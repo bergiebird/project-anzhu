@@ -1,0 +1,229 @@
+[gd_scene load_steps=27 format=3 uid="uid://dr7gmcq3ydu2b"]
+
+[ext_resource type="Script" path="res://resources/polar_bear/polar_bear.gd" id="1_6aww6"]
+[ext_resource type="Texture2D" uid="uid://bb66i1rmtlvbo" path="res://warehouse/Animals/PNGs/polar_bear.png" id="2_0unm6"]
+[ext_resource type="Script" path="res://scenes/hurt.gd" id="2_h4eey"]
+[ext_resource type="Script" path="res://resources/polar_bear/sprites/polar_bear_sprite.gd" id="3_51qta"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="3_g2n60"]
+[ext_resource type="AudioStream" uid="uid://dcdghhtudphib" path="res://warehouse/_audio/763026__celldroid__bear-angry-growl.wav" id="4_2du00"]
+[ext_resource type="Script" path="res://resources/standard_collision/standard_collision.gd" id="4_fh6a4"]
+[ext_resource type="Script" path="res://resources/polar_bear/sprites/actions/polar_bear_idle.gd" id="5_gcotj"]
+[ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://warehouse/_audio/music/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
+[ext_resource type="Script" path="res://resources/polar_bear/sprites/actions/hit.gd" id="6_pyaxb"]
+[ext_resource type="Script" path="res://resources/polar_bear/eyesight/eyesight.gd" id="8_jp6s3"]
+[ext_resource type="Script" path="res://resources/goals/goals.gd" id="11_4sorn"]
+[ext_resource type="Script" path="res://resources/polar_bear/goals/chase.gd" id="12_fnbe6"]
+[ext_resource type="Script" path="res://resources/polar_bear/audio/polar_bear_audio.gd" id="13_k8gcw"]
+[ext_resource type="Script" path="res://resources/polar_bear/goals/hunt.gd" id="13_kkkf8"]
+[ext_resource type="Script" path="res://resources/polar_bear/goals/wander.gd" id="13_qx7fo"]
+[ext_resource type="Script" path="res://resources/polar_bear/goals/nothing.gd" id="14_k7mq3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au3c1"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(264, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrqfs"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(272, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3rhmi"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(16, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onfqy"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(24, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd8ic"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(112, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in4l1"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(120, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0o1g"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(56, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx8mo"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(64, 8, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gfttw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au3c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrqfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au3c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrqfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au3c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrqfs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_au3c1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrqfs")
+}],
+"loop": false,
+"name": &"Hit",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_3rhmi")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_onfqy")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_3rhmi")
+}, {
+"duration": 7.0,
+"texture": SubResource("AtlasTexture_onfqy")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_3rhmi")
+}, {
+"duration": 6.0,
+"texture": SubResource("AtlasTexture_onfqy")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd8ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in4l1")
+}],
+"loop": true,
+"name": &"Move",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_l0o1g")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_cx8mo")
+}],
+"loop": true,
+"name": &"Sit",
+"speed": 3.0
+}]
+
+[node name="PolarBear" type="StaticBody2D" groups=["animal"]]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_6aww6")
+
+[node name="StandardCollision" parent="." instance=ExtResource("3_g2n60")]
+unique_name_in_owner = true
+visible = true
+script = ExtResource("4_fh6a4")
+
+[node name="Healthy" type="ColorRect" parent="StandardCollision"]
+offset_left = -4.0
+offset_top = -4.0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(0.0705882, 0.054902, 0.137255, 1)
+
+[node name="Hurt" type="ColorRect" parent="StandardCollision"]
+unique_name_in_owner = true
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(0.717647, 0.254902, 0.196078, 1)
+script = ExtResource("2_h4eey")
+
+[node name="PolarBearSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_gfttw")
+animation = &"Idle"
+autoplay = "Idle"
+script = ExtResource("3_51qta")
+
+[node name="Idle" type="Node" parent="PolarBearSprite"]
+script = ExtResource("5_gcotj")
+
+[node name="Sit" type="Node" parent="PolarBearSprite"]
+
+[node name="Hit" type="Node" parent="PolarBearSprite"]
+script = ExtResource("6_pyaxb")
+
+[node name="SlowTimer" type="Timer" parent="PolarBearSprite/Hit"]
+wait_time = 30.0
+one_shot = true
+
+[node name="Search" type="Node" parent="PolarBearSprite"]
+script = ExtResource("13_qx7fo")
+
+[node name="DirectionTimer" type="Timer" parent="PolarBearSprite/Search"]
+wait_time = 2.0
+autostart = true
+
+[node name="Chase" type="Node" parent="PolarBearSprite"]
+script = ExtResource("12_fnbe6")
+
+[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
+script = ExtResource("8_jp6s3")
+
+[node name="OutOfSightTimer" type="Timer" parent="Eyesight"]
+one_shot = true
+
+[node name="Audio" type="Node2D" parent="."]
+script = ExtResource("13_k8gcw")
+
+[node name="EncounterMusic" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("6_cuqt7")
+max_distance = 625.0
+bus = &"PolarBear"
+
+[node name="Roar" type="AudioStreamPlayer2D" parent="Audio"]
+unique_name_in_owner = true
+stream = ExtResource("4_2du00")
+
+[node name="Goals" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("11_4sorn")
+
+[node name="GetSleep" type="Node" parent="Goals"]
+
+[node name="FindFood" type="Node" parent="Goals"]
+
+[node name="FindWater" type="Node" parent="Goals"]
+
+[node name="Hunt" type="Node" parent="Goals"]
+script = ExtResource("13_kkkf8")
+
+[node name="Nothing" type="Node" parent="Goals"]
+script = ExtResource("14_k7mq3")
+
+[connection signal="animation_finished" from="PolarBearSprite" to="PolarBearSprite/Hit" method="_stun_over"]
+[connection signal="hunt_player" from="PolarBearSprite/Hit" to="." method="incoming_goals_request"]
+[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="StandardCollision/Hurt" method="_on_shot"]
+[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="PolarBearSprite" method="_on_hit_polar_bear_shot"]
+[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="Eyesight" method="_on_hit_polar_bear_shot"]
+[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="Audio" method="_on_shot"]
+[connection signal="timeout" from="PolarBearSprite/Hit/SlowTimer" to="PolarBearSprite/Hit" method="_on_slow_timer_timeout"]
+[connection signal="timeout" from="PolarBearSprite/Search/DirectionTimer" to="PolarBearSprite/Search" method="_on_direction_timer_timeout"]
+[connection signal="screen_entered" from="Eyesight" to="Eyesight" method="_on_screen_entered"]
+[connection signal="screen_exited" from="Eyesight" to="Eyesight" method="_on_screen_exited"]
+[connection signal="timeout" from="Eyesight/OutOfSightTimer" to="PolarBearSprite/Search" method="start_goal"]

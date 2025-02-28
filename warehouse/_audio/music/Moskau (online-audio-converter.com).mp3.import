@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b6eycjid8ts1m"
+path="res://.godot/imported/Moskau (online-audio-converter.com).mp3-50e8f1e3990a9e8d1e733b4ba36b40d6.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/music/Moskau (online-audio-converter.com).mp3"
+dest_files=["res://.godot/imported/Moskau (online-audio-converter.com).mp3-50e8f1e3990a9e8d1e733b4ba36b40d6.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

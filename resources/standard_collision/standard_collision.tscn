@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cukrdvxpstpgp"]
+
+[ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/standard_collision/standard_collision.tres" id="1_6yy8u"]
+
+[node name="StandardCollision" type="CollisionShape2D"]
+visible = false
+shape = ExtResource("1_6yy8u")
+debug_color = Color(0.905882, 0, 0.74902, 0.392157)
