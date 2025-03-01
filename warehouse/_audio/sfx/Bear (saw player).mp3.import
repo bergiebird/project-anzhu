@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dighd7kxlaht8"
+path="res://.godot/imported/Bear (saw player).mp3-6b88c8baed7f995393bcc50a20a89676.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/sfx/Bear (saw player).mp3"
+dest_files=["res://.godot/imported/Bear (saw player).mp3-6b88c8baed7f995393bcc50a20a89676.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

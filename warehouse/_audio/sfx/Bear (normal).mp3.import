@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cjfo3gmgsqhpb"
+path="res://.godot/imported/Bear (normal).mp3-a05fe679165384d1890b888a232c36fb.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/sfx/Bear (normal).mp3"
+dest_files=["res://.godot/imported/Bear (normal).mp3-a05fe679165384d1890b888a232c36fb.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

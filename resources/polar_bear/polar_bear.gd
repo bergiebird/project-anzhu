@@ -1,10 +1,10 @@
 @icon("res://resources/polar_bear/polar_bear.png")
-extends StaticBody2D
+extends StaticBody2D #polar_bear.gd
 enum PolarBearGoals {GetSleep,FindFood,FindWater,Nothing,Hunt}
 enum PolarBearActions {Idle,Sit,Hit,Search,Chase}
 
 @export var starting_health :int = 10
-@export var starting_goal :PolarBearGoals = 3
+@export var starting_goal :PolarBearGoals
 @onready var anim :AnimatedSprite2D = $PolarBearSprite
 @onready var goals :Node = %Goals
 @onready var player :Node = get_node('%Player')
@@ -17,10 +17,6 @@ func got_hit()->void:
 	change_actions("Hit")
 func hit_over()->void:
 	change_actions("Chase")
-func incoming_action_request(new_action_name :String)->void:
-	change_actions(new_action_name)
-func incoming_goals_request(new_goal_name :String)->void:
-	change_goals(new_goal_name)
 
 func change_actions(new_action_name :String)->void:
 	if new_action_name == PolarBearGoals.keys()[current_action]:
@@ -66,3 +62,7 @@ func change_goals(new_goal_name :String)->void:
 			goals.process_hunt()
 		_:
 			print_debug('invalid polar_bear goal', new_goal_name)
+
+
+func _on_roar_hurt_finished() -> void:
+	queue_free()

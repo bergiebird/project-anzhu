@@ -7,7 +7,7 @@ signal hunt_player(hunt :String)
 @onready var slow_timer :Timer = $SlowTimer
 var was_just_hit = false
 
-func got_hit()->void:
+func start()->void:
 	slow_timer.start()
 	was_just_hit = true
 	polar_bear_shot.emit()
@@ -15,10 +15,11 @@ func got_hit()->void:
 func _on_slow_timer_timeout() -> void:
 	reset_movement_speed.emit()
 
-func _stun_over()->void:
+func unstun()->void:
 	if was_just_hit:
 		was_just_hit = false
 		hunt_player.emit("Hunt")
 
-func start()->void:
-	got_hit()
+func _unprocess()->void:
+	set_physics_process(false)
+	set_process(false)

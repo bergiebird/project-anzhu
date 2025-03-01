@@ -1,5 +1,13 @@
 extends AnimatedSprite2D #polar_bear_sprite.gd
 
+signal idle_start()
+signal sit_start()
+signal hit_start()
+signal search_start()
+signal chase_start()
+
+
+
 enum PolarBearActions {Idle,Sit,Hit,Search,Chase}
 var current_action :PolarBearActions
 @onready var goals :Node = %Goals
@@ -13,39 +21,31 @@ func process_idle()->void:
 	play('Idle')
 
 func process_sit()->void:
-	play('Dit')
+	play('Sit')
 
 func process_hit()->void:
 	play('Hit')
-	unprocess_all()
 	hit.start()
 
 func process_search()->void:
 	play('Move')
+	search_start.emit()
 
 func process_chase()->void:
 	play('Move')
+	chase_start.emit()
 
 
 func _ready()->void:
-	unprocess_all()
-func unprocess_all()->void:
-	unprocess_idle()
-	unprocess_sit()
-	unprocess_hit()
-	unprocess_search()
-	unprocess_chase()
-func unprocess_idle()->void:
-	pass
+	for child in get_children():
+		child.set_physics_process(false)
+		child.set_process(false)
 
-func unprocess_sit()->void:
-	pass
 
-func unprocess_hit()->void:
-	pass #may never be needed
 
-func unprocess_search()->void:
-	pass
 
-func unprocess_chase()->void:
-	pass
+func _on_hit_finished() -> void:
+	print(1)
+	hit.unstun()
+	search.unstun()
+	chase.unstun()

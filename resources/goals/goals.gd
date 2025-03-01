@@ -7,25 +7,27 @@ enum PolarBearGoals {GetSleep,FindFood,FindWater,Nothing,Hunt}
 @onready var find_water :Node = $FindWater
 @onready var hunt :Node = $Hunt
 @onready var nothing :Node = $Nothing
-var current_goal
+var current_goal :PolarBearGoals
 
 func _ready()->void:
 	unprocess_all()
 
 func process_get_sleep()->void:
-	pass
+	current_goal = PolarBearGoals.GetSleep
 
 func process_find_food()->void:
-	pass
+	current_goal = PolarBearGoals.FindFood
 
 func process_find_water()->void:
-	pass
+	current_goal = PolarBearGoals.FindWater
 
 func process_hunt()->void:
-	pass
+	current_goal = PolarBearGoals.Hunt
+	hunt.enter()
 
 func process_nothing()->void:
-	pass
+	current_goal = PolarBearGoals.Nothing
+	nothing.enter()
 
 
 func unprocess_all()->void:

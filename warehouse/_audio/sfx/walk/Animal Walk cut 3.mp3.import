@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bqbgthnc4l742"
+path="res://.godot/imported/Animal Walk cut 3.mp3-d3126b19a45877c7e24533723d3e0b9d.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/sfx/walk/Animal Walk cut 3.mp3"
+dest_files=["res://.godot/imported/Animal Walk cut 3.mp3-d3126b19a45877c7e24533723d3e0b9d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,9 +1,9 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1740783378
+::res://::1740795699
 arctic_fox.gd::GDScript::-1::1740499724::0::1::::<>StaticBody2D<>res://resources/arctic_fox/arctic_fox.png::
 camp_fire.gd::GDScript::-1::1740596462::0::1::::<>Node2D<>res://resources/camp_fire/campfire.png::
 DayNighton.gd::GDScript::-1::1740607609::0::1::::<>Node<>::
-default_bus_layout.tres::AudioBusLayout::7888079753305195417::1740783378::0::1::::<><>::
+default_bus_layout.tres::AudioBusLayout::7888079753305195417::1740794154::0::1::::<><>::
 Enumerton.gd::GDScript::-1::1740690636::0::1::::<>Node<>::
 export_presets.cfg::TextFile::-1::1740619055::0::1::::<><>::
 ::res://resources/::1740752685
@@ -28,47 +28,47 @@ goals.png::CompressedTexture2D::3783278472744475299::1727460451::1740783376::1::
 player.gd::GDScript::-1::1740754382::0::1::::<>CharacterBody2D<>res://resources/player/player.png::
 player.png::CompressedTexture2D::4539521179498576613::1740409979::1740783376::1::::<><>::
 player_movement.gd::GDScript::-1::1740754409::0::1::::<>Node<>res://warehouse/_icons/misc/cardinal_movement.png::
-::res://resources/polar_bear/::1740783376
-polar_bear.gd::GDScript::-1::1740781822::0::1::::<>StaticBody2D<>res://resources/polar_bear/polar_bear.png::
+::res://resources/polar_bear/::1740793851
+polar_bear.gd::GDScript::-1::1740793851::0::1::::<>StaticBody2D<>res://resources/polar_bear/polar_bear.png::
 polar_bear.png::CompressedTexture2D::2964921354931158451::1740421519::1740783376::1::::<><>::
-::res://resources/polar_bear/audio/::1740782361
-polar_bear_audio.gd::GDScript::-1::1740782361::0::1::::<>Node2D<>res://warehouse/_icons/node_2D/icon_audio.png::
-::res://resources/polar_bear/eyesight/::1740771640
-eyesight.gd::GDScript::-1::1740771640::0::1::::<>VisibleOnScreenNotifier2D<>::
-::res://resources/polar_bear/goals/::1740781431
+::res://resources/polar_bear/audio/::1740788917
+polar_bear_audio.gd::GDScript::-1::1740788917::0::1::::<>Node2D<>res://warehouse/_icons/node_2D/icon_audio.png::
+::res://resources/polar_bear/eyesight/::1740787564
+eyesight.gd::GDScript::-1::1740787564::0::1::::<>VisibleOnScreenNotifier2D<>::
+::res://resources/polar_bear/goals/::1740794054
 chase.gd::GDScript::-1::1740771744::0::1::::<>Node<>::
 hunt.gd::GDScript::-1::1740781431::0::1::::<>Node<>::
-nothing.gd::GDScript::-1::1740774996::0::1::::<>Node<>::
-wander.gd::GDScript::-1::1740777720::0::1::::<>Node<>::
+nothing.gd::GDScript::-1::1740793930::0::1::::<>Node<>::
+wander.gd::GDScript::-1::1740794054::0::1::::<>Node<>::
 ::res://resources/polar_bear/sprites/::1740781730
 polar_bear_sprite.gd::GDScript::-1::1740781730::0::1::::<>AnimatedSprite2D<>::
-::res://resources/polar_bear/sprites/actions/::1740781671
+::res://resources/polar_bear/sprites/actions/::1740786067
 ai_movement.gd::GDScript::-1::1740771835::0::1::::<>Node<>::
-hit.gd::GDScript::-1::1740781671::0::1::::<>Node<>::
+hit.gd::GDScript::-1::1740786067::0::1::::<>Node<>::
 polar_bear_attack.gd::GDScript::-1::1740752622::0::1::::<>Node<>::
 polar_bear_idle.gd::GDScript::-1::1740756726::0::1::::<>Node<>::
 ::res://resources/standard_collision/::1740782120
 standard_collision.gd::GDScript::-1::1740517417::0::1::::<>CollisionShape2D<>::
 standard_collision.tres::RectangleShape2D::6845301415449109573::1740684350::0::1::::<><>::
 standard_collision.tscn::PackedScene::6198300703173396463::1740782120::0::1::::<><>::uid://c4r6d5ato0hir::::res://resources/standard_collision/standard_collision.tres
-::res://scenes/::1740783594
+::res://scenes/::1740795692
 arctic_fox.tscn::PackedScene::8978066331683342609::1740619268::0::1::::<><>::res://arctic_fox.gd<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>res://resources/standard_collision/standard_collision.gd<>res://resources/ai_controls/ai_controls.gd
 camp_fire.tscn::PackedScene::6559249330164677489::1740782120::0::1::::<><>::res://camp_fire.gd<>uid://b5golrueqxb8h::::res://warehouse/Structures/PNGs/original.png<>uid://dnj80iffowsn1::::res://warehouse/Structures/PNGs/arctic.png<>uid://c43gja4g441vn::::res://resources/camp_fire/camp_fire_light.tres<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>res://scenes/camp_fire_light.gd<>uid://dgnxwh4t4p2vs::::res://warehouse/_audio/sfx/Campfire.mp3
 camp_fire_light.gd::GDScript::-1::1740599463::0::1::::<>PointLight2D<>::
 day_night.gd::GDScript::-1::1740768882::0::1::::<>CanvasModulate<>res://warehouse/_icons/node_2D/icon_area_meteo.png::
-game.tscn::PackedScene::3847319026799585163::1740783594::0::1::::<><>::res://resources/game/game.gd<>uid://dvco2l6mmjfpt::::res://warehouse/Overworld/all_overworld_ts.tres<>uid://b5id41tdwyrd4::::res://scenes/player.tscn<>uid://dr7gmcq3ydu2b::::res://scenes/polar_bear.tscn<>uid://dtjkl0eql0m0h::::res://warehouse/_audio/607839__sonically_sound__polar-wind-synthetic.wav<>uid://c0pl44e11q0uf::::res://scenes/camp_fire.tscn<>res://resources/day_night_modulator/day_night_timer.gd<>res://scenes/day_night.gd<>uid://towmm2aavkd0::::res://warehouse/_audio/music/Music historic 3.mp3<>uid://d06bo8scbr23v::::res://scenes/arctic_fox.tscn<>uid://hvyddlreidmd::::res://warehouse/_audio/music/Music Historic 1.mp3<>uid://bsck3qaty34rh::::res://warehouse/_audio/music/Music Historic 2 (baroque).mp3
-hurt.gd::GDScript::-1::1740768582::0::1::::<>ColorRect<>::
+game.tscn::PackedScene::3847319026799585163::1740795691::0::1::::<><>::res://resources/game/game.gd<>uid://dvco2l6mmjfpt::::res://warehouse/Overworld/all_overworld_ts.tres<>uid://b5id41tdwyrd4::::res://scenes/player.tscn<>uid://dr7gmcq3ydu2b::::res://scenes/polar_bear.tscn<>uid://dtjkl0eql0m0h::::res://warehouse/_audio/607839__sonically_sound__polar-wind-synthetic.wav<>uid://c0pl44e11q0uf::::res://scenes/camp_fire.tscn<>res://resources/day_night_modulator/day_night_timer.gd<>res://scenes/day_night.gd<>uid://towmm2aavkd0::::res://warehouse/_audio/music/Music historic 3.mp3<>uid://d06bo8scbr23v::::res://scenes/arctic_fox.tscn<>uid://hvyddlreidmd::::res://warehouse/_audio/music/Music Historic 1.mp3<>uid://bsck3qaty34rh::::res://warehouse/_audio/music/Music Historic 2 (baroque).mp3
+hurt.gd::GDScript::-1::1740787089::0::1::::<>ColorRect<>::
 node.gd::GDScript::-1::1740768826::0::1::::<>RefCounted<>::
 player.tscn::PackedScene::4508836348993148551::1740782120::0::1::::<><>::res://resources/player/player.gd<>uid://cyod5qpkt7u6::::res://warehouse/Units/PNGs/original-Recovered.png<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://xtu3ptec0j14::::res://warehouse/Units/PNGs/musket_hero.png<>res://scenes/player_sprite.gd<>uid://bphym84428lme::::res://warehouse/_audio/538795__brunoauzet__old-musket-bang.wav<>uid://bq7ijkrb81e5d::::res://warehouse/_audio/reload.wav<>res://scenes/ray_cast_2d.gd<>uid://bwv6f7evffbt1::::res://resources/camp_fire/fire_gradient.tres<>res://resources/player/player_movement.gd
 player_sprite.gd::GDScript::-1::1740697964::0::1::::<>AnimatedSprite2D<>::
-polar_bear.tscn::PackedScene::8418918343607200895::1740783326::0::1::::<><>::res://resources/polar_bear/polar_bear.gd<>uid://bb66i1rmtlvbo::::res://warehouse/Animals/PNGs/polar_bear.png<>res://scenes/hurt.gd<>res://resources/polar_bear/sprites/polar_bear_sprite.gd<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://dcdghhtudphib::::res://warehouse/_audio/763026__celldroid__bear-angry-growl.wav<>res://resources/standard_collision/standard_collision.gd<>res://resources/polar_bear/sprites/actions/polar_bear_idle.gd<>uid://ddmph0kataceh::::res://warehouse/_audio/music/Music Historic 4 (russian pop bear music).mp3<>res://resources/polar_bear/sprites/actions/hit.gd<>res://resources/polar_bear/eyesight/eyesight.gd<>res://resources/goals/goals.gd<>res://resources/polar_bear/goals/chase.gd<>res://resources/polar_bear/audio/polar_bear_audio.gd<>res://resources/polar_bear/goals/hunt.gd<>res://resources/polar_bear/goals/wander.gd<>res://resources/polar_bear/goals/nothing.gd
+polar_bear.tscn::PackedScene::8418918343607200895::1740795692::0::1::::<><>::res://resources/polar_bear/polar_bear.gd<>uid://bb66i1rmtlvbo::::res://warehouse/Animals/PNGs/polar_bear.png<>res://scenes/hurt.gd<>res://resources/polar_bear/sprites/polar_bear_sprite.gd<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>res://resources/standard_collision/standard_collision.gd<>res://resources/polar_bear/sprites/actions/polar_bear_idle.gd<>uid://ddmph0kataceh::::res://warehouse/_audio/music/Music Historic 4 (russian pop bear music).mp3<>res://resources/polar_bear/sprites/actions/hit.gd<>res://resources/polar_bear/eyesight/eyesight.gd<>res://resources/goals/goals.gd<>res://resources/polar_bear/goals/chase.gd<>res://resources/polar_bear/audio/polar_bear_audio.gd<>res://resources/polar_bear/goals/hunt.gd<>res://resources/polar_bear/goals/wander.gd<>res://resources/polar_bear/goals/nothing.gd<>uid://dighd7kxlaht8::::res://warehouse/_audio/sfx/Bear (saw player).mp3<>uid://b1e37kdue1g3v::::res://warehouse/_audio/sfx/Bear (hurt).mp3<>uid://cjfo3gmgsqhpb::::res://warehouse/_audio/sfx/Bear (normal).mp3<>uid://blcf182o0vhga::::res://warehouse/_audio/sfx/walk/Animal Walk cut 1.mp3<>uid://cfc7k8xu6ve63::::res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3<>uid://bjirdkcl8sm8v::::res://warehouse/_audio/sfx/walk/Animal Walk cut 2.mp3<>uid://bqbgthnc4l742::::res://warehouse/_audio/sfx/walk/Animal Walk cut 3.mp3<>uid://blos45ew7xbtv::::res://warehouse/_audio/sfx/walk/Animal Walk cut 4.mp3<>uid://sttm7cfo55ve::::res://warehouse/_audio/sfx/walk/Animal Walk cut 5.mp3
 ray_cast_2d.gd::GDScript::-1::1740517650::0::1::::<>RayCast2D<>::
 visible_on_screen_notifier_2d.gd::GDScript::-1::1740700438::0::1::::<>VisibleOnScreenNotifier2D<>::
 ::res://warehouse/::1740783432
 ::res://warehouse/__/::1740783376
 musket_hero.png::CompressedTexture2D::9193506892995070617::1740441910::1740783376::1::::<><>::
 polar_bear.png::CompressedTexture2D::1032699369851787124::1740426757::1740783376::1::::<><>::
-::res://warehouse/_audio/::1740783686
+::res://warehouse/_audio/::1740783702
 51153__rutgermuller__head-hair-scratching.wav::AudioStreamWAV::7935375688781095615::1740413287::1740783376::1::::<><>::
 234869__mlsulli__musket-shot.wav::AudioStreamWAV::5890406335572413964::1740411147::1740783376::1::::<><>::
 538795__brunoauzet__old-musket-bang.wav::AudioStreamWAV::3455184399320160480::1740411144::1740783376::1::::<><>::
@@ -81,9 +81,22 @@ Music Historic 1.mp3::AudioStreamMP3::536136578850556679::1740504882::1740783375
 Music Historic 2 (baroque).mp3::AudioStreamMP3::3654606638112887293::1740504880::1740783375::1::::<><>::
 Music historic 3.mp3::AudioStreamMP3::1363847193037931151::1740504878::1740783375::1::::<><>::
 Music Historic 4 (russian pop bear music).mp3::AudioStreamMP3::7395525699048139463::1740516875::1740783375::1::::<><>::
-::res://warehouse/_audio/sfx/::1740783376
+::res://warehouse/_audio/sfx/::1740795699
+Animal Run (heavy animal).mp3::AudioStreamMP3::5129876912544081698::1740782415::1740788712::1::::<><>::
+Animal Run (walking fast like some insects).mp3::AudioStreamMP3::3775270794885153520::1740782414::1740786159::1::::<><>::
+Bear (hurt).mp3::AudioStreamMP3::4221345881283598133::1740782409::1740786159::1::::<><>::
+Bear (normal).mp3::AudioStreamMP3::5415763223001917947::1740782407::1740786159::1::::<><>::
+Bear (saw player).mp3::AudioStreamMP3::7733591140293972819::1740782405::1740786159::1::::<><>::
 Campfire.mp3::AudioStreamMP3::7608668215375238320::1740774647::1740783375::1::::<><>::
 footsteps on snow.wav::AudioStreamWAV::1552102166871647333::1740699281::1740783376::1::::<><>::
+::res://warehouse/_audio/sfx/walk/::1740795699
+Animal Walk cut 1.mp3::AudioStreamMP3::3162978510475548448::1740795057::1740795470::1::::<><>::
+Animal Walk cut 2.mp3::AudioStreamMP3::3035673373594336807::1740795059::1740795470::1::::<><>::
+Animal Walk cut 3.mp3::AudioStreamMP3::3511905179572474141::1740795061::1740795470::1::::<><>::
+Animal Walk cut 4.mp3::AudioStreamMP3::3188545529084302359::1740795062::1740795470::1::::<><>::
+Animal Walk cut 5.mp3::AudioStreamMP3::1303799099285054006::1740795063::1740795470::1::::<><>::
+Animal Walk.mp3::AudioStreamMP3::2885024262318708360::1740782410::1740795699::1::::<><>::
+default_bus_layout.tres::AudioStreamRandomizer::2936715891072193483::1740795621::0::1::::<><>::uid://blcf182o0vhga::::res://warehouse/_audio/sfx/walk/Animal Walk cut 1.mp3<>uid://bjirdkcl8sm8v::::res://warehouse/_audio/sfx/walk/Animal Walk cut 2.mp3<>uid://blos45ew7xbtv::::res://warehouse/_audio/sfx/walk/Animal Walk cut 4.mp3<>uid://sttm7cfo55ve::::res://warehouse/_audio/sfx/walk/Animal Walk cut 5.mp3
 ::res://warehouse/_icons/::1740408072
 ::res://warehouse/_icons/color/::1740783376
 icon_area_damage.png::CompressedTexture2D::899425821975904430::1737126218::1740783376::1::::<><>::

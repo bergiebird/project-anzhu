@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cfc7k8xu6ve63"
+path="res://.godot/imported/Animal Run (heavy animal).mp3-a65672276cbbc7aa817b62bb12f8e9ad.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3"
+dest_files=["res://.godot/imported/Animal Run (heavy animal).mp3-a65672276cbbc7aa817b62bb12f8e9ad.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
