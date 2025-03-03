@@ -1,68 +1,65 @@
 @icon("res://resources/polar_bear/polar_bear.png")
-extends StaticBody2D #polar_bear.gd
-enum PolarBearGoals {GetSleep,FindFood,FindWater,Nothing,Hunt}
-enum PolarBearActions {Idle,Sit,Hit,Search,Chase}
+extends AnzhuCharacter #polar_bear.gd
 
-@export var starting_health :int = 10
-@export var starting_goal :PolarBearGoals
-@onready var anim :AnimatedSprite2D = $PolarBearSprite
-@onready var goals :Node = %Goals
+@onready var anim :AnimatedSprite2D = $Actions
+@onready var goals :Node = $Goals
 @onready var player :Node = get_node('%Player')
-@onready var current_action :PolarBearActions
-@onready var current_goal :PolarBearGoals
+var current_speed :int
+var is_injured :bool
 
 func _ready()->void:
-	change_goals(PolarBearGoals.keys()[starting_goal])
+	current_speed = move_speed
+	change_goals(Goals.keys()[starting_goal])
+
 func got_hit()->void:
 	change_actions("Hit")
+
 func hit_over()->void:
 	change_actions("Chase")
 
 func change_actions(new_action_name :String)->void:
-	if new_action_name == PolarBearGoals.keys()[current_action]:
-		return
+	if new_action_name == Actions.keys()[current_action]: return
 	match new_action_name:
-		"Idle":
-			current_action = PolarBearActions.Idle
-			anim.process_idle()
-		"Sit":
-			current_action = PolarBearActions.Sit
-			anim.process_sit()
-		"Hit":
-			current_action = PolarBearActions.Hit
-			anim.process_hit()
-		"Search":
-			current_action = PolarBearActions.Search
-			anim.process_search()
-		"Chase":
-			current_action = PolarBearActions.Chase
-			anim.process_chase()
-		_:
-			print_debug('invalid polar_bear action', new_action_name)
-			return
+		"Idle":   current_action = Actions.Idle
+		"Sit":    current_action = Actions.Sit
+		"Hit":    current_action = Actions.Hit
+		"Wander": current_action = Actions.Wander
+		"Chase":  current_action = Actions.Chase
+		"Dead":   current_action = Actions.Dead
+		"Search": current_action = Actions.Search
+		"Charge": current_action = Actions.Charge
+		"Sleep":  current_action = Actions.Sleep
+		_: return
+	anim.on_action_transition(new_action_name)
 
 func change_goals(new_goal_name :String)->void:
-	if new_goal_name == PolarBearGoals.keys()[current_goal]:
-		return
+	if new_goal_name == Goals.keys()[current_goal]: return
 	match new_goal_name:
-		"Nothing":
-			current_goal = PolarBearGoals.Nothing
-			goals.process_nothing()
-		"GetSleep":
-			current_goal = PolarBearGoals.GetSleep
-			goals.process_get_sleep()
-		"FindFood":
-			current_goal = PolarBearGoals.FindFood
-			goals.process_find_food()
-		"FindWater":
-			current_goal = PolarBearGoals.FindWater
-			goals.process_find_water()
-		"Hunt":
-			current_goal = PolarBearGoals.Hunt
-			goals.process_hunt()
-		_:
-			print_debug('invalid polar_bear goal', new_goal_name)
+		"Nothing":   current_goal = Goals.Nothing
+		"GetSleep":  current_goal = Goals.GetSleep
+		"FindFood":  current_goal = Goals.FindFood
+		"Hunt":      current_goal = Goals.Hunt
+		_: return
+	goals.on_goal_transition(new_goal_name)
 
-
-func _on_roar_hurt_finished() -> void:
+func _on_roar_hurt_finished()->void:
 	queue_free()
+#
+#func _on_roar_spotted_finished()->void:
+	#update_current_move_speed(-injured_speed_decrease)
+	#await get_tree().create_timer(5.0).timeout
+	#update_current_move_speed()
+#
+#func update_current_move_speed(modifying_number :int = 0)->void:
+	#if modifying_number != 0:
+		#current_speed += modifying_number
+		#check_if_is_injured()
+		#return
+	#if not check_if_is_injured():
+		#current_speed = move_speed
+#
+#func check_if_is_injured()->bool:
+	#if is_injured:
+		#current_speed -= injured_speed_decrease
+		#return true
+	#return false

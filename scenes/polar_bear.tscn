@@ -1,27 +1,38 @@
-[gd_scene load_steps=32 format=3 uid="uid://dr7gmcq3ydu2b"]
+[gd_scene load_steps=35 format=3 uid="uid://dr7gmcq3ydu2b"]
 
 [ext_resource type="Script" path="res://resources/polar_bear/polar_bear.gd" id="1_6aww6"]
 [ext_resource type="Texture2D" uid="uid://bb66i1rmtlvbo" path="res://warehouse/Animals/PNGs/polar_bear.png" id="2_0unm6"]
-[ext_resource type="Script" path="res://scenes/hurt.gd" id="2_h4eey"]
+[ext_resource type="Script" path="res://resources/timer_manager/timer_manager.gd" id="2_dbxb3"]
 [ext_resource type="Script" path="res://resources/polar_bear/sprites/polar_bear_sprite.gd" id="3_51qta"]
 [ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="3_g2n60"]
-[ext_resource type="Script" path="res://resources/standard_collision/standard_collision.gd" id="4_fh6a4"]
-[ext_resource type="Script" path="res://resources/polar_bear/sprites/actions/polar_bear_idle.gd" id="5_gcotj"]
+[ext_resource type="Script" path="res://resources/_states/action_states/idle.gd" id="5_gcotj"]
 [ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://warehouse/_audio/music/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
-[ext_resource type="Script" path="res://resources/polar_bear/sprites/actions/hit.gd" id="6_pyaxb"]
-[ext_resource type="Script" path="res://resources/polar_bear/sprites/actions/polar_bear_sit.gd" id="8_i834n"]
+[ext_resource type="Script" path="res://resources/_states/action_states/hit.gd" id="6_pyaxb"]
+[ext_resource type="Script" path="res://resources/_states/action_states/sit.gd" id="8_i834n"]
 [ext_resource type="Script" path="res://resources/polar_bear/eyesight/eyesight.gd" id="8_jp6s3"]
 [ext_resource type="Script" path="res://resources/goals/goals.gd" id="11_4sorn"]
 [ext_resource type="Script" path="res://resources/polar_bear/goals/chase.gd" id="12_fnbe6"]
+[ext_resource type="Script" path="res://resources/_states/action_states/dead.gd" id="13_bm8wf"]
 [ext_resource type="Script" path="res://resources/polar_bear/audio/polar_bear_audio.gd" id="13_k8gcw"]
 [ext_resource type="Script" path="res://resources/polar_bear/goals/hunt.gd" id="13_kkkf8"]
-[ext_resource type="Script" path="res://resources/polar_bear/goals/wander.gd" id="13_qx7fo"]
+[ext_resource type="Script" path="res://resources/_states/action_states/wander.gd" id="13_qx7fo"]
+[ext_resource type="Script" path="res://resources/_states/action_states/search.gd" id="14_1lng4"]
 [ext_resource type="Script" path="res://resources/polar_bear/goals/nothing.gd" id="14_k7mq3"]
 [ext_resource type="AudioStream" uid="uid://dighd7kxlaht8" path="res://warehouse/_audio/sfx/Bear (saw player).mp3" id="14_t1s4a"]
 [ext_resource type="AudioStream" uid="uid://b1e37kdue1g3v" path="res://warehouse/_audio/sfx/Bear (hurt).mp3" id="15_n3oor"]
+[ext_resource type="Script" path="res://resources/_states/action_states/charge.gd" id="16_6x4uf"]
 [ext_resource type="AudioStream" uid="uid://cjfo3gmgsqhpb" path="res://warehouse/_audio/sfx/Bear (normal).mp3" id="16_47icu"]
+[ext_resource type="Script" path="res://resources/_states/action_states/sleep.gd" id="16_74pan"]
 [ext_resource type="AudioStream" uid="uid://bh3tjtuu7g7a2" path="res://warehouse/_audio/sfx/walk/default_bus_layout.tres" id="17_fjh5o"]
 [ext_resource type="AudioStream" uid="uid://cfc7k8xu6ve63" path="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3" id="18_5puse"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fd8ic"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(112, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_in4l1"]
+atlas = ExtResource("2_0unm6")
+region = Rect2(120, 8, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_au3c1"]
 atlas = ExtResource("2_0unm6")
@@ -39,14 +50,6 @@ region = Rect2(16, 8, 8, 8)
 atlas = ExtResource("2_0unm6")
 region = Rect2(24, 8, 8, 8)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fd8ic"]
-atlas = ExtResource("2_0unm6")
-region = Rect2(112, 8, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_in4l1"]
-atlas = ExtResource("2_0unm6")
-region = Rect2(120, 8, 8, 8)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_l0o1g"]
 atlas = ExtResource("2_0unm6")
 region = Rect2(56, 8, 8, 8)
@@ -57,6 +60,25 @@ region = Rect2(64, 8, 8, 8)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gfttw"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd8ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in4l1")
+}],
+"loop": true,
+"name": &"Chase",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_au3c1")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 2.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_au3c1")
@@ -110,17 +132,6 @@ animations = [{
 "speed": 3.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fd8ic")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_in4l1")
-}],
-"loop": true,
-"name": &"Move",
-"speed": 2.0
-}, {
-"frames": [{
 "duration": 10.0,
 "texture": SubResource("AtlasTexture_l0o1g")
 }, {
@@ -130,94 +141,82 @@ animations = [{
 "loop": true,
 "name": &"Sit",
 "speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fd8ic")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_in4l1")
+}],
+"loop": true,
+"name": &"Wander",
+"speed": 3.0
 }]
 
-[node name="PolarBear" type="StaticBody2D" groups=["animal"]]
+[node name="PolarBear" type="CharacterBody2D" groups=["animal"]]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_6aww6")
-starting_goal = 3
 
-[node name="StandardCollision" parent="." instance=ExtResource("3_g2n60")]
+[node name="TimerManager" type="Node" parent="."]
 unique_name_in_owner = true
-visible = true
-script = ExtResource("4_fh6a4")
+script = ExtResource("2_dbxb3")
 
-[node name="Healthy" type="ColorRect" parent="StandardCollision"]
-offset_left = -4.0
-offset_top = -4.0
-offset_right = 4.0
-offset_bottom = 4.0
-color = Color(0.0705882, 0.054902, 0.137255, 1)
+[node name="Timer_Nothing" type="Timer" parent="TimerManager"]
+wait_time = 5.0
 
-[node name="Hurt" type="ColorRect" parent="StandardCollision"]
-unique_name_in_owner = true
-offset_left = -4.0
-offset_top = 4.0
-offset_right = 4.0
-offset_bottom = 4.0
-color = Color(0.717647, 0.254902, 0.196078, 1)
-script = ExtResource("2_h4eey")
+[node name="Timer_Wander" type="Timer" parent="TimerManager"]
+wait_time = 3.0
 
-[node name="PolarBearSprite" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_gfttw")
-animation = &"Idle"
-autoplay = "Idle"
-script = ExtResource("3_51qta")
+[node name="Timer_Chase" type="Timer" parent="TimerManager"]
+wait_time = 0.5
 
-[node name="Idle" type="Node" parent="PolarBearSprite"]
-script = ExtResource("5_gcotj")
-
-[node name="Sit" type="Node" parent="PolarBearSprite"]
-script = ExtResource("8_i834n")
-
-[node name="Hit" type="Node" parent="PolarBearSprite"]
-script = ExtResource("6_pyaxb")
-
-[node name="SlowTimer" type="Timer" parent="PolarBearSprite/Hit"]
+[node name="Timer_Hit" type="Timer" parent="TimerManager"]
+editor_description = "This handles the Slower"
 wait_time = 30.0
 one_shot = true
 
-[node name="Search" type="Node" parent="PolarBearSprite"]
-script = ExtResource("13_qx7fo")
-
-[node name="Chase" type="Node" parent="PolarBearSprite"]
-script = ExtResource("12_fnbe6")
-
-[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
-script = ExtResource("8_jp6s3")
-
-[node name="OutOfSightTimer" type="Timer" parent="Eyesight"]
+[node name="Timer_OutOfSight" type="Timer" parent="TimerManager"]
 one_shot = true
 
-[node name="Audio" type="Node2D" parent="."]
-script = ExtResource("13_k8gcw")
+[node name="Actions" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+z_index = 10
+sprite_frames = SubResource("SpriteFrames_gfttw")
+animation = &"Wander"
+autoplay = "Idle"
+script = ExtResource("3_51qta")
 
-[node name="BgmEncounter" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("6_cuqt7")
-max_distance = 625.0
-bus = &"PolarBear"
+[node name="Idle" type="Node" parent="Actions"]
+script = ExtResource("5_gcotj")
 
-[node name="RoarSpotted" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("14_t1s4a")
-max_distance = 700.0
-bus = &"SFX"
+[node name="Sit" type="Node" parent="Actions"]
+script = ExtResource("8_i834n")
 
-[node name="RoarHurt" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("15_n3oor")
-max_distance = 700.0
+[node name="Wander" type="Node" parent="Actions"]
+script = ExtResource("13_qx7fo")
 
-[node name="LostSight" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("16_47icu")
-max_distance = 700.0
+[node name="Hit" type="Node" parent="Actions"]
+script = ExtResource("6_pyaxb")
 
-[node name="Walk" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("17_fjh5o")
-max_distance = 600.0
+[node name="Chase" type="Node" parent="Actions"]
+script = ExtResource("12_fnbe6")
 
-[node name="Run" type="AudioStreamPlayer2D" parent="Audio"]
-stream = ExtResource("18_5puse")
-max_distance = 700.0
+[node name="Dead" type="Node" parent="Actions"]
+script = ExtResource("13_bm8wf")
+
+[node name="Search" type="Node" parent="Actions"]
+script = ExtResource("14_1lng4")
+
+[node name="Charge" type="Node" parent="Actions"]
+script = ExtResource("16_6x4uf")
+
+[node name="Sleep" type="Node" parent="Actions"]
+script = ExtResource("16_74pan")
+
+[node name="Stats" parent="." instance=ExtResource("3_g2n60")]
+unique_name_in_owner = true
 
 [node name="Goals" type="Node" parent="."]
 unique_name_in_owner = true
@@ -227,69 +226,78 @@ script = ExtResource("11_4sorn")
 
 [node name="FindFood" type="Node" parent="Goals"]
 
-[node name="FindWater" type="Node" parent="Goals"]
-
 [node name="Hunt" type="Node" parent="Goals"]
 script = ExtResource("13_kkkf8")
 
-[node name="Nothing" type="Node" parent="Goals"]
+[node name="Nothing" type="Node" parent="Goals" node_paths=PackedStringArray("state_options")]
 script = ExtResource("14_k7mq3")
+state_options = [NodePath("../../Actions/Sit"), NodePath("../../Actions/Idle"), NodePath("../../Actions/Wander")]
 
-[node name="OneTimer" type="Timer" parent="Goals"]
-autostart = true
+[node name="Audio" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("13_k8gcw")
 
-[node name="TwoTimer" type="Timer" parent="Goals"]
-wait_time = 2.0
-autostart = true
+[node name="Sfx_Hunt" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("6_cuqt7")
+max_distance = 500.0
+attenuation = 1.618
+bus = &"PolarBear"
 
-[node name="ThreeTimer" type="Timer" parent="Goals"]
-wait_time = 3.0
-autostart = true
+[node name="Sfx_Spotted" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("14_t1s4a")
+max_distance = 350.0
+bus = &"SFX"
 
-[connection signal="polar_bear_dead" from="StandardCollision/Hurt" to="Audio" method="_on_polar_bear_dead"]
-[connection signal="animation_finished" from="PolarBearSprite" to="PolarBearSprite" method="_on_hit_finished"]
-[connection signal="chase_start" from="PolarBearSprite" to="PolarBearSprite/Idle" method="_unprocess"]
-[connection signal="chase_start" from="PolarBearSprite" to="PolarBearSprite/Sit" method="_unprocess"]
-[connection signal="chase_start" from="PolarBearSprite" to="PolarBearSprite/Hit" method="_unprocess"]
-[connection signal="chase_start" from="PolarBearSprite" to="PolarBearSprite/Search" method="_unprocess"]
-[connection signal="chase_start" from="PolarBearSprite" to="PolarBearSprite/Chase" method="enter"]
-[connection signal="hit_start" from="PolarBearSprite" to="PolarBearSprite/Idle" method="_unprocess"]
-[connection signal="hit_start" from="PolarBearSprite" to="PolarBearSprite/Sit" method="_unprocess"]
-[connection signal="hit_start" from="PolarBearSprite" to="PolarBearSprite/Hit" method="start"]
-[connection signal="hit_start" from="PolarBearSprite" to="PolarBearSprite/Search" method="_unprocess"]
-[connection signal="hit_start" from="PolarBearSprite" to="PolarBearSprite/Search" method="_stop_moving"]
-[connection signal="hit_start" from="PolarBearSprite" to="PolarBearSprite/Chase" method="_unprocess"]
-[connection signal="idle_start" from="PolarBearSprite" to="PolarBearSprite/Idle" method="enter"]
-[connection signal="idle_start" from="PolarBearSprite" to="PolarBearSprite/Sit" method="_unprocess"]
-[connection signal="idle_start" from="PolarBearSprite" to="PolarBearSprite/Hit" method="_unprocess"]
-[connection signal="idle_start" from="PolarBearSprite" to="PolarBearSprite/Search" method="_unprocess"]
-[connection signal="idle_start" from="PolarBearSprite" to="PolarBearSprite/Chase" method="_unprocess"]
-[connection signal="search_start" from="PolarBearSprite" to="PolarBearSprite/Idle" method="_unprocess"]
-[connection signal="search_start" from="PolarBearSprite" to="PolarBearSprite/Sit" method="_unprocess"]
-[connection signal="search_start" from="PolarBearSprite" to="PolarBearSprite/Hit" method="_unprocess"]
-[connection signal="search_start" from="PolarBearSprite" to="PolarBearSprite/Search" method="enter"]
-[connection signal="search_start" from="PolarBearSprite" to="PolarBearSprite/Chase" method="_unprocess"]
-[connection signal="sit_start" from="PolarBearSprite" to="PolarBearSprite/Idle" method="_unprocess"]
-[connection signal="sit_start" from="PolarBearSprite" to="PolarBearSprite/Sit" method="enter"]
-[connection signal="sit_start" from="PolarBearSprite" to="PolarBearSprite/Hit" method="_unprocess"]
-[connection signal="sit_start" from="PolarBearSprite" to="PolarBearSprite/Search" method="_unprocess"]
-[connection signal="sit_start" from="PolarBearSprite" to="PolarBearSprite/Chase" method="_unprocess"]
-[connection signal="hunt_player" from="PolarBearSprite/Hit" to="." method="change_goals"]
-[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="StandardCollision/Hurt" method="_on_shot"]
-[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="PolarBearSprite/Search" method="_stop_moving"]
-[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="PolarBearSprite/Chase" method="_stop_moving"]
-[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="Eyesight" method="_on_hit_polar_bear_shot"]
-[connection signal="polar_bear_shot" from="PolarBearSprite/Hit" to="Audio" method="_on_shot"]
-[connection signal="timeout" from="PolarBearSprite/Hit/SlowTimer" to="PolarBearSprite/Hit" method="_on_slow_timer_timeout"]
-[connection signal="is_walking" from="PolarBearSprite/Search" to="Audio" method="_on_is_walking"]
-[connection signal="enraged" from="Eyesight" to="Audio" method="_on_eyesight_enraged"]
-[connection signal="lost_sight" from="Eyesight" to="Audio" method="_on_eyesight_lost_sight"]
+[node name="Sfx_Dead" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("15_n3oor")
+max_distance = 350.0
+
+[node name="Sfx_OutOfSight" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("16_47icu")
+max_distance = 350.0
+
+[node name="Sfx_Idle" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("17_fjh5o")
+max_distance = 250.0
+
+[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Audio"]
+stream = ExtResource("18_5puse")
+max_distance = 250.0
+
+[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+script = ExtResource("8_jp6s3")
+
+[connection signal="timeout" from="TimerManager/Timer_Nothing" to="Goals/Nothing" method="_on_timeout"]
+[connection signal="timeout" from="TimerManager/Timer_Wander" to="Actions/Wander" method="change_direction"]
+[connection signal="timeout" from="TimerManager/Timer_Chase" to="Actions/Chase" method="change_direction"]
+[connection signal="animation_finished" from="Actions" to="." method="hit_over"]
+[connection signal="animation_finished" from="Actions" to="Actions" method="unstun"]
+[connection signal="action_transition" from="Actions/Idle" to="." method="change_actions"]
+[connection signal="goal_transition" from="Actions/Idle" to="." method="change_goals"]
+[connection signal="action_transition" from="Actions/Sit" to="." method="change_actions"]
+[connection signal="goal_transition" from="Actions/Sit" to="." method="change_goals"]
+[connection signal="entered" from="Actions/Wander" to="TimerManager" method="start_timer"]
+[connection signal="exited" from="Actions/Wander" to="TimerManager" method="stop_timer"]
+[connection signal="entered" from="Actions/Hit" to="TimerManager" method="start_timer"]
+[connection signal="entered" from="Actions/Hit" to="Stats" method="increment_values"]
+[connection signal="entered" from="Actions/Hit" to="Audio" method="increase_stakes"]
+[connection signal="entered" from="Actions/Hit" to="Eyesight" method="_just_shot"]
+[connection signal="goal_transition" from="Actions/Hit" to="Goals" method="on_goal_transition"]
+[connection signal="entered" from="Actions/Chase" to="TimerManager" method="start_timer"]
+[connection signal="entered" from="Actions/Chase" to="Audio" method="start_sfx"]
+[connection signal="exited" from="Actions/Chase" to="TimerManager" method="stop_timer"]
+[connection signal="exited" from="Actions/Chase" to="Audio" method="stop_sfx"]
+[connection signal="entered" from="Actions/Dead" to="Audio" method="start_sfx"]
+[connection signal="entered" from="Goals/Hunt" to="Audio" method="start_sfx"]
+[connection signal="action_transition" from="Goals/Nothing" to="." method="change_actions"]
+[connection signal="entered" from="Goals/Nothing" to="TimerManager" method="start_timer"]
+[connection signal="exited" from="Goals/Nothing" to="TimerManager" method="stop_timer"]
+[connection signal="finished" from="Audio/Sfx_Spotted" to="." method="_on_roar_spotted_finished"]
+[connection signal="finished" from="Audio/Sfx_Dead" to="." method="_on_roar_hurt_finished"]
 [connection signal="screen_entered" from="Eyesight" to="Eyesight" method="_on_screen_entered"]
 [connection signal="screen_exited" from="Eyesight" to="Eyesight" method="_on_screen_exited"]
-[connection signal="timeout" from="Eyesight/OutOfSightTimer" to="PolarBearSprite/Search" method="start_goal"]
-[connection signal="finished" from="Audio/RoarHurt" to="." method="_on_roar_hurt_finished"]
-[connection signal="start_hunt" from="Goals/Hunt" to="." method="change_actions"]
-[connection signal="start_nothing" from="Goals/Nothing" to="." method="change_actions"]
-[connection signal="timeout" from="Goals/OneTimer" to="PolarBearSprite/Search" method="_on_one_timer_timeout"]
-[connection signal="timeout" from="Goals/OneTimer" to="PolarBearSprite/Chase" method="change_direction"]
-[connection signal="timeout" from="Goals/TwoTimer" to="." method="_on_debug_timer_timeout"]
+[connection signal="sight_update" from="Eyesight" to="Goals/Hunt" method="_on_sight_update"]
+[connection signal="sight_update" from="Eyesight" to="Audio" method="start_sfx"]

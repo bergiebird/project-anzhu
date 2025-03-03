@@ -1,7 +1,7 @@
 @icon('res://warehouse/_icons/node/icon_human_controller.png')
 extends Node
 
-@onready var parent :StaticBody2D = get_parent()
+@onready var parent :CharacterBody2D = get_parent()
 
 func wander()->void:
 	pass

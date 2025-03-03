@@ -1,12 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://c0pl44e11q0uf"]
+[gd_scene load_steps=35 format=3 uid="uid://c0pl44e11q0uf"]
 
-[ext_resource type="Script" path="res://camp_fire.gd" id="1_ggvyn"]
+[ext_resource type="Script" path="res://resources/camp_fire/camp_fire.gd" id="1_ggvyn"]
 [ext_resource type="Texture2D" uid="uid://b5golrueqxb8h" path="res://warehouse/Structures/PNGs/original.png" id="2_fmlbm"]
 [ext_resource type="Texture2D" uid="uid://dnj80iffowsn1" path="res://warehouse/Structures/PNGs/arctic.png" id="3_hc0ee"]
 [ext_resource type="Texture2D" uid="uid://c43gja4g441vn" path="res://resources/camp_fire/camp_fire_light.tres" id="4_8np16"]
 [ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="5_c13y7"]
 [ext_resource type="Script" path="res://scenes/camp_fire_light.gd" id="5_l8ynl"]
 [ext_resource type="AudioStream" uid="uid://dgnxwh4t4p2vs" path="res://warehouse/_audio/sfx/Campfire.mp3" id="7_6e312"]
+[ext_resource type="AudioStream" uid="uid://buls2uubesprq" path="res://warehouse/_audio/music/Menu (start - I think).mp3" id="8_obei1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lgakc"]
 atlas = ExtResource("2_fmlbm")
@@ -233,7 +234,7 @@ position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_wmliu")
 animation = &"lit"
 autoplay = "lit"
-frame_progress = 0.598736
+frame_progress = 0.597965
 
 [node name="CampFireLight" type="PointLight2D" parent="."]
 shadow_filter = 2
@@ -243,10 +244,18 @@ script = ExtResource("5_l8ynl")
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="StandardCollision" parent="StaticBody2D" instance=ExtResource("5_c13y7")]
+only_needs_collider = true
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+[node name="Sfx_Crackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_6e312")
 volume_db = 20.0
 autoplay = true
 max_distance = 50.0
 bus = &"SFX"
+
+[node name="Bgm_CalmCampfire" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_obei1")
+autoplay = true
+max_distance = 200.0
+attenuation = 2.0
+bus = &"PolarBear"

@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="3_4a5ij"]
 [ext_resource type="Texture2D" uid="uid://xtu3ptec0j14" path="res://warehouse/Units/PNGs/musket_hero.png" id="3_cgccp"]
 [ext_resource type="Script" path="res://scenes/player_sprite.gd" id="3_ro5pv"]
-[ext_resource type="AudioStream" uid="uid://bphym84428lme" path="res://warehouse/_audio/538795__brunoauzet__old-musket-bang.wav" id="4_g210k"]
-[ext_resource type="AudioStream" uid="uid://bq7ijkrb81e5d" path="res://warehouse/_audio/reload.wav" id="5_sdhxg"]
+[ext_resource type="AudioStream" uid="uid://bphym84428lme" path="res://warehouse/_audio/sfx/538795__brunoauzet__old-musket-bang.wav" id="4_g210k"]
+[ext_resource type="AudioStream" uid="uid://bq7ijkrb81e5d" path="res://warehouse/_audio/sfx/reload.wav" id="5_sdhxg"]
 [ext_resource type="Script" path="res://scenes/ray_cast_2d.gd" id="7_hi174"]
 [ext_resource type="Gradient" uid="uid://bwv6f7evffbt1" path="res://resources/camp_fire/fire_gradient.tres" id="9_lmby3"]
 [ext_resource type="Script" path="res://resources/player/player_movement.gd" id="10_m88x0"]
@@ -694,8 +694,9 @@ script = ExtResource("1_e4mdq")
 
 [node name="PlayerSprite" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
+z_index = 10
 sprite_frames = SubResource("SpriteFrames_eko0w")
-animation = &"walk_SOUTH"
+animation = &"reload_SOUTH"
 autoplay = "idle_SIDE"
 script = ExtResource("3_ro5pv")
 

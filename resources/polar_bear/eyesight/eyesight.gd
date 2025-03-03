@@ -1,21 +1,21 @@
 extends VisibleOnScreenNotifier2D #eyesight.gd
 
-@onready var out_of_sight_timer :Timer = $OutOfSightTimer
 var has_grievance :bool = false
+var is_spotted :bool = false
 
-signal enraged()
-signal lost_sight()
+signal sight_update(string_name :String)
 
 func _on_screen_exited() -> void:
 	if has_grievance:
-		lost_sight.emit()
-		out_of_sight_timer.start()
-
-func _on_hit_polar_bear_shot() -> void:
-	if has_grievance:
-		return
-	has_grievance = true
+		sight_update.emit("OutOfSight")
+	is_spotted = false
 
 func _on_screen_entered() -> void:
 	if has_grievance:
-		enraged.emit()
+		sight_update.emit("Spotted")
+	is_spotted = true
+
+func _just_shot(_action_name: String) -> void:
+	if has_grievance:
+		return
+	has_grievance = true

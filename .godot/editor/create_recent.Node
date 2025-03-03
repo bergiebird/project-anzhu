@@ -1,2 +1,6 @@
-Timer
+Line2D
+AnimatedSprite2D
+Node
 AudioStreamPlayer2D
+CharacterBody2D
+Timer

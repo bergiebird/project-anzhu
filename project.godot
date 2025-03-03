@@ -15,14 +15,24 @@ run/main_scene="res://scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://warehouse/~examples/arctic-3.png"
 
+[audio]
+
+buses/default_bus_layout="res://resources/polar_bear/audio/default_bus_layout.tres"
+general/default_playback_type.web=0
+
 [autoload]
 
 Signalton="*res://resources/_singletons/Signalton.gd"
-Enumerton="*res://Enumerton.gd"
-DayNighton="*res://DayNighton.gd"
+Enumerton="*res://resources/_singletons/Enumerton.gd"
+DayNighton="*res://resources/_singletons/DayNighton.gd"
+Audioton="*res://resources/_singletons/Audioton.gd"
 
 [debug]
 
+gdscript/warnings/unused_variable=0
+gdscript/warnings/unused_local_constant=0
+gdscript/warnings/unused_private_class_variable=0
+gdscript/warnings/unused_parameter=0
 gdscript/warnings/unused_signal=0
 
 [display]

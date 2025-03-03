@@ -1,58 +1,22 @@
 @icon("res://resources/goals/goals.png")
-extends Node
+extends Node #goals.gd
 
-enum PolarBearGoals {GetSleep,FindFood,FindWater,Nothing,Hunt}
-@onready var get_sleep :Node = $GetSleep
-@onready var find_food :Node = $FindFood
-@onready var find_water :Node = $FindWater
-@onready var hunt :Node = $Hunt
-@onready var nothing :Node = $Nothing
-var current_goal :PolarBearGoals
+var goal_states :Dictionary = {}
+var current_goal :GoalState
 
 func _ready()->void:
-	unprocess_all()
+	for child in get_children():
+		if child is GoalState:
+			goal_states[child.name] = child
+			child.goal_transition.connect(on_goal_transition)
 
-func process_get_sleep()->void:
-	current_goal = PolarBearGoals.GetSleep
-
-func process_find_food()->void:
-	current_goal = PolarBearGoals.FindFood
-
-func process_find_water()->void:
-	current_goal = PolarBearGoals.FindWater
-
-func process_hunt()->void:
-	current_goal = PolarBearGoals.Hunt
-	hunt.enter()
-
-func process_nothing()->void:
-	current_goal = PolarBearGoals.Nothing
-	nothing.enter()
-
-
-func unprocess_all()->void:
-	unprocess_get_sleep()
-	unprocess_find_food()
-	unprocess_find_water()
-	unprocess_hunt()
-	unprocess_nothing()
-
-func unprocess_get_sleep()->void:
-	get_sleep.set_process(false)
-	get_sleep.set_physics_process(false)
-
-func unprocess_find_food()->void:
-	find_food.set_process(false)
-	find_food.set_physics_process(false)
-
-func unprocess_find_water()->void:
-	find_water.set_process(false)
-	find_water.set_physics_process(false)
-
-func unprocess_hunt()->void:
-	hunt.set_process(false)
-	hunt.set_physics_process(false)
-
-func unprocess_nothing()->void:
-	nothing.set_process(false)
-	nothing.set_physics_process(false)
+func on_goal_transition(new_goal_name, old_goal=null)->void:
+	if current_goal != null:
+		if new_goal_name == current_goal.name:
+			return
+	var verify_new_goal :GoalState = goal_states.get(new_goal_name)
+	if !verify_new_goal:
+		return
+	if current_goal: current_goal.exit()
+	current_goal = verify_new_goal
+	current_goal.enter()

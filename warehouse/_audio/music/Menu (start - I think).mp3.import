@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://buls2uubesprq"
+path="res://.godot/imported/Menu (start - I think).mp3-81dc6efee450612e45d25deec3ddf5d4.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/music/Menu (start - I think).mp3"
+dest_files=["res://.godot/imported/Menu (start - I think).mp3-81dc6efee450612e45d25deec3ddf5d4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,9 +1,9 @@
 [gd_scene load_steps=11 format=3 uid="uid://d06bo8scbr23v"]
 
-[ext_resource type="Script" path="res://arctic_fox.gd" id="1_yb322"]
+[ext_resource type="Script" path="res://resources/arctic_fox/arctic_fox.gd" id="1_yb322"]
 [ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="2_br13m"]
 [ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="3_cuink"]
-[ext_resource type="Script" path="res://resources/standard_collision/standard_collision.gd" id="4_5msqs"]
+[ext_resource type="Script" path="res://resources/standard_collision/ui_stats.gd" id="4_5msqs"]
 [ext_resource type="Script" path="res://resources/ai_controls/ai_controls.gd" id="4_oqrvh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ueala"]
@@ -63,12 +63,12 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="ArcticFox" type="StaticBody2D"]
+[node name="ArcticFox" type="CharacterBody2D"]
 script = ExtResource("1_yb322")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_htsuc")
-animation = &"idle_alert"
+animation = &"alert"
 autoplay = "idle_alert"
 
 [node name="StandardCollision" parent="." instance=ExtResource("3_cuink")]

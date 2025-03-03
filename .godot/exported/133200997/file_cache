@@ -1,0 +1,15 @@
+res://resources/camp_fire/camp_fire_light.tres::cd97431e770c46c8cb83e8eedf2787a8::1740751343::res://.godot/exported/133200997/export-b9437901a37ed80c6fd0ae97539ddba1-camp_fire_light.res
+res://resources/camp_fire/fire_gradient.tres::5ac7bd8478306965e2db4385ce5954a8::1740751343::res://.godot/exported/133200997/export-6da3e55aa99c83d1b713042084bd6277-fire_gradient.res
+res://resources/standard_collision/standard_collision.tres::f67cd960b49c1d1bea7e2dd606537f8c::1740684350::res://.godot/exported/133200997/export-48e8118d17b00180f9859c178a5b3a41-standard_collision.res
+res://resources/standard_collision/standard_collision.tscn::dbba82de16abb48e72090d90a777eb0b::1740962193::res://.godot/exported/133200997/export-b7f9b29381fb24744df5682006457a53-standard_collision.scn
+res://scenes/arctic_fox.tscn::4922d884ff636184a87a7d4fad8aa45f::1740943907::res://.godot/exported/133200997/export-7bb5042046923242b363528b075d378a-arctic_fox.scn
+res://scenes/camp_fire.tscn::59dae4d63297cb3d5e0eda759270ff82::1740962193::res://.godot/exported/133200997/export-86354f589ab635da88ba4a96226d241c-camp_fire.scn
+res://scenes/game.tscn::cc6b714c356264255d5a24984f2fc435::1740962280::res://.godot/exported/133200997/export-c2a7af834e91ff64325daddf58e45dc0-game.scn
+res://scenes/player.tscn::459c12deba85c633e081bbf674e1fa3b::1740962193::res://.godot/exported/133200997/export-234fb6894ec6226e856ab7f825500d3d-player.scn
+res://scenes/polar_bear.tscn::677e27f40182dfdfb587283c7151e95d::1740962193::res://.godot/exported/133200997/export-3f3ef07b2bf55ee0982a21c1b37ee275-polar_bear.scn
+res://warehouse/_audio/sfx/walk/default_bus_layout.tres::91fed42beb021b15e4603dc8e920ec2d::1740935655::res://.godot/exported/133200997/export-612bfc42b00b2f964c38aa1f65c1401e-default_bus_layout.res
+res://warehouse/Overworld/all_overworld_ts.tres::0209595f0c604fd1208ca2806a0f88a4::1740962192::res://.godot/exported/133200997/export-22dffd68e422602a65d0bcc8bcb09a1f-all_overworld_ts.res
+res://warehouse/UI/Resources/sf_emotes.tres::29a84a11747cebd34c855db4888ea585::1740333492::res://.godot/exported/133200997/export-be4e037f3a6b4f2aeb919a4146042db0-sf_emotes.res
+res://warehouse/UI/Resources/sf_portraits.tres::7dc9191afd98617c5dc840abfcd9519f::1740333492::res://.godot/exported/133200997/export-4e4d5d97917e93dc9c11c2d0d5149149-sf_portraits.res
+res://resources/polar_bear/audio/default_bus_layout.tres::74cacd9d5719b5907bb0ec9cb42ebb2c::1740940526::res://.godot/exported/133200997/export-b9f34bb89f75a0a26aeff83495a63a3a-default_bus_layout.res
+res://warehouse/_audio/music/bgm_playlist.tres::17a7c36b143e807d65cc1773f128ef7c::1740935648::res://.godot/exported/133200997/export-be11590cb298e5f789127e37378fa1f8-bgm_playlist.res
