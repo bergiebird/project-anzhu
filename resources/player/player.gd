@@ -1,5 +1,5 @@
 @icon('res://resources/player/player.png')
-extends CharacterBody2D #player.gd
+extends AnzhuCharacter #player.gd
 @onready var movement_node :Node = %Movement
 @onready var bgm = %BGM
 @onready var anim :AnimatedSprite2D = %PlayerSprite

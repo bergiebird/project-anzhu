@@ -248,9 +248,9 @@ only_needs_collider = true
 
 [node name="Sfx_Crackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_6e312")
-volume_db = 20.0
 autoplay = true
-max_distance = 50.0
+max_distance = 75.0
+attenuation = 0.5
 bus = &"SFX"
 
 [node name="Bgm_CalmCampfire" type="AudioStreamPlayer2D" parent="."]
