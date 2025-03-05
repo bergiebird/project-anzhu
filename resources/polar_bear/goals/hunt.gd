@@ -1,9 +1,13 @@
 extends GoalState #hunt.gd
 
+signal boogie_signal(string_name :String)
 enum HuntDesire {None, Minimal, Hungry, Unstoppable}
 var current_hunt_desire :int = 0
-var target
-func on_enter()->void:
+var target :AnzhuCharacter
+
+func enter()->void:
+	if Audioton.can_bear_boogie():
+		boogie_signal.emit("Hunt")
 	target = parent.get_parent().player
 
 
@@ -13,7 +17,7 @@ func update(_delta:float)->void:
 func physics_update(_delta:float)->void:
 	pass
 
-func on_exit()->void:
+func exit()->void:
 	current_hunt_desire = 0
 
 

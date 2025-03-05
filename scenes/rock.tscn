@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://c52jy468y547f"]
+
+[ext_resource type="Texture2D" uid="uid://bli3cobwsjqqu" path="res://warehouse/Ores/PNGs/arctic.png" id="1_mek2u"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="2_ik6fu"]
+
+[node name="Rock" type="Sprite2D"]
+texture = ExtResource("1_mek2u")
+region_enabled = true
+region_rect = Rect2(113, 84, 12, 12)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Stats" parent="StaticBody2D" instance=ExtResource("2_ik6fu")]
+position = Vector2(1, 1)
+only_needs_collider = true

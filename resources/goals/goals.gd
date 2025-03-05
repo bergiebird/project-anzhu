@@ -3,6 +3,7 @@ extends Node #goals.gd
 
 var goal_states :Dictionary = {}
 var current_goal :GoalState
+@onready var audio :Node2D = %Audio
 
 func _ready()->void:
 	for child in get_children():
@@ -17,6 +18,6 @@ func on_goal_transition(new_goal_name, old_goal=null)->void:
 	var verify_new_goal :GoalState = goal_states.get(new_goal_name)
 	if !verify_new_goal:
 		return
-	if current_goal: current_goal.exit()
+	if current_goal: current_goal.on_exit()
 	current_goal = verify_new_goal
-	current_goal.enter()
+	current_goal.on_enter()

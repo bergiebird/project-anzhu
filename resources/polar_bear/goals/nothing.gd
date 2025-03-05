@@ -4,7 +4,7 @@ extends GoalState #Nothing
 @export var time_options :Array[int] = [5,9,2,1,10,15]
 @onready var nothing_timer :Node = %TimerManager
 
-func on_enter()->void:
+func enter()->void:
 	action_transition.emit(state_options.pick_random().name)
 
 func _on_timeout() -> void:

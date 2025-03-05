@@ -1,6 +1,13 @@
-Line2D
+VisibleOnScreenEnabler2D
+StaticBody2D
+Sprite2D
 AnimatedSprite2D
 Node
-AudioStreamPlayer2D
+PointLight2D
+AnzhuCharacter
 CharacterBody2D
+TileMapLayer
+AudioStreamPlayer
+Line2D
+AudioStreamPlayer2D
 Timer

@@ -1,4 +1,4 @@
 extends ActionState #sleep.gd
 
-func on_enter()->void:
+func enter()->void:
 	set_sleeping(true)

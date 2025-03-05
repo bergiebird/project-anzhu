@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://d06bo8scbr23v"]
 
-[ext_resource type="Script" path="res://resources/arctic_fox/arctic_fox.gd" id="1_yb322"]
+[ext_resource type="Script" uid="uid://du442geuk0s1v" path="res://resources/arctic_fox/arctic_fox.gd" id="1_yb322"]
 [ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="2_br13m"]
 [ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="3_cuink"]
-[ext_resource type="Script" path="res://resources/standard_collision/ui_stats.gd" id="4_5msqs"]
-[ext_resource type="Script" path="res://resources/ai_controls/ai_controls.gd" id="4_oqrvh"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/standard_collision/ui_stats.gd" id="4_5msqs"]
+[ext_resource type="Script" uid="uid://pn4ntq6i77rx" path="res://resources/ai_controls/ai_controls.gd" id="4_oqrvh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ueala"]
 atlas = ExtResource("2_br13m")

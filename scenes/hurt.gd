@@ -1,5 +1,7 @@
 extends ColorRect #hurt.gd
 
+@onready var parent :CollisionShape2D = get_parent()
+
 func increment(incoming_value :int) -> void:
 	size.y += incoming_value
 	position.y -= incoming_value
@@ -7,4 +9,4 @@ func increment(incoming_value :int) -> void:
 		return
 	if position.y > 0:
 		return
-	print('dead')
+	parent.signal_is_dead_emit()

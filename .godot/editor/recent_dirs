@@ -1,3 +1,16 @@
+res://scenes
+res://warehouse/Ores/PNGs
+res://resources/player
+/home/bergiebird/Current/Godot/projects/project-anzhu/exports/030415302025
+res://resources/camp_fire
+res://resources/node_audio
+res://warehouse/Animals/PNGs
+res://resources/walrus
+res://resources/arctic_wolf
+res://resources/Reindeer
+res://warehouse/Overworld
+/home/bergiebird/Current/Godot/projects/project-anzhu/exports/030317112025
+res://resources/snow_tracker
 /home/bergiebird/Current/Godot/projects/project-anzhu/exports/030313142025
 /home/bergiebird/Current/Godot/projects/project-anzhu/exports/030219382025
 /home/bergiebird/Current/Godot/projects/project-anzhu/exports/030218122025
@@ -7,6 +20,4 @@ res://resources/_states/action_states
 res://warehouse/_audio/music
 res://resources/_singletons
 res://resources/_states
-res://resources/timer_manager
 /home/bergiebird/Current/Godot/projects/project-anzhu/exports/02282223
-res://warehouse/_audio/sfx/walk

@@ -1,8 +1,6 @@
 res://resources/polar_bear/audio/default_bus_layout.tres
 res://scenes/game.tscn
-res://warehouse/Overworld/all_overworld_ts.tres
+res://warehouse/Overworld/ts_arctic_all.tres
 res://warehouse/_audio/sfx/walk/default_bus_layout.tres
-res://scenes/polar_bear.tscn
-res://resources/player/player.gd
-res://scenes/player.tscn
-res://scenes/camp_fire.tscn
+res://resources/camp_fire/camp_fire_light.tres
+res://resources/game/game.gd

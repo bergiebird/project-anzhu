@@ -1,6 +1,6 @@
 extends PointLight2D #camp_fire_light.gd
 
-@onready var parent :Node2D = get_parent()
+@onready var parent :StaticBody2D = get_parent()
 var time_dictionary :Dictionary
 var tween :Tween
 

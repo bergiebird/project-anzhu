@@ -2,7 +2,6 @@
 extends Node #player_movement.gd
 
 signal efficiency_check(report :bool)
-
 @export_group('Movement')
 @export var normal_speed :int = 20
 @export var efficient_modifier :int = 15
@@ -11,20 +10,20 @@ var directions :Dictionary
 var run_speed :int
 var efficient_speed :int
 
-@onready var parent :CharacterBody2D = get_parent()
-@onready var anim: AnimatedSprite2D = %PlayerSprite
+@onready var parent :AnzhuPlayer = get_parent().get_parent()
+@onready var anim: AnimatedSprite2D = %Animations
 @onready var velocity :Vector2
 @onready var has_movement :bool
 @onready var enumer :Enumerton = Enumerton
 
 
-func _ready() -> void:
+func _ready()->void:
 	efficient_speed = normal_speed + efficient_modifier
 	run_speed = efficient_speed + run_bonus
 	directions = enumer.character_directions_bible
 
 
-func movement() -> void:
+func move()->void:
 	velocity = Vector2.ZERO
 	has_movement = false
 	for dir_name in ["NORTH", "SOUTH", "WEST", "EAST"]:

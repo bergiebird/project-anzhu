@@ -4,20 +4,23 @@ signal action_transition(action_name :String)
 signal entered(self_name :String)
 signal exited(self_name :String)
 @export var self_debug :bool
-@onready var parent = get_parent()
-@onready var grandparent = parent.get_parent()
+@onready var parent :Node = get_parent()
+@onready var grandparent := parent.get_parent()
 
-func enter()->void:
+## Override this and on_enter, the signal, and debug will not function
+func on_enter()->void:
 	if self_debug: print_rich("[color=yellow][b]" + self.name + "[/b][/color]")
 	enter_emit()
-	on_enter()
-func on_enter()->void:
+	enter()
+
+## Virtual method for my State class's enter. Runs after the enter signal.
+func enter()->void:
 	pass
-func exit()->void:
+func on_exit()->void:
 	if self_debug: print_rich("[color=white][b]" + self.name + "[/b][/color]")
 	exit_emit()
-	on_exit()
-func on_exit()->void:
+	exit()
+func exit()->void:
 	pass
 func update(_delta:float)->void:
 	if self_debug: print_rich("[bgcolor=purple][color=white]UPDATE ERROR [/color][/bgcolor] [color=yellow]" + self.name + " has not been assigned a process function[/color]")

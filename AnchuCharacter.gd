@@ -1,18 +1,18 @@
 class_name AnzhuCharacter extends CharacterBody2D #AnzhuCharacter.gd
 var daynight_dictionary :Dictionary
-enum Goals {GetSleep,FindFood,FindWater,Nothing,Hunt}
-enum Actions {Idle,Sit,Hit,Wander,Chase,Dead,Search,Charge,Sleep}
+enum AnimalGoals {GetSleep,FindFood,FindWater,Nothing,Hunt}
+enum AnimalActions {Idle,Sit,Hit,Wander,Chase,Dead,Search,Charge,Sleep}
 enum SleepSchedule {Diurnal,Nocturnal,Crepuscular}
 enum Sleepiness {Awake, Drowsy, Tired, Exhausted, Deprived}
 @export_group("Core Attributes")
 @export var is_sleeping :bool = false
 @export var move_speed :int = 10
 @export var starting_health :int = 8
-@export var starting_goal :Goals = Goals.Nothing
+@export var starting_goal :AnimalGoals = AnimalGoals.Nothing
 @export var set_sleep_schedule :SleepSchedule = SleepSchedule.Diurnal
 var current_melatonin :float
-var current_action :Actions
-var current_goal :Goals
+var current_action :AnimalActions
+var current_goal :AnimalGoals
 var time_since_last_sleep :float = 0.0
 
 
@@ -26,7 +26,7 @@ func _ready() -> void:
 	DayNighton.time_dictionary_delivery.connect(_characters_dictionary_inbox)
 	DayNighton.time_progressed.connect(_process_melatonin)
 	current_goal = starting_goal
-	current_action = Actions.Idle
+	current_action = AnimalActions.Idle
 	ready()
 func ready()->void: pass
 

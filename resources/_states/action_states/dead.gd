@@ -1,6 +1,6 @@
 extends ActionState #dead.gd
 
-func on_enter()->void:
+func enter()->void:
 	print('im dead')
 
 func update(delta:float)->void:

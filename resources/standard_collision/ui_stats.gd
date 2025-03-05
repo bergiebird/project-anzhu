@@ -1,6 +1,8 @@
 @icon("res://warehouse/_icons/control/icon_transition.png")
 extends CollisionShape2D #ui_stats.gd
 
+signal is_dead(dead_name :String)
+
 ##Must be either 1,2,4, or 8
 @export var damage_taken_per_hit :int = 1
 @export var only_needs_collider :bool = false
@@ -17,3 +19,6 @@ func _ready()->void:
 
 func increment_values(name_of_stat :String)->void:
 	stats_dictionary.get("Ui_" + name_of_stat).increment(damage_taken_per_hit)
+
+func signal_is_dead_emit()->void:
+	is_dead.emit("Dead")

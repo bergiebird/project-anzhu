@@ -2,8 +2,10 @@ extends AnimatedSprite2D #polar_bear_sprite.gd
 
 var action_states :Dictionary = {}
 var current_action :ActionState
-var is_stunned :bool = false
+
 @export var debug_all :bool = false
+@onready var parent :AnzhuCharacter = get_parent()
+
 
 func _ready()->void:
 	for child in get_children():
@@ -18,7 +20,7 @@ func _process(delta :float)->void:
 		current_action.update(delta)
 
 func _physics_process(delta:float)->void:
-	if is_stunned:
+	if parent.is_stunned:
 		return
 	if current_action:
 		current_action.physics_update(delta)
@@ -29,14 +31,7 @@ func on_action_transition(new_action_name :String, old_action = null)->void:
 			return
 	var verify_new_action :ActionState = action_states.get(new_action_name)
 	if !verify_new_action: return
-	if current_action: current_action.exit()
+	if current_action: current_action.on_exit()
 	current_action = verify_new_action
-	current_action.enter()
+	current_action.on_enter()
 	play(new_action_name)
-
-
-func _on_hit_start()->void:
-	is_stunned = true
-
-func unstun()->void:
-	is_stunned = false

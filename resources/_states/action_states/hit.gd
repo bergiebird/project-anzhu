@@ -1,6 +1,6 @@
 extends ActionState #hit.gd
 
-func on_enter()->void:
+func enter()->void:
 	goal_transition.emit('Hunt')
 
 func update(_delta:float)->void:
@@ -9,5 +9,5 @@ func update(_delta:float)->void:
 func physics_update(_delta:float)->void:
 	pass
 
-func on_exit()->void:
+func exit()->void:
 	pass

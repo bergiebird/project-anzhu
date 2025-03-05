@@ -1,11 +1,11 @@
 [gd_scene load_steps=35 format=3 uid="uid://c0pl44e11q0uf"]
 
-[ext_resource type="Script" path="res://resources/camp_fire/camp_fire.gd" id="1_ggvyn"]
+[ext_resource type="Script" uid="uid://ce1y6f37kb76j" path="res://resources/camp_fire/camp_fire.gd" id="1_ggvyn"]
 [ext_resource type="Texture2D" uid="uid://b5golrueqxb8h" path="res://warehouse/Structures/PNGs/original.png" id="2_fmlbm"]
 [ext_resource type="Texture2D" uid="uid://dnj80iffowsn1" path="res://warehouse/Structures/PNGs/arctic.png" id="3_hc0ee"]
 [ext_resource type="Texture2D" uid="uid://c43gja4g441vn" path="res://resources/camp_fire/camp_fire_light.tres" id="4_8np16"]
 [ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/standard_collision/standard_collision.tscn" id="5_c13y7"]
-[ext_resource type="Script" path="res://scenes/camp_fire_light.gd" id="5_l8ynl"]
+[ext_resource type="Script" uid="uid://cpu483vdcrb1" path="res://scenes/camp_fire_light.gd" id="5_l8ynl"]
 [ext_resource type="AudioStream" uid="uid://dgnxwh4t4p2vs" path="res://warehouse/_audio/sfx/Campfire.mp3" id="7_6e312"]
 [ext_resource type="AudioStream" uid="uid://buls2uubesprq" path="res://warehouse/_audio/music/Menu (start - I think).mp3" id="8_obei1"]
 
@@ -226,7 +226,7 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CampFire" type="Node2D"]
+[node name="CampFire" type="StaticBody2D"]
 script = ExtResource("1_ggvyn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -241,11 +241,6 @@ shadow_filter = 2
 texture = ExtResource("4_8np16")
 script = ExtResource("5_l8ynl")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="StandardCollision" parent="StaticBody2D" instance=ExtResource("5_c13y7")]
-only_needs_collider = true
-
 [node name="Sfx_Crackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_6e312")
 autoplay = true
@@ -256,6 +251,9 @@ bus = &"SFX"
 [node name="Bgm_CalmCampfire" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_obei1")
 autoplay = true
-max_distance = 200.0
-attenuation = 2.0
+max_distance = 150.0
+attenuation = 0.2
 bus = &"PolarBear"
+
+[node name="StandardCollision" parent="." instance=ExtResource("5_c13y7")]
+only_needs_collider = true

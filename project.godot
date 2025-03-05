@@ -12,7 +12,7 @@ config_version=5
 
 config/name="[HAGJ] - Arctic Exploration"
 run/main_scene="res://scenes/game.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://warehouse/~examples/arctic-3.png"
 
 [audio]
@@ -39,7 +39,6 @@ gdscript/warnings/unused_signal=0
 
 window/size/viewport_width=2400
 window/size/viewport_height=2400
-window/size/mode=3
 window/size/window_width_override=640
 window/size/window_height_override=480
 window/stretch/mode="viewport"
@@ -51,6 +50,17 @@ folder_colors={
 "res://scenes/": "purple",
 "res://warehouse/": "gray"
 }
+
+[global_group]
+
+bear=""
+animal=""
+reindeer=""
+wolf=""
+walrus=""
+person=""
+player=""
+gunshot=""
 
 [input]
 

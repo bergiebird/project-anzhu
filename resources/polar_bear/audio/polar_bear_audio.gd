@@ -36,6 +36,7 @@ func parse_goal(new_goal :String)->void:
 	if new_goal == "Nothing" and sfx_hunt.is_playing():
 		sfx_hunt.stop()
 
-func start_sfx(name_of_sfx :String)->void: audio_dictionary.get(audio_string + name_of_sfx).play()
-
-func stop_sfx(name_of_sfx :String)->void: audio_dictionary.get(audio_string + name_of_sfx).stop()
+func start_sfx(name_of_sfx :String)->void:  audio_dictionary.get(audio_string + name_of_sfx).play()
+func stop_sfx(name_of_sfx :String)->void:   audio_dictionary.get(audio_string + name_of_sfx).stop()
+func get_is_playing(name_of_sfx :String)->bool:
+	return audio_dictionary.get(audio_string + name_of_sfx).is_playing()
