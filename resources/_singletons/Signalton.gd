@@ -1,7 +1,5 @@
-extends Node
+extends Node #Signalton.gd
 
-signal gunshot()
-signal time_progressed()
-
-func _ready()->void:
-	pass
+signal gunshot
+signal time_progressed
+signal player_hit

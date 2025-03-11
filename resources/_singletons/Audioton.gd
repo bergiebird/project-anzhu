@@ -1,5 +1,5 @@
 extends Node #Audioton.gd
-#@onready var main_audio_node :Node =
+
 var audio_buses :Array[String] = []
 var exclusive_bear_list :Array[Node]
 signal permission_granter(permission :bool)

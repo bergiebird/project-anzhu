@@ -1,12 +1,13 @@
-extends Node #Enumerton.gd
+extends Node #Directon.gd
 
 enum AnimalState{IDLE,WANDER,HUNT,FLEE,EAT}
 enum Looking{NORTH,SOUTH,EAST,WEST}
 var looking_where :int = Looking.EAST
-var direction_priority :Array = ["NORTH", "SOUTH", "WEST", "EAST"]
+var direction_priority :Array[String] = ["NORTH", "SOUTH", "WEST", "EAST"]
 var character_directions_bible :Dictionary = {
 	"NORTH": {
 		"vector": Vector2(0, -1),
+		"jump": Vector2(0,-1),
 		"enum": Looking.NORTH,
 		"opposite": "SOUTH",
 		"move_action": "move_NORTH",
@@ -14,6 +15,7 @@ var character_directions_bible :Dictionary = {
 	},
 	"SOUTH": {
 		"vector": Vector2(0, 1),
+		"jump": Vector2(0,1),
 		"enum": Looking.SOUTH,
 		"opposite": "NORTH",
 		"move_action": "move_SOUTH",
@@ -21,6 +23,7 @@ var character_directions_bible :Dictionary = {
 	},
 	"WEST": {
 		"vector": Vector2(-1, 0),
+		"jump": Vector2(1,0),
 		"enum": Looking.WEST,
 		"opposite": "EAST",
 		"move_action": "move_WEST",
@@ -28,6 +31,7 @@ var character_directions_bible :Dictionary = {
 		},
 	"EAST": {
 		"vector": Vector2(1, 0),
+		"jump": Vector2(-1,0),
 		"enum": Looking.EAST,
 		"opposite": "WEST",
 		"move_action": "move_EAST",
@@ -49,5 +53,5 @@ func get_current_direction_data()->Dictionary:
 	for direction in character_directions_bible:
 		if character_directions_bible[direction]["enum"] == looking_where:
 			return character_directions_bible[direction]
-	push_error("Invalid looking_where value in Enumerton")
+	push_error("Invalid looking_where value in Directon")
 	return {}

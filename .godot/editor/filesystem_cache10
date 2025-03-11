@@ -1,9 +1,7 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1741185660
-AnchuCharacter.gd::GDScript/GDScript::5369671792221298707::1741122356::0::1::::AnzhuCharacter<>CharacterBody2D<><>0<>0<><>::
-AnzhuPlayer.gd::GDScript/GDScript::2128072108319765459::1741122501::0::1::::AnzhuPlayer<>AnzhuCharacter<>res://resources/player/player.png<>0<>0<><>::
-export_presets.cfg::TextFile/TextFile::-1::1741120250::0::1::::<><><>0<>0<><>::
-::res://exports/::1741120299
+::res://::1741704793
+export_presets.cfg::TextFile/TextFile::-1::1741406406::0::1::::<><><>0<>0<><>::
+::res://exports/::1741406447
 ::res://exports/02282223/::1741027935
 index.apple-touch-icon.png::CompressedTexture2D/CompressedTexture2D::4388049213941632340::1740799508::1741027935::1::::<><><>0<>0<>7d0d5cbe7e0a5a38d9dac23739519068<>res://.godot/imported/index.apple-touch-icon.png-e8d82845376a44286b678fcb97c7575d.ctex::
 index.icon.png::CompressedTexture2D/CompressedTexture2D::2833638887897299024::1740799508::1741027935::1::::<><><>0<>0<>b24e2e5d26acb54f1548f52deae0617c<>res://.godot/imported/index.icon.png-a92a60aa52661d8a2b53eb035c06dea5.ctex::
@@ -28,134 +26,172 @@ index.png::CompressedTexture2D/CompressedTexture2D::712666123126940446::17410413
 index.apple-touch-icon.png::CompressedTexture2D/CompressedTexture2D::5811287175391091107::1741120250::1741120620::1::::<><><>0<>0<>e64886917f604df3bf264dc3926629b2<>res://.godot/imported/index.apple-touch-icon.png-d141d1f714c5a29a3139c6d71358beb7.ctex::
 index.icon.png::CompressedTexture2D/CompressedTexture2D::290064159880737114::1741120250::1741120620::1::::<><><>0<>0<>b9b91be716ccf362f67281d7f64b7c01<>res://.godot/imported/index.icon.png-becbc17bc143807c116fba9837d709f2.ctex::
 index.png::CompressedTexture2D/CompressedTexture2D::7421174055687001239::1741120250::1741120620::1::::<><><>0<>0<>29e3ff7898b48723930311313b88a79e<>res://.godot/imported/index.png-5da40691b6391d679efcb1b39d93c9a5.ctex::
-::res://resources/::1741136146
-::res://resources/_singletons/::1741112650
-Audioton.gd::GDScript/GDScript::7816094116997914710::1741112650::0::1::::<>Node<><>0<>0<><>::
-DayNighton.gd::GDScript/GDScript::7833205766299112660::1740962823::0::1::::<>Node<><>0<>0<><>::
+::res://exports/030723002025/::1741406405
+index.apple-touch-icon.png::CompressedTexture2D/CompressedTexture2D::8300215043674510987::1741406405::1741406390::1::::<><><>0<>0<>bda06f35fec46a77f847e81e31152a92<>res://.godot/imported/index.apple-touch-icon.png-7c048d41c121e4c440d6c0ae0e7e2e54.ctex::
+index.icon.png::CompressedTexture2D/CompressedTexture2D::3274597128340058582::1741406405::1741406390::1::::<><><>0<>0<>37d5f70f3df0401eb3665268107cc775<>res://.godot/imported/index.icon.png-cea0fd3bfc2a843c47cf42143d38c3ae.ctex::
+index.png::CompressedTexture2D/CompressedTexture2D::2433574823317462164::1741406405::1741406390::1::::<><><>0<>0<>9654412e649081388608e987b5b17ca1<>res://.godot/imported/index.png-9a311ee3994d1866bbd4c640091e7c05.ctex::
+::res://resources/::1741615520
+::res://resources/_singletons/::1741611453
+Audioton.gd::GDScript/GDScript::7816094116997914710::1741191017::0::1::::<>Node<><>0<>0<><>::
+DayNighton.gd::GDScript/GDScript::7833205766299112660::1741611453::0::1::::<>Node<><>0<>0<><>::
 Dictionaryton.gd::GDScript/GDScript::6266271572901040460::1740854866::0::1::::<>Node<><>0<>0<><>::
-Enumerton.gd::GDScript/GDScript::1092402665442629417::1740690636::0::1::::<>Node<><>0<>0<><>::
-Signalton.gd::GDScript/GDScript::6247088473682867841::1740607596::0::1::::<>Node<><>0<>0<><>::
-::res://resources/_states/::1741030709
-action_state.gd::GDScript/GDScript::478286721228667771::1740936947::0::1::::ActionState<>State<><>0<>0<><>::
-goal_state.gd::GDScript/GDScript::4298653620081114873::1740930841::0::1::::GoalState<>State<><>0<>0<><>::
-state.gd::GDScript/GDScript::219043643472552904::1741030709::0::1::::State<>Node<><>0<>0<><>::
-::res://resources/_states/action_states/::1741044920
-attack.gd::GDScript/GDScript::684848280065122677::1740931429::0::1::::<>Node<><>0<>0<><>::
-charge.gd::GDScript/GDScript::1196275917000919383::1741041959::0::1::::<>ActionState<><>0<>0<><>::
-dead.gd::GDScript/GDScript::7318071217524250191::1741030645::0::1::::<>ActionState<><>0<>0<><>::
-hit.gd::GDScript/GDScript::5434478133421483659::1741030709::0::1::::<>ActionState<><>0<>0<><>::
-idle.gd::GDScript/GDScript::5978628224679273861::1740931429::0::1::::<>ActionState<><>0<>0<><>::
-search.gd::GDScript/GDScript::258907855915228288::1740931517::0::1::::<>ActionState<><>0<>0<><>::
-sit.gd::GDScript/GDScript::5959339511341253788::1740931429::0::1::::<>ActionState<><>0<>0<><>::
-sleep.gd::GDScript/GDScript::4881092163060547009::1741030634::0::1::::<>ActionState<><>0<>0<><>::
-wander.gd::GDScript/GDScript::8216628328923051381::1741044920::0::1::::<>ActionState<><>0<>0<><>::
-::res://resources/ai_controls/::1741027934
-ai_controls.gd::GDScript/GDScript::1081454597565261497::1740869381::0::1::::<>Node<>res://warehouse/_icons/node/icon_human_controller.png<>0<>0<><>::
-::res://resources/arctic_fox/::1741027935
-arctic_fox.gd::GDScript/GDScript::8624715210175738681::1740869381::0::1::::<>CharacterBody2D<>res://resources/arctic_fox/arctic_fox.png<>0<>0<><>::
-arctic_fox.png::CompressedTexture2D/CompressedTexture2D::2300322739991088959::1740494136::1741027935::1::::<><><>0<>0<>161ef1dc72e148d228f5d891f73f5114<>res://.godot/imported/arctic_fox.png-1b701f0311473718e3b4ea9ec559fee9.ctex::
-::res://resources/arctic_wolf/::1741106081
-arctic_wolf.gd::GDScript/GDScript::9150074059940817614::1741106081::0::1::::<>AnzhuCharacter<>res://resources/arctic_wolf/arctic_wolf.png<>0<>0<><>::
-arctic_wolf.png::CompressedTexture2D/CompressedTexture2D::9038653076186645013::1741106036::1741106060::1::::<><><>0<>0<>87050983bedf809786ea972b10e8bacc<>res://.godot/imported/arctic_wolf.png-3a4b053db8586e9ed681fccdda7aee8e.ctex::
-::res://resources/camp_fire/::1741139384
-campfire.png::CompressedTexture2D/CompressedTexture2D::4506811804552886893::1740591742::1741027935::1::::<><><>0<>0<>6fb4c57d5e0524978f8eae60439e4b09<>res://.godot/imported/campfire.png-3700117fa1b5176b53a8f74c780a9bb7.ctex::
-camp_fire.gd::GDScript/GDScript::5108783438319981391::1741120955::0::1::::<>StaticBody2D<>res://resources/camp_fire/campfire.png<>0<>0<><>::
-camp_fire_light.tres::GradientTexture2D::6866500829216422775::1741139384::0::1::::<><><>0<>0<><>::uid://bwv6f7evffbt1::::res://resources/camp_fire/fire_gradient.tres
-fire_gradient.tres::Gradient::3975820020197799868::1741139384::0::1::::<><><>0<>0<><>::
-::res://resources/day_night_modulator/::1741027934
-day_night_timer.gd::GDScript/GDScript::2815886756588395730::1740600738::0::1::::<>Timer<><>0<>0<><>::
-::res://resources/game/::1741144614
-game.gd::GDScript::7933250295495211711::1741144614::0::1::::<>Node2D<>res://warehouse/_icons/misc/icons8-quest-100.png<>0<>0<><>::
-::res://resources/goals/::1741115634
-goals.gd::GDScript/GDScript::3353926066145093066::1741115634::0::1::::<>Node<>res://resources/goals/goals.png<>0<>0<><>::
+Enumerton.gd::GDScript/GDScript::1092402665442629417::1741394008::0::1::::<>Node<><>0<>0<><>::
+Signalton.gd::GDScript/GDScript::6247088473682867841::1741557655::0::1::::<>Node<><>0<>0<><>::
+::res://resources/_states/::1741555799
+state.gd::GDScript/GDScript::219043643472552904::1741555799::0::1::::State<>Node<><>0<>0<><>::
+::res://resources/actions/::1741613549
+_ActionState.gd::GDScript/GDScript::478286721228667771::1741472122::0::1::::ActionState<>State<><>0<>0<><>::
+ActionAttack.gd::GDScript/GDScript::684848280065122677::1741472122::0::1::::<>Node<><>0<>0<><>::
+ActionCharge.gd::GDScript/GDScript::1196275917000919383::1741472122::0::1::::<>ActionState<><>0<>0<><>::
+ActionDead.gd::GDScript/GDScript::7318071217524250191::1741472122::0::1::::<>ActionState<><>0<>0<><>::
+ActionHit.gd::GDScript/GDScript::5434478133421483659::1741528615::0::1::::<>ActionState<><>0<>0<><>::
+ActionHurt.gd::GDScript/GDScript::1622642854931296931::1741613549::0::1::::<>ColorRect<><>0<>0<><>::
+ActionIdle.gd::GDScript/GDScript::5978628224679273861::1741534416::0::1::::<>ActionState<><>0<>0<><>::
+ActionSearch.gd::GDScript/GDScript::258907855915228288::1741472122::0::1::::<>ActionState<><>0<>0<><>::
+ActionSit.gd::GDScript/GDScript::5959339511341253788::1741472122::0::1::::<>ActionState<><>0<>0<><>::
+ActionSleep.gd::GDScript/GDScript::4881092163060547009::1741472122::0::1::::<>ActionState<><>0<>0<><>::
+ActionWander.gd::GDScript/GDScript::8216628328923051381::1741555925::0::1::::<>ActionState<><>0<>0<><>::
+::res://resources/aiControls/::1741472122
+AiControls.gd::GDScript/GDScript::1081454597565261497::1741472122::0::1::::<>Node<><>0<>0<><>::
+::res://resources/anzhuCharacter/::1741625618
+_AnchuCharacter.gd::GDScript/GDScript::5369671792221298707::1741618285::0::1::::AnzhuCharacter<>CharacterBody2D<><>0<>0<><>::
+_AnzhuAnimal.gd::GDScript/GDScript::3802161035088647857::1741625618::0::1::::AnzhuAnimal<>AnzhuCharacter<><>0<>0<><>::
+_AnzhuHuman.gd::GDScript/GDScript::2128072108319765459::1741559409::0::1::::AnzhuHuman<>AnzhuCharacter<><>0<>0<><>::
+::res://resources/audio/::1741540731
+audio.gd::GDScript/GDScript::9022221136215878771::1741540731::0::1::::AudioManager<>Node2D<><>0<>0<><>::
+::res://resources/bear/::1741704274
+Bear.gd::GDScript/GDScript::780722520892690270::1741704274::0::1::::Bear<>AnzhuAnimal<><>0<>0<><>::
+bear.png::CompressedTexture2D/CompressedTexture2D::2964921354931158451::1740421519::1741465398::1::::<><><>0<>0<>cd29b433f7a905eaf13f539f4985d909<>res://.godot/imported/bear.png-e7c5c082f299a09034ca476f08115508.ctex::
+BearActions.gd::GDScript/GDScript::5714552526540899402::1741555985::0::1::::<>AnimatedSprite2D<><>0<>0<><>::
+BearAudio.gd::GDScript/GDScript::3029987398197730284::1741702769::0::1::::<>Node2D<><>0<>0<><>::
+BearEyesight.gd::GDScript/GDScript::7068962784135559121::1741527284::0::1::::<>VisibleOnScreenNotifier2D<><>0<>0<><>::
+BearGoals.gd::GDScript/GDScript::3353926066145093066::1741702747::0::1::::AnimalGoalsMachine<>Node<><>0<>0<><>::
+BearTimerManager.gd::GDScript/GDScript::1538906270493030053::1741527284::0::1::::<>Node<><>0<>0<><>::
+default_bus_layout.tres::AudioBusLayout/AudioBusLayout::7888079753305195417::1741702468::0::1::::<><><>0<>0<><>::
+::res://resources/campFire/::1741610857
+CampFire.gd::GDScript/GDScript::5108783438319981391::1741527284::0::1::::<>StaticBody2D<><>0<>0<><>::
+campfire.png::CompressedTexture2D/CompressedTexture2D::4506811804552886893::1740591742::1741465345::1::::<><><>0<>0<>cfacfb0ebe9dcf76fab409738feaca88<>res://.godot/imported/campfire.png-49ff4faba4d498b80a0ec7f808194808.ctex::
+CampFireLight.gd::GDScript/GDScript::172611258948862304::1741610857::0::1::::<>PointLight2D<><>0<>0<><>::
+camp_fire_light.tres::GradientTexture2D/GradientTexture2D::6866500829216422775::1741465345::0::1::::<><><>0<>0<><>::uid://bwv6f7evffbt1::::res://resources/campFire/fire_gradient.tres
+fire_gradient.tres::Gradient/Gradient::3975820020197799868::1741454089::0::1::::<><><>0<>0<><>::
+::res://resources/cliffs/::1741472122
+Cliffs.gd::GDScript/GDScript::2598969470083508305::1741472122::0::1::::<>TileMapLayer<><>0<>0<><>::
+::res://resources/corpse/::1741617614
+Corpse.gd::GDScript/GDScript::96857603244136636::1741617614::0::1::::<>Area2D<><>0<>0<><>::
+::res://resources/dayNightModulator/::1741617547
+DayNightModulator.gd::GDScript/GDScript::7043914852978536325::1741617547::0::1::::<>CanvasModulate<><>0<>0<><>::
+DayNightTimer.gd::GDScript/GDScript::2815886756588395730::1741472122::0::1::::<>Timer<><>0<>0<><>::
+::res://resources/fox/::1741557648
+Fox.gd::GDScript/GDScript::8624715210175738681::1741557648::0::1::::Fox<>AnzhuAnimal<><>0<>0<><>::
+fox.png::CompressedTexture2D/CompressedTexture2D::2300322739991088959::1740494136::1741464781::1::::<><><>0<>0<>3e1c89a9575a78fbfbe78120c70d17e8<>res://.godot/imported/fox.png-f101281d0cc98b1ccee21ee360d84d2c.ctex::
+::res://resources/game/::1741528262
+Game.gd::GDScript/GDScript::7933250295495211711::1741528262::0::1::::<>Node2D<><>0<>0<><>::
+::res://resources/goals/::1741614542
+GoalChase.gd::GDScript/GDScript::2313185564082621101::1741614542::0::1::::<>ActionState<><>0<>0<><>::
+GoalHunt.gd::GDScript/GDScript::6316237697896966931::1741527284::0::1::::<>GoalState<><>0<>0<><>::
+GoalNothing.gd::GDScript/GDScript::972736460592054676::1741527284::0::1::::<>GoalState<><>0<>0<><>::
 goals.png::CompressedTexture2D/CompressedTexture2D::3783278472744475299::1727460451::1741027935::1::::<><><>0<>0<>1baef7b6098602b55e6da6bb4a9eebca<>res://.godot/imported/goals.png-83c66953acf017060de7df34ae3fd527.ctex::
-::res://resources/node_audio/::1741114795
-node_audio.gd::GDScript/GDScript::1091139983295229448::1741114795::0::1::::<>Node<>res://warehouse/_icons/node/icon_sound.png<>0<>0<><>::
-::res://resources/player/::1741122686
-player.gd::GDScript/GDScript::9153671386803435142::1741122540::0::1::::<>AnzhuPlayer<><>0<>0<><>::
+goal_state.gd::GDScript/GDScript::4298653620081114873::1741542013::0::1::::GoalState<>State<><>0<>0<><>::
+::res://resources/hurt_box/::1741702704
+hurt_box.gd::GDScript/GDScript::5015771287984042623::1741702704::0::1::::<>Area2D<><>0<>0<><>::
+::res://resources/nodeAudio/::1741704658
+Bgm.gd::GDScript/GDScript::8468235530588599878::1740883174::0::1::::<>AudioStreamPlayer<><>0<>0<><>::
+NodeAudio.gd::GDScript/GDScript::1091139983295229448::1741704658::0::1::::<>Node<><>0<>0<><>::
+::res://resources/player/::1741617547
+_Ability.gd::GDScript/GDScript::5807957252941088600::1741539630::0::1::::Ability<>Node<><>0<>0<><>::
+GunshotGunray.gd::GDScript/GDScript::7690125805354828264::1741472123::0::1::::<>RayCast2D<><>0<>0<><>::
+GunshotSfx.gd::GDScript/GDScript::2385550400910694261::1741538396::0::1::::<>Marker2D<><>0<>0<><>::
+Player.gd::GDScript/GDScript::9153671386803435142::1741613119::0::1::::Player<>AnzhuHuman<><>0<>0<><>::
 player.png::CompressedTexture2D/CompressedTexture2D::4539521179498576613::1740409979::1741027935::1::::<><><>0<>0<>54a3a059f46c1432a6c6c5d56dd09c60<>res://.godot/imported/player.png-ff230bb20dbffac8398f4b58e3f9af2d.ctex::
-player_movement.gd::GDScript/GDScript::8728145873518433073::1741122637::0::1::::<>Node<>res://warehouse/_icons/misc/cardinal_movement.png<>0<>0<><>::
-shoot.gd::GDScript/GDScript::4125146195842505524::1741122686::0::1::::<>Node<><>0<>0<><>::
-::res://resources/polar_bear/::1741135876
-polar_bear.gd::GDScript::780722520892690270::1741135876::0::1::::<>AnzhuCharacter<>res://resources/polar_bear/polar_bear.png<>0<>0<><>::
-polar_bear.png::CompressedTexture2D/CompressedTexture2D::2964921354931158451::1740421519::1741027935::1::::<><><>0<>0<>3f4529df09d76bae47e03e6189f061b4<>res://.godot/imported/polar_bear.png-ed51251af5835300eef1f91987f4e143.ctex::
-::res://resources/polar_bear/audio/::1741135876
-default_bus_layout.tres::AudioBusLayout::7888079753305195417::1741132968::0::1::::<><><>0<>0<><>::
-polar_bear_audio.gd::GDScript::3029987398197730284::1741135876::0::1::::<>Node2D<>res://warehouse/_icons/node_2D/icon_audio.png<>0<>0<><>::
-::res://resources/polar_bear/eyesight/::1741027934
-eyesight.gd::GDScript/GDScript::7068962784135559121::1740932867::0::1::::<>VisibleOnScreenNotifier2D<><>0<>0<><>::
-::res://resources/polar_bear/goals/::1741145797
-chase.gd::GDScript::2313185564082621101::1741145797::0::1::::<>ActionState<><>0<>0<><>::
-hunt.gd::GDScript/GDScript::6316237697896966931::1741115826::0::1::::<>GoalState<><>0<>0<><>::
-nothing.gd::GDScript/GDScript::972736460592054676::1741115840::0::1::::<>GoalState<><>0<>0<><>::
-::res://resources/polar_bear/sprites/::1741115634
-polar_bear_sprite.gd::GDScript/GDScript::5714552526540899402::1741115634::0::1::::<>AnimatedSprite2D<><>0<>0<><>::
-::res://resources/Reindeer/::1741105855
-reindeer.gd::GDScript/GDScript::825587456424562841::1741105855::0::1::::<>AnzhuCharacter<>res://resources/Reindeer/reindeer.png<>0<>0<><>::
-reindeer.png::CompressedTexture2D/CompressedTexture2D::54380608552242310::1741105809::1741105830::1::::<><><>0<>0<>0b8b76663c04b6755516d3cab3440b9d<>res://.godot/imported/reindeer.png-774f1ed6cdfd27ae5f4929e5fad709c2.ctex::
-::res://resources/snow_tracker/::1741144646
-snow_tracker.gd::GDScript::2663535023687548661::1741144646::0::1::::SnowTracker<>Node<>res://warehouse/_icons/node/icon_grid.png<>0<>0<><>::
-::res://resources/standard_collision/::1741139384
-standard_collision.tres::RectangleShape2D::6845301415449109573::1741139384::0::1::::<><><>0<>0<><>::
-standard_collision.tscn::PackedScene/PackedScene::6198300703173396463::1741047940::0::1::::<><><>0<>0<><>::uid://c4r6d5ato0hir::::res://resources/standard_collision/standard_collision.tres<>uid://60saxsgwo84g::::res://resources/standard_collision/ui_stats.gd<>uid://xeaxqrhuln28::::res://scenes/hurt.gd
-ui_stats.gd::GDScript/GDScript::2228557738646428788::1741031417::0::1::::<>CollisionShape2D<>res://warehouse/_icons/control/icon_transition.png<>0<>0<><>::
-::res://resources/timer_manager/::1741115991
-timer_manager.gd::GDScript/GDScript::1538906270493030053::1741115991::0::1::::<>Node<>res://warehouse/_icons/node/icon_time.png<>0<>0<><>::
-::res://resources/walrus/::1741106507
+PlayerAbilities.gd::GDScript/GDScript::2372405044639778231::1741540387::0::1::::Abilities<>Node<><>0<>0<><>::
+PlayerAnimations.gd::GDScript/GDScript::2437235271826423443::1741559306::0::1::::<>AnimatedSprite2D<><>0<>0<><>::
+PlayerJump.gd::GDScript/GDScript::7246198105510003481::1741530769::0::1::::<>Ability<><>0<>0<><>::
+PlayerMovement.gd::GDScript/GDScript::8728145873518433073::1741617547::0::1::::<>Ability<><>0<>0<><>::
+PlayerNightLight.gd::GDScript/GDScript::7742328532492801730::1741613221::0::1::::<>PointLight2D<><>0<>0<><>::
+Shoot.gd::GDScript/GDScript::4125146195842505524::1741530238::0::1::::<>Ability<><>0<>0<><>::
+::res://resources/reindeer/::1741614383
+Reindeer.gd::GDScript/GDScript::825587456424562841::1741614383::0::1::::Reindeer<>AnzhuAnimal<><>0<>0<><>::
+reindeer.png::CompressedTexture2D/CompressedTexture2D::54380608552242310::1741105809::1741464948::1::::<><><>0<>0<>017327703fd472e29e72904e54e5491c<>res://.godot/imported/reindeer.png-d2298b6705b6924aeaee1f1821263ce8.ctex::
+::res://resources/snowTracker/::1741556660
+SnowTracker.gd::GDScript/GDScript::2663535023687548661::1741556660::0::1::::<>Node<><>0<>0<><>::
+::res://resources/uiStats/::1741621165
+StandardCollision.tscn::PackedScene/PackedScene::6198300703173396463::1741621165::0::1::::<><><>0<>0<><>::uid://c4r6d5ato0hir::::res://resources/uiStats/standard_collision.tres<>uid://60saxsgwo84g::::res://resources/uiStats/UiStats.gd<>uid://xeaxqrhuln28::::res://resources/actions/ActionHurt.gd
+standard_collision.tres::RectangleShape2D/RectangleShape2D::6845301415449109573::1741289152::0::1::::<><><>0<>0<><>::
+UiStats.gd::GDScript/GDScript::2228557738646428788::1741610102::0::1::::<>CollisionShape2D<><>0<>0<><>::
+::res://resources/walrus/::1741557547
 walrus.png::CompressedTexture2D/CompressedTexture2D::5686022002640060222::1741106345::1741106377::1::::<><><>0<>0<>efe2149e3d3d72cba031bcd27bdc8616<>res://.godot/imported/walrus.png-0c28aa94222f618843d32e6a22714947.ctex::
-warlus.gd::GDScript/GDScript::6227413743383909127::1741106507::0::1::::<>AnzhuCharacter<>res://resources/walrus/walrus.png<>0<>0<><>::
-::res://scenes/::1741148316
-actions.gd::GDScript/GDScript::2372405044639778231::1741122592::0::1::::Actions<>Node<><>0<>0<><>::
-arctic_fox.tscn::PackedScene/PackedScene::8978066331683342609::1741027968::0::1::::<><><>0<>0<><>::uid://du442geuk0s1v::::res://resources/arctic_fox/arctic_fox.gd<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://60saxsgwo84g::::res://resources/standard_collision/ui_stats.gd<>uid://pn4ntq6i77rx::::res://resources/ai_controls/ai_controls.gd
-arctic_wolf.tscn::PackedScene/PackedScene::5257178885413954976::1741122637::0::1::::<><><>0<>0<><>::uid://d3mmnawqa7gqw::::res://resources/arctic_wolf/arctic_wolf.gd<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png
-bgm.gd::GDScript/GDScript::8468235530588599878::1740883174::0::1::::<>AudioStreamPlayer<><>0<>0<><>::
-camp_fire.tscn::PackedScene::6559249330164677489::1741145797::0::1::::<><><>0<>0<><>::uid://ce1y6f37kb76j::::res://resources/camp_fire/camp_fire.gd<>uid://b5golrueqxb8h::::res://warehouse/Structures/PNGs/original.png<>uid://dnj80iffowsn1::::res://warehouse/Structures/PNGs/arctic.png<>uid://c43gja4g441vn::::res://resources/camp_fire/camp_fire_light.tres<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://cpu483vdcrb1::::res://scenes/camp_fire_light.gd<>uid://dgnxwh4t4p2vs::::res://warehouse/_audio/sfx/Campfire.mp3<>uid://buls2uubesprq::::res://warehouse/_audio/music/Menu (start - I think).mp3
-camp_fire_light.gd::GDScript/GDScript::172611258948862304::1741111195::0::1::::<>PointLight2D<><>0<>0<><>::
-day_night.gd::GDScript::7043914852978536325::1741135358::0::1::::<>CanvasModulate<>res://warehouse/_icons/node_2D/icon_area_meteo.png<>0<>0<><>::
-game.tscn::PackedScene::3847319026799585163::1741145797::0::1::::<><><>0<>0<><>::uid://dla6qde00tedb::::res://resources/game/game.gd<>uid://c52jy468y547f::::res://scenes/rock.tscn<>uid://io7ysittrqe2::::res://warehouse/Overworld/ts_arctic_all.tres<>uid://b5id41tdwyrd4::::res://scenes/player.tscn<>uid://dr7gmcq3ydu2b::::res://scenes/polar_bear.tscn<>uid://cg5u76gsfhdns::::res://scenes/arctic_wolf.tscn<>uid://dtjkl0eql0m0h::::res://warehouse/_audio/music/607839__sonically_sound__polar-wind-synthetic.wav<>uid://c0pl44e11q0uf::::res://scenes/camp_fire.tscn<>uid://bgebijpsfda0y::::res://resources/day_night_modulator/day_night_timer.gd<>uid://c7meipjbeacr2::::res://scenes/day_night.gd<>uid://cy8x2rpiisi4c::::res://scenes/walrus.tscn<>uid://d06bo8scbr23v::::res://scenes/arctic_fox.tscn<>uid://vmqaefg54xvc::::res://warehouse/_audio/music/bgm_playlist.tres<>uid://pss6faxg1mjw::::res://resources/node_audio/node_audio.gd<>uid://4usvcs4gfign::::res://scenes/reindeer.tscn
-hurt.gd::GDScript/GDScript::1622642854931296931::1741041758::0::1::::<>ColorRect<><>0<>0<><>::
-node.gd::GDScript/GDScript::8143816056474756120::1740768826::0::1::::<>RefCounted<><>0<>0<><>::
-player.tscn::PackedScene::4508836348993148551::1741145797::0::1::::<><><>0<>0<><>::uid://d3odvoyfq8ttm::::res://resources/player/player.gd<>uid://82hfueor42tn::::res://scenes/actions.gd<>uid://cyod5qpkt7u6::::res://warehouse/Units/PNGs/original-Recovered.png<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://xtu3ptec0j14::::res://warehouse/Units/PNGs/musket_hero.png<>uid://bayu55ve5ewdv::::res://scenes/player_sprite.gd<>uid://bphym84428lme::::res://warehouse/_audio/sfx/538795__brunoauzet__old-musket-bang.wav<>uid://by1is401patsu::::res://resources/player/shoot.gd<>uid://bq7ijkrb81e5d::::res://warehouse/_audio/sfx/reload.wav<>uid://dhtfiph8c4xbc::::res://scenes/ray_cast_2d.gd<>uid://bwv6f7evffbt1::::res://resources/camp_fire/fire_gradient.tres<>uid://dwl8j1ftfgflh::::res://resources/player/player_movement.gd<>uid://bd7ibd17tc3yv::::res://resources/snow_tracker/snow_tracker.gd
-player_sprite.gd::GDScript/GDScript::2437235271826423443::1740697964::0::1::::<>AnimatedSprite2D<><>0<>0<><>::
-polar_bear.tscn::PackedScene::8418918343607200895::1741148316::0::1::::<><><>0<>0<><>::uid://legnebu0kphu::::res://resources/polar_bear/polar_bear.gd<>uid://bb66i1rmtlvbo::::res://warehouse/Animals/PNGs/polar_bear.png<>uid://v6ptda02udi0::::res://resources/timer_manager/timer_manager.gd<>uid://cnof30b7u102a::::res://resources/polar_bear/sprites/polar_bear_sprite.gd<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://crgdesgb0g5fd::::res://resources/_states/action_states/idle.gd<>uid://ddmph0kataceh::::res://warehouse/_audio/music/Music Historic 4 (russian pop bear music).mp3<>uid://cjorccmpecej0::::res://resources/_states/action_states/hit.gd<>uid://cq50plpkkjn5e::::res://resources/_states/action_states/sit.gd<>uid://c7yi1wu2k8qh2::::res://resources/polar_bear/eyesight/eyesight.gd<>uid://bn1ww4f4t115g::::res://resources/goals/goals.gd<>uid://77r3fqyd6fhd::::res://resources/polar_bear/goals/chase.gd<>uid://dci6tfym4ktc6::::res://resources/_states/action_states/dead.gd<>uid://bjf0pj6ov15cq::::res://resources/polar_bear/audio/polar_bear_audio.gd<>uid://cv8vrn7ohwvvv::::res://resources/polar_bear/goals/hunt.gd<>uid://dpcgwylrmycpp::::res://resources/_states/action_states/wander.gd<>uid://dxof6153gn57::::res://resources/_states/action_states/search.gd<>uid://n4g3epvshvea::::res://resources/polar_bear/goals/nothing.gd<>uid://dighd7kxlaht8::::res://warehouse/_audio/sfx/Bear (saw player).mp3<>uid://b1e37kdue1g3v::::res://warehouse/_audio/sfx/Bear (hurt).mp3<>uid://rbqqv7itpil0::::res://resources/_states/action_states/charge.gd<>uid://cjfo3gmgsqhpb::::res://warehouse/_audio/sfx/Bear (normal).mp3<>uid://cbso40iygppbl::::res://resources/_states/action_states/sleep.gd<>uid://bh3tjtuu7g7a2::::res://warehouse/_audio/sfx/walk/default_bus_layout.tres<>uid://cfc7k8xu6ve63::::res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3<>uid://bd7ibd17tc3yv::::res://resources/snow_tracker/snow_tracker.gd
-ray_cast_2d.gd::GDScript/GDScript::7690125805354828264::1740517650::0::1::::<>RayCast2D<><>0<>0<><>::
-reindeer.tscn::PackedScene/PackedScene::2077894562304964897::1741122637::0::1::::<><><>0<>0<><>::uid://l06kmlmqgi5n::::res://resources/Reindeer/reindeer.gd<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png
-rock.tscn::PackedScene::6934835760474149129::1741144506::0::1::::<><><>0<>0<><>::uid://bli3cobwsjqqu::::res://warehouse/Ores/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn
-visible_on_screen_notifier_2d.gd::GDScript/GDScript::3222746477679840569::1740700438::0::1::::<>VisibleOnScreenNotifier2D<><>0<>0<><>::
-walrus.tscn::PackedScene/PackedScene::6526943704295923276::1741122637::0::1::::<><><>0<>0<><>::uid://cuyuuhi5p5vat::::res://resources/walrus/warlus.gd<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/standard_collision/standard_collision.tscn
-::res://warehouse/::1740935599
+Warlus.gd::GDScript/GDScript::6227413743383909127::1741557547::0::1::::Walrus<>AnzhuAnimal<><>0<>0<><>::
+::res://resources/wolf/::1741557565
+Wolf.gd::GDScript/GDScript::9150074059940817614::1741557565::0::1::::Wolf<>AnzhuAnimal<><>0<>0<><>::
+wolf.png::CompressedTexture2D/CompressedTexture2D::9038653076186645013::1741106036::1741464813::1::::<><><>0<>0<>6688ffbf1143314d75eb2839a96b8ead<>res://.godot/imported/wolf.png-9cbfcf302dcb6bb6933dfdb9ccb32804.ctex::
+::res://scenes/::1741704777
+Bear.tscn::PackedScene/PackedScene::8418918343607200895::1741704777::0::1::::<><><>0<>0<><>::uid://legnebu0kphu::::res://resources/bear/Bear.gd<>uid://bb66i1rmtlvbo::::res://warehouse/Animals/PNGs/polar_bear.png<>uid://cnof30b7u102a::::res://resources/bear/BearActions.gd<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://crgdesgb0g5fd::::res://resources/actions/ActionIdle.gd<>uid://ddmph0kataceh::::res://warehouse/_audio/music/bgm/Music Historic 4 (russian pop bear music).mp3<>uid://cjorccmpecej0::::res://resources/actions/ActionHit.gd<>uid://cq50plpkkjn5e::::res://resources/actions/ActionSit.gd<>uid://c7yi1wu2k8qh2::::res://resources/bear/BearEyesight.gd<>uid://bn1ww4f4t115g::::res://resources/bear/BearGoals.gd<>uid://77r3fqyd6fhd::::res://resources/goals/GoalChase.gd<>uid://dci6tfym4ktc6::::res://resources/actions/ActionDead.gd<>uid://bjf0pj6ov15cq::::res://resources/bear/BearAudio.gd<>uid://cv8vrn7ohwvvv::::res://resources/goals/GoalHunt.gd<>uid://dpcgwylrmycpp::::res://resources/actions/ActionWander.gd<>uid://dxof6153gn57::::res://resources/actions/ActionSearch.gd<>uid://n4g3epvshvea::::res://resources/goals/GoalNothing.gd<>uid://dighd7kxlaht8::::res://warehouse/_audio/sfx/bear/Bear (saw player).mp3<>uid://b1e37kdue1g3v::::res://warehouse/_audio/sfx/bear/Bear (hurt).mp3<>uid://rbqqv7itpil0::::res://resources/actions/ActionCharge.gd<>uid://cjfo3gmgsqhpb::::res://warehouse/_audio/sfx/bear/Bear (normal).mp3<>uid://cbso40iygppbl::::res://resources/actions/ActionSleep.gd<>uid://bh3tjtuu7g7a2::::res://warehouse/_audio/sfx/walk/default_bus_layout.tres<>uid://cfc7k8xu6ve63::::res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3<>uid://cdpxaxp4jlkh8::::res://resources/hurt_box/hurt_box.gd<>uid://bd7ibd17tc3yv::::res://resources/snowTracker/SnowTracker.gd<>uid://jy7axhrfnb21::::res://scenes/Corpse.tscn
+CampFire.tscn::PackedScene/PackedScene::6559249330164677489::1741702915::0::1::::<><><>0<>0<><>::uid://ce1y6f37kb76j::::res://resources/campFire/CampFire.gd<>uid://b5golrueqxb8h::::res://warehouse/Structures/PNGs/original.png<>uid://dnj80iffowsn1::::res://warehouse/Structures/PNGs/arctic.png<>uid://c43gja4g441vn::::res://resources/campFire/camp_fire_light.tres<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://cpu483vdcrb1::::res://resources/campFire/CampFireLight.gd<>uid://dgnxwh4t4p2vs::::res://warehouse/_audio/sfx/Campfire.mp3<>uid://buls2uubesprq::::res://warehouse/_audio/music/bgm/Menu (start - I think).mp3
+Corpse.tscn::PackedScene/PackedScene::683188822238534092::1741621165::0::1::::<><><>0<>0<><>::uid://bm6h3sq2ypia::::res://resources/corpse/Corpse.gd
+Fox.tscn::PackedScene/PackedScene::8978066331683342609::1741621165::0::1::::<><><>0<>0<><>::uid://du442geuk0s1v::::res://resources/fox/Fox.gd<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://bn1ww4f4t115g::::res://resources/bear/BearGoals.gd<>uid://d3pnkk4m18mui::::res://scenes/SnowTracker.tscn<>uid://jy7axhrfnb21::::res://scenes/Corpse.tscn
+GAME.tscn::PackedScene/PackedScene::3847319026799585163::1741704741::0::1::::<><><>0<>0<><>::uid://dla6qde00tedb::::res://resources/game/Game.gd<>uid://c52jy468y547f::::res://scenes/Rock.tscn<>uid://io7ysittrqe2::::res://warehouse/Overworld/ts_arctic_all.tres<>uid://bda7wapxss3tl::::res://resources/cliffs/Cliffs.gd<>uid://pio4q5jvles3::::res://warehouse/Overworld/PNGs/proto_tiles.png<>uid://b5id41tdwyrd4::::res://scenes/Player.tscn<>uid://dr7gmcq3ydu2b::::res://scenes/Bear.tscn<>uid://cg5u76gsfhdns::::res://scenes/Wolf.tscn<>uid://d06bo8scbr23v::::res://scenes/Fox.tscn<>uid://cy8x2rpiisi4c::::res://scenes/Walrus.tscn<>uid://4usvcs4gfign::::res://scenes/Reindeer.tscn<>uid://c0pl44e11q0uf::::res://scenes/CampFire.tscn<>uid://pss6faxg1mjw::::res://resources/nodeAudio/NodeAudio.gd<>uid://dtjkl0eql0m0h::::res://warehouse/_audio/music/ambience/607839__sonically_sound__polar-wind-synthetic.wav<>uid://dt8tbpw6y5t1o::::res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres<>uid://b75k7g21yhkww::::res://warehouse/_audio/music/day-night/Begin.mp3<>uid://cnlvuutd3eh62::::res://warehouse/_audio/music/day-night/Morning.mp3<>uid://danm16q6et1a8::::res://warehouse/_audio/music/day-night/Dusk.wav<>uid://cx8c4g6ss24t::::res://warehouse/_audio/music/day-night/DawnStart.mp3<>uid://c7meipjbeacr2::::res://resources/dayNightModulator/DayNightModulator.gd<>uid://c0gafng5vkfn8::::res://warehouse/_audio/music/day-night/Late Night.mp3<>uid://jfa2si1nbvr6::::res://warehouse/_audio/music/day-night/Noon.mp3<>uid://dqm5vov4853q1::::res://warehouse/_audio/music/day-night/Afternoon.mp3<>uid://bgebijpsfda0y::::res://resources/dayNightModulator/DayNightTimer.gd<>uid://djx5omk6t2ytb::::res://warehouse/_audio/music/day-night/Night.mp3
+GunShot.tscn::PackedScene/PackedScene::4406944962055002741::1741542026::0::1::::<><><>0<>0<><>::uid://88twws4eaxq0::::res://resources/player/GunshotSfx.gd<>uid://dhtfiph8c4xbc::::res://resources/player/GunshotGunray.gd
+Player.tscn::PackedScene/PackedScene::4508836348993148551::1741621165::0::1::::<><><>0<>0<><>::uid://d3odvoyfq8ttm::::res://resources/player/Player.gd<>uid://82hfueor42tn::::res://resources/player/PlayerAbilities.gd<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://xtu3ptec0j14::::res://warehouse/Units/PNGs/musket_hero.png<>uid://bayu55ve5ewdv::::res://resources/player/PlayerAnimations.gd<>uid://by1is401patsu::::res://resources/player/Shoot.gd<>uid://dbid3axaqrb3v::::res://resources/player/PlayerJump.gd<>uid://bq7ijkrb81e5d::::res://warehouse/_audio/sfx/reload.wav<>uid://dwl8j1ftfgflh::::res://resources/player/PlayerMovement.gd<>uid://b3100fbxnsgc0::::res://scenes/GunShot.tscn<>uid://dikpaw3yn24t7::::res://resources/player/PlayerNightLight.gd<>uid://d3pnkk4m18mui::::res://scenes/SnowTracker.tscn<>uid://d1sowtr56fff4::::res://resources/audio/audio.gd
+Reindeer.tscn::PackedScene/PackedScene::2077894562304964897::1741704658::0::1::::<><><>0<>0<><>::uid://l06kmlmqgi5n::::res://resources/reindeer/Reindeer.gd<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://2xdr0k4ypwfv::::res://warehouse/Animals/PNGs/reindeer.png<>uid://bd7ibd17tc3yv::::res://resources/snowTracker/SnowTracker.gd<>uid://bn1ww4f4t115g::::res://resources/bear/BearGoals.gd<>uid://jy7axhrfnb21::::res://scenes/Corpse.tscn
+Rock.tscn::PackedScene/PackedScene::6934835760474149129::1741465423::0::1::::<><><>0<>0<><>::uid://bli3cobwsjqqu::::res://warehouse/Ores/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn
+SnowTracker.tscn::PackedScene/PackedScene::9156323088714230472::1741465416::0::1::::<><><>0<>0<><>::uid://bd7ibd17tc3yv::::res://resources/snowTracker/SnowTracker.gd
+Walrus.tscn::PackedScene/PackedScene::6526943704295923276::1741621165::0::1::::<><><>0<>0<><>::uid://cuyuuhi5p5vat::::res://resources/walrus/Warlus.gd<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://bd7ibd17tc3yv::::res://resources/snowTracker/SnowTracker.gd<>uid://bn1ww4f4t115g::::res://resources/bear/BearGoals.gd<>uid://jy7axhrfnb21::::res://scenes/Corpse.tscn
+Wolf.tscn::PackedScene/PackedScene::5257178885413954976::1741621165::0::1::::<><><>0<>0<><>::uid://d3mmnawqa7gqw::::res://resources/wolf/Wolf.gd<>uid://cukrdvxpstpgp::::res://resources/uiStats/StandardCollision.tscn<>uid://bbnixm6lqqhfw::::res://warehouse/Animals/PNGs/arctic.png<>uid://bd7ibd17tc3yv::::res://resources/snowTracker/SnowTracker.gd<>uid://bn1ww4f4t115g::::res://resources/bear/BearGoals.gd<>uid://jy7axhrfnb21::::res://scenes/Corpse.tscn
+::res://warehouse/::1741622379
+MM-palette.png::CompressedTexture2D/CompressedTexture2D::3944612289059303692::1741622348::1741622379::1::::<><><>0<>0<>c4bc477b8f61c4cbece663908422f834<>res://.godot/imported/MM-palette.png-c339629ad54b0a1ecb067c73810fa0c8.ctex::
 ::res://warehouse/_audio/::1740935661
-::res://warehouse/_audio/music/::1741027935
-607839__sonically_sound__polar-wind-synthetic.wav::AudioStreamWAV/AudioStreamWAV::8512057613654710017::1740783686::1741027935::1::::<><><>0<>0<>835323e69b907b65ddd9f02b97a619de<>res://.godot/imported/607839__sonically_sound__polar-wind-synthetic.wav-a2e7e12a29f1a88a76b82e7151a3510c.sample::
-bgm_playlist.tres::AudioStreamPlaylist/AudioStreamPlaylist::1499709939462953200::1740935648::0::1::::<><><>0<>0<><>::uid://hvyddlreidmd::::res://warehouse/_audio/music/Music Historic 1.mp3<>uid://bsck3qaty34rh::::res://warehouse/_audio/music/Music Historic 2 (baroque).mp3<>uid://towmm2aavkd0::::res://warehouse/_audio/music/Music historic 3.mp3
-Menu (start - I think).mp3::AudioStreamMP3/AudioStreamMP3::3814047915468232190::1740933592::1741027935::1::::<><><>0<>0<>ea381dee66ee23eaae7a76c23601c216<>res://.godot/imported/Menu (start - I think).mp3-81dc6efee450612e45d25deec3ddf5d4.mp3str::
-Music Historic 1.mp3::AudioStreamMP3/AudioStreamMP3::536136578850556679::1740504882::1741027935::1::::<><><>0<>0<>f09bba6e9dea0b15439b05f0bc4e4888<>res://.godot/imported/Music Historic 1.mp3-b9c64443ff5e36c29d1ed4409be59188.mp3str::
-Music Historic 2 (baroque).mp3::AudioStreamMP3/AudioStreamMP3::3654606638112887293::1740504880::1741027935::1::::<><><>0<>0<>82d54c896ade22dd134deda91896b92b<>res://.godot/imported/Music Historic 2 (baroque).mp3-00d27c3c8420d30a5d687e3acb1071ec.mp3str::
-Music historic 3.mp3::AudioStreamMP3/AudioStreamMP3::1363847193037931151::1740504878::1741027935::1::::<><><>0<>0<>e00c4ffe660025078c0ced34bd2a212e<>res://.godot/imported/Music historic 3.mp3-0978db7e547b94c16c6f8f2ec1d9e7e4.mp3str::
-Music Historic 4 (russian pop bear music).mp3::AudioStreamMP3/AudioStreamMP3::7395525699048139463::1740516875::1741027935::1::::<><><>0<>0<>e2aa4faabcfda52054823cf944a38767<>res://.godot/imported/Music Historic 4 (russian pop bear music).mp3-30cac6ad61e84ebee72f22e919c45e15.mp3str::
-::res://warehouse/_audio/sfx/::1741027935
+::res://warehouse/_audio/music/::1741704793
+Bear Bite 1.mp3::AudioStreamMP3/AudioStreamMP3::6974458870029984529::1741702803::1741703003::1::::<><><>0<>0<>8e1c4b013b291ffdd7e931c2d514eb68<>res://.godot/imported/Bear Bite 1.mp3-2e0fab961217d15238dc839fcd0a4992.mp3str::
+bgm_playlist.tres::AudioStreamPlaylist/AudioStreamPlaylist::1499709939462953200::1741702915::0::1::::<><><>0<>0<><>::uid://hvyddlreidmd::::res://warehouse/_audio/music/bgm/Music Historic 1.mp3<>uid://bsck3qaty34rh::::res://warehouse/_audio/music/bgm/Music Historic 2 (baroque).mp3<>uid://towmm2aavkd0::::res://warehouse/_audio/music/bgm/Music historic 3.mp3
+::res://warehouse/_audio/music/ambience/::1741702886
+607839__sonically_sound__polar-wind-synthetic.wav::AudioStreamWAV/AudioStreamWAV::8512057613654710017::1740783686::1741702886::1::::<><><>0<>0<>ce0248a094ae148e242abe381c7ee690<>res://.godot/imported/607839__sonically_sound__polar-wind-synthetic.wav-cc3537a39cb34269b36839e30f879393.sample::
+::res://warehouse/_audio/music/bgm/::1741702916
+Menu (start - I think).mp3::AudioStreamMP3/AudioStreamMP3::3814047915468232190::1740933592::1741702916::1::::<><><>0<>0<>42975ed159a7c7c04462c55dc31bddf4<>res://.godot/imported/Menu (start - I think).mp3-b3303126f8ee9fea46456f539a604c7f.mp3str::
+Music Historic 1.mp3::AudioStreamMP3/AudioStreamMP3::536136578850556679::1740504882::1741702916::1::::<><><>0<>0<>17549575dd3c98c015a768421719b66b<>res://.godot/imported/Music Historic 1.mp3-30016277f034851f51023d42aae4d7d8.mp3str::
+Music Historic 2 (baroque).mp3::AudioStreamMP3/AudioStreamMP3::3654606638112887293::1740504880::1741702916::1::::<><><>0<>0<>7a5672016d8d421285978e9ac063e720<>res://.godot/imported/Music Historic 2 (baroque).mp3-274383c7610a390a68991e0ed09bd5ae.mp3str::
+Music historic 3.mp3::AudioStreamMP3/AudioStreamMP3::1363847193037931151::1740504878::1741702916::1::::<><><>0<>0<>2f9fc88f01caebe4b06df651d4e56153<>res://.godot/imported/Music historic 3.mp3-948273adb300636f2ce556937c0994bc.mp3str::
+Music Historic 4 (russian pop bear music).mp3::AudioStreamMP3/AudioStreamMP3::7395525699048139463::1740516875::1741702916::1::::<><><>0<>0<>c6d4d58db9fc9e28448d3c6dddc8f31d<>res://.godot/imported/Music Historic 4 (russian pop bear music).mp3-2a8e86a63f794da8b000589b403e1459.mp3str::
+::res://warehouse/_audio/music/day-night/::1741703435
+Afternoon.mp3::AudioStreamMP3/AudioStreamMP3::8308915862922268554::1741702805::1741703435::1::::<><><>0<>0<>1ffd48a1b0f1900018704edc1f47bfe2<>res://.godot/imported/Afternoon.mp3-8f3a74e8f458de251f42dd70fdb13ab4.mp3str::
+Begin.mp3::AudioStreamMP3/AudioStreamMP3::4695059686128052578::1741374050::1741702873::1::::<><><>0<>0<>2587738ced7d148ea000f8b65b90b9b3<>res://.godot/imported/Begin.mp3-646e4e91667ae51e50461f1aeb8a7dcd.mp3str::
+Dawn.mp3::AudioStreamMP3/AudioStreamMP3::8854147126497365604::1741702806::1741703047::1::::<><><>0<>0<>6c30c2d8822990549b97f97bfdaea495<>res://.godot/imported/Dawn.mp3-84eba2773897845e6ada8a18ae0a8502.mp3str::
+DawnStart.mp3::AudioStreamMP3/AudioStreamMP3::189867141847815273::1741374447::1741702873::1::::<><><>0<>0<>174c40bf480b6162cbad84d8f2ccc3fc<>res://.godot/imported/DawnStart.mp3-09ef32c9c8794e1b2f8edfe81a6f30f6.mp3str::
+Dusk.wav::AudioStreamWAV/AudioStreamWAV::7186875650792150593::1741702810::1741703047::1::::<><><>0<>0<>0f91665292f758b4de49ddeb2f470f72<>res://.godot/imported/Dusk.wav-2d5f96487f8ada2198e01c445cd489c0.sample::
+Late Night.mp3::AudioStreamMP3/AudioStreamMP3::6539958347294798287::1741702809::1741703047::1::::<><><>0<>0<>509a06e3263acd02f2d71e47934041c4<>res://.godot/imported/Late Night.mp3-7762ae72b3b03aa2930245eafe8ef22c.mp3str::
+Morning.mp3::AudioStreamMP3/AudioStreamMP3::5709316342693651157::1741702810::1741703047::1::::<><><>0<>0<>35cf78ef5f61b35bd641bee8c35ed75e<>res://.godot/imported/Morning.mp3-e9a20f8fa2b900da32169ed410037bfe.mp3str::
+Night.mp3::AudioStreamMP3/AudioStreamMP3::7840289490225855951::1741702811::1741703047::1::::<><><>0<>0<>899aaa57fb5033326a7a451d6e1af6f7<>res://.godot/imported/Night.mp3-51b3972c2b61eb38ef5392c908372b44.mp3str::
+Nightfall (2).mp3::AudioStreamMP3/AudioStreamMP3::6927460933053580788::1741702812::1741703047::1::::<><><>0<>0<>33e93c14a9694dabf56fa188f96f2596<>res://.godot/imported/Nightfall (2).mp3-985b594904341bdfc2c0114c475c40d5.mp3str::
+Nightfall.mp3::AudioStreamMP3/AudioStreamMP3::3877712235736471265::1741374322::1741702905::1::::<><><>0<>0<>d917794068b631c8519af4b6fed33202<>res://.godot/imported/Nightfall.mp3-4c52c4c3ca74b8fe963384a9890ca509.mp3str::
+Noon.mp3::AudioStreamMP3/AudioStreamMP3::642070656925518029::1741702814::1741703047::1::::<><><>0<>0<>b80bdd9dfecfeec6f99aae511470aeb8<>res://.godot/imported/Noon.mp3-a59b12886299512ae73d9d13c48cc367.mp3str::
+::res://warehouse/_audio/sfx/::1741704771
 51153__rutgermuller__head-hair-scratching.wav::AudioStreamWAV/AudioStreamWAV::7935375688781095615::1740413287::1741027935::1::::<><><>0<>0<>99d5cf7fa75b718ce65df10c9d4650e5<>res://.godot/imported/51153__rutgermuller__head-hair-scratching.wav-2b23e517c1124afbe39504c0e77c4df8.sample::
 234869__mlsulli__musket-shot.wav::AudioStreamWAV/AudioStreamWAV::5890406335572413964::1740411147::1741027935::1::::<><><>0<>0<>589ff0b67cf9b32cc2a89e0e939416f4<>res://.godot/imported/234869__mlsulli__musket-shot.wav-3a70e44d19414f8f4d2914d93e34a3a3.sample::
 538795__brunoauzet__old-musket-bang.wav::AudioStreamWAV/AudioStreamWAV::3455184399320160480::1740411144::1741027935::1::::<><><>0<>0<>b9a6fd674e16157a7c7972514015d90c<>res://.godot/imported/538795__brunoauzet__old-musket-bang.wav-45e2604ae0123705fcddfd8dc1aa62ad.sample::
 763026__celldroid__bear-angry-growl.wav::AudioStreamWAV/AudioStreamWAV::7306210072059530645::1740424728::1741027935::1::::<><><>0<>0<>08d3316cfe25f4afb5ea2747f9706aca<>res://.godot/imported/763026__celldroid__bear-angry-growl.wav-001bda1cb16bb1ccfac2d37dfe5f3980.sample::
 Animal Run (heavy animal).mp3::AudioStreamMP3/AudioStreamMP3::5129876912544081698::1740782415::1741027935::1::::<><><>0<>0<>2f2786e00ff6a999acb26fd5d6c2e4b1<>res://.godot/imported/Animal Run (heavy animal).mp3-a65672276cbbc7aa817b62bb12f8e9ad.mp3str::
 Animal Run (walking fast like some insects).mp3::AudioStreamMP3/AudioStreamMP3::3775270794885153520::1740782414::1741027935::1::::<><><>0<>0<>38a56ad1dfd290da7a12aa608b305151<>res://.godot/imported/Animal Run (walking fast like some insects).mp3-5694211a12fcc114fb7d162cd21f5f85.mp3str::
-Bear (hurt).mp3::AudioStreamMP3/AudioStreamMP3::4221345881283598133::1740782409::1741027935::1::::<><><>0<>0<>54574724ef71d5f546b4256de11fa594<>res://.godot/imported/Bear (hurt).mp3-109c246d14e7dd733ec33f9d99e01892.mp3str::
-Bear (normal).mp3::AudioStreamMP3/AudioStreamMP3::5415763223001917947::1740782407::1741027935::1::::<><><>0<>0<>410226b033873e14b10f459f14b0b512<>res://.godot/imported/Bear (normal).mp3-a05fe679165384d1890b888a232c36fb.mp3str::
-Bear (saw player).mp3::AudioStreamMP3/AudioStreamMP3::7733591140293972819::1740782405::1741027935::1::::<><><>0<>0<>758f1c710b5e3d9d70d4fd439109fdb2<>res://.godot/imported/Bear (saw player).mp3-6b88c8baed7f995393bcc50a20a89676.mp3str::
 Campfire.mp3::AudioStreamMP3/AudioStreamMP3::7608668215375238320::1740774647::1741027935::1::::<><><>0<>0<>07f8a4a83985b34bc06fbee5e1ffa778<>res://.godot/imported/Campfire.mp3-3a39a9abe5435484cb7294127616ff70.mp3str::
 footsteps on snow.wav::AudioStreamWAV/AudioStreamWAV::1552102166871647333::1740699281::1741027935::1::::<><><>0<>0<>19983a98f7bddf83ccd230363e54fe86<>res://.godot/imported/footsteps on snow.wav-b87d2888e139320fd37d1f741d976df7.sample::
 reload.wav::AudioStreamWAV/AudioStreamWAV::3576004629704546383::1740413489::1741027935::1::::<><><>0<>0<>49ea8d15d0c0f0fa9b9f42759d0b2736<>res://.godot/imported/reload.wav-80ad989c72db298f0f7c72c9bbdaac74.sample::
 short_musket.wav::AudioStreamWAV/AudioStreamWAV::1027113614171997331::1740412986::1741027935::1::::<><><>0<>0<>02898bac0df1d188ed4d557a1758682e<>res://.godot/imported/short_musket.wav-01ddec799f610dff7424eb792708f6f5.sample::
-::res://warehouse/_audio/sfx/walk/::1741132971
+::res://warehouse/_audio/sfx/bear/::1741704793
+Bear (hurt).mp3::AudioStreamMP3/AudioStreamMP3::4221345881283598133::1740782409::1741704771::1::::<><><>0<>0<>9867ddcfed0546c318391fd190f673c8<>res://.godot/imported/Bear (hurt).mp3-8256ebd70bd1f1039001bf6ceb3c848c.mp3str::
+Bear (normal).mp3::AudioStreamMP3/AudioStreamMP3::5415763223001917947::1740782407::1741704771::1::::<><><>0<>0<>1eddb64390a5c23c4daee7c8cb50b367<>res://.godot/imported/Bear (normal).mp3-13239fc339d1688239d3cfc62231f678.mp3str::
+Bear (saw player).mp3::AudioStreamMP3/AudioStreamMP3::7733591140293972819::1740782405::1741704771::1::::<><><>0<>0<>b9a24dff1ec72135f66f6b8c909f20c5<>res://.godot/imported/Bear (saw player).mp3-ea97899ed3b3881cb788bff2430e353a.mp3str::
+Bear Bite 1.mp3::AudioStreamMP3/AudioStreamMP3::5372091052768487749::1741704755::1741704783::1::::<><><>0<>0<>9c022f5017c80eacaa281ee59db10a58<>res://.godot/imported/Bear Bite 1.mp3-9ef079ec0a5ea9031e24dd5aa07df000.mp3str::
+Bear Bite 2.mp3::AudioStreamMP3::8904048530779548545::1741702801::1741704793::1::::<><><>0<>0<>0f7818059b57ad90af1af313f51a0a25<>res://.godot/imported/Bear Bite 2.mp3-10d298c8cda27500dd67abd2548a8e49.mp3str::
+::res://warehouse/_audio/sfx/gunshot/::1741188728
+rando_gunshot.tres::AudioStreamRandomizer/AudioStreamRandomizer::8562130778020080286::1741188728::0::1::::<><><>0<>0<><>::uid://bphym84428lme::::res://warehouse/_audio/sfx/538795__brunoauzet__old-musket-bang.wav
+::res://warehouse/_audio/sfx/walk/::1741702922
 Animal Walk cut 1.mp3::AudioStreamMP3/AudioStreamMP3::3162978510475548448::1740795057::1741027935::1::::<><><>0<>0<>e5556ff37018f614bd7b66ac4eb37351<>res://.godot/imported/Animal Walk cut 1.mp3-4cbcbe97eb98ad6ba712c506b443706b.mp3str::
 Animal Walk cut 2.mp3::AudioStreamMP3/AudioStreamMP3::3035673373594336807::1740795059::1741027935::1::::<><><>0<>0<>0cc6275b7d71a73911e0e24ddbd1209d<>res://.godot/imported/Animal Walk cut 2.mp3-8958548ae711f53eb12d5b04c32163d8.mp3str::
 Animal Walk cut 3.mp3::AudioStreamMP3/AudioStreamMP3::3511905179572474141::1740795061::1741027935::1::::<><><>0<>0<>68101682a05cdd01bf73415b4b4b4dd3<>res://.godot/imported/Animal Walk cut 3.mp3-d3126b19a45877c7e24533723d3e0b9d.mp3str::
 Animal Walk cut 4.mp3::AudioStreamMP3/AudioStreamMP3::3188545529084302359::1740795062::1741027935::1::::<><><>0<>0<>23aaac27a0ad2a47b9b5bce54b271c9e<>res://.godot/imported/Animal Walk cut 4.mp3-ebe345b4364e5406b114b9babf4d434f.mp3str::
 Animal Walk cut 5.mp3::AudioStreamMP3/AudioStreamMP3::1303799099285054006::1740795063::1741027935::1::::<><><>0<>0<>e0659e27c44b5fa9b1d8bbf1770b2aff<>res://.godot/imported/Animal Walk cut 5.mp3-6a0b554ce288e22f21f7d07ea4614210.mp3str::
 Animal Walk.mp3::AudioStreamMP3/AudioStreamMP3::2885024262318708360::1740782410::1741027935::1::::<><><>0<>0<>43d4da34822e5a8ee51c9486af2479d2<>res://.godot/imported/Animal Walk.mp3-aad3b680624c77012204b0ca73782cfc.mp3str::
-default_bus_layout.tres::AudioStreamRandomizer::2936715891072193483::1741132971::0::1::::<><><>0<>0<><>::uid://blcf182o0vhga::::res://warehouse/_audio/sfx/walk/Animal Walk cut 1.mp3<>uid://bjirdkcl8sm8v::::res://warehouse/_audio/sfx/walk/Animal Walk cut 2.mp3<>uid://blos45ew7xbtv::::res://warehouse/_audio/sfx/walk/Animal Walk cut 4.mp3<>uid://sttm7cfo55ve::::res://warehouse/_audio/sfx/walk/Animal Walk cut 5.mp3
-::res://warehouse/_icons/::1740408072
+default_bus_layout.tres::AudioStreamRandomizer/AudioStreamRandomizer::2936715891072193483::1741702922::0::1::::<><><>0<>0<><>::uid://blcf182o0vhga::::res://warehouse/_audio/sfx/walk/Animal Walk cut 1.mp3<>uid://bjirdkcl8sm8v::::res://warehouse/_audio/sfx/walk/Animal Walk cut 2.mp3<>uid://blos45ew7xbtv::::res://warehouse/_audio/sfx/walk/Animal Walk cut 4.mp3<>uid://sttm7cfo55ve::::res://warehouse/_audio/sfx/walk/Animal Walk cut 5.mp3
+::res://warehouse/_icons/::1741190083
+Preview.png::CompressedTexture2D/CompressedTexture2D::4956665004032887883::1741190042::1741190083::1::::<><><>0<>0<>7627516048e3ab237841f94759ed3262<>res://.godot/imported/Preview.png-8b379ef67f2708d2b366b92ddc3bedb8.ctex::
 ::res://warehouse/_icons/color/::1741027935
 icon_area_damage.png::CompressedTexture2D/CompressedTexture2D::899425821975904430::1737126218::1741027935::1::::<><><>0<>0<>522bebf8aa24efda2506eaef6640089f<>res://.godot/imported/icon_area_damage.png-f470bc13ecb50d9aa0fb1a7983251174.ctex::
 icon_character.png::CompressedTexture2D/CompressedTexture2D::5480305569498039963::1737126218::1741027935::1::::<><><>0<>0<>b81ec1d15ffd2e1c05b3a90c3aa2f7a1<>res://.godot/imported/icon_character.png-5cffae163606ef0cce96c44457e3e7ef.ctex::
@@ -829,13 +865,14 @@ icon_visibility.png::CompressedTexture2D/CompressedTexture2D::284550113217387581
 icon_visibility_off.png::CompressedTexture2D/CompressedTexture2D::3741244891767097297::1737126218::1741027935::1::::<><><>0<>0<>77740d663df176d4f99be4f3f7e224a9<>res://.godot/imported/icon_visibility_off.png-5f848f1ab0248bf4a80aa3ca40fc3908.ctex::
 wiggly_appendage_2d_icon.svg::CompressedTexture2D/CompressedTexture2D::6385188881881799430::1737126218::1741027935::1::::<><><>0<>0<>f4bc02b1dde3a3b38a88f0369bbb5c43<>res://.godot/imported/wiggly_appendage_2d_icon.svg-12b8f064a647afdcbc8a3a7eb2196cf3.ctex::
 ::res://warehouse/Animals/::1738357131
-::res://warehouse/Animals/PNGs/::1741027935
+::res://warehouse/Animals/PNGs/::1741624083
 arctic.png::CompressedTexture2D/CompressedTexture2D::2483973926026801660::1740493763::1741027935::1::::<><><>0<>0<>52bb9c12e296a94695a8e32a7da6095c<>res://.godot/imported/arctic.png-9c18ab5b8de5622e17117160733619ec.ctex::
 desert.png::CompressedTexture2D/CompressedTexture2D::3337819012759547994::1693675527::1741027935::1::::<><><>0<>0<>631b780b098ce9e4bbc7ca8b5259ee4b<>res://.godot/imported/desert.png-a106108eb0b0fa1d35d433a6e04a6c99.ctex::
 interior.png::CompressedTexture2D/CompressedTexture2D::1071107521051355839::1724253942::1741027935::1::::<><><>0<>0<>894aea46acc9af90c48549d462fe9b40<>res://.godot/imported/interior.png-8ee91a9d6542728039e230e806cbcf04.ctex::
 ocean.png::CompressedTexture2D/CompressedTexture2D::6554209090267369104::1689006036::1741027935::1::::<><><>0<>0<>6fd0b4909ae086845f2c9821519aeb07<>res://.godot/imported/ocean.png-a23b88430bb0de037fd21387d0ca47f0.ctex::
 original.png::CompressedTexture2D/CompressedTexture2D::2095867387063985516::1727362407::1741027935::1::::<><><>0<>0<>506abeb2d9e5f899ad2ea15cecbf1a73<>res://.godot/imported/original.png-f6929c9eeb19d8ee90739748d52a6eb8.ctex::
-polar_bear.png::CompressedTexture2D/CompressedTexture2D::2522503143273837004::1740756096::1741027935::1::::<><><>0<>0<>d189fe7f0c58d0af335462bb773842c5<>res://.godot/imported/polar_bear.png-fc7dcb813ab538bbce58f062a5fecab4.ctex::
+polar_bear.png::CompressedTexture2D/CompressedTexture2D::2522503143273837004::1741625433::1741622316::1::::<><><>0<>0<>d189fe7f0c58d0af335462bb773842c5<>res://.godot/imported/polar_bear.png-fc7dcb813ab538bbce58f062a5fecab4.ctex::
+reindeer.png::CompressedTexture2D/CompressedTexture2D::1942793305927044143::1741624082::1741624083::1::::<><><>0<>0<>3856c3d84186c626c984b4ed9358077f<>res://.godot/imported/reindeer.png-461a30e284c18b63a4acf9f497c2a25b.ctex::
 ::res://warehouse/Animals/Resources/::1738357037
 ::res://warehouse/Boats/::1738357127
 ::res://warehouse/Boats/PNGs/::1741027935
@@ -859,21 +896,23 @@ interior.png::CompressedTexture2D/CompressedTexture2D::2719686579540679036::1724
 ocean.png::CompressedTexture2D/CompressedTexture2D::858945254898611764::1689006065::1741027935::1::::<><><>0<>0<>960958a8cf3ad9072584055218f8e4ed<>res://.godot/imported/ocean.png-e628024456798465456e900937261b41.ctex::
 original.png::CompressedTexture2D/CompressedTexture2D::437317908396104923::1727362416::1741027935::1::::<><><>0<>0<>5dba12c89a5af0010bcb8d34d0167c86<>res://.godot/imported/original.png-7c1a6aecd56f93be3d89e1c003e4e917.ctex::
 ::res://warehouse/Misc/Resources/::1738357037
+::res://warehouse/nightlight/::1741464651
 ::res://warehouse/Ores/::1738357115
 ::res://warehouse/Ores/PNGs/::1741027935
 arctic.png::CompressedTexture2D/CompressedTexture2D::3176717371024918876::1701881889::1741027935::1::::<><><>0<>0<>1fdcdc9a084b64c0db133247bb81d3e2<>res://.godot/imported/arctic.png-a8e94284c4acaa36e81cea650d6d9472.ctex::
 Desert.png::CompressedTexture2D/CompressedTexture2D::3869114115233943373::1692734996::1741027935::1::::<><><>0<>0<>482d58c01c1faaccca2974dce9f6076e<>res://.godot/imported/Desert.png-fc4973db389adb5b61177cc5b35c9ad2.ctex::
 Original.png::CompressedTexture2D/CompressedTexture2D::4203309368857596744::1727362426::1741027935::1::::<><><>0<>0<>a45c1a47013f8920e9d837a380565414<>res://.godot/imported/Original.png-627211fea7d60cc555b6cdeff0177ec0.ctex::
 ::res://warehouse/Ores/Resources/::1738357037
-::res://warehouse/Overworld/::1741132971
+::res://warehouse/Overworld/::1741702922
 all_overworld_ts.tres::TileSet/TileSet::8638255403527675117::1741045779::0::1::::<><><>0<>0<><>::uid://dmf5w3rvo712t::::res://warehouse/Overworld/PNGs/arctic.png<>uid://qshflc8psepr::::res://warehouse/Overworld/PNGs/desert.png<>uid://bnab78iefsocj::::res://warehouse/Overworld/PNGs/ocean.png<>uid://dsjaoi0jd7e7o::::res://warehouse/Overworld/PNGs/original.png
 arctic_overworld.tres::TileSet/TileSet::3141954388406065902::1741045977::0::1::::<><><>0<>0<><>::uid://dmf5w3rvo712t::::res://warehouse/Overworld/PNGs/arctic.png<>uid://bnab78iefsocj::::res://warehouse/Overworld/PNGs/ocean.png
-ts_arctic_all.tres::TileSet::592398799151428475::1741132971::0::1::::<><><>0<>0<><>::uid://dmf5w3rvo712t::::res://warehouse/Overworld/PNGs/arctic.png<>uid://bnab78iefsocj::::res://warehouse/Overworld/PNGs/ocean.png
-::res://warehouse/Overworld/PNGs/::1741111829
+ts_arctic_all.tres::TileSet/TileSet::592398799151428475::1741702922::0::1::::<><><>0<>0<><>::uid://dmf5w3rvo712t::::res://warehouse/Overworld/PNGs/arctic.png<>uid://bnab78iefsocj::::res://warehouse/Overworld/PNGs/ocean.png
+::res://warehouse/Overworld/PNGs/::1741368628
 arctic.png::CompressedTexture2D/CompressedTexture2D::8013712358644512721::1741111828::1741111829::1::::<><><>0<>0<>7ab3d5c21e8d8205a9f4811cf90ab7c2<>res://.godot/imported/arctic.png-d60e32c7d47ded25501e715ba4b620e7.ctex::
 desert.png::CompressedTexture2D/CompressedTexture2D::1160614828067070911::1693675547::1741027935::1::::<><><>0<>0<>50474ddf2378c949546257817233f4e0<>res://.godot/imported/desert.png-ebe5621f7533a006113b81feda5f30ef.ctex::
 ocean.png::CompressedTexture2D/CompressedTexture2D::3298995259203382373::1689006075::1741027935::1::::<><><>0<>0<>edb2cf5fd0fe32f1dbffb4b7d465514e<>res://.godot/imported/ocean.png-c6770be9ebe11e6dc7e295981ae42033.ctex::
 original.png::CompressedTexture2D/CompressedTexture2D::8441266096686195438::1727362433::1741027935::1::::<><><>0<>0<>618dde9851b6c28880b664fcea36836e<>res://.godot/imported/original.png-919f4da3d9c1bb783a519b5c216bee3d.ctex::
+proto_tiles.png::CompressedTexture2D/CompressedTexture2D::1070250389680090712::1741368627::1741368628::1::::<><><>0<>0<>0d452c251f2e69fbac8e411325d8ab30<>res://.godot/imported/proto_tiles.png-029b0b881f011acd8a1feb2a7eb4046a.ctex::
 ::res://warehouse/Overworld/Resources/::1738357037
 ::res://warehouse/Structures/::1738357103
 ::res://warehouse/Structures/PNGs/::1741027935
@@ -906,12 +945,12 @@ Portraits.png::CompressedTexture2D/CompressedTexture2D::5616186815707389317::173
 sf_emotes.tres::SpriteFrames/SpriteFrames::5640993370838761714::1740333492::0::1::::<><><>0<>0<><>::uid://dsvk7nmxli4rl::::res://warehouse/UI/PNGs/Emotes.png
 sf_portraits.tres::SpriteFrames/SpriteFrames::4989174356665746877::1740333492::0::1::::<><><>0<>0<><>::uid://cmar1nop0modx::::res://warehouse/UI/PNGs/Portraits.png
 ::res://warehouse/Units/::1738357091
-::res://warehouse/Units/PNGs/::1741027935
+::res://warehouse/Units/PNGs/::1741610468
 arctic.png::CompressedTexture2D/CompressedTexture2D::7757415187490118502::1701881889::1741027935::1::::<><><>0<>0<>f05c96994b3b69ff2897d9bb207dcf75<>res://.godot/imported/arctic.png-dea3f79ae6d7bb182c7c41473d3380fb.ctex::
 desert.png::CompressedTexture2D/CompressedTexture2D::3367209577757641369::1693675560::1741027935::1::::<><><>0<>0<>1e6d09639fe04747009cb5a3aeb91678<>res://.godot/imported/desert.png-9f8f4feb1e11a85fba4daa157d277786.ctex::
 exclusive-newunit.png::CompressedTexture2D/CompressedTexture2D::4504583332546813177::1696699473::1741027935::1::::<><><>0<>0<>45c73f69b12fce9f1037965d17940e8f<>res://.godot/imported/exclusive-newunit.png-ded43d05a3e4ffa992fa487586ecbc3d.ctex::
 interior.png::CompressedTexture2D/CompressedTexture2D::4939083552920631653::1724274897::1741027935::1::::<><><>0<>0<>04d183faa244f62d0d513b62f733863f<>res://.godot/imported/interior.png-12a575bfb0d6f16fccca0c114fde364b.ctex::
-musket_hero.png::CompressedTexture2D/CompressedTexture2D::1654831740473491293::1740441910::1741027935::1::::<><><>0<>0<>277d74bc96da17200f540d5804b95f48<>res://.godot/imported/musket_hero.png-320d0bdbc67b05c8bcb9cb32b68f0add.ctex::
+musket_hero.png::CompressedTexture2D/CompressedTexture2D::1654831740473491293::1741610467::1741610468::1::::<><><>0<>0<>277d74bc96da17200f540d5804b95f48<>res://.godot/imported/musket_hero.png-320d0bdbc67b05c8bcb9cb32b68f0add.ctex::
 ocean.png::CompressedTexture2D/CompressedTexture2D::5655783296276153120::1689006095::1741027935::1::::<><><>0<>0<>934b78f4d2b6a680c94715d1e4e5e6e5<>res://.godot/imported/ocean.png-cb1abd9dc1c3d488fe08f99727224eb2.ctex::
 original-Recovered.png::CompressedTexture2D/CompressedTexture2D::190779749766998751::1740411092::1741027935::1::::<><><>0<>0<>c81c14ffd668e8f81f9ea620f521f618<>res://.godot/imported/original-Recovered.png-b93ae8aad04450ea381428f17d1c88a8.ctex::
 original.png::CompressedTexture2D/CompressedTexture2D::2554838327694926729::1727362445::1741027935::1::::<><><>0<>0<>fc46d65efd0c6bd9f139e0a32bbf87b6<>res://.godot/imported/original.png-12dd9245768559b22a333f72bf4192a1.ctex::

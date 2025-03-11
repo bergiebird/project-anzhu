@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://cg5u76gsfhdns"]
+
+[ext_resource type="Script" uid="uid://d3mmnawqa7gqw" path="res://resources/wolf/Wolf.gd" id="1_scy07"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/uiStats/StandardCollision.tscn" id="2_ktw5e"]
+[ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="3_2euxl"]
+[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/snowTracker/SnowTracker.gd" id="4_ktw5e"]
+[ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/bear/BearGoals.gd" id="5_j7ab6"]
+[ext_resource type="PackedScene" uid="uid://jy7axhrfnb21" path="res://scenes/Corpse.tscn" id="6_dohk3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dy6t"]
+atlas = ExtResource("3_2euxl")
+region = Rect2(8, 16, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t12y5"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dy6t")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Wolf" type="CharacterBody2D"]
+script = ExtResource("1_scy07")
+
+[node name="Stats" parent="." instance=ExtResource("2_ktw5e")]
+unique_name_in_owner = true
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = SubResource("SpriteFrames_t12y5")
+
+[node name="SnowTracker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_ktw5e")
+
+[node name="AnimalGoals" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_j7ab6")
+
+[node name="AudioManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="Corpse" parent="." instance=ExtResource("6_dohk3")]
