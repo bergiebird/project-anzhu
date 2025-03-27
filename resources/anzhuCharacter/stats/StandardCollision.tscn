@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://cukrdvxpstpgp"]
+
+[ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/anzhuCharacter/stats/standard_collision.tres" id="1_fc5ml"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuCharacter/stats/Stats.gd" id="2_ltnae"]
+
+[node name="Stats" type="CollisionShape2D"]
+editor_description = "Get to:
+COLD
+HUNGER
+"
+shape = ExtResource("1_fc5ml")
+debug_color = Color(0, 0.6, 0.701961, 0)
+script = ExtResource("2_ltnae")
+
+[node name="Background" type="ColorRect" parent="."]
+editor_description = "k"
+color = Color(0.0705882, 0.054902, 0.137255, 1)
+
+[node name="HealthBar" type="ColorRect" parent="."]
+offset_left = -4.0
+offset_top = 4.0
+offset_right = 4.0
+offset_bottom = 4.0
+color = Color(0.717647, 0.254902, 0.196078, 1)

@@ -1,6 +1,6 @@
 extends PointLight2D #PlayerNightLight.gd
-@onready var day_night :DayNighton = DayNighton
-@onready var child_timer :Timer = $NightAdjustTimer
+@onready var timer :Timer = $Timer
+@export var debug_night_light = false
 var node_dictionary :Dictionary[String, Node] = {}:
 	set(new_dictionary):
 		node_dictionary = new_dictionary
@@ -12,8 +12,9 @@ var minimum_energy :float = 0.06
 var maximum_energy :float = 0.17
 
 func _ready()->void:
-	day_night.turn_on_night_lights.connect(update_nightlight)
+	DayNighton.turn_on_night_lights.connect(update_nightlight)
 	Signalton.gunshot.connect(gunshot_sequence)
+	timer.timeout.connect(starting_to_see_again)
 	energy = minimum_energy
 
 func dictionary_inbox(incoming_delivery :Dictionary)->void:
@@ -50,14 +51,18 @@ func starting_to_see_again()->void:
 		if tween_energy_up and tween_energy_up.is_valid():
 			tween_energy_up.kill()
 		tween_energy_up = create_tween()
-		tween_energy_up.tween_property(self, 'energy', maximum_energy, 45).set_trans(Tween.TRANS_CIRC)
+		tween_energy_up.tween_property(self, 'energy', maximum_energy, 40).set_trans(Tween.TRANS_CIRC)
 
 func gunshot_sequence()->void:
 	cant_see_anything()
-	child_timer.start()
+	timer.start()
 
 func campfire_nightlight(is_leaving_campfire :bool)->void:
 	if is_leaving_campfire:
 		starting_to_see_again()
 	else:
 		cant_see_anything(3.0)
+
+func debug()->void:
+	print_rich('[color=2a2942]NightLight debugging enabled . . .[/color]')
+	debug_night_light = true

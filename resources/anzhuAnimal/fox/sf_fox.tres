@@ -1,0 +1,84 @@
+[gd_resource type="SpriteFrames" load_steps=6 format=3 uid="uid://cfjippld3y5i3"]
+
+[ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="1_yv0xy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sjb5e"]
+atlas = ExtResource("1_yv0xy")
+region = Rect2(64, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ueala"]
+atlas = ExtResource("1_yv0xy")
+region = Rect2(56, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5alo1"]
+atlas = ExtResource("1_yv0xy")
+region = Rect2(40, 8, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0cey"]
+atlas = ExtResource("1_yv0xy")
+region = Rect2(48, 8, 8, 8)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjb5e")
+}],
+"loop": true,
+"name": &"Corpse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjb5e")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ueala")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ueala")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjb5e")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5alo1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0cey")
+}],
+"loop": true,
+"name": &"calm",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sjb5e")
+}],
+"loop": true,
+"name": &"idle_alert",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5alo1")
+}],
+"loop": true,
+"name": &"idle_calm",
+"speed": 5.0
+}]

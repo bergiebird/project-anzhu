@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://jy7axhrfnb21"]
-
-[ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/corpse/Corpse.gd" id="1_8l8a6"]
-
-[node name="Corpse" type="Area2D"]
-script = ExtResource("1_8l8a6")

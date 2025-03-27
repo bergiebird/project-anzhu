@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" load_steps=3 format=3 uid="uid://blewkem7ca20m"]
+
+[ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="1_3mqoy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dy6t"]
+atlas = ExtResource("1_3mqoy")
+region = Rect2(8, 16, 8, 8)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 10.0,
+"texture": SubResource("AtlasTexture_2dy6t")
+}],
+"loop": true,
+"name": &"Corpse",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dy6t")
+}],
+"loop": true,
+"name": &"Dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dy6t")
+}],
+"loop": true,
+"name": &"Hit",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2dy6t")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]

@@ -1,0 +1,101 @@
+[gd_scene load_steps=17 format=3 uid="uid://cy8x2rpiisi4c"]
+
+[ext_resource type="Script" uid="uid://cuyuuhi5p5vat" path="res://resources/anzhuAnimal/walrus/Warlus.gd" id="1_qyjs8"]
+[ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuCharacter/corpse/Corpse.gd" id="2_r8wrc"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="3_emk87"]
+[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="4_1tkhr"]
+[ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_5bcdx"]
+[ext_resource type="SpriteFrames" uid="uid://dxm2bxjoy2ikb" path="res://resources/anzhuAnimal/walrus/sf_walrus.tres" id="4_xras0"]
+[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuCharacter/snowTracker/SnowTracker.gd" id="4_y54qn"]
+[ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/anzhuAnimal/bear/BearGoals.gd" id="5_emk87"]
+[ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="5_fqfuq"]
+[ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="6_cvvs1"]
+[ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="9_xras0"]
+[ext_resource type="Script" uid="uid://d1sowtr56fff4" path="res://resources/anzhuCharacter/audio/AudioManager.gd" id="10_r8wrc"]
+[ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="10_sm0p4"]
+[ext_resource type="Script" uid="uid://cdpxaxp4jlkh8" path="res://resources/anzhuCharacter/hurtBox/HurtBox.gd" id="11_1wq0h"]
+[ext_resource type="PackedScene" uid="uid://jy7axhrfnb21" path="res://resources/anzhuCharacter/corpse/Corpse.tscn" id="15_sm0p4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r8wrc"]
+size = Vector2(8, 8)
+
+[node name="Walrus" type="CharacterBody2D"]
+collision_layer = 17
+collision_mask = 17
+script = ExtResource("1_qyjs8")
+corpse_script = ExtResource("2_r8wrc")
+debug_all = true
+
+[node name="Stats" parent="." instance=ExtResource("3_emk87")]
+unique_name_in_owner = true
+damage_value = 8
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = ExtResource("4_xras0")
+animation = &"Idle"
+autoplay = "Idle"
+script = ExtResource("4_1tkhr")
+
+[node name="Dead" type="Node" parent="Animations"]
+script = ExtResource("4_5bcdx")
+
+[node name="Timer" type="Timer" parent="Animations/Dead"]
+wait_time = 2.61
+one_shot = true
+
+[node name="Hit" type="Node" parent="Animations"]
+script = ExtResource("5_fqfuq")
+
+[node name="Timer" type="Timer" parent="Animations/Hit"]
+editor_description = "This handles the Slower"
+wait_time = 10.0
+one_shot = true
+
+[node name="Sit" type="Node" parent="Animations"]
+script = ExtResource("6_cvvs1")
+
+[node name="Idle" type="Node" parent="Animations"]
+script = ExtResource("9_xras0")
+
+[node name="Timer" type="Timer" parent="Animations/Idle"]
+wait_time = 2.0
+
+[node name="Wander" type="Node" parent="Animations"]
+script = ExtResource("10_sm0p4")
+
+[node name="Timer" type="Timer" parent="Animations/Wander"]
+editor_description = "Will change the animal's trajectory every timeout."
+wait_time = 3.0
+
+[node name="SnowTracker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_y54qn")
+
+[node name="AnimalGoals" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_emk87")
+
+[node name="AudioManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+script = ExtResource("10_r8wrc")
+
+[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("11_1wq0h")
+
+[node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_r8wrc")
+
+[node name="Timer" type="Timer" parent="HurtBox"]
+wait_time = 2.0
+
+[node name="Corpse" parent="." instance=ExtResource("15_sm0p4")]
+
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_player_entered"]

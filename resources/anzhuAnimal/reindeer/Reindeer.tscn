@@ -1,0 +1,111 @@
+[gd_scene load_steps=16 format=3 uid="uid://4usvcs4gfign"]
+
+[ext_resource type="Script" uid="uid://l06kmlmqgi5n" path="res://resources/anzhuAnimal/reindeer/Reindeer.gd" id="1_h2ltq"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="2_eajid"]
+[ext_resource type="SpriteFrames" uid="uid://dbou7vyci5jqt" path="res://resources/anzhuAnimal/reindeer/sf_reindeer.tres" id="3_acxsq"]
+[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuCharacter/snowTracker/SnowTracker.gd" id="4_eajid"]
+[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="5_aqmka"]
+[ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/anzhuAnimal/bear/BearGoals.gd" id="5_fvqds"]
+[ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="6_egqkp"]
+[ext_resource type="PackedScene" uid="uid://jy7axhrfnb21" path="res://resources/anzhuCharacter/corpse/Corpse.tscn" id="6_xmqht"]
+[ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="7_73va0"]
+[ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="8_172ob"]
+[ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="9_h033c"]
+[ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="10_r7peg"]
+[ext_resource type="Script" uid="uid://cdpxaxp4jlkh8" path="res://resources/anzhuCharacter/hurtBox/HurtBox.gd" id="12_x1bbh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2el2y"]
+radius = 40.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acxsq"]
+size = Vector2(8, 8)
+
+[node name="Reindeer" type="CharacterBody2D"]
+script = ExtResource("1_h2ltq")
+this_animals_type = 7
+starting_health = 1
+debug_all = true
+metadata/_custom_type_script = "uid://cirdyev4u4o7t"
+
+[node name="Stats" parent="." instance=ExtResource("2_eajid")]
+unique_name_in_owner = true
+damage_value = 8
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = ExtResource("3_acxsq")
+animation = &"Hit"
+autoplay = "Idle"
+script = ExtResource("5_aqmka")
+
+[node name="Dead" type="Node" parent="Animations"]
+script = ExtResource("6_egqkp")
+
+[node name="Timer" type="Timer" parent="Animations/Dead"]
+wait_time = 2.61
+one_shot = true
+
+[node name="Hit" type="Node" parent="Animations"]
+script = ExtResource("7_73va0")
+
+[node name="Timer" type="Timer" parent="Animations/Hit"]
+editor_description = "This handles the Slower"
+wait_time = 10.0
+one_shot = true
+
+[node name="Sit" type="Node" parent="Animations"]
+script = ExtResource("8_172ob")
+
+[node name="Idle" type="Node" parent="Animations"]
+script = ExtResource("9_h033c")
+
+[node name="Timer" type="Timer" parent="Animations/Idle"]
+wait_time = 2.0
+
+[node name="Wander" type="Node" parent="Animations"]
+script = ExtResource("10_r7peg")
+
+[node name="Timer" type="Timer" parent="Animations/Wander"]
+editor_description = "Will change the animal's trajectory every timeout."
+wait_time = 3.0
+
+[node name="SnowTracker" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_eajid")
+
+[node name="AnimalGoals" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_fvqds")
+
+[node name="AudioManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="HerdMentality" type="Node" parent="."]
+
+[node name="Corpse" parent="." instance=ExtResource("6_xmqht")]
+
+[node name="TooClose" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TooClose"]
+shape = SubResource("CircleShape2D_2el2y")
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("12_x1bbh")
+
+[node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
+shape = SubResource("RectangleShape2D_acxsq")
+
+[node name="Timer" type="Timer" parent="HurtBox"]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="TooClose" to="." method="_on_too_close_area_entered"]
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_player_entered"]

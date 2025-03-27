@@ -1,20 +1,24 @@
 class_name AnzhuCharacter extends CharacterBody2D #_AnzhuCharacter.gd
 signal has_died(is_playing_music :bool)
 const NEW_SAFE_MARGIN :float = 0.05
-
 enum AnimalType {Walrus, Owl, Human,  Bear, Fox, Hare, Wolf, Reindeer}
-var move_speed :int
 enum Sleepiness {Awake, Drowsy, Tired, Exhausted, Deprived}
 enum SleepSchedule {Diurnal,Nocturnal,Crepuscular}
 enum MaxHits {One, Two, Four, Eight}
-var max_health :int
 
 @export_group("Core Attributes")
 @export var this_animals_type :AnimalType = AnimalType.Walrus
 @export var starting_health :MaxHits = MaxHits.One
 @export var set_sleep_schedule :SleepSchedule = SleepSchedule.Diurnal
 @export var is_sleeping :bool = false
-@onready var day_night :DayNighton = DayNighton
+@export_group('DEBUG')
+@export var debug_all :bool = false
+@export var debug_self :bool = false
+@onready var DN :DayNighton = DayNighton
+@onready var S :Signalton = Signalton
+var debug_icon :String
+var max_health :int
+var move_speed :int
 var anim :AnimatedSprite2D
 var stats :CollisionShape2D
 var audio :Node2D
@@ -27,44 +31,55 @@ var daynight_dictionary :Dictionary
 var scenes_nodes :Dictionary[String, Node]
 
 func create_and_ship_scenes_nodes()->void:
-	scenes_nodes["parent"] = self
-	scenes_nodes["ex_elevation"] = %ElevationsLayer
-	scenes_nodes["ex_tracks"] = %SnowTracksLayer
-	scenes_nodes["Player"] = %Player
+	scenes_nodes["ex_elevation"] = %ElevationsLayer #global nodes, place in Singleton LATER
+	scenes_nodes["Tracks"] = %Tracks #global nodes, place in Singleton LATER
+	scenes_nodes["Player"] = %Player #place in Libraryton
+	scenes_nodes["scene_root"] = self
 	for child in get_children():
 		scenes_nodes[child.name] = child
+		if debug_all and child.has_method('debug'):
+			child.debug()
 	for child_name in scenes_nodes:
-		var child_node = scenes_nodes[child_name]
+		var child_node :Node = scenes_nodes[child_name]
 		if child_node.get("node_dictionary") != null and child_name != self.name:
 			child_node.node_dictionary = scenes_nodes
 	anim = scenes_nodes['Animations']
+	anim.animation_finished.connect(hit_over)
 	stats = scenes_nodes['Stats']
 	audio = scenes_nodes['AudioManager']
 	parent = get_parent()
 
 func _characters_dictionary_inbox(incoming_delivery :Dictionary)->void:
 	daynight_dictionary = incoming_delivery
-	day_night.time_dictionary_delivery.disconnect(_characters_dictionary_inbox)
+	DN.time_dictionary_delivery.disconnect(_characters_dictionary_inbox)
 
-func get_daynight_dictionary()->Dictionary:
-	return daynight_dictionary
+func _process(delta:float)->void:
+	character_process(delta)
+func character_process(delta:float)->void:pass
 
 func _ready()->void:
+	if debug_self or debug_all:
+		debug_self = true
+	early_ready_for_debug()
 	add_to_group("being")
 	set_motion_mode(MOTION_MODE_FLOATING)
 	set_safe_margin(NEW_SAFE_MARGIN)
-	day_night.time_dictionary_delivery.connect(_characters_dictionary_inbox)
-	day_night.time_progressed.connect(time_progressed)
+	DN.time_dictionary_delivery.connect(_characters_dictionary_inbox)
+	DN.time_progressed.connect(time_progressed)
 	move_speed = match_move_speed()
 	max_health = match_max_hits()
 	create_and_ship_scenes_nodes()
-	ready()
-func ready()->void: pass
+	character_ready()
+func character_ready()->void: pass #Virtual for child
+func early_ready_for_debug():pass #Virtual for grandchild
+func hit_over()->void: pass
 
 func time_progressed(current_time :DayNighton.TimeOfDay)->void:
+	if debug_self:
+		print_rich('[color=eaf1f0] Time has progressed')
 	_process_melatonin(current_time)
-	virtual_progress_time(current_time)
-func virtual_progress_time(current_time :DayNighton.TimeOfDay)->void: pass
+	character_time_progressed(current_time)
+func character_time_progressed(current_time :DayNighton.TimeOfDay)->void: pass #
 
 func _process_melatonin(current_time :DayNighton.TimeOfDay)->void:
 	if is_sleeping:
