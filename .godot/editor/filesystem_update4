@@ -1,0 +1,6 @@
+res://resources/anzhuAnimal/bear/Bear.tscn
+res://warehouse/Overworld/ts_arctic_all.tres
+res://resources/player/abilities/jump/PlayerJump.gd
+res://resources/player/sf_player.tres
+res://resources/anzhuAnimal/bear/sf_bear.tres
+res://warehouse/_audio/sfx/walk/default_bus_layout.tres

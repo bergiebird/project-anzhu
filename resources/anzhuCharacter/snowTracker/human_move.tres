@@ -1,0 +1,20 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://jfut804k47c2"]
+
+[ext_resource type="Texture2D" uid="uid://b7peq6crk472o" path="res://warehouse/Animals/Resources/tracks_human_move.png" id="1_ifk5w"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_75v03"]
+texture = ExtResource("1_ifk5w")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+0:1/0 = 0
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_75v03")

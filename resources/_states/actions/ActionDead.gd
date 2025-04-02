@@ -1,0 +1,25 @@
+extends ActionState #ActionDead.gd
+
+@export var has_death_howl :bool = false
+@onready var timer :Timer = $Timer
+var corpse_node :Area2D
+
+func _ready() -> void:
+	timer.timeout.connect(begin_end_of_life)
+
+func enter()->void:
+	parent.node_dictionary['HurtBox'].monitoring = false
+	if has_death_howl:
+		parent.node_dictionary['AudioManager'].start_sfx(self.name)
+		timer.start()
+	else:
+		begin_end_of_life()
+
+func update(delta:float)->void:
+	pass
+
+func physics_update(delta:float)->void:
+	pass
+
+func begin_end_of_life()->void:
+	corpse_node.end_of_life('yarp')

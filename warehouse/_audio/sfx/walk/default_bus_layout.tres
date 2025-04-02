@@ -1,0 +1,13 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=5 format=3 uid="uid://bh3tjtuu7g7a2"]
+
+[ext_resource type="AudioStream" uid="uid://blcf182o0vhga" path="res://warehouse/_audio/sfx/walk/Animal Walk cut 1.mp3" id="1_rsjee"]
+[ext_resource type="AudioStream" uid="uid://bjirdkcl8sm8v" path="res://warehouse/_audio/sfx/walk/Animal Walk cut 2.mp3" id="2_ykiwb"]
+[ext_resource type="AudioStream" uid="uid://blos45ew7xbtv" path="res://warehouse/_audio/sfx/walk/Animal Walk cut 4.mp3" id="3_wh8j3"]
+[ext_resource type="AudioStream" uid="uid://sttm7cfo55ve" path="res://warehouse/_audio/sfx/walk/Animal Walk cut 5.mp3" id="4_vg6v5"]
+
+[resource]
+streams_count = 4
+stream_0/stream = ExtResource("1_rsjee")
+stream_1/stream = ExtResource("2_ykiwb")
+stream_2/stream = ExtResource("3_wh8j3")
+stream_3/stream = ExtResource("4_vg6v5")

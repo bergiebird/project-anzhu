@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://jlicup5il7x7"]
+
+[ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/anzhuAnimal/bear/interactable.gd" id="1_jcy0q"]
+[ext_resource type="Texture2D" uid="uid://be0o3t0qs3byi" path="res://warehouse/Misc/PNGs/interior.png" id="2_jcy0q"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_p3y1h"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsa77"]
+size = Vector2(10, 10)
+
+[node name="Interactable" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_jcy0q")
+
+[node name="Mask" parent="." instance=ExtResource("3_p3y1h")]
+editor_description = "Place this at the top of the scene tree for z_index purposes.
+"
+set_mask_dimensions = 1
+release_healthbar = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="InteractShape" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_xsa77")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_jcy0q")
+region_enabled = true
+region_rect = Rect2(40, 0, 8, 8)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

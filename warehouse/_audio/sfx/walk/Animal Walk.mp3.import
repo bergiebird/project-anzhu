@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bhdr6s41gd2xw"
+path="res://.godot/imported/Animal Walk.mp3-aad3b680624c77012204b0ca73782cfc.mp3str"
+
+[deps]
+
+source_file="res://warehouse/_audio/sfx/walk/Animal Walk.mp3"
+dest_files=["res://.godot/imported/Animal Walk.mp3-aad3b680624c77012204b0ca73782cfc.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

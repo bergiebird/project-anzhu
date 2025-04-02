@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://lyjk4x4prrqn"]
+
+[ext_resource type="Script" uid="uid://vc5erfs8ditw" path="res://stat_bar.gd" id="1_6bqml"]
+
+[sub_resource type="Gradient" id="Gradient_brsxg"]
+offsets = PackedFloat32Array(0.297337)
+colors = PackedColorArray(0.760784, 0.215686, 0.32549, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kenmb"]
+gradient = SubResource("Gradient_brsxg")
+
+[node name="StatBar_Health" type="TextureProgressBar"]
+offset_right = 40.0
+offset_bottom = 40.0
+max_value = 8.0
+value = 8.0
+fill_mode = 3
+texture_progress = SubResource("GradientTexture2D_kenmb")
+script = ExtResource("1_6bqml")
+node_name = "Health"
