@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://4usvcs4gfign"]
 
 [ext_resource type="Script" uid="uid://l06kmlmqgi5n" path="res://resources/anzhuAnimal/reindeer/Reindeer.gd" id="1_h2ltq"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="2_eajid"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="2_eajid"]
 [ext_resource type="SpriteFrames" uid="uid://dbou7vyci5jqt" path="res://resources/anzhuAnimal/reindeer/sf_reindeer.tres" id="3_acxsq"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuCharacter/snowTracker/SnowTracker.gd" id="4_eajid"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="5_aqmka"]

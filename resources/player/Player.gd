@@ -1,6 +1,5 @@
 @icon("res://resources/player/player.png") #Player.gd
 class_name Player extends AnzhuHuman
-@onready var player_icon = "[img]res://resources/player/player.png[/img]"
 @onready var camera :Camera2D = $Camera
 @onready var abilities: Node = $Abilities
 @onready var listener :AudioListener2D = $AudioListener2D
@@ -11,6 +10,7 @@ func early_ready_for_debug()->void:
 		print_rich(debug_icon)
 
 func human_ready()->void:
+	add_to_group('player')
 	S.player_hit.connect(human_was_hit)
 
 func _physics_process(delta :float)->void:
@@ -22,8 +22,8 @@ func affect_nightlight(is_leaving_campfire :bool)->void:
 	nightlight.campfire_nightlight(is_leaving_campfire)
 
 func human_was_hit()->void:
-	scenes_nodes['Animations'].was_just_hit()
-	scenes_nodes['Stats'].take_damage()
+	anim.was_just_hit()
+	mask.take_damage()
 
 func change_actions(string_dead :String)->void:
 	if string_dead == "Dead":

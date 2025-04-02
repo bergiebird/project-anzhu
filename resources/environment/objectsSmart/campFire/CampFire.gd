@@ -7,6 +7,9 @@ extends StaticBody2D #CampFire.gd
 @onready var player :AnzhuHuman = %Player
 @onready var debug_icon :String = "[img]res://resources/campFire/campfire.png[/img]"
 
+func _ready() -> void:
+	assert(minimum_light, )
+
 
 func _on_screen_exited()->void:
 	player.affect_nightlight(true)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://dq65nxriesry0"]
 
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="1_d2itq"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="1_d2itq"]
 [ext_resource type="Texture2D" uid="uid://v0md4yd7vicg" path="res://warehouse/~documented/arctic/Ores.png" id="2_h1cpv"]
 
 [node name="Rock" type="Node2D"]

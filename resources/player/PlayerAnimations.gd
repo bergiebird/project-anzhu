@@ -1,10 +1,8 @@
 extends AnimatedSprite2D #PlayerAnimations.gd
-@export var time_before_start_reload :float = 0.5
-@export var time_before_end_reload :float = 1.0
+@export var animations_reloads_reload_time :float = 0.5
 @export_group('Debug')
 @export var debug_animations :bool = false
 @export var debugger_color :Color = Color("e67a84")
-@onready var dcolor = debugger_color.to_html()
 var default_color :Color = Color("ffffff")
 var red_color :Color = Color("b74132")
 var is_colored :bool = false
@@ -16,9 +14,9 @@ var node_dictionary :Dictionary[String, Node] = {}:
 		node_dictionary = new_dictionary
 		audio = node_dictionary['AudioManager']
 		abilities = node_dictionary['Abilities']
+@onready var dcolor = debugger_color.to_html() 
 @onready var parent :AnzhuCharacter
 @onready var D :Directon = Directon
-
 
 func _ready()->void:
 	animation_finished.connect(reload_animation_finished)
@@ -35,7 +33,7 @@ func start_reload_animation()->void:
 	stop()
 	just_play('reload')
 	speed_scale = 1
-	await get_tree().create_timer(time_before_start_reload).timeout
+	await get_tree().create_timer(animations_reloads_reload_time).timeout
 	audio.audio_dictionary['reload'].play()
 
 func should_flip(anim_name :String)->void:

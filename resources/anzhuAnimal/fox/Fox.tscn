@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://d06bo8scbr23v"]
 
 [ext_resource type="Script" uid="uid://du442geuk0s1v" path="res://resources/anzhuAnimal/fox/Fox.gd" id="1_yb322"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="3_cuink"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_cuink"]
 [ext_resource type="SpriteFrames" uid="uid://cfjippld3y5i3" path="res://resources/anzhuAnimal/fox/sf_fox.tres" id="3_dk85e"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="4_dk85e"]
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_k34b2"]

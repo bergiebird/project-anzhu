@@ -1,5 +1,6 @@
 extends Node2D # Interactable.gd
 
+## Emitted after input and proximity has been validated
 signal interacted
 
 @export var interaction_text = "Press SPACE to interact"
@@ -28,3 +29,7 @@ func _on_area_2d_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		print('out')
 		set_process(false)
+
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	pass # Replace with function body.

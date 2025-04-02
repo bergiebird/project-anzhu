@@ -1,5 +1,5 @@
 @icon("res://resources/player/abilities/gun/icons8-sniper-rifle-100.png")
-extends Ability #Shoot.gd
+extends Ability #Gun.gd
 
 var reload_audio
 @export var shoot_cooldown :float = 0.4

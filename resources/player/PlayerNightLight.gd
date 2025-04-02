@@ -1,15 +1,16 @@
 extends PointLight2D #PlayerNightLight.gd
 @onready var timer :Timer = $Timer
 @export var debug_night_light = false
+@export var minimum_energy :float = 0.06
+@export var maximum_energy :float = 0.17
+@export var time_until_off :float = 35.0
+@export var time_until_on :float = 40.0
 var node_dictionary :Dictionary[String, Node] = {}:
 	set(new_dictionary):
 		node_dictionary = new_dictionary
-
 var time_dictionary :Dictionary
 var tween_energy_up :Tween
 var tween_energy_down :Tween
-var minimum_energy :float = 0.06
-var maximum_energy :float = 0.17
 
 func _ready()->void:
 	DayNighton.turn_on_night_lights.connect(update_nightlight)
@@ -31,8 +32,8 @@ func turn_on_nightlight()->void:
 	starting_to_see_again()
 
 func turn_off_nightlight()->void:
-	cant_see_anything(35.0)
-	await get_tree().create_timer(35.0).timeout
+	cant_see_anything(time_until_off)
+	await get_tree().create_timer(time_until_off).timeout
 	visible = false
 
 func cant_see_anything(floater:float = 0.2)->void:
@@ -51,7 +52,7 @@ func starting_to_see_again()->void:
 		if tween_energy_up and tween_energy_up.is_valid():
 			tween_energy_up.kill()
 		tween_energy_up = create_tween()
-		tween_energy_up.tween_property(self, 'energy', maximum_energy, 40).set_trans(Tween.TRANS_CIRC)
+		tween_energy_up.tween_property(self, 'energy', maximum_energy, time_until_on).set_trans(Tween.TRANS_CIRC)
 
 func gunshot_sequence()->void:
 	cant_see_anything()

@@ -1,7 +1,9 @@
 class_name AnzhuAnimal extends AnzhuCharacter #_AnzhuAnimal.gd
+signal striking()
+
 enum AnimalGoals {GetSleep,FindFood,FindWater,Nothing,Hunt,StayWithHerd,FleeWithHerd, WanderWithHerd}
 enum AnimalActions {Idle,Sit,Hit,Wander,Chase,Dead,Search,Charge,Sleep,Graze,Dash}
-@export var corpse_script :Script = load("res://resources/corpse/Corpse.gd")
+#@export var corpse_script :Script = load("res://resources/corpse/Corpse.gd")
 @export var starting_goal :AnimalGoals = AnimalGoals.Nothing
 var goals :Node
 var corpse :Area2D
@@ -15,6 +17,7 @@ var hurt_box :Area2D
 
 func character_ready()->void:
 	init_scenes_nodes()
+	character_signal_connector()
 	animal_ready()
 	for child in get_children():
 		for grandchild in child.get_children():
@@ -22,16 +25,17 @@ func character_ready()->void:
 				grandchild.action_transition.connect(change_actions)
 	change_goals(AnimalGoals.keys()[starting_goal])
 	hurt_box = scenes_nodes['HurtBox']
-func animal_ready()->void:pass
 
 func character_process(delta:float)->void:
 	animal_process(delta)
-func animal_process(delta:float)->void: pass
+
+func character_signal_connector()->void:
+	striking.connect(animal_strike)
 
 func init_scenes_nodes()->void:
 	player = scenes_nodes['Player']
 	goals = scenes_nodes['AnimalGoals']
-	stats = scenes_nodes['Stats']
+	mask = scenes_nodes['Mask']
 	current_action = AnimalActions.Idle
 	add_to_group('animal')
 
@@ -72,13 +76,19 @@ func change_goals(new_goal_name :String)->void:
 	old_goal_name = new_goal_name
 
 func got_hit()->void:
-	is_stunned = true
-	is_injured = true
 	change_actions("Hit")
+	was_hit.emit()
 
 func uninjur()->void:
 	is_injured = false
 	is_stunned = false
 
-func temp():
-	return get_script().get_meta('icon')
+func stop_in_tracks(unused_string)->void:
+	velocity = Vector2.ZERO
+
+
+###VIRTUALS###
+func animal_ready()->void:pass
+func animal_process(delta:float)->void: pass
+func animal_strike()->void:pass
+###VIRTUALS###

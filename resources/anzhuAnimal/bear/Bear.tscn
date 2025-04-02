@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuAnimal/bear/Bear.gd" id="1_6aww6"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="3_51qta"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="3_g2n60"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_g2n60"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="5_gcotj"]
 [ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://warehouse/_audio/music/bgm/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
 [ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="6_pyaxb"]
@@ -47,10 +47,10 @@ size = Vector2(8, 8)
 script = ExtResource("1_6aww6")
 debug_all = true
 
-[node name="Stats" parent="." instance=ExtResource("3_g2n60")]
+[node name="Mask" parent="." instance=ExtResource("3_g2n60")]
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_lf0l5")
-set_stat_size_option = 2
+set_mask_dimensions = 2
 
 [node name="AnimalGoals" type="Node" parent="."]
 unique_name_in_owner = true
@@ -76,6 +76,7 @@ sprite_frames = ExtResource("6_ybwxf")
 animation = &"Hit"
 autoplay = "Idle"
 script = ExtResource("3_51qta")
+debug_actions = null
 
 [node name="Idle" type="Node" parent="Animations"]
 script = ExtResource("5_gcotj")
@@ -110,8 +111,11 @@ script = ExtResource("14_1lng4")
 [node name="Chase" type="Node" parent="Animations"]
 script = ExtResource("12_fnbe6")
 
-[node name="Timer" type="Timer" parent="Animations/Chase"]
+[node name="DirectionTimer" type="Timer" parent="Animations/Chase"]
 wait_time = 1.1
+
+[node name="WallThunkTimer" type="Timer" parent="Animations/Chase"]
+one_shot = true
 
 [node name="Charge" type="Node" parent="Animations"]
 script = ExtResource("16_6x4uf")
@@ -152,11 +156,10 @@ stream = ExtResource("18_5puse")
 max_distance = 225.0
 attenuation = 0.5
 
-[node name="Sfx_Strike" type="AudioStreamPlayer2D" parent="AudioManager"]
+[node name="Sfx_Attack" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = SubResource("AudioStreamRandomizer_jrj27")
 
 [node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
-unique_name_in_owner = true
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.4, 0.4)
@@ -164,6 +167,8 @@ script = ExtResource("8_jp6s3")
 
 [node name="SnowTracker" type="Node" parent="."]
 script = ExtResource("26_42w22")
+debug_snow_tracker = null
+has_sliding_layer = null
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -186,20 +191,9 @@ editor_description = "Could put food component on here"
 [connection signal="goal_transition" from="Animations/Idle" to="." method="change_goals"]
 [connection signal="action_transition" from="Animations/Sit" to="." method="change_actions"]
 [connection signal="goal_transition" from="Animations/Sit" to="." method="change_goals"]
-[connection signal="entered" from="Animations/Hit" to="AudioManager" method="increase_stakes"]
-[connection signal="entered" from="Animations/Hit" to="Eyesight" method="_just_shot"]
-[connection signal="entered" from="Animations/Hit" to="SnowTracker" method="set_track_style_to_slide"]
-[connection signal="exited" from="Animations/Hit" to="SnowTracker" method="set_track_style_to_walk"]
-[connection signal="goal_transition" from="Animations/Hit" to="AnimalGoals" method="on_goal_transition"]
 [connection signal="entered" from="Animations/Chase" to="AudioManager" method="start_sfx"]
 [connection signal="exited" from="Animations/Chase" to="AudioManager" method="stop_sfx"]
 [connection signal="finished" from="AudioManager/Sfx_Spotted" to="." method="_on_roar_spotted_finished"]
 [connection signal="finished" from="AudioManager/Sfx_Dead" to="." method="end_of_life"]
-[connection signal="screen_entered" from="Eyesight" to="Eyesight" method="_on_screen_entered"]
-[connection signal="screen_exited" from="Eyesight" to="Eyesight" method="_on_screen_exited"]
 [connection signal="sight_update" from="Eyesight" to="AnimalGoals/Hunt" method="_on_sight_update"]
 [connection signal="sight_update" from="Eyesight" to="AudioManager" method="start_sfx"]
-[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_player_entered"]
-[connection signal="has_striked" from="HurtBox" to="." method="stop_in_tracks"]
-[connection signal="has_striked" from="HurtBox" to="AudioManager" method="start_sfx"]
-[connection signal="timeout" from="HurtBox/Timer" to="HurtBox" method="_on_timer_hurt_timeout"]

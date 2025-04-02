@@ -1,31 +1,39 @@
 extends ActionState #GoalChase.gd
 
-@onready var timer :Timer = $Timer
 @export var chase_speed: int = 13
 @export var slowed_chase_speed: int = 9
 @export var max_speed :int = 70
-
+@onready var direction_timer :Timer = $DirectionTimer
+@onready var wall_thunk_timer :Timer = $WallThunkTimer
 @onready var direction_keys = DIRECTIONS.keys()
-const DIRECTIONS :Dictionary = {
-	"NORTH":Vector2(0, -1),"SOUTH":Vector2(0, 1),
-	"EAST": Vector2(1, 0),"WEST":  Vector2(-1, 0)}
+const DIRECTIONS :Dictionary = {"NORTH":Vector2(0, -1),"SOUTH":Vector2(0, 1),"EAST": Vector2(1, 0),"WEST":  Vector2(-1, 0)}
 var current_direction :String = "NORTH"
 var current_speed :int
+var wall_thunk_occured :bool = false
 
-func _ready() -> void:
-	timer.timeout.connect(change_direction)
+func _ready()->void:
+	direction_timer.timeout.connect(change_direction)
+	wall_thunk_timer.timeout.connect(_on_wall_thunk_timeout)
 
 func enter()->void:
-	timer.start()
+	direction_timer.start()
 	current_speed = chase_speed
 
 func physics_update(delta :float)->void:
 	grandparent.velocity += DIRECTIONS[current_direction] * chase_speed * delta
-	if grandparent.velocity.x > max_speed:  grandparent.velocity.x = max_speed
-	if grandparent.velocity.y > max_speed:  grandparent.velocity.y = max_speed
-	if grandparent.velocity.x < -max_speed: grandparent.velocity.x = -max_speed
-	if grandparent.velocity.y < -max_speed: grandparent.velocity.y = -max_speed
-func update(delta :float)->void:return
+	grandparent.velocity.x = clamp(grandparent.velocity.x, -max_speed, max_speed)
+	grandparent.velocity.y = clamp(grandparent.velocity.y, -max_speed, max_speed)
+func update(delta :float)->void:
+	process_wall_thunk()
+
+func process_wall_thunk()->void:
+	if wall_thunk_occured:
+		grandparent.velocity = Vector2.ZERO
+		print('velocity is zero')
+	elif (abs(grandparent.velocity.x)>60 or abs(grandparent.velocity.y)>60):
+		if grandparent.is_on_wall_only():
+			wall_thunk_occured = true
+			wall_thunk_timer.start()
 
 func change_direction()->void:
 	move_toward_target(grandparent.player.position)
@@ -49,5 +57,9 @@ func move_toward_target(target_position :Vector2)->void:
 		grandparent.velocity = Vector2.ZERO
 		printt(grandparent.player.position - grandparent.global_position)
 
+func _on_wall_thunk_timeout() -> void:
+	print('thunk over')
+	wall_thunk_occured = false
+
 func exit()->void:
-	timer.stop()
+	direction_timer.stop()

@@ -1,7 +1,7 @@
 [gd_scene load_steps=15 format=3 uid="uid://cg5u76gsfhdns"]
 
 [ext_resource type="Script" uid="uid://d3mmnawqa7gqw" path="res://resources/anzhuAnimal/wolf/Wolf.gd" id="1_scy07"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="2_ktw5e"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="2_ktw5e"]
 [ext_resource type="SpriteFrames" uid="uid://blewkem7ca20m" path="res://resources/anzhuAnimal/wolf/sf_wolf.tres" id="3_33pya"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="4_33pya"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuCharacter/snowTracker/SnowTracker.gd" id="4_ktw5e"]

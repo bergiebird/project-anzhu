@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cuyuuhi5p5vat" path="res://resources/anzhuAnimal/walrus/Warlus.gd" id="1_qyjs8"]
 [ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuCharacter/corpse/Corpse.gd" id="2_r8wrc"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="3_emk87"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_emk87"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="4_1tkhr"]
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_5bcdx"]
 [ext_resource type="SpriteFrames" uid="uid://dxm2bxjoy2ikb" path="res://resources/anzhuAnimal/walrus/sf_walrus.tres" id="4_xras0"]

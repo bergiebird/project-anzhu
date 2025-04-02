@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d3odvoyfq8ttm" path="res://resources/player/Player.gd" id="1_e4mdq"]
 [ext_resource type="Script" uid="uid://82hfueor42tn" path="res://resources/player/abilities/PlayerAbilities.gd" id="2_3v2ag"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="3_4a5ij"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_4a5ij"]
 [ext_resource type="Script" uid="uid://bayu55ve5ewdv" path="res://resources/player/PlayerAnimations.gd" id="3_ro5pv"]
 [ext_resource type="Script" uid="uid://by1is401patsu" path="res://resources/player/abilities/gun/Shoot.gd" id="4_jej6c"]
 [ext_resource type="Script" uid="uid://dbid3axaqrb3v" path="res://resources/player/abilities/jump/PlayerJump.gd" id="5_f1ej7"]
@@ -36,14 +36,15 @@ fill_from = Vector2(0.5, 0.5)
 radius = 40.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 513
+collision_layer = 515
+collision_mask = 3
 script = ExtResource("1_e4mdq")
 this_animals_type = 2
 
-[node name="Stats" parent="." instance=ExtResource("3_4a5ij")]
+[node name="Mask" parent="." instance=ExtResource("3_4a5ij")]
 unique_name_in_owner = true
 shape = SubResource("CircleShape2D_d2wvv")
-set_stat_size_option = 1
+set_mask_dimensions = 1
 
 [node name="GunShot" parent="." instance=ExtResource("11_f1ej7")]
 

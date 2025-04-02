@@ -143,9 +143,10 @@ screenshot={
 
 [layer_names]
 
-2d_physics/layer_1="Walls"
-2d_physics/layer_5="gunshot"
-2d_physics/layer_10="Damager"
+2d_physics/layer_1="WALL"
+2d_physics/layer_2="PROP"
+2d_physics/layer_5="GUNSHOT"
+2d_physics/layer_10="MELEE"
 2d_physics/layer_20="Loot"
 
 [rendering]

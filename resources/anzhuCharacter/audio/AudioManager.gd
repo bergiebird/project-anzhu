@@ -6,13 +6,17 @@ var count :float = 1.0
 var sfx_hunt_count :int = 1
 var audio_dictionary :Dictionary[String, Node] = {}
 var audio_string :String = "Sfx_"
+@onready var parent :AnzhuCharacter = get_parent()
+@export_group('DEBUG')
 @export var debug_audio :bool = false
 
 func _ready()->void:
 	for child in get_children():
 		if child is AudioStreamPlayer2D:
 			audio_dictionary[child.name] = child
-
+	ready()
+	_signal_connector()
+func ready()->void:pass
 
 func start_sfx(name_of_sfx :String)->void:
 	audio_dictionary.get(audio_string + name_of_sfx).play()
@@ -24,3 +28,11 @@ func get_is_playing(name_of_sfx :String)->bool:
 func debug()->void:
 	print_rich('[color=ebb85b]Audio debugging enabled . . .[/color]')
 	debug_audio = true
+
+func _signal_connector()->void:
+	parent.was_hit.connect(was_just_hit)
+	parent.striking.connect(character_is_striking)
+	signal_connector()
+func signal_connector()->void:pass
+func was_just_hit()->void: 	pass
+func character_is_striking()->void:pass

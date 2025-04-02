@@ -45,8 +45,6 @@ func move()->Vector2:
 		anim.just_play('idle')
 	return move_velocity
 
-
-
 func move_stat_delivery(incoming_speed :int)->void:
 	normal_speed = incoming_speed
 	efficient_speed = normal_speed + efficient_modifier

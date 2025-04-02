@@ -8,7 +8,7 @@ extends Area2D #Corpse.gd
 var parent :AnzhuCharacter
 var grandparent :Node
 var anim :AnimatedSprite2D
-var stats :CollisionShape2D
+var mask :CollisionShape2D
 var stored_position :Vector2
 var node_dictionary :Dictionary[String, Node] = {}:
 	set(new_dictionary):
@@ -16,7 +16,7 @@ var node_dictionary :Dictionary[String, Node] = {}:
 		parent = node_dictionary['scene_root']
 		grandparent = parent.get_parent()
 		anim = node_dictionary['Animations']
-		stats = node_dictionary['Stats']
+		mask = node_dictionary['Mask']
 
 func _ready()->void:
 	connect('body_entered', _on_body_entered)
@@ -36,8 +36,8 @@ func end_of_life(unused_variable)->void:
 	grandparent.add_child(self)
 	self.global_position = stored_position
 	add_child(new_anim)
-	parent.remove_child(stats)
-	add_child(stats)
+	parent.remove_child(mask)
+	add_child(mask)
 	allow_pickup()
 	parent.queue_free()
 

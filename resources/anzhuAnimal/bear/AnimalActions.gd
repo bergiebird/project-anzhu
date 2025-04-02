@@ -4,7 +4,6 @@ class_name AnimalAnimations extends AnimatedSprite2D #BearActions.gd
 @onready var parent :AnzhuCharacter = get_parent()
 var action_states :Dictionary = {}
 var current_action :ActionState
-
 var verified_action :ActionState
 var node_dictionary :Dictionary[String, Node] = {}:
 	set(new_dictionary):
@@ -15,7 +14,8 @@ var node_dictionary :Dictionary[String, Node] = {}:
 			child.animal_icon = node_dictionary['scene_root'].animal_icon
 			if child.name == 'Hit':
 				child.hurt_box_node = node_dictionary['HurtBox']
-				child.stats_node = node_dictionary['Stats']
+				child.mask = node_dictionary['Mask']
+				child.snow_tracker = node_dictionary['SnowTracker']
 			if child.name == 'Dead':
 				child.corpse_node = node_dictionary['Corpse']
 

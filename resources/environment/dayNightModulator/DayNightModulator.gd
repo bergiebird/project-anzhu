@@ -1,11 +1,12 @@
 @icon("res://warehouse/_icons/node_2D/icon_area_meteo.png")
 extends CanvasModulate #DayNightModulator.gd
 @onready var day_night_system :DayNighton = DayNighton
-@onready var timer_node :Timer = $WorldTimer
-@onready var time_to_pass :int = int(timer_node.wait_time)
+@onready var world_timer :Timer = $WorldTimer
+@onready var time_to_pass :int = int(world_timer.wait_time)
 @export_enum("DAWN", "MORNING", "NOON", "AFTERNOON", "DUSK", "NIGHT", "MIDNIGHT", "LATE_NIGHT")
 var time_right_before_start :int = day_night_system.TimeOfDay.LATE_NIGHT
 
+	
 @export_group('dawn')
 @export var dawn_amount :int = 170
 @export var dawn_lerp_time :float = 1
@@ -52,9 +53,9 @@ var first_time :bool = true
 var is_on :bool
 
 func _ready()->void:
-	lerp_times = [
-		dawn_lerp_time, morning_lerp_time, noon_lerp_time, afternoon_lerp_time,
-		dusk_lerp_time, night_lerp_time, midnight_lerp_time, late_night_lerp_time]
+	init_assertions()
+	world_timer.timeout.connect(world_timer_timeout)
+	lerp_times = [dawn_lerp_time, morning_lerp_time, noon_lerp_time, afternoon_lerp_time, dusk_lerp_time, night_lerp_time, midnight_lerp_time, late_night_lerp_time]
 	prepare_lerp_time()
 	day_night_system.time_dictionary_delivery.connect(initialize_dictionary)
 	day_night_system.initialize(self)
@@ -94,3 +95,30 @@ func _process(delta: float) -> void:
 		if is_on:
 			is_on = false
 			day_night_system.turn_on_night_lights.emit(false)
+
+func world_timer_timeout()->void:
+	day_night_system.progress_time()
+
+
+func init_assertions()->void:
+	assert(day_night_system, "day_night_system not properly instantiated in DayNightModulator.gd")
+	assert(world_timer, "world_timer not properly instantiated in DayNightModulator.gd")
+	assert(time_to_pass, "time_to_pass not properly instantiated in DayNightModulator.gd")
+	assert(time_right_before_start, "time_right_before_start not properly instantiated in DayNightModulator.gd")
+	assert(dawn_amount, "dawn_amount not properly instantiated in DayNightModulator.gd")
+	assert(dawn_lerp_time, "dawn_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(morning_amount, "morning_amount not properly instantiated in DayNightModulator.gd")
+	assert(morning_lerp_time, "morning_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(noon_amount, "noon_amount not properly instantiated in DayNightModulator.gd")
+	assert(noon_lerp_time, "noon_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(afternoon_amount, "afternoon_amount not properly instantiated in DayNightModulator.gd")
+	assert(afternoon_lerp_time, "afternoon_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(dusk_amount, "dusk_amount not properly instantiated in DayNightModulator.gd")
+	assert(dusk_lerp_time, "dusk_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(night_amount, "night_amount not properly instantiated in DayNightModulator.gd")
+	assert(night_lerp_time, "night_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(midnight_amount, "midnight_amount not properly instantiated in DayNightModulator.gd")
+	assert(midnight_lerp_time, "midnight_lerp_time not properly instantiated in DayNightModulator.gd")
+	assert(late_night_amount, "late_night_amount not properly instantiated in DayNightModulator.gd")
+	assert(late_night_lerp_time, "late_night_lerp_time not properly instantiated in DayNightModulator.gd")
+	

@@ -2,7 +2,7 @@
 extends Ability #PlayerJump.gd
 @export var jump_time :float = 1.3
 @export var jump_distance :float = 1.5
-@onready var stats :CollisionShape2D = %Stats
+@onready var mask :CollisionShape2D = %Mask
 @onready var grandparent :Player = get_parent().get_parent()
 @onready var D :Directon = Directon
 @onready var I :Object = Input
@@ -44,4 +44,4 @@ func jumping_attributes(is_jump_active :bool = true)->void:
 	grandparent.set_collision_layer_value(1, is_jump_active)
 	grandparent.set_collision_mask_value(1, is_jump_active)
 	snow_tracker_node.can_make_tracks = is_jump_active
-	stats.visible = is_jump_active
+	mask.visible = is_jump_active

@@ -2,23 +2,27 @@
 
 [ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/anzhuAnimal/bear/interactable.gd" id="1_jcy0q"]
 [ext_resource type="Texture2D" uid="uid://be0o3t0qs3byi" path="res://warehouse/Misc/PNGs/interior.png" id="2_jcy0q"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_p3y1h"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_j07xb"]
-radius = 8.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_j07xb"]
-size = Vector2(8, 8)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsa77"]
+size = Vector2(10, 10)
 
 [node name="Interactable" type="StaticBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_jcy0q")
+
+[node name="Mask" parent="." instance=ExtResource("3_p3y1h")]
+editor_description = "Place this at the top of the scene tree for z_index purposes.
+"
+set_mask_dimensions = 1
+release_healthbar = true
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_j07xb")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_j07xb")
+[node name="InteractShape" type="CollisionShape2D" parent="Area2D"]
+visible = false
+shape = SubResource("RectangleShape2D_xsa77")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_jcy0q")
