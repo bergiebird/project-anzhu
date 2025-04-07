@@ -1,6 +1,13 @@
-res://resources/anzhuAnimal/bear/Bear.tscn
+res://resources/anzhuAnimal/bear/default_bus_layout.tres
+res://resources/_singletons/game/GAME.tscn
 res://warehouse/Overworld/ts_arctic_all.tres
 res://resources/player/abilities/jump/PlayerJump.gd
 res://resources/player/sf_player.tres
 res://resources/anzhuAnimal/bear/sf_bear.tres
 res://warehouse/_audio/sfx/walk/default_bus_layout.tres
+res://resources/player/Player.tscn
+res://resources/player/abilities/gun/GunShot.tscn
+res://resources/player/abilities/gun/GunshotSfx.gd
+res://resources/_singletons/Directon.gd
+res://resources/anzhuAnimal/bear/Bear.tscn
+res://resources/player/Player.gd

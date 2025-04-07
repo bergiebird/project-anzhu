@@ -9,6 +9,7 @@ var audio_dictionary :Dictionary[String, Node]
 
 func _ready()->void:
 	assertions()
+	signal_connector()
 	for child in get_children():
 		audio_dictionary[child.name] = child
 	sfx_gunshot = audio_dictionary['Gunshot']

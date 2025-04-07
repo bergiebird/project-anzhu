@@ -30,7 +30,7 @@ func debug()->void:
 	debug_audio = true
 
 func _signal_connector()->void:
-	parent.was_hit.connect(was_just_hit)
+	parent.was_struck.connect(was_just_hit)
 	parent.striking.connect(character_is_striking)
 	signal_connector()
 func signal_connector()->void:pass

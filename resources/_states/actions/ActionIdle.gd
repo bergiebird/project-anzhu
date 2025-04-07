@@ -1,8 +1,6 @@
 extends ActionState #ActionIdle.gd
 
 
-
-
 func update(_delta:float)->void:
 	pass
 

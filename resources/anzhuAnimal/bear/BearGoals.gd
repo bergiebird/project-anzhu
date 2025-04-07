@@ -1,7 +1,6 @@
 @icon("res://warehouse/icons/node/icon_transition.png")
 class_name AnimalGoalsMachine extends Node #BearGoals.gd
-@export_category('DEBUG')
-@export var debug_goals :bool = false
+
 var goal_states :Dictionary = {}
 var current_goal :GoalState
 var audio :Node2D
@@ -29,9 +28,12 @@ func on_goal_transition(new_goal_name, old_goal=null)->void:
 		if new_goal_name == current_goal.name:
 			return
 	verified_goal = goal_states.get(new_goal_name)
-	if !verified_goal: return
-	if current_goal:   current_goal.on_exit()
-	else:              verified_goal.on_enter()
+	if !verified_goal:
+		return
+	if current_goal:
+		current_goal.on_exit()
+	else:
+		verified_goal.on_enter()
 	current_goal = verified_goal
 
 func transition_part_2()->void:
@@ -45,5 +47,11 @@ func get_goals()->void:
 			if debug_goals:
 				child.self_debug = true
 
+
+###
+## DEBUG
+###
+@export_category('DEBUG')
+@export var debug_goals :bool = false
 func debug()->void:
 	debug_goals = true

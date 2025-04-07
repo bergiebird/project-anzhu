@@ -1,8 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://dr7gmcq3ydu2b"]
+[gd_scene load_steps=32 format=3 uid="uid://dr7gmcq3ydu2b"]
 
 [ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuAnimal/bear/Bear.gd" id="1_6aww6"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/anzhuAnimal/bear/AnimalActions.gd" id="3_51qta"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_g2n60"]
+[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/stats/StandardCollision.tscn" id="3_g2n60"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="5_gcotj"]
 [ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://warehouse/_audio/music/bgm/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
 [ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="6_pyaxb"]
@@ -30,9 +30,6 @@
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuCharacter/snowTracker/SnowTracker.gd" id="26_42w22"]
 [ext_resource type="PackedScene" uid="uid://jy7axhrfnb21" path="res://resources/anzhuCharacter/corpse/Corpse.tscn" id="29_lf0l5"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_lf0l5"]
-size = Vector2(11.9, 9.9)
-
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jrj27"]
 random_pitch = 1.16
 random_volume_offset_db = 1.16
@@ -49,7 +46,6 @@ debug_all = true
 
 [node name="Mask" parent="." instance=ExtResource("3_g2n60")]
 unique_name_in_owner = true
-shape = SubResource("RectangleShape2D_lf0l5")
 set_mask_dimensions = 2
 
 [node name="AnimalGoals" type="Node" parent="."]
@@ -156,7 +152,7 @@ stream = ExtResource("18_5puse")
 max_distance = 225.0
 attenuation = 0.5
 
-[node name="Sfx_Attack" type="AudioStreamPlayer2D" parent="AudioManager"]
+[node name="Sfx_Strike" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = SubResource("AudioStreamRandomizer_jrj27")
 
 [node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
@@ -167,8 +163,6 @@ script = ExtResource("8_jp6s3")
 
 [node name="SnowTracker" type="Node" parent="."]
 script = ExtResource("26_42w22")
-debug_snow_tracker = null
-has_sliding_layer = null
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -179,21 +173,18 @@ script = ExtResource("26_4qpwo")
 visible = false
 shape = SubResource("RectangleShape2D_jrj27")
 
-[node name="Timer" type="Timer" parent="HurtBox"]
+[node name="HurtTimer" type="Timer" parent="HurtBox"]
 wait_time = 2.0
 
 [node name="Corpse" parent="." instance=ExtResource("29_lf0l5")]
 editor_description = "Could put food component on here"
 
 [connection signal="boogie_signal" from="AnimalGoals/Hunt" to="AudioManager" method="start_sfx"]
-[connection signal="action_transition" from="AnimalGoals/Nothing" to="." method="change_actions"]
 [connection signal="action_transition" from="Animations/Idle" to="." method="change_actions"]
 [connection signal="goal_transition" from="Animations/Idle" to="." method="change_goals"]
 [connection signal="action_transition" from="Animations/Sit" to="." method="change_actions"]
 [connection signal="goal_transition" from="Animations/Sit" to="." method="change_goals"]
 [connection signal="entered" from="Animations/Chase" to="AudioManager" method="start_sfx"]
 [connection signal="exited" from="Animations/Chase" to="AudioManager" method="stop_sfx"]
-[connection signal="finished" from="AudioManager/Sfx_Spotted" to="." method="_on_roar_spotted_finished"]
-[connection signal="finished" from="AudioManager/Sfx_Dead" to="." method="end_of_life"]
 [connection signal="sight_update" from="Eyesight" to="AnimalGoals/Hunt" method="_on_sight_update"]
 [connection signal="sight_update" from="Eyesight" to="AudioManager" method="start_sfx"]

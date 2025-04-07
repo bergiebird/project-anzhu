@@ -1,15 +1,6 @@
 @icon("res://warehouse/_icons/node/icon_human_controller.png")
 class_name Abilities extends Node #PlayerAbilities.gd
 
-@onready var parent :AnzhuHuman
-@onready var movement :Ability = $Movement
-@onready var gun :Ability = $Gun
-@onready var jump :Ability = $Jump
-@onready var binos :Ability = $Binos
-@export_group('Debug')
-@export var debug_abilities :bool = false
-@export var debugger_color :Color = Color("eaf1f0")
-@onready var dcolor = debugger_color.to_html()
 var init_finished :bool = false
 var is_loaded :bool = false
 var is_reloading :bool = false
@@ -20,7 +11,6 @@ var is_efficient :bool = false
 var node_dictionary :Dictionary[String, Node] = {}:
 	set(new_dictionary):
 		node_dictionary = new_dictionary
-		parent = node_dictionary["scene_root"]
 		for child in get_children():
 			child.parent = self
 			child.anim = node_dictionary["Animations"]
@@ -30,6 +20,11 @@ var node_dictionary :Dictionary[String, Node] = {}:
 		jump.snow_tracker_node = node_dictionary['SnowTracker']
 		binos.camera = node_dictionary['Camera']
 		init_finished = true
+@onready var parent :AnzhuHuman = get_parent()
+@onready var movement :Ability = $Movement
+@onready var gun :Ability = $Gun
+@onready var jump :Ability = $Jump
+@onready var binos :Ability = $Binos
 
 func able()->void:
 	if init_finished and can_move:
@@ -53,6 +48,16 @@ func cant_do_anything()->void:
 func set_efficiency(has_efficiency :bool)->void:
 	is_efficient = has_efficiency
 
+
+
+###
+##DEBUG
+###
+
+@export_group('Debug')
+@export var debug_abilities :bool = false
+@export var debugger_color :Color = Color("eaf1f0")
+@onready var dcolor = debugger_color.to_html()
 
 func debug()->void:
 	Debuggerton.enable_print(self.name, dcolor)

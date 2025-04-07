@@ -1,5 +1,10 @@
 extends Node #Directon.gd
 
+const ROTATE_NORTH = 270
+const ROTATE_WEST = 180
+const ROTATE_SOUTH = 90
+const ROTATE_EAST = 0
+
 enum Looking{NORTH,SOUTH,EAST,WEST}
 var looking_where :int = Looking.EAST
 var direction_priority :Array[String] = ["NORTH", "SOUTH", "WEST", "EAST"]

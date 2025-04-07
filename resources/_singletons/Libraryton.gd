@@ -64,7 +64,7 @@ func track_and_print(object, property_name, label = ""):
 @onready var pattern_that_removes_digits = RegEx.new() #Create a new pattern
 @onready var pattern_that_lowercases_all = RegEx.new()
 
-func _remove_digits_from_string()->void: 
+func _remove_digits_from_string()->void:
 	pattern_that_removes_digits.compile('\\d') #initialize that pattern to find digits
 
 func remove_digits_from_string(input_string :String)->String:

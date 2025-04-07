@@ -5,7 +5,6 @@ var reload_audio
 @export var shoot_cooldown :float = 0.4
 @export var modified_speed_up :float = 0.16
 @onready var I :Object = Input
-@onready var S :Signalton = Signalton
 
 func reload()->void:
 	if I.is_action_just_pressed('gun'):
@@ -24,6 +23,6 @@ func shoot()->void:
 	if I.is_action_just_released('gun'):
 		parent.can_shoot = false
 		parent.can_move = false
-		S.gunshot.emit()
+		Signalton.gunshot.emit()
 		await get_tree().create_timer(shoot_cooldown).timeout
 		parent.can_move = true

@@ -1,14 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://cukrdvxpstpgp"]
 
-[ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/anzhuCharacter/stats/standard_collision.tres" id="1_fc5ml"]
-[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuCharacter/stats/Stats.gd" id="2_ltnae"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuCharacter/stats/Mask.gd" id="2_ltnae"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ehges"]
 
 [node name="Stats" type="CollisionShape2D"]
 editor_description = "Get to:
 COLD
 HUNGER
 "
-shape = ExtResource("1_fc5ml")
+shape = SubResource("RectangleShape2D_ehges")
 debug_color = Color(0, 0.6, 0.701961, 0)
 script = ExtResource("2_ltnae")
 

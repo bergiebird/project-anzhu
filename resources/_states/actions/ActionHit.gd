@@ -28,7 +28,6 @@ func was_just_hit()->void:
 func exit()->void:
 	parent.self_modulate = DEFAULT_COLOR
 	parent.modulate = DEFAULT_COLOR
-	snow_tracker.set_is_sliding(false)
 	hurt_box_node.monitoring = true
 	grandparent.uninjur()
 

@@ -14,11 +14,12 @@ var node_dictionary :Dictionary[String, Node] = {}:
 		node_dictionary = new_dictionary
 		audio = node_dictionary['AudioManager']
 		abilities = node_dictionary['Abilities']
-@onready var dcolor = debugger_color.to_html() 
-@onready var parent :AnzhuCharacter
+@onready var dcolor = debugger_color.to_html()
+@onready var parent :AnzhuCharacter = get_parent()
 @onready var D :Directon = Directon
 
 func _ready()->void:
+	parent.was_struck.connect(flash_red)
 	animation_finished.connect(reload_animation_finished)
 
 func reload_animation_finished()->void:
@@ -53,7 +54,7 @@ func just_play(anim_name :String)->void:
 	should_flip(anim_name)
 	play(anim_name + current_direction)
 
-func was_just_hit()->void:
+func flash_red()->void:
 	modulate = red_color
 	for index in 4:
 		is_colored = !is_colored

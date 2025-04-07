@@ -5,11 +5,10 @@ signal action_transition(action_name :String)
 signal entered(self_name :String)
 signal exited(self_name :String)
 @export var self_debug :bool
-var parent
+@onready var parent = get_parent()
 var grandparent
 var animal_icon = ""
 @onready var what_state_type :String = "[color=yellow][b]Goal: [/b] " + self.name + '[/color]'
-
 
 func _ready() -> void:
 	if self is ActionState:
@@ -24,7 +23,6 @@ func on_enter()->void: ## Override this and on_enter, the signal, and debug will
 	enter()
 func virtual_enter()->void:pass
 func enter()->void:pass
-
 
 func update(_delta:float)->void:
 	if self_debug:

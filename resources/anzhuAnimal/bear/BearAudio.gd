@@ -2,6 +2,13 @@ extends AudioManager #BearAudio.gd
 
 @onready var sfx_hunt :AudioStreamPlayer2D = $Sfx_Hunt
 
+func signal_connector():
+	Audioton.permission_granter.connect(play_hunt_music)
+
+func play_hunt_music(which_bear :Bear)->void:
+	if which_bear == parent:
+		sfx_hunt.play()
+
 func _reset_bgm()->void:
 	sfx_hunt.volume_db = 0
 	sfx_hunt.pitch_scale = 1

@@ -1,7 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3100fbxnsgc0"]
+[gd_scene load_steps=8 format=3 uid="uid://b3100fbxnsgc0"]
 
 [ext_resource type="Script" uid="uid://88twws4eaxq0" path="res://resources/player/abilities/gun/GunshotSfx.gd" id="1_1tum2"]
-[ext_resource type="Script" uid="uid://dhtfiph8c4xbc" path="res://resources/player/abilities/gun/GunshotGunray.gd" id="2_d2ek5"]
 
 [sub_resource type="Gradient" id="Gradient_d1bta"]
 offsets = PackedFloat32Array(0, 0.0805195, 0.628571)
@@ -36,6 +35,7 @@ colors = PackedColorArray(0.917647, 0.945098, 0.941176, 1, 0.523343, 0.525148, 0
 
 [node name="GunShot" type="Marker2D"]
 script = ExtResource("1_1tum2")
+bullet_travel_time = 0.15
 
 [node name="VfxFlash" type="PointLight2D" parent="."]
 visible = false
@@ -69,7 +69,6 @@ color_ramp = SubResource("Gradient_naea4")
 
 [node name="VfxSmoke2" type="CPUParticles2D" parent="."]
 z_index = 1
-position = Vector2(0, 1)
 emitting = false
 amount = 35
 texture = SubResource("GradientTexture2D_d2ek5")
@@ -93,22 +92,38 @@ scale_amount_curve = SubResource("Curve_d2ek5")
 color = Color(0.682353, 0.643137, 0.494118, 1)
 color_ramp = SubResource("Gradient_naea4")
 
-[node name="FlashTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
 [node name="GunRay" type="RayCast2D" parent="."]
-position = Vector2(0, 2)
 rotation = 1.5708
 target_position = Vector2(120, 0)
 collision_mask = 16
 collide_with_bodies = false
-script = ExtResource("2_d2ek5")
 
-[node name="HitTimer" type="Timer" parent="GunRay"]
-wait_time = 0.5
+[node name="EastAim" type="Marker2D" parent="."]
+position = Vector2(4, -0.5)
+gizmo_extents = 2.0
+metadata/_edit_lock_ = true
+
+[node name="SouthAim" type="Marker2D" parent="."]
+position = Vector2(-1.5, 3)
+gizmo_extents = 2.0
+metadata/_edit_lock_ = true
+
+[node name="NorthAim" type="Marker2D" parent="."]
+position = Vector2(0.5, -4)
+gizmo_extents = 2.0
+metadata/_edit_lock_ = true
+
+[node name="WestAim" type="Marker2D" parent="."]
+position = Vector2(-4, -0.5)
+gizmo_extents = 2.0
+metadata/_edit_lock_ = true
+
+[node name="DelayTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="DelayTimer" type="Timer" parent="GunRay"]
-wait_time = 0.16
+[node name="FlashTimer" type="Timer" parent="."]
+wait_time = 0.1
 one_shot = true
+
+[connection signal="timeout" from="DelayTimer" to="." method="try_to_hit"]
+[connection signal="timeout" from="FlashTimer" to="." method="flash_out"]

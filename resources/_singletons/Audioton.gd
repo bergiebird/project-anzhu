@@ -1,15 +1,21 @@
 extends Node #Audioton.gd
 
+signal permission_granter(which_bear :Bear)
 var audio_buses :Array[String] = []
-var exclusive_bear_list :Array[Node]
-signal permission_granter(permission :bool)
 var bear_boogie_mode :bool = false
-
 
 func _ready():
 	for index in range(AudioServer.bus_count):
 		audio_buses.append(AudioServer.get_bus_name(index))
-	exclusive_bear_list = get_tree().get_nodes_in_group("bear")
 
-func can_bear_boogie()->bool:
-	return true
+
+###
+## BEAR CHASE
+###
+func can_bear_boogie(which_bear :Bear):
+	if not bear_boogie_mode:
+		bear_boogie_mode = true
+		permission_granter.emit(which_bear)
+
+func boogie_bear_dead()->void:
+	bear_boogie_mode = false
