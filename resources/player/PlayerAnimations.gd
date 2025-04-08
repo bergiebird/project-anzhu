@@ -20,6 +20,7 @@ var node_dictionary :Dictionary[String, Node] = {}:
 
 func _ready()->void:
 	parent.was_struck.connect(flash_red)
+	parent.has_died.connect(set_is_dead)
 	animation_finished.connect(reload_animation_finished)
 
 func reload_animation_finished()->void:
@@ -59,10 +60,14 @@ func flash_red()->void:
 	for index in 4:
 		is_colored = !is_colored
 		self_modulate = red_color if is_colored else default_color
-		await get_tree().create_timer(.4).timeout
+		if not is_dead: await get_tree().create_timer(.4).timeout
 	modulate = default_color
 	self_modulate = default_color
 
 func debug()->void:
 	Debuggerton.enable_print(self.name, dcolor)
 	debug_animations = true
+
+var is_dead = false
+func set_is_dead()->void:
+	is_dead = true

@@ -4,8 +4,6 @@ class_name Player extends AnzhuHuman
 @onready var abilities: Node = $Abilities
 @onready var listener :AudioListener2D = $AudioListener2D
 
-
-
 func human_ready()->void:
 	add_to_group('player')
 
@@ -17,10 +15,8 @@ func _physics_process(delta :float)->void:
 func affect_nightlight(is_leaving_campfire :bool)->void:
 	nightlight.campfire_nightlight(is_leaving_campfire)
 
-func change_actions(string_dead :String)->void:
-	if string_dead == "Dead":
-		Signalton.reload_scene.emit()
-
+func how_should_character_die()->void:
+	Signalton.reload_scene.emit()
 
 
 

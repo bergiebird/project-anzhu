@@ -1,5 +1,5 @@
 @icon("res://warehouse/_icons/node/icon_human_controller.png")
-class_name Abilities extends Node #PlayerAbilities.gd
+class_name Abilities extends Node2D #PlayerAbilities.gd
 
 var init_finished :bool = false
 var is_loaded :bool = false
@@ -22,7 +22,7 @@ var node_dictionary :Dictionary[String, Node] = {}:
 		init_finished = true
 @onready var parent :AnzhuHuman = get_parent()
 @onready var movement :Ability = $Movement
-@onready var gun :Ability = $Gun
+@onready var gun = $GunShot
 @onready var jump :Ability = $Jump
 @onready var binos :Ability = $Binos
 
@@ -30,8 +30,10 @@ func able()->void:
 	if init_finished and can_move:
 		parent.set_velocity(movement.move())
 		jump.start_jump()
-		if can_shoot: gun.shoot()
-		else:         gun.reload()
+		if can_shoot:
+			gun.shoot()
+		else:
+			gun.reload()
 	if is_reloading:
 		gun.modify_reload()
 

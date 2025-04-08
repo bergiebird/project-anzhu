@@ -4,11 +4,8 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ehges"]
 
-[node name="Stats" type="CollisionShape2D"]
-editor_description = "Get to:
-COLD
-HUNGER
-"
+[node name="Mask" type="CollisionShape2D"]
+editor_description = "Handles the background and the healthbar"
 shape = SubResource("RectangleShape2D_ehges")
 debug_color = Color(0, 0.6, 0.701961, 0)
 script = ExtResource("2_ltnae")

@@ -1,7 +1,14 @@
-extends Marker2D #sfx_gunshot.gd
+@icon("res://resources/player/abilities/gun/icons8-sniper-rifle-100.png")
+extends Node2D #Gun.gd
 
 @export_range(0, 0.5, 0.01) var bullet_travel_time :float = 0.16
-@onready var parent :AnzhuHuman = get_parent()
+@export var shoot_cooldown :float = 0.4
+@export var modified_speed_up :float = 0.16
+var reload_audio
+var anim
+@onready var I :Object = Input
+@onready var parent :Abilities = get_parent()
+@onready var grandparent :AnzhuHuman = parent.get_parent()
 @onready var DI :Directon = Directon
 @onready var flash :PointLight2D = $VfxFlash
 @onready var smoke_barrel :CPUParticles2D = $VfxSmoke
@@ -17,6 +24,27 @@ extends Marker2D #sfx_gunshot.gd
 func _ready()->void:
 	Signalton.gunshot.connect(sfx_start)
 	delay_timer.wait_time = bullet_travel_time
+
+func reload()->void:
+	if I.is_action_just_pressed('gun'):
+		if not parent.is_loaded:
+			parent.can_move = false
+			parent.is_reloading = true
+			anim.start_reload_animation()
+
+func modify_reload()->void:
+	if I.is_action_just_pressed('spacebar'):
+		if parent.is_reloading:
+			anim.speed_scale += modified_speed_up
+			reload_audio.pitch_scale += modified_speed_up
+
+func shoot()->void:
+	if I.is_action_just_released('gun'):
+		parent.can_shoot = false
+		parent.can_move = false
+		Signalton.gunshot.emit()
+		await get_tree().create_timer(shoot_cooldown).timeout
+		parent.can_move = true
 
 func sfx_start()->void:
 	position = Vector2.ZERO
@@ -58,7 +86,7 @@ func try_to_hit() ->void:
 	if gunray.is_colliding():
 		var who :Object = gunray.get_collider()
 		if who is AnzhuCharacter:
-			parent.strike_target(1,"gun",who)
+			grandparent.strike_target(1,"gun",who)
 	gunray.collide_with_bodies = false
 
 

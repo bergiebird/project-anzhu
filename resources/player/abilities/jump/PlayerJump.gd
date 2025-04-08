@@ -6,7 +6,7 @@ extends Ability #PlayerJump.gd
 @onready var grandparent :Player = get_parent().get_parent()
 @onready var D :Directon = Directon
 @onready var I :Object = Input
-@onready var timer :Timer = $Timer
+@onready var jump_timer :Timer = $JumpTimer
 @onready var character_directions_bible :Dictionary = D.character_directions_bible
 const TILE_SIZE :int = 8
 var snow_tracker_node :Node
@@ -14,8 +14,8 @@ var elev :TileMapLayer
 var is_jump_initiated :bool = false
 
 func _ready() -> void:
-	timer.wait_time = jump_time
-	timer.timeout.connect(jumping_attributes)
+	jump_timer.wait_time = jump_time
+	jump_timer.timeout.connect(jumping_attributes)
 
 func start_jump()->void:
 	if I.is_action_just_pressed('jump') and parent.can_jump:
@@ -38,7 +38,7 @@ func start_jump()->void:
 					grandparent.global_position.x + (jump_direction.x * TILE_SIZE * jump_distance) ,grandparent.global_position.y), jump_time)
 			else:
 				return
-			timer.start()
+			jump_timer.start()
 
 func jumping_attributes(is_jump_active :bool = true)->void:
 	grandparent.set_collision_layer_value(1, is_jump_active)
