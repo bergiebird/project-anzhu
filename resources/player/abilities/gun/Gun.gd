@@ -3,13 +3,8 @@ extends Node2D #Gun.gd
 
 @export_range(0, 0.5, 0.01) var bullet_travel_time :float = 0.16
 @export var shoot_cooldown :float = 0.4
-@export var modified_speed_up :float = 0.16
 var reload_audio
 var anim
-@onready var I :Object = Input
-@onready var parent :Abilities = get_parent()
-@onready var grandparent :AnzhuHuman = parent.get_parent()
-@onready var DI :Directon = Directon
 @onready var flash :PointLight2D = $VfxFlash
 @onready var smoke_barrel :CPUParticles2D = $VfxSmoke
 @onready var smoke_back :CPUParticles2D = $VfxSmoke2
@@ -20,55 +15,50 @@ var anim
 @onready var west :Marker2D =$WestAim
 @onready var south :Marker2D = $SouthAim
 @onready var east :Marker2D =$EastAim
+@onready var parent :Abilities = get_parent()
+@onready var grandparent :AnzhuHuman = parent.get_parent()
 
 func _ready()->void:
 	Signalton.gunshot.connect(sfx_start)
 	delay_timer.wait_time = bullet_travel_time
 
 func reload()->void:
-	if I.is_action_just_pressed('gun'):
+	if Inputon.gun():
 		if not parent.is_loaded:
-			parent.can_move = false
-			parent.is_reloading = true
+			parent.start_reload.emit()
 			anim.start_reload_animation()
 
 func modify_reload()->void:
-	if I.is_action_just_pressed('spacebar'):
-		if parent.is_reloading:
-			anim.speed_scale += modified_speed_up
-			reload_audio.pitch_scale += modified_speed_up
+	if Inputon.modifier():
+		parent.modified_reload.emit()
 
 func shoot()->void:
-	if I.is_action_just_released('gun'):
-		parent.can_shoot = false
-		parent.can_move = false
+	if Inputon.gun():
 		Signalton.gunshot.emit()
-		await get_tree().create_timer(shoot_cooldown).timeout
-		parent.can_move = true
 
 func sfx_start()->void:
 	position = Vector2.ZERO
-	match DI.looking_where:
-		DI.Looking.NORTH:
+	match Directon.looking_where:
+		Directon.Looking.NORTH:
 			position = north.position
 			smoke_barrel.direction = Vector2.UP
 			smoke_back.position = Vector2.DOWN
-			gunray.rotation_degrees = DI.ROTATE_NORTH
-		DI.Looking.WEST:
+			gunray.rotation_degrees = Directon.ROTATE_NORTH
+		Directon.Looking.WEST:
 			position = west.position
 			smoke_barrel.direction = Vector2.LEFT
 			smoke_back.position = Vector2(3.0, 0.0)
-			gunray.rotation_degrees = DI.ROTATE_WEST
-		DI.Looking.SOUTH:
+			gunray.rotation_degrees = Directon.ROTATE_WEST
+		Directon.Looking.SOUTH:
 			position = south.position
 			smoke_barrel.direction = Vector2.DOWN
 			smoke_back.position = Vector2(0.0, -5.0)
-			gunray.rotation_degrees = DI.ROTATE_SOUTH
-		DI.Looking.EAST:
+			gunray.rotation_degrees = Directon.ROTATE_SOUTH
+		Directon.Looking.EAST:
 			position = east.position
 			smoke_barrel.direction = Vector2.RIGHT
 			smoke_back.position = Vector2(-3.0, 0.0)
-			gunray.rotation_degrees = DI.ROTATE_EAST
+			gunray.rotation_degrees = Directon.ROTATE_EAST
 	flash_timer.start()
 	smoke_back.emitting = true
 	flash.visible = true
@@ -85,13 +75,9 @@ func try_to_hit() ->void:
 	gunray.force_raycast_update()
 	if gunray.is_colliding():
 		var who :Object = gunray.get_collider()
-		if who is AnzhuCharacter:
+		if who is AnzhuBeing:
 			grandparent.strike_target(1,"gun",who)
 	gunray.collide_with_bodies = false
-
-
-
-
 
 
 ###

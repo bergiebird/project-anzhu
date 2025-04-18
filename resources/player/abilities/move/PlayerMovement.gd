@@ -5,48 +5,44 @@ extends Ability #PlayerMovement.gd
 @export var efficient_modifier :int = 15
 @export var run_bonus :int = 20
 var normal_speed :int
-var cardinal_dictionary :Dictionary
+var directionary :Dictionary = Directon.directionary
 var run_speed :int
 var efficient_speed :int
-var move_velocity :Vector2
-var has_movement :bool
-@onready var D :Directon = Directon
-@onready var I :Object = Input
+var can_move :bool
 
-func move()->Vector2:
-	move_velocity = Vector2.ZERO
-	has_movement = false
-	for direction_name in cardinal_dictionary:
-		var direction :Dictionary = cardinal_dictionary[direction_name]
-		if I.is_action_pressed(direction["move_action"]):
-			has_movement = true
-			if I.is_action_pressed(direction["aim_action"]) and D.looking_where == direction["enum"]:
+func mover()->Vector2:
+	var velocity :Vector2 = Vector2.ZERO
+	can_move = false
+	for direction in directionary:
+		var vector = directionary[direction]['direction']
+		if Inputon.move(direction):
+			can_move = true
+			if Inputon.aim(direction) and Directon.check_direction(direction):
 				anim.just_play('run')
-				move_velocity = direction["vector"] * run_speed
+				velocity = vector * run_speed
 				parent.set_efficiency(true)
-			elif I.is_action_pressed(cardinal_dictionary[direction["opposite"]]["aim_action"]) and D.looking_where == direction["enum"]:
-				move_velocity = direction["vector"] * normal_speed
+			elif Inputon.inverse_aim(direction) and Directon.check_direction(direction):
+				velocity = vector * normal_speed
 				parent.set_efficiency(false)
 			else:
 				anim.just_play('walk')
-				if D.looking_where == direction["enum"]:
-					move_velocity = direction["vector"] * efficient_speed
+				if Directon.check_direction(direction):
+					velocity = vector * efficient_speed
 					parent.set_efficiency(true)
 				else:
-					move_velocity = direction["vector"] * normal_speed
+					velocity = vector * normal_speed
 					parent.set_efficiency(false)
 			break
-	if not has_movement:
-		for direction_name in cardinal_dictionary:
-			if I.is_action_pressed(cardinal_dictionary[direction_name]["aim_action"]):
-				D.looking_where = cardinal_dictionary[direction_name]["enum"]
+	if not can_move:
+		for direction in directionary:
+			if Input.is_action_pressed(directionary[direction]["aim"]):
+				Directon.looking_where = directionary[direction]["enum"]
 				anim.just_play('idle')
 				break
 		anim.just_play('idle')
-	return move_velocity
+	return velocity
 
 func move_stat_delivery(incoming_speed :int)->void:
 	normal_speed = incoming_speed
 	efficient_speed = normal_speed + efficient_modifier
 	run_speed = efficient_speed + run_bonus
-	cardinal_dictionary = D.character_directions_bible

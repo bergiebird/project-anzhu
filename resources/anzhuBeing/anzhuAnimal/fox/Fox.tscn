@@ -1,0 +1,95 @@
+[gd_scene load_steps=15 format=3 uid="uid://d06bo8scbr23v"]
+
+[ext_resource type="Script" uid="uid://du442geuk0s1v" path="res://resources/anzhuBeing/anzhuAnimal/fox/Fox.gd" id="1_yb322"]
+[ext_resource type="PackedScene" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_cuink"]
+[ext_resource type="SpriteFrames" uid="uid://cfjippld3y5i3" path="res://resources/anzhuBeing/anzhuAnimal/fox/sf_fox.tres" id="3_dk85e"]
+[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalActions.gd" id="4_dk85e"]
+[ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_k34b2"]
+[ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="5_0508v"]
+[ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="5_dk85e"]
+[ext_resource type="PackedScene" uid="uid://d3pnkk4m18mui" path="res://resources/anzhuBeing/snowTracker/SnowTracker.tscn" id="5_ivbwv"]
+[ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="6_tpcek"]
+[ext_resource type="PackedScene" uid="uid://chicyma06s6la" path="res://resources/anzhuBeing/corpse/Corpse.tscn" id="6_w0nge"]
+[ext_resource type="Script" uid="uid://cdpxaxp4jlkh8" path="res://resources/anzhuBeing/hurtBox/HurtBox.gd" id="7_c55v1"]
+[ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="7_vlwue"]
+[ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="8_jiw6w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x1vn2"]
+size = Vector2(8, 8)
+
+[node name="Fox" type="CharacterBody2D"]
+script = ExtResource("1_yb322")
+debug_all = true
+
+[node name="Stats" parent="." instance=ExtResource("3_cuink")]
+unique_name_in_owner = true
+damage_value = 8
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+sprite_frames = ExtResource("3_dk85e")
+animation = &"Corpse"
+autoplay = "idle_alert"
+script = ExtResource("4_dk85e")
+
+[node name="Dead" type="Node" parent="Animations"]
+script = ExtResource("4_k34b2")
+
+[node name="Timer" type="Timer" parent="Animations/Dead"]
+wait_time = 2.61
+one_shot = true
+
+[node name="Hit" type="Node" parent="Animations"]
+script = ExtResource("5_dk85e")
+
+[node name="Timer" type="Timer" parent="Animations/Hit"]
+editor_description = "This handles the Slower"
+wait_time = 10.0
+one_shot = true
+
+[node name="Sit" type="Node" parent="Animations"]
+script = ExtResource("6_tpcek")
+
+[node name="Idle" type="Node" parent="Animations"]
+script = ExtResource("7_vlwue")
+
+[node name="Timer" type="Timer" parent="Animations/Idle"]
+wait_time = 2.0
+
+[node name="Wander" type="Node" parent="Animations"]
+script = ExtResource("8_jiw6w")
+
+[node name="Timer" type="Timer" parent="Animations/Wander"]
+editor_description = "Will change the animal's trajectory every timeout."
+wait_time = 3.0
+
+[node name="SnowTracker" parent="." instance=ExtResource("5_ivbwv")]
+unique_name_in_owner = true
+
+[node name="AnimalGoals" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("5_0508v")
+
+[node name="AudioManager" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(2.38419e-07, 2.38419e-07)
+scale = Vector2(0.4, 0.4)
+
+[node name="Corpse" parent="." instance=ExtResource("6_w0nge")]
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("7_c55v1")
+
+[node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
+visible = false
+shape = SubResource("RectangleShape2D_x1vn2")
+
+[node name="Timer" type="Timer" parent="HurtBox"]
+wait_time = 2.0
+
+[connection signal="area_entered" from="HurtBox" to="HurtBox" method="_on_player_entered"]

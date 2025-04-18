@@ -1,0 +1,107 @@
+[gd_scene load_steps=16 format=3 uid="uid://bqyubqk75ak53"]
+
+[ext_resource type="Texture2D" uid="uid://b0pohqgdvwsf4" path="res://resources/environment/snowfall/snowflake.png" id="1_x31i4"]
+[ext_resource type="Script" uid="uid://bpm73yq251nvw" path="res://gyms/snow_fall.gd" id="2_oeyyd"]
+[ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="3_oeyyd"]
+[ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/environment/dayNightModulator/DayNightModulator.gd" id="4_1xu36"]
+
+[sub_resource type="Gradient" id="Gradient_4cc5g"]
+offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 0.945098, 0.662745, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nslvf"]
+gradient = SubResource("Gradient_4cc5g")
+
+[sub_resource type="Curve" id="Curve_nslvf"]
+_limits = [0.0, 100.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 3.00443, 3.00443, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_co8le"]
+curve = SubResource("Curve_nslvf")
+
+[sub_resource type="Curve" id="Curve_rkcle"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h6hdp"]
+curve = SubResource("Curve_rkcle")
+
+[sub_resource type="Curve" id="Curve_h6hdp"]
+_limits = [-200.0, 200.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_rkcle"]
+curve = SubResource("Curve_h6hdp")
+
+[sub_resource type="Curve" id="Curve_4cc5g"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_nslvf"]
+curve = SubResource("Curve_4cc5g")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4cc5g"]
+particle_flag_disable_z = true
+emission_shape = 2
+emission_sphere_radius = 10000.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 4.0
+initial_velocity_max = 6.0
+angular_velocity_min = 0.499984
+angular_velocity_max = 30.0
+gravity = Vector3(0, 0.5, 0)
+linear_accel_curve = SubResource("CurveTexture_rkcle")
+tangential_accel_min = 0.0999978
+tangential_accel_max = 0.299998
+damping_curve = SubResource("CurveTexture_co8le")
+scale_curve = SubResource("CurveTexture_nslvf")
+color_ramp = SubResource("GradientTexture1D_nslvf")
+hue_variation_min = -0.01
+hue_variation_max = 0.00999998
+hue_variation_curve = SubResource("CurveTexture_h6hdp")
+turbulence_influence_max = 0.3
+
+[node name="MainCamera" type="Camera2D"]
+zoom = Vector2(12, 12)
+
+[node name="SnowFall" type="GPUParticles2D" parent="."]
+z_index = 100
+amount = 4000
+texture = ExtResource("1_x31i4")
+lifetime = 5.0
+preprocess = 2.0
+randomness = 0.1
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_4cc5g")
+script = ExtResource("2_oeyyd")
+frequency = 3
+direction = 3
+speed = 3
+
+[node name="WindSFX" type="AudioStreamPlayer2D" parent="SnowFall"]
+position = Vector2(0, 100)
+stream = ExtResource("3_oeyyd")
+pitch_scale = 1.4
+attenuation = 0.8
+bus = &"Wind"
+
+[node name="Marker2D" type="Marker2D" parent="SnowFall/WindSFX"]
+rotation = 0.523599
+gizmo_extents = 20.0
+
+[node name="DayNightModulator" type="CanvasModulate" parent="."]
+unique_name_in_owner = true
+editor_description = "Funnily enough, I designed this entire system forgetting the simple fact that the day/night cycle of an island this far north would absolutely be 23/1 in the summertime. Woops"
+position = Vector2(-217, -291)
+script = ExtResource("4_1xu36")
+
+[node name="WorldTimer" type="Timer" parent="DayNightModulator"]
+process_callback = 0
+wait_time = 180.0
+autostart = true

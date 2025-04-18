@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://chicyma06s6la"]
+
+[ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuBeing/corpse/Corpse.gd" id="1_8l8a6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xf7mx"]
+
+[node name="Corpse" type="Area2D"]
+position = Vector2(-1, 0)
+script = ExtResource("1_8l8a6")
+
+[node name="OnlyHereToBeDestroyed" type="CollisionShape2D" parent="."]
+editor_description = "Simply a node that ensures we don't get an error showing. Consider removing this node before a release."
+shape = SubResource("RectangleShape2D_xf7mx")
+disabled = true

@@ -1,0 +1,23 @@
+[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ctnpv680jcrj3"]
+
+[ext_resource type="Texture2D" uid="uid://bhgbwhyavn81r" path="res://resources/anzhuBeing/snowTracker/tracks_biwalk_33.png" id="1_r1lmu"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_inu4h"]
+texture = ExtResource("1_r1lmu")
+texture_region_size = Vector2i(3, 3)
+0:0/0 = 0
+1:0/0 = 0
+2:0/next_alternative_id = 3
+2:0/0 = 0
+0:1/next_alternative_id = 3
+0:1/0 = 0
+2:1/next_alternative_id = 2
+2:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+1:1/0 = 0
+
+[resource]
+tile_size = Vector2i(3, 3)
+sources/0 = SubResource("TileSetAtlasSource_inu4h")

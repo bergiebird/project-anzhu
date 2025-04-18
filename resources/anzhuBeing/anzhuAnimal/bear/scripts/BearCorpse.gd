@@ -1,0 +1,1 @@
+extends Corpse #BearCorpse.gd

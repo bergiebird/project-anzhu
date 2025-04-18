@@ -3,13 +3,13 @@ extends GoalState #GoalHunt.gd
 signal boogie_signal(string_name :String)
 enum HuntDesire {None, Minimal, Hungry, Unstoppable}
 var current_hunt_desire :int = 0
-var target :AnzhuCharacter
+var target :AnzhuBeing
 
 func enter()->void:
 	if grandparent is Bear:
 		Audioton.can_bear_boogie(grandparent)
 	target = parent.get_parent().player
-	action_transition.emit('Chase')
+	grandparent.change_actions('Chase')
 
 func update(_delta:float)->void:
 	pass

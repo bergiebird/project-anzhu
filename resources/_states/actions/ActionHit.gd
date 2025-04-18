@@ -2,28 +2,32 @@ extends ActionState #ActionHit.gd
 
 const DEFAULT_COLOR :Color = Color("ffffff")
 const RED_COLOR :Color = Color("b74132")
+const BLINKS :int = 4
 var is_colored :bool = false
 var hurt_box_node :Area2D
 var mask :CollisionShape2D
 var snow_tracker :Node
 
 func _ready() -> void:
-	parent.animation_finished.connect(inform_grandparent_that_hit_is_over)
+	if parent == null:
+		await get_tree().process_frame
+
 
 func enter()->void:
 	grandparent.is_stunned = true
 	grandparent.is_injured = true
 	hurt_box_node.monitoring = false
 	if grandparent.name == "Bear":
-		goal_transition.emit('Hunt')
+		grandparent.change_goals("Hunt")
 	was_just_hit()
 
 func was_just_hit()->void:
 	parent.modulate = RED_COLOR
-	for index in 4:
+	for index in BLINKS:
 		is_colored = !is_colored
 		parent.self_modulate = RED_COLOR if is_colored else DEFAULT_COLOR
 		await get_tree().create_timer(.4).timeout
+	grandparent.character_was_hit_over()
 
 func exit()->void:
 	parent.self_modulate = DEFAULT_COLOR
@@ -31,9 +35,12 @@ func exit()->void:
 	hurt_box_node.monitoring = true
 	grandparent.uninjur()
 
-func inform_grandparent_that_hit_is_over()->void:
-	grandparent.character_hit_over()
 
+func _collect_dictionary(incoming_dictionary :Dictionary[String,Node])->void:
+	hurt_box_node = incoming_dictionary['HurtBox']
+
+	mask = incoming_dictionary['Mask']
+	snow_tracker = incoming_dictionary['SnowTracker']
 
 # To prevent console's debug from going crazy, these are empty
 func update(delta :float)->void:return

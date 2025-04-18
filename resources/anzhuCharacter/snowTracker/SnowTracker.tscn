@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://d3pnkk4m18mui"]
-
-[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuCharacter/snowTracker/SnowTracker.gd" id="1_qdf0k"]
-
-[node name="SnowTracker" type="Node"]
-script = ExtResource("1_qdf0k")

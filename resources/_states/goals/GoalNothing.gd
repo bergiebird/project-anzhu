@@ -1,7 +1,10 @@
 extends GoalState #GoalNothing.gd
 
 @export var state_options :Array[String] = ["Idle","Sit","Wander"]
-@export var time_options :Array[int] = [6,9,30,12,15,50,45]
+@export var time_options :Array[int] = [6,9,30,12,15,5,4]
+var chosen_time
+var chosen_state
+@onready var old_chosen_state = null
 @onready var timer :Timer = $Timer
 
 func _ready() -> void:
@@ -9,12 +12,16 @@ func _ready() -> void:
 
 func enter()->void:
 	timer.start()
-	action_transition.emit('Sit') # Starting Option
+	_on_timeout()
 
 func _on_timeout() -> void:
 	if goal_is_still_same():
-		timer.wait_time = time_options.pick_random()
-		action_transition.emit(state_options.pick_random())
+		chosen_time = time_options.pick_random()
+		chosen_state = state_options.pick_random()
+		if chosen_state != old_chosen_state:
+			grandparent.change_actions(chosen_state)
+		timer.wait_time = chosen_time
+		old_chosen_state = chosen_state
 
 func exit()->void:
 	timer.stop()

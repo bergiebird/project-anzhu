@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dighd7kxlaht8"
+path="res://.godot/imported/Bear (saw player).mp3-0c251ac16982e38193c33aa1bed13ad1.mp3str"
+
+[deps]
+
+source_file="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (saw player).mp3"
+dest_files=["res://.godot/imported/Bear (saw player).mp3-0c251ac16982e38193c33aa1bed13ad1.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

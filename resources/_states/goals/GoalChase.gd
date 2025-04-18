@@ -3,15 +3,16 @@ extends ActionState #GoalChase.gd
 @export var chase_speed: int = 13
 @export var slowed_chase_speed: int = 9
 @export var max_speed :int = 70
-@onready var direction_timer :Timer = $DirectionTimer
-@onready var wall_thunk_timer :Timer = $WallThunkTimer
-@onready var direction_keys = DIRECTIONS.keys()
-const DIRECTIONS :Dictionary = {"NORTH":Vector2(0, -1),"SOUTH":Vector2(0, 1),"EAST": Vector2(1, 0),"WEST":  Vector2(-1, 0)}
 var current_direction :String = "NORTH"
 var current_speed :int
 var wall_thunk_occured :bool = false
+var player :Player
+@onready var direction_timer :Timer = $DirectionTimer
+@onready var wall_thunk_timer :Timer = $WallThunkTimer
+@onready var directionary = Directon.directionary
 
 func _ready()->void:
+	Libraryton.player_reference.connect(func(ref):player=ref)
 	direction_timer.timeout.connect(change_direction)
 	wall_thunk_timer.timeout.connect(_on_wall_thunk_timeout)
 
@@ -20,9 +21,10 @@ func enter()->void:
 	current_speed = chase_speed
 
 func physics_update(delta :float)->void:
-	grandparent.velocity += DIRECTIONS[current_direction] * chase_speed * delta
+	grandparent.velocity += directionary[current_direction]['direction'] * chase_speed * delta
 	grandparent.velocity.x = clamp(grandparent.velocity.x, -max_speed, max_speed)
 	grandparent.velocity.y = clamp(grandparent.velocity.y, -max_speed, max_speed)
+
 func update(delta :float)->void:
 	process_wall_thunk()
 
@@ -36,7 +38,8 @@ func process_wall_thunk()->void:
 			wall_thunk_timer.start()
 
 func change_direction()->void:
-	move_toward_target(grandparent.player.position)
+	print(player)
+	move_toward_target(player.position)
 
 func move_toward_target(target_position :Vector2)->void:
 	var direction_to_target :Vector2 = grandparent.global_position.direction_to(target_position)

@@ -1,20 +1,22 @@
 @icon("res://resources/_singletons/game/game.png")
 extends Node2D #GAME.gd
 
-@onready var player :Player = %Player
-@onready var S :Signalton = Signalton
-@onready var I :Object = Input
+var player :Player:
+	set(value):
+		if value != player:
+			player = value
+			if Signalton.saved_state:
+				set_player_position()
 var tools :Node2D
 var respawner :Marker2D
 var global_scene_dictionary :Dictionary
 
 func _ready()->void:
-	if debug: assertions()
-	S.reload_scene.connect(reload_scene)
-	I.set_mouse_mode(I.MOUSE_MODE_HIDDEN)
+	assertions()
+	Signalton.reload_scene.connect(reload_scene)
+	Inputon.hide_mouse()
 	Libraryton.global_delivery.connect(set_global_scene_dictionary)
-	if S.saved_state:
-		set_player_position()
+	Libraryton.player_reference.connect(func(ref): player = ref)
 
 func reload_scene()->void:
 	get_tree().reload_current_scene()
@@ -27,10 +29,7 @@ func set_global_scene_dictionary(incoming_delivery:Dictionary)->void:
 	global_scene_dictionary = incoming_delivery
 	tools = global_scene_dictionary['NODE2D']['Tools']
 	respawner = global_scene_dictionary['NODE2D']['Tools']['RespawnNode']
-	if debug: assert_set_global_scene_dictionary()
-
-
-
+	assert_set_global_scene_dictionary()
 
 
 
@@ -42,9 +41,11 @@ func set_global_scene_dictionary(incoming_delivery:Dictionary)->void:
 @export var debug :bool = false
 
 func assertions()->void:
-	assert(player, "Player not found")
+	if debug:
+		assert(player, "Player not found")
 
 func assert_set_global_scene_dictionary()->void:
-	assert(global_scene_dictionary, "global_scene_dictionary not properly instantiated in GAME")
-	assert(tools, "Tools not properly instantiated in GAME")
-	assert(respawner, "Respawner not properly instantiated in GAME")
+	if debug:
+		assert(global_scene_dictionary, "global_scene_dictionary not properly instantiated in GAME")
+		assert(tools, "Tools not properly instantdiated in GAME")
+		assert(respawner, "Respawner not properly instantiated in GAME")

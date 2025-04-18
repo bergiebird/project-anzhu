@@ -1,9 +1,9 @@
 extends Node #DayNighton.gd
 signal time_progressed(current_time :TimeOfDay)
-signal time_dictionary_delivery(time_of_day_dictionary :Dictionary)
+signal time_dictionary_delivery(time_dictionary :Dictionary)
 signal turn_on_night_lights(should_be_on :bool)
 enum TimeOfDay{DAWN, MORNING, NOON, AFTERNOON, DUSK, NIGHT, MIDNIGHT, LATE_NIGHT}
-var time_of_day_dictionary = {}
+var time_dictionary = {}
 var current_time: TimeOfDay = TimeOfDay.DAWN
 var night_lights_on :bool
 
@@ -36,55 +36,56 @@ func progress_time(incoming_time :TimeOfDay=current_time)->void:
 			night_lights_on = false
 	time_progressed.emit(current_time)
 
-func initialize(modulator :CanvasModulate)->void:
-	time_of_day_dictionary = {
+func initialize(modulator :CanvasModulate)->Dictionary:
+	time_dictionary = {
 		TimeOfDay.DAWN: {
 			"name": "Dawn",
-			"modulate": modulator.dawn_amount,
+			"modulate": 170,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.DAWN],
 			"melatonin_value": 0,
 		},
 		TimeOfDay.MORNING: {
 			"name": "Morning",
-			"modulate": modulator.morning_amount,
+			"modulate": 250,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.MORNING],
 			"melatonin_value": -1,
 		},
 		TimeOfDay.NOON: {
 			"name": "Noon",
-			"modulate": modulator.noon_amount,
+			"modulate": 255,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.NOON],
 			"melatonin_value": -2,
 		},
 		TimeOfDay.AFTERNOON: {
 			"name": "Afternoon",
-			"modulate": modulator.afternoon_amount,
+			"modulate": 254,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.AFTERNOON],
 			"melatonin_value": -3,
 		},
 		TimeOfDay.DUSK: {
 			"name": "Dusk",
-			"modulate": modulator.dusk_amount,
+			"modulate": 170,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.DUSK],
 			"melatonin_value": 0,
 		},
 		TimeOfDay.NIGHT: {
 			"name": "Night",
-			"modulate": modulator.night_amount,
+			"modulate": 100,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.NIGHT],
 			"melatonin_value": 2,
 		},
 		TimeOfDay.MIDNIGHT: {
 			"name": "Midnight",
-			"modulate": modulator.midnight_amount,
+			"modulate": 97,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.MIDNIGHT],
 			"melatonin_value": 3,
 		},
 		TimeOfDay.LATE_NIGHT: {
 			"name": "Late Night",
-			"modulate": modulator.late_night_amount,
+			"modulate": 100,
 			"modulate_duration": modulator.init_time_lerp[TimeOfDay.LATE_NIGHT],
 			"melatonin_value": 1,
 		}
 	}
-	time_dictionary_delivery.emit(time_of_day_dictionary)
+	time_dictionary_delivery.emit(time_dictionary)
+	return time_dictionary

@@ -1,6 +1,6 @@
-res://resources/player/abilities/jump
 res://
-res://resources/anzhuAnimal/bear
+res://resources/_singletons/game
+res://resources/player/abilities/jump
 res://resources/environment/objectsDumb
 res://resources/tools/invisible walls
 /home/bergiebird/.local/share/fonts/comic-code

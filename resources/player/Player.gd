@@ -1,23 +1,31 @@
 @icon("res://resources/player/player.png") #Player.gd
 class_name Player extends AnzhuHuman
-@onready var camera :Camera2D = $Camera
-@onready var abilities: Node = $Abilities
+
+signal affect_nighlight(is_leaving_campfire :bool)
+
+@onready var camera :Camera2D = $MainCamera
+@onready var abilities: Node = %Abilities
 @onready var listener :AudioListener2D = $AudioListener2D
+@onready var nightlight :PointLight2D = $Nightlight
 
 func human_ready()->void:
+	Libraryton.reference_emitter_deferred("player_reference", self)
 	add_to_group('player')
 
-func _physics_process(delta :float)->void:
+func __physics_process(delta :float)->void:
 	velocity = Vector2.ZERO
 	abilities.able()
-	move_and_slide()
-
-func affect_nightlight(is_leaving_campfire :bool)->void:
-	nightlight.campfire_nightlight(is_leaving_campfire)
 
 func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
 
+func character_signaler()->void:
+	abilities.is_jumping.connect(process_jump.bind(false))
+	abilities.finished_jumping.connect(process_jump.bind(true))
+
+func process_jump(can_go_over_walls :bool)->void:
+	set_collision_layer_value(1, can_go_over_walls)
+	set_collision_mask_value(1, can_go_over_walls)
 
 
 ###

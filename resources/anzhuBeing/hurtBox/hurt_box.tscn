@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c31orajqrt5wx"]
+
+[ext_resource type="Script" uid="uid://cdpxaxp4jlkh8" path="res://resources/anzhuBeing/hurtBox/HurtBox.gd" id="1_tixfv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_acxsq"]
+size = Vector2(8, 8)
+
+[node name="HurtBox" type="Area2D"]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("1_tixfv")
+
+[node name="HurtShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_acxsq")
+
+[node name="HurtTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="area_entered" from="." to="." method="_on_player_entered"]

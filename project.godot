@@ -11,13 +11,14 @@ config_version=5
 [application]
 
 config/name="Project: Anzhu"
-run/main_scene="res://resources/_singletons/game/GAME.tscn"
+run/main_scene="uid://bu2w1ukm7uknj"
 config/features=PackedStringArray("4.4", "Forward Plus")
+run/max_fps=60
 config/icon="res://warehouse/~examples/arctic-3.png"
 
 [audio]
 
-buses/default_bus_layout="res://resources/anzhuAnimal/bear/default_bus_layout.tres"
+buses/default_bus_layout="res://resources/anzhuBeing/anzhuAnimal/bear/audio/default_bus_layout.tres"
 general/default_playback_type.web=0
 
 [autoload]
@@ -29,6 +30,9 @@ Audioton="*res://resources/_singletons/Audioton.gd"
 Libraryton="*res://resources/_singletons/Libraryton.gd"
 Debuggerton="*res://resources/_singletons/Debuggerton.gd"
 Screenshoton="*res://resources/_singletons/Screenshoton.gd"
+Swatchton="*res://resources/_singletons/Swatchton.gd"
+Inputon="*res://resources/_singletons/Inputon.gd"
+Builderton="*res://Builderton.gd"
 
 [debug]
 
@@ -49,10 +53,6 @@ window/size/window_height_override=480
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
 
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/godot_state_charts/plugin.cfg")
-
 [file_customization]
 
 folder_colors={
@@ -72,6 +72,10 @@ player=""
 gunshot=""
 being="Is a living creature"
 human="is a humanbeing"
+
+[gui]
+
+theme/default_font_subpixel_positioning=3
 
 [input]
 
