@@ -23,16 +23,17 @@ general/default_playback_type.web=0
 
 [autoload]
 
-Signalton="*res://resources/_singletons/Signalton.gd"
-Directon="*res://resources/_singletons/Directon.gd"
-DayNighton="*res://resources/_singletons/DayNighton.gd"
-Audioton="*res://resources/_singletons/Audioton.gd"
-Libraryton="*res://resources/_singletons/Libraryton.gd"
-Debuggerton="*res://resources/_singletons/Debuggerton.gd"
-Screenshoton="*res://resources/_singletons/Screenshoton.gd"
-Swatchton="*res://resources/_singletons/Swatchton.gd"
-Inputon="*res://resources/_singletons/Inputon.gd"
-Builderton="*res://Builderton.gd"
+Signalton="*res://resources/main_scene/singletons/Signalton.gd"
+Directon="*res://resources/main_scene/singletons/Directon.gd"
+DayNighton="*res://resources/main_scene/singletons/DayNighton.gd"
+Audioton="*res://resources/main_scene/singletons/Audioton.gd"
+Libraryton="*res://resources/main_scene/singletons/Libraryton.gd"
+Debuggerton="*res://resources/main_scene/singletons/Debuggerton.gd"
+Screenshoton="*res://resources/main_scene/singletons/Screenshoton.gd"
+Swatchton="*res://resources/main_scene/singletons/Swatchton.gd"
+Inputon="*res://resources/main_scene/singletons/Inputon.gd"
+Builderton="*res://resources/main_scene/singletons/Builderton.gd"
+Staton="*res://resources/main_scene/singletons/Staton.gd"
 
 [debug]
 
@@ -63,15 +64,15 @@ folder_colors={
 
 [global_group]
 
-bear=""
 animal=""
-reindeer=""
-wolf=""
-walrus=""
 player=""
 gunshot=""
 being="Is a living creature"
-human="is a humanbeing"
+Bear=""
+Human="is a humanbeing"
+Reindeer=""
+Walrus=""
+Wolf=""
 
 [gui]
 

@@ -8,7 +8,7 @@ var spacebar_pressed :bool = false
 var direction_count :int
 var camera :Camera2D
 var camera_movement :Vector2 = Vector2.ZERO
-
+var parent
 #func _process(delta: float) -> void:
 	#if !camera:
 		#return

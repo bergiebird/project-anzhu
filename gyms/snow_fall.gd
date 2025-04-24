@@ -84,3 +84,10 @@ func position_wind_sfx(tween_time)->void:
 	var pitch_new = 1.4 - (float(frequency)*0.1)
 	Builderton.tweener(sfx_wind, "pitch_scale", pitch_new,tween_time)
 	Builderton.tweener(sfx_wind, "position", position_new,tween_time)
+
+func change_weather_randomly()->void:
+	printt('weather changed activated! Old Weather: ', speed, direction, frequency)
+	speed = Libraryton.random_range(0,6)
+	direction = Libraryton.random_range(0,7)
+	frequency = Libraryton.random_range(0,4)
+	printt('weather changed activated! New Weather: ', speed, direction, frequency)

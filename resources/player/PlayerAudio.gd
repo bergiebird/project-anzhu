@@ -1,16 +1,24 @@
 extends AudioManager
-var reload
-var default_pitch :float
 
-@onready var abilities = %Abilities
-@onready var anim = %Animations
 @export var modified_speed_up = 0.16
+@onready var reload :AudioStreamPlayer2D = $ReloadSFX
+@onready var gunshot :AudioStreamPlayer2D = $GunshotSFX
+@onready var reload_default_pitch :float = reload.pitch_scale
+var abilities :Abilities:
+	set(value): if abilities != value:
+		abilities = value
+		abilities.reloading.connect(reloader)
+		abilities.gunfired.connect(fire_gun_audio)
 
-func ready() -> void:
-	reload = audio_dictionary['reload']
-	default_pitch = reload.pitch_scale
+func __ready() -> void:
+	abilities = parent.get_node("Abilities")
 
-func signaler()->void:
-	abilities.start_reload.connect(func(): reload.play())
-	anim.reloaded.connect(func(): reload.pitch_scale = default_pitch)
-	abilities.modified_reload.connect(func(): reload.pitch_scale += modified_speed_up)
+func reloader(bol :bool)->void:
+	if bol:
+		reload.play()
+	else:
+		reload.pitch_scale = reload_default_pitch
+
+func fire_gun_audio(bol :bool)->void:
+	if bol: 
+		gunshot.play()

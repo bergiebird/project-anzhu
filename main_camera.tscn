@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=17 format=3 uid="uid://bqyubqk75ak53"]
 
+[ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://main_camera.gd" id="1_7nf1k"]
 [ext_resource type="Texture2D" uid="uid://b0pohqgdvwsf4" path="res://resources/environment/snowfall/snowflake.png" id="1_x31i4"]
 [ext_resource type="Script" uid="uid://bpm73yq251nvw" path="res://gyms/snow_fall.gd" id="2_oeyyd"]
 [ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="3_oeyyd"]
@@ -69,6 +70,7 @@ turbulence_influence_max = 0.3
 
 [node name="MainCamera" type="Camera2D"]
 zoom = Vector2(12, 12)
+script = ExtResource("1_7nf1k")
 
 [node name="SnowFall" type="GPUParticles2D" parent="."]
 z_index = 100
@@ -100,6 +102,7 @@ unique_name_in_owner = true
 editor_description = "Funnily enough, I designed this entire system forgetting the simple fact that the day/night cycle of an island this far north would absolutely be 23/1 in the summertime. Woops"
 position = Vector2(-217, -291)
 script = ExtResource("4_1xu36")
+time_right_before_start = 5
 
 [node name="WorldTimer" type="Timer" parent="DayNightModulator"]
 process_callback = 0

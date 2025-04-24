@@ -29,9 +29,8 @@ func _ready()->void:
 
 func setup_basics()->void:
 	if parent.has_node("Abilities"):
-		abilities = %Abilities
-		abilities.is_jumping.connect(func(): visible=false)
-		abilities.finished_jumping.connect(func(): visible=true)
+		abilities = parent.get_node('Abilities')
+		abilities.jumping.connect(func(needs_inverse:bool): visible=!needs_inverse)
 	parent.set_collision_layer_value(5,true)
 	shape.size.x = snapped(mask_dimensions.x - 0.05, 0.01)
 	shape.size.y = snapped(mask_dimensions.y - 0.05, 0.01)

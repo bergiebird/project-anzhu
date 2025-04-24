@@ -1,18 +1,28 @@
 class_name AnzhuBeing extends CharacterBody2D #_AnzhuBeing.gd
+
+signal made_loud_noise (who :AnzhuBeing, how_loud :float)
 signal has_died
 signal on_new_track_tile (new_tile_coordinates :Vector2i)
 signal hit_over
 signal striking (attacking_who :AnzhuBeing, who_is_attacking :AnzhuBeing, what_weapon)
 signal was_struck
-signal direction_changed(new_direction)
+
 enum AnimalType {Walrus, Owl, Human,  Bear, Fox, Hare, Wolf, Reindeer}
-enum MaxHits {One, Two, Four, Eight}
-const NEW_SAFE_MARGIN :float = 0.05
-@export_group("Core Attributes")
-@export var this_animals_type :AnimalType = AnimalType.Walrus
-@export var starting_health :MaxHits = MaxHits.One
+const ANIMAL_NAMES :Array[String] = ["Walrus", "Owl", "Human",  "Bear", "Fox", "Hare", "Wolf", "Reindeer"]
+
+var personal_stats :Dictionary
 var max_health :int
 var move_speed :int
+var animal_name :String:
+	set(value): if value != animal_name:
+		animal_name = value
+		add_to_group(animal_name)
+		personal_stats = Staton.ANIMAL_INFO[animal_name]
+		move_speed = personal_stats["BaseMoveSpeed"]
+		max_health = personal_stats["StartingHealth"]
+
+const NEW_SAFE_MARGIN :float = 0.05
+@export var this_animals_type :AnimalType = AnimalType.Walrus
 var anim :AnimatedSprite2D
 var audio :Node2D
 var is_sliding :bool = false
@@ -39,8 +49,7 @@ func setup_basics()->void:
 	add_to_group("being")
 	set_motion_mode(MOTION_MODE_FLOATING)
 	set_safe_margin(NEW_SAFE_MARGIN)
-	move_speed = match_move_speed()
-	max_health = match_max_hits()
+	animal_name = ANIMAL_NAMES[this_animals_type]
 
 func create_and_ship_scene_nodes()->void:
 	scenes_nodes["ex_elevation"] = elevation_map
@@ -55,7 +64,7 @@ func create_and_ship_scene_nodes()->void:
 	audio = scenes_nodes['AudioManager']
 
 func signaler()->void:
-	DayNighton.time_dictionary_delivery.connect(_characters_dictionary_inbox)
+	DayNighton.time_dictionary_delivery.connect(func(delivery :Dictionary)->void: daynight_dictionary = delivery)
 	DayNighton.time_progressed.connect(time_progressed)
 	Libraryton.entities_reference.connect(func(ref): entities_manager = ref)
 	Libraryton.player_reference.connect(func(ref): player = ref)
@@ -63,34 +72,6 @@ func signaler()->void:
 	has_died.connect(how_should_character_die)
 	character_signaler()
 
-func _characters_dictionary_inbox(incoming_delivery :Dictionary)->void:
-	daynight_dictionary = incoming_delivery
-	DayNighton.time_dictionary_delivery.disconnect(_characters_dictionary_inbox)
-
-# Make a .tres for animal stats, will cut this matching code down by a ton.
-func match_move_speed()->int:
-	match this_animals_type:
-		AnimalType.Walrus:   return 5
-		AnimalType.Owl:      return 15
-		AnimalType.Human:    return 16
-		AnimalType.Bear:     return 10
-		AnimalType.Fox:      return 40
-		AnimalType.Hare:     return 45
-		AnimalType.Wolf:     return 50
-		AnimalType.Reindeer: return 55
-		_:
-			print_rich("[color=red][b]match_move_speed in, ", self.name, ", resulted in 0[/b][/color]")
-			return 0
-
-func match_max_hits()->int:
-	match starting_health:
-		MaxHits.One: return 1
-		MaxHits.Two: return 2
-		MaxHits.Four: return 4
-		MaxHits.Eight: return 8
-		_:
-			print_rich("[color=red][b]match_max_hits in, ", self.name, ", resulted in 0[/b][/color]")
-			return 0
 
 ### PROCESS ####################################
 
@@ -113,7 +94,8 @@ func check_current_tile(is_tile_forced :bool=false)->void:
 ### Signals ####################################
 
 func time_progressed(current_time :DayNighton.TimeOfDay)->void:
-	if debug_self: print_rich('[color=eaf1f0] Time has progressed')
+	if debug_self: 
+		print_rich('[color=eaf1f0] Time has progressed')
 	character_time_progressed(current_time)
 
 ###Attack Functions###

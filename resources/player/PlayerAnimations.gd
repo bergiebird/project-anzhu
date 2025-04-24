@@ -1,58 +1,61 @@
 extends AnimatedSprite2D #PlayerAnimations.gd
-signal reloaded
+
+const FLASH_AMOUNT :int = 4
 @export var animations_reloads_reload_time :float = 0.5
-var is_dead = false
-var is_colored :bool = false
-var audio :Node2D
-var current_direction :String = '_SIDE'
-var node_dictionary :Dictionary[String, Node] = {}:
-	set(value):
-		node_dictionary = value
-		audio = node_dictionary['AudioManager']
-		abilities = node_dictionary['Abilities']
 @export var modified_speed_up :float = 0.16
-@onready var abilities :Node = %Abilities
+var is_dead :bool = false
+var is_colored :bool = false
+var anim_direction :String = 'SIDE'
+var is_efficient :bool = false
 @onready var parent :AnzhuBeing = get_parent()
+@onready var abilities :Abilities = parent.get_node('Abilities')
 
 func _ready()->void:
 	parent.was_struck.connect(flash_red)
-	parent.has_died.connect(func():is_dead = true)
-	abilities.modified_reload.connect(func():speed_scale+= modified_speed_up)
-	abilities.start_reload.connect(start_reload_animation)
+	parent.has_died.connect(func(): is_dead = true)
+	abilities.modified_reload.connect(anim_reload_modified)
+	abilities.reloading.connect(anim_reloading_recieved)
+	abilities.efficiency.connect(func(bol): is_efficient = bol)
 	animation_finished.connect(reload_animation_finished)
 
+func anim_reloading_recieved(reload_begining:bool)->void:
+	if reload_begining:
+		print('reload should begin now')
+		just_play('reload', true, 1)
+
+func anim_reload_modified(bol :bool)->void:
+	if bol:
+		speed_scale+= modified_speed_up
+
+
 func reload_animation_finished()->void:
-	if animation == 'reload_' + current_direction:
-		reloaded.emit()
-		just_play('idle')
-		speed_scale = 1
+	if animation == 'reload_' + anim_direction:
+		abilities.is_reloading = false
 
-func start_reload_animation()->void:
-	stop()
-	just_play('reload')
-	speed_scale = 1
-	await get_tree().create_timer(animations_reloads_reload_time).timeout
+func movement_animation(incoming_velocity :Vector2)->void:
+	var speed = incoming_velocity.length()
+	if abilities.is_reloading: 
+		return
+	if speed > 30:                 just_play('run')
+	elif 30 >= speed and speed > 0: just_play('walk')
+	else:                          just_play('idle')
 
-func should_flip(anim_name :String)->void:
-	if abilities.is_efficient:
-		speed_scale = 1
-	else:
-		speed_scale = 0.60
-	current_direction = Directon.anim_wants_to_know_where_we_looking()
-	if current_direction == "WEST":
-		flip_h = true
-	else:
-		flip_h = false
-	if current_direction == "WEST" or current_direction == "EAST":
-		current_direction = "SIDE"
+func just_play(anim_name :String='idle', should_stop :bool=false, force_speed_scale:int = -1)->void:
+	anim_direction = Directon.get_anim_direction()
+	if should_stop: 
+		stop()
+	flip_h = Directon.get_should_flip()
+	efficiency_check(force_speed_scale)
+	play(anim_name + anim_direction)
 
-func just_play(anim_name :String)->void:
-	should_flip(anim_name)
-	play(anim_name + "_" + current_direction)
+func efficiency_check(force_speed_scale :int = -1)->void:
+	if force_speed_scale != -1: speed_scale = force_speed_scale
+	elif is_efficient:          speed_scale = 1
+	else:                       speed_scale = 0.60
 
 func flash_red()->void:
 	modulate = Swatchton.RED_TOMATO
-	for index in 4:
+	for flashes in FLASH_AMOUNT:
 		is_colored = !is_colored
 		self_modulate = Swatchton.RED_TOMATO if is_colored else Swatchton.BASIC_WHITE
 		if not is_dead: await get_tree().create_timer(.4).timeout
@@ -68,5 +71,4 @@ func flash_red()->void:
 @onready var dcolor = debugger_color.to_html()
 
 func debug()->void:
-	Debuggerton.enable_print(self.name, dcolor)
-	debug_animations = true
+	debug_animations = Debuggerton.enable_print(self.name, dcolor)

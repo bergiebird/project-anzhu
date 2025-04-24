@@ -97,33 +97,3 @@ rotation = 1.5708
 target_position = Vector2(120, 0)
 collision_mask = 16
 collide_with_bodies = false
-
-[node name="EastAim" type="Marker2D" parent="."]
-position = Vector2(4, -0.5)
-gizmo_extents = 2.0
-metadata/_edit_lock_ = true
-
-[node name="SouthAim" type="Marker2D" parent="."]
-position = Vector2(-1.5, 3)
-gizmo_extents = 2.0
-metadata/_edit_lock_ = true
-
-[node name="NorthAim" type="Marker2D" parent="."]
-position = Vector2(0.5, -4)
-gizmo_extents = 2.0
-metadata/_edit_lock_ = true
-
-[node name="WestAim" type="Marker2D" parent="."]
-position = Vector2(-4, -0.5)
-gizmo_extents = 2.0
-metadata/_edit_lock_ = true
-
-[node name="DelayTimer" type="Timer" parent="."]
-one_shot = true
-
-[node name="FlashTimer" type="Timer" parent="."]
-wait_time = 0.1
-one_shot = true
-
-[connection signal="timeout" from="DelayTimer" to="." method="try_to_hit"]
-[connection signal="timeout" from="FlashTimer" to="." method="flash_out"]

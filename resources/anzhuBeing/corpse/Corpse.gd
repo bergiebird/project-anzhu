@@ -6,10 +6,10 @@ class_name Corpse extends Area2D #Corpse.gd
 @export var energy :int = 1
 var stored_position :Vector2
 @onready var temp_shape :CollisionShape2D = $OnlyHereToBeDestroyed
-@onready var anim :AnimatedSprite2D = %Animations
-@onready var mask :CollisionShape2D = %Mask
 @onready var parent :AnzhuBeing = get_parent()
 @onready var grandparent :Node = parent.get_parent()
+@onready var anim :AnimatedSprite2D = parent.get_node('Animations')
+@onready var mask :CollisionShape2D = parent.get_node('Mask')
 
 func _ready()->void:
 	connect('body_entered', _on_body_entered)

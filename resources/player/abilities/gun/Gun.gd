@@ -3,82 +3,51 @@ extends Node2D #Gun.gd
 
 @export_range(0, 0.5, 0.01) var bullet_travel_time :float = 0.16
 @export var shoot_cooldown :float = 0.4
-var reload_audio
-var anim
-@onready var flash :PointLight2D = $VfxFlash
+@export var flash_time :float = 0.1
+@export var modified_speed_up :float = 0.16
+@export var noise_db :float = 300.0
+
+var grandparent :AnzhuHuman
+
+@onready var can_shoot :bool = true
+@onready var flash :bool = $VfxFlash.visible:
+	set(value): if flash!=value:
+		if value:
+			flash = value
+			await get_tree().create_timer(flash_time).timeout
+			flash = false
 @onready var smoke_barrel :CPUParticles2D = $VfxSmoke
 @onready var smoke_back :CPUParticles2D = $VfxSmoke2
 @onready var gunray :RayCast2D = $GunRay
-@onready var flash_timer :Timer = $FlashTimer
-@onready var delay_timer :Timer = $DelayTimer
-@onready var north :Marker2D = $NorthAim
-@onready var west :Marker2D =$WestAim
-@onready var south :Marker2D = $SouthAim
-@onready var east :Marker2D =$EastAim
-@onready var parent :Abilities = get_parent()
-@onready var grandparent :AnzhuHuman = parent.get_parent()
+@onready var parent :Abilities:
+	set(value): if parent != value:
+			parent = value
+			parent.full_ammo.connect(func(full_ammo:bool): if full_ammo: parent.is_reloading = false)
 
-func _ready()->void:
-	Signalton.gunshot.connect(sfx_start)
-	delay_timer.wait_time = bullet_travel_time
+func process_ability()->void:
+	if parent.is_reloading:          if Inputon.modifier():     parent.is_reload_modified = true
+	elif parent.has_full_ammo:      
+		print('has full ammo')
+		if Inputon.gun_shoot():     
+			print('processing')
+			process_gunshot()
+	elif not parent.has_full_ammo: if Inputon.gun_reload():     parent.is_reloading = true
 
-func reload()->void:
-	if Inputon.gun():
-		if not parent.is_loaded:
-			parent.start_reload.emit()
-			anim.start_reload_animation()
-
-func modify_reload()->void:
-	if Inputon.modifier():
-		parent.modified_reload.emit()
-
-func shoot()->void:
-	if Inputon.gun():
-		Signalton.gunshot.emit()
-
-func sfx_start()->void:
+func process_gunshot()->void:
+	parent.is_gunfired = true
 	position = Vector2.ZERO
-	match Directon.looking_where:
-		Directon.Looking.NORTH:
-			position = north.position
-			smoke_barrel.direction = Vector2.UP
-			smoke_back.position = Vector2.DOWN
-			gunray.rotation_degrees = Directon.ROTATE_NORTH
-		Directon.Looking.WEST:
-			position = west.position
-			smoke_barrel.direction = Vector2.LEFT
-			smoke_back.position = Vector2(3.0, 0.0)
-			gunray.rotation_degrees = Directon.ROTATE_WEST
-		Directon.Looking.SOUTH:
-			position = south.position
-			smoke_barrel.direction = Vector2.DOWN
-			smoke_back.position = Vector2(0.0, -5.0)
-			gunray.rotation_degrees = Directon.ROTATE_SOUTH
-		Directon.Looking.EAST:
-			position = east.position
-			smoke_barrel.direction = Vector2.RIGHT
-			smoke_back.position = Vector2(-3.0, 0.0)
-			gunray.rotation_degrees = Directon.ROTATE_EAST
-	flash_timer.start()
+	Directon.gunmatch(self, smoke_barrel, smoke_back, gunray)
 	smoke_back.emitting = true
-	flash.visible = true
 	smoke_barrel.emitting = true
-	gun_was_fired()
-
-func flash_out() -> void:
-	flash.visible = false
-
-func gun_was_fired()->void:
-	delay_timer.start()
-func try_to_hit() ->void:
+	flash = true
+	await get_tree().create_timer(bullet_travel_time).timeout
 	gunray.collide_with_bodies = true
 	gunray.force_raycast_update()
 	if gunray.is_colliding():
-		var who :Object = gunray.get_collider()
-		if who is AnzhuBeing:
-			grandparent.strike_target(1,"gun",who)
-	gunray.collide_with_bodies = false
-
+		var target_acquired :Object = gunray.get_collider()
+		if target_acquired is AnzhuBeing:
+			grandparent.strike_target(1,"gun",target_acquired)
+			gunray.collide_with_bodies = false
 
 ###
 ##DEBUGGER

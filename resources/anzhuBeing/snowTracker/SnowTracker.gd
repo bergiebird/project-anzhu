@@ -20,14 +20,13 @@ var personal_maps :Array[TileMapLayer]
 func _ready() -> void:
 	if parent.has_node('Abilities'):
 		abilities = parent.get_node('Abilities')
+		abilities.jumping.connect(func(needs_inverse:bool)->void: 
+			print('snowtracking: ', !needs_inverse)
+			can_make_tracks=!needs_inverse)
 	parent.on_new_track_tile.connect(update_tracks)
 	parent.was_struck.connect(func(): is_sliding=true)
 	parent.hit_over.connect(func(): is_sliding=false)
 	Libraryton.tracks_reference.connect(setup_maps)
-	if abilities:
-		abilities.is_jumping.connect(func(): can_make_tracks=false)
-		abilities.finished_jumping.connect(func(): can_make_tracks=true)
-
 func update_tracks(incoming_cell :Vector2i)->void:
 	if can_make_tracks:
 		while current_cells.size() <= MAX_SIZE:

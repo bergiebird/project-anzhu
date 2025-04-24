@@ -2,47 +2,47 @@
 extends Ability #PlayerMovement.gd
 
 @export_group('Movement')
-@export var efficient_modifier :int = 15
+@export var efficient_bonus :int = 15
 @export var run_bonus :int = 20
-var normal_speed :int
-var directionary :Dictionary = Directon.directionary
-var run_speed :int
-var efficient_speed :int
-var can_move :bool
+var parent :Abilities
 
-func mover()->Vector2:
-	var velocity :Vector2 = Vector2.ZERO
-	can_move = false
-	for direction in directionary:
-		var vector = directionary[direction]['direction']
-		if Inputon.move(direction):
-			can_move = true
-			if Inputon.aim(direction) and Directon.check_direction(direction):
-				anim.just_play('run')
-				velocity = vector * run_speed
-				parent.set_efficiency(true)
-			elif Inputon.inverse_aim(direction) and Directon.check_direction(direction):
-				velocity = vector * normal_speed
-				parent.set_efficiency(false)
-			else:
-				anim.just_play('walk')
-				if Directon.check_direction(direction):
-					velocity = vector * efficient_speed
-					parent.set_efficiency(true)
-				else:
-					velocity = vector * normal_speed
-					parent.set_efficiency(false)
-			break
-	if not can_move:
-		for direction in directionary:
-			if Input.is_action_pressed(directionary[direction]["aim"]):
-				Directon.looking_where = directionary[direction]["enum"]
-				anim.just_play('idle')
+var anim :AnimatedSprite2D
+var grandparent :Player:
+	set(value): if grandparent != value:
+		grandparent = value
+		anim = grandparent.get_node('Animations')
+
+var speed_efficient :int
+var speed_run :int
+var speed_normal :int:
+	set(value): if value != speed_normal:
+		speed_normal = value
+		speed_efficient = speed_normal + efficient_bonus
+		speed_run = speed_efficient + run_bonus
+var velocity :Vector2
+
+func process_ability()->void:
+	if speed_normal == 0: speed_normal = grandparent.move_speed
+	if parent.can_move:
+		velocity = Vector2.ZERO
+		for direction in Directon.DIRECTIONS:
+			Inputon.look_direction(direction)
+			velocity = mover(direction)
+			if velocity != Vector2.ZERO: 
 				break
-		anim.just_play('idle')
-	return velocity
+		grandparent.velocity = velocity
 
-func move_stat_delivery(incoming_speed :int)->void:
-	normal_speed = incoming_speed
-	efficient_speed = normal_speed + efficient_modifier
-	run_speed = efficient_speed + run_bonus
+func mover(direction)->Vector2:
+	if Inputon.move(direction):
+		velocity = Directon.get_vectors(direction)
+		if Inputon.aim(direction):                 velocity = efficienctVelocity(speed_run, true)
+		elif Inputon.inverse_aim(direction):       velocity = efficienctVelocity(speed_normal, false) 
+		else:
+			if Directon.check_direction(direction):  velocity = efficienctVelocity(speed_efficient, true)
+			else:                                    velocity = efficienctVelocity(speed_normal, false)
+		return velocity
+	return Vector2.ZERO
+
+func efficienctVelocity(speed, efficiency)->Vector2:
+	parent.is_efficient = efficiency
+	return velocity * speed
