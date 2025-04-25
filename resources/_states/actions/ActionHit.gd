@@ -38,7 +38,6 @@ func exit()->void:
 
 func _collect_dictionary(incoming_dictionary :Dictionary[String,Node])->void:
 	hurt_box_node = incoming_dictionary['HurtBox']
-
 	mask = incoming_dictionary['Mask']
 	snow_tracker = incoming_dictionary['SnowTracker']
 

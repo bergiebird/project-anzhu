@@ -49,7 +49,7 @@ func transition_part_2()->void:
 ###
 ## DEBUG
 ###
-@export_category('DEBUG')
+@export_group('DEBUG')
 @export var debug_actions :bool = false
 
 func debug()->void:

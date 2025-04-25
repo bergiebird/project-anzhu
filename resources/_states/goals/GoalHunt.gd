@@ -21,9 +21,11 @@ func exit()->void:
 	current_hunt_desire = 0
 
 
-func _on_sight_update(string_name: String) -> void:
+func _on_spotted(string_name: String) -> void:
 	match string_name:
-		"OutOfSight": pass #action_transition.emit("Search")
-		"Spotted": pass
+		"OutOfSight":
+			pass
+		"Spotted":
+			pass
 		_:
 			print_rich("[color = red] Unkown String Name: " + string_name + "[/color]")

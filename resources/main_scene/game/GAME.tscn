@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://nxai7gqj4ivy" path="res://resources/tools/invisible walls/invisible_walls.png" id="13_wces6"]
 [ext_resource type="Script" uid="uid://cpnpyww4qrtyp" path="res://resources/main_scene/game/ElevationsLayer.gd" id="14_eoykx"]
 [ext_resource type="TileSet" uid="uid://io7ysittrqe2" path="res://warehouse/Overworld/ts_arctic_all.tres" id="14_vtybo"]
-[ext_resource type="PackedScene" uid="uid://b5id41tdwyrd4" path="res://resources/player/Player.tscn" id="16_w6htp"]
+[ext_resource type="PackedScene" uid="uid://b5id41tdwyrd4" path="res://resources/anzhuBeing/player/Player.tscn" id="16_w6htp"]
 [ext_resource type="PackedScene" uid="uid://dr7gmcq3ydu2b" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear.tscn" id="17_tud0i"]
 [ext_resource type="AudioStream" uid="uid://hvyddlreidmd" path="res://resources/main_scene/nodeAudio/CyclingBGM/Music Historic 1.mp3" id="17_u3ck6"]
 [ext_resource type="AudioStream" uid="uid://bsck3qaty34rh" path="res://resources/main_scene/nodeAudio/CyclingBGM/Music Historic 2 (baroque).mp3" id="18_tq4j5"]

@@ -73,6 +73,7 @@ zoom = Vector2(12, 12)
 script = ExtResource("1_7nf1k")
 
 [node name="SnowFall" type="GPUParticles2D" parent="."]
+light_mask = 0
 z_index = 100
 amount = 4000
 texture = ExtResource("1_x31i4")
@@ -93,16 +94,12 @@ pitch_scale = 1.4
 attenuation = 0.8
 bus = &"Wind"
 
-[node name="Marker2D" type="Marker2D" parent="SnowFall/WindSFX"]
-rotation = 0.523599
-gizmo_extents = 20.0
-
 [node name="DayNightModulator" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
 editor_description = "Funnily enough, I designed this entire system forgetting the simple fact that the day/night cycle of an island this far north would absolutely be 23/1 in the summertime. Woops"
 position = Vector2(-217, -291)
 script = ExtResource("4_1xu36")
-time_right_before_start = 5
+time_right_before_start = 1
 
 [node name="WorldTimer" type="Timer" parent="DayNightModulator"]
 process_callback = 0

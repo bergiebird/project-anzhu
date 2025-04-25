@@ -27,7 +27,7 @@ enum WindSpeed{BLIZZARD,SQUALL,GALE,STRONGBREEZE,MODERATEBREEZE,LIGHTBREEZE,CALM
 var frequencies :Dictionary[int,float] = {FrequencyType.BLIZZARD:200.0,
 														FrequencyType.SQUALL  :300.0,
 														FrequencyType.NORMAL  :700.0,
-														FrequencyType.DUSTING :2000.0,
+														FrequencyType.DUSTING :1900.0,
 														FrequencyType.NONE    :12000.0,}
 var directions :Dictionary[int,Vector3] = { WindDirection.NORTH     :Vector3.DOWN,
 															WindDirection.NORTHEAST :Vector3.DOWN + Vector3.RIGHT,

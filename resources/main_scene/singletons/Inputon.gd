@@ -15,7 +15,7 @@ func _ready()->void:
 
 func look_direction(direction :String)->bool:
 	var input = Input.is_action_pressed(Directon.get_aim(direction))
-	if input:   
+	if input:
 		Directon.set_direction(direction)
 	return input
 

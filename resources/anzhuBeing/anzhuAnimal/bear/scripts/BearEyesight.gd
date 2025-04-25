@@ -21,7 +21,7 @@ func just_shot()->void:
 		return
 	has_grievance = true
 
-func react_to_loud_noise()->void:
+func react_to_loud_noise(player :Player, location :Vector2, noise_db :float)->void:
 	if is_spotted:
 		parent.change_goals('Hunt')
 
@@ -29,4 +29,4 @@ func signaler()->void:
 	self.screen_entered.connect(_on_screen_entered)
 	self.screen_exited.connect(_on_screen_exited)
 	parent.was_struck.connect(just_shot)
-	Signalton.gunshot.connect(react_to_loud_noise)
+	Signalton.loud_noise.connect(react_to_loud_noise)

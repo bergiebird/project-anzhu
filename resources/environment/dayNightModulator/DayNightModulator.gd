@@ -28,7 +28,7 @@ func _ready()->void:
 	DayNighton.progress_time(time_right_before_start)
 
 func sun_change(new_time)->void:
-	print_rich("[color=#FFD700]⏰ Time has changed:[/color] [color=#87CEEB]" + modulate_dictionary[new_time]['name'] + "[/color]")
+	debug_sun_change(new_time)
 	var rgb :float = modulate_dictionary[new_time]['modulate']/255.0
 	if first_time:
 		first_time = false
@@ -58,6 +58,14 @@ func _process(delta: float) -> void:
 ###
 ## DEBUG
 ###
+@export_group('DEBUG')
+@export var debug :bool = true
+
+func debug_sun_change(new_time)->void:
+	if debug:
+		print_rich("[color=#FFD700]⏰ Time has changed:[/color] [color=#87CEEB]" + modulate_dictionary[new_time]['name'] + "[/color]")
+
+
 func init_assertions()->void:
 	assert(world_timer, "world_timer not properly instantiated in DayNightModulator.gd")
 	assert(time_to_pass, "time_to_pass not properly instantiated in DayNightModulator.gd")

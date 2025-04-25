@@ -1,5 +1,5 @@
-AudioStreamPlayer
 Node
+AudioStreamPlayer
 AudioStreamPlayer2D
 Sprite2D
 Polygon2D
@@ -12,4 +12,3 @@ Camera2D
 Node2D
 Timer
 Button
-VBoxContainer

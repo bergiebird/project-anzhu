@@ -73,6 +73,7 @@ sprite_frames = ExtResource("6_ybwxf")
 animation = &"Hit"
 autoplay = "Idle"
 script = ExtResource("3_51qta")
+debug_actions = true
 
 [node name="Idle" type="Node" parent="Animations"]
 script = ExtResource("5_gcotj")
@@ -105,7 +106,7 @@ script = ExtResource("14_1lng4")
 script = ExtResource("12_fnbe6")
 
 [node name="DirectionTimer" type="Timer" parent="Animations/Chase"]
-wait_time = 1.1
+wait_time = 1.5
 
 [node name="WallThunkTimer" type="Timer" parent="Animations/Chase"]
 one_shot = true
@@ -118,6 +119,7 @@ script = ExtResource("16_74pan")
 
 [node name="AudioManager" type="Node2D" parent="."]
 script = ExtResource("13_k8gcw")
+debug_audio = true
 
 [node name="Sfx_Hunt" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("6_cuqt7")
@@ -173,5 +175,5 @@ shape = SubResource("RectangleShape2D_jrj27")
 script = ExtResource("31_xf7mx")
 
 [connection signal="boogie_signal" from="AnimalGoals/Hunt" to="AudioManager" method="start_sfx"]
-[connection signal="sight_update" from="Eyesight" to="AnimalGoals/Hunt" method="_on_sight_update"]
+[connection signal="sight_update" from="Eyesight" to="AnimalGoals/Hunt" method="_on_spotted"]
 [connection signal="sight_update" from="Eyesight" to="AudioManager" method="start_sfx"]

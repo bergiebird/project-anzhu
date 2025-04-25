@@ -7,6 +7,11 @@ signal hit_over
 signal striking (attacking_who :AnzhuBeing, who_is_attacking :AnzhuBeing, what_weapon)
 signal was_struck
 
+enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
+var current_direction :int = PersonalDirection.EAST
+var velocity_force :Vector2
+var old_velocity_force :Vector2
+
 enum AnimalType {Walrus, Owl, Human,  Bear, Fox, Hare, Wolf, Reindeer}
 const ANIMAL_NAMES :Array[String] = ["Walrus", "Owl", "Human",  "Bear", "Fox", "Hare", "Wolf", "Reindeer"]
 
@@ -25,9 +30,25 @@ const NEW_SAFE_MARGIN :float = 0.05
 @export var this_animals_type :AnimalType = AnimalType.Walrus
 var anim :AnimatedSprite2D
 var audio :Node2D
-var is_sliding :bool = false
-var is_injured :bool = false
-var is_stunned :bool = false
+
+signal sliding(is_sliding :bool)
+var is_sliding :bool = false:
+	set(value): if value!=is_sliding:
+		is_sliding = value
+		sliding.emit(is_sliding)
+
+signal injured(is_injured :bool)
+var is_injured :bool = false:
+	set(value): if value!=is_injured:
+		is_injured = value
+		injured.emit(is_injured)
+
+signal stunned(is_stunned :bool)
+var is_stunned :bool = false:
+	set(value): if value!=is_stunned:
+		is_stunned = value
+		stunned.emit(is_stunned)
+
 var daynight_dictionary :Dictionary
 var last_known_tile_coords :Vector2i
 var scenes_nodes :Dictionary[String, Node]
@@ -81,7 +102,34 @@ func _process(delta:float)->void:
 func _physics_process(delta: float) -> void:
 	__physics_process(delta)
 	check_current_tile()
+	velocity_force_filter_for_direction(delta)
 	move_and_slide()
+
+func velocity_force_filter_for_direction(delta:float)->void:
+	if self is Player:
+		return
+	print(velocity_force)
+	if velocity_force != Vector2.ZERO and velocity_force != old_velocity_force:
+		current_direction = Directon.get_prevalent_direction(velocity_force)
+		old_velocity_force = velocity_force
+	match current_direction:
+		PersonalDirection.NORTH:
+			if anim.flip_h:
+				anim.flip_h = false
+			velocity.y -= velocity_force.y * delta
+		PersonalDirection.SOUTH:
+			if anim.flip_h:
+				anim.flip_h = false
+			velocity.y += velocity_force.y *delta
+		PersonalDirection.EAST:
+			if anim.flip_h:
+				anim.flip_h = false
+			velocity.x += velocity_force.x *delta
+		PersonalDirection.WEST:
+			if not anim.flip_h:
+				anim.flip_h = true
+			velocity.x -= velocity_force.x *delta
+	print(velocity)
 
 func check_current_tile(is_tile_forced :bool=false)->void:
 	if personal_track_map:
@@ -94,7 +142,7 @@ func check_current_tile(is_tile_forced :bool=false)->void:
 ### Signals ####################################
 
 func time_progressed(current_time :DayNighton.TimeOfDay)->void:
-	if debug_self: 
+	if debug_self:
 		print_rich('[color=eaf1f0] Time has progressed')
 	character_time_progressed(current_time)
 
