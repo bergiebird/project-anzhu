@@ -1,6 +1,7 @@
 ## Source: https://github.com/github/gitignore/blob/main/Godot.gitignore
 # Godot 4+ specific ignores
 .godot/
+/.godot/editor
 .nomedia
 
 # Godot-specific ignores
@@ -21,3 +22,6 @@ mono_crash.*.json
 # VS Code
 .history/
 *.vsix
+
+
+.godot/uid_cache.bin
