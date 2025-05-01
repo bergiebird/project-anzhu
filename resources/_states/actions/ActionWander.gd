@@ -6,7 +6,8 @@ var current_directional_velocity :Vector2 = Vector2.UP
 @onready var timer = $WanderTimer
 
 func _ready()->void:
-	timer.timeout.connect(update_direction)
+	timer.timeout.connect(func():
+		current_directional_velocity = Directon.get_vectors_with_string(parent.change_direction()))
 
 func enter()->void:
 	timer.start()
@@ -16,10 +17,7 @@ func exit()->void:
 func physics_update(delta :float)->void:
 	if grandparent.is_stunned:
 		return
-	grandparent.position += current_directional_velocity * movement_speed * delta
-
-func update_direction()->void:
-	current_directional_velocity = D.change_direction()
+	grandparent.velocity_force = current_directional_velocity * movement_speed * delta
 
 
 

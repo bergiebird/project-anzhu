@@ -4,3 +4,5 @@
 
 [node name="SnowTracker" type="Node"]
 script = ExtResource("1_qdf0k")
+
+[node name="TrackMarker" type="Marker2D" parent="."]

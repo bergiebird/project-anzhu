@@ -11,6 +11,7 @@ func _on_body_entered(body :Node2D)->void:
 	queue_free()
 
 func end_of_life()->void:
+	_end_of_life()
 	reparent_at_same_location()
 	construct_new_animation()
 	be_free()
@@ -36,6 +37,8 @@ func be_free()->void:
 	monitoring = true
 	parent.queue_free()
 
+###
+func _end_of_life()->void:pass
 ###
 ## DEBUG
 ###

@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://qpf733d2727o"]
+
+[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="1_l8sjq"]
+
+[node name="SnowTracker2D" type="Marker2D"]
+editor_description = "- The position of the SnowTracker is where the tracks will print
+- This works if and only if there are two .tres found in res://resources/anzhuBeing/snowTracker/ named \"animal name\"_slide.tres, \"animal name\"_move.tres.
+- This also requires that the main scene posesses a unique CanvasGroup called Tracks."
+script = ExtResource("1_l8sjq")

@@ -48,9 +48,14 @@ var speeds :Dictionary[int, int] = { WindSpeed.BLIZZARD      :128,
 var wind_direction :Vector2
 @onready var sfx_wind :AudioStreamPlayer2D = $WindSFX
 @onready var parent :Camera2D = get_parent()
+var player :Player
 
 func _ready() -> void:
+	_debug()
+	DayNighton.time_progressed.connect(change_weather_randomly)
+	change_weather_randomly()
 	Libraryton.reference_emitter_deferred("snowfall_reference", self)
+	Libraryton.player_reference.connect(func(ref): player = ref)
 	update_frequency(frequency, frequency)
 	update_direction(direction, direction)
 	update_speed(speed, speed)
@@ -80,10 +85,11 @@ func update_speed(val :int, old_val:int)->int:
 	return val
 
 func position_wind_sfx(tween_time)->void:
-	var position_new = parent.position - wind_direction*((speed*speed*speed+10))*10
-	var pitch_new = 1.4 - (float(frequency)*0.1)
-	Builderton.tweener(sfx_wind, "pitch_scale", pitch_new,tween_time)
-	Builderton.tweener(sfx_wind, "position", position_new,tween_time)
+	if player:
+		var position_new = parent.position - wind_direction*((speed*speed*speed+10))*10
+		var pitch_new = 1.4 - (float(frequency)*0.1)
+		Builderton.tweener(sfx_wind, "pitch_scale", pitch_new,tween_time)
+		Builderton.tweener(sfx_wind, "position", position_new,tween_time)
 
 func change_weather_randomly()->void:
 	printt('weather changed activated! Old Weather: ', speed, direction, frequency)
@@ -91,3 +97,18 @@ func change_weather_randomly()->void:
 	direction = Libraryton.random_range(0,7)
 	frequency = Libraryton.random_range(0,4)
 	printt('weather changed activated! New Weather: ', speed, direction, frequency)
+
+###
+## DEBUG
+###
+@export_group('debug')
+@export var debug :bool = false
+@export var debug_color :Color = Swatchton.WHITE_WHITE
+
+func _debug() ->void:
+	if debug:
+		Debuggerton.enable_print(self.name, debug_color)
+
+func debug_weather_changed()->void:
+	if debug:
+		Debuggerton.dprint('weather update: ' +str(speed)+str(direction)+str(frequency), debug_color)

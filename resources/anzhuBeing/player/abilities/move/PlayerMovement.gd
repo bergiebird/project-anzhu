@@ -35,11 +35,15 @@ func process_ability()->void:
 func mover(direction)->Vector2:
 	if Inputon.move(direction):
 		velocity = Directon.get_vectors_with_string(direction)
-		if Inputon.aim(direction):                 velocity = efficienctVelocity(speed_run, true)
-		elif Inputon.inverse_aim(direction):       velocity = efficienctVelocity(speed_normal, false)
+		if Inputon.aim(direction):
+			velocity = efficienctVelocity(speed_run, true)
+		elif Inputon.inverse_aim(direction):
+			velocity = efficienctVelocity(speed_normal, false)
 		else:
-			if Directon.check_direction(direction):  velocity = efficienctVelocity(speed_efficient, true)
-			else:                                    velocity = efficienctVelocity(speed_normal, false)
+			if Directon.check_direction(direction):
+				velocity = efficienctVelocity(speed_efficient, true)
+			else:
+				velocity = efficienctVelocity(speed_normal, false)
 		return velocity
 	return Vector2.ZERO
 

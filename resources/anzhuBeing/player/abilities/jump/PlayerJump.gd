@@ -1,6 +1,5 @@
 @icon("res://resources/anzhuBeing/player/abilities/jump/icons8-track-and-field-skin-type-1-100.png")
 extends Ability #PlayerJump.gd
-
 @export var jump_time :float = 1.0
 @export var jump_distance :float = 1.5
 
@@ -24,6 +23,8 @@ var elevation_map :TileMapLayer
 var parent :Abilities
 var grandparent :Player
 var landing_location :Vector2
+var only_one_may_enter :bool = true
+@onready var sfx_land :AudioStreamPlayer2D = $SfxLand
 
 func _ready() -> void:
 	Libraryton.elevation_reference.connect(func(ref):elevation_map = ref)
@@ -37,5 +38,9 @@ func process_ability()->void:
 				if landing_location != Vector2.ZERO:  current_jump_sequence = JumpSequence.ACCEPTED
 				else:                                 current_jump_sequence = JumpSequence.NONE
 		JumpSequence.ACCEPTED:
-			await get_tree().create_timer(jump_time).timeout
-			current_jump_sequence = JumpSequence.NONE
+			if only_one_may_enter:
+				only_one_may_enter = false
+				await get_tree().create_timer(jump_time).timeout
+				sfx_land.play()
+				current_jump_sequence = JumpSequence.NONE
+				only_one_may_enter = true
