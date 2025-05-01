@@ -9,7 +9,9 @@ extends PointLight2D #PlayerNightLight.gd
 
 func _ready()->void:
 	DayNighton.turn_on_night_lights.connect(update_nightlight)
-	abilities.gunfired.connect(func(bol): if bol: change_nightlight(minimum_light, fast_time))
+	abilities.gunfired.connect(func(is_gunfired :bool):
+		if is_gunfired:
+			change_nightlight(minimum_light, fast_time))
 	timer_node.timeout.connect(func():return) #visible = false
 	energy = minimum_light
 
@@ -23,8 +25,9 @@ func update_nightlight(should_nightlight_be_on :bool)->void:
 
 func change_nightlight(m_energy, wait_time)->void:
 	Builderton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)
-	if not visible: return
-		#visible = true
+	if not visible:
+		return
+#		visible = true
 	if m_energy == minimum_light:
 		timer_node.wait_time = wait_time
 		timer_node.start()

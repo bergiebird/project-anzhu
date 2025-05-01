@@ -6,7 +6,7 @@ var hurtbox :HurtBox
 var audio :AudioManager
 
 func _ready() -> void:
-	timer.timeout.connect(begin_end_of_life)
+	timer.timeout.connect(func():corpse_node.end_of_life())
 
 func enter()->void:
 	hurtbox.monitoring = false
@@ -14,18 +14,14 @@ func enter()->void:
 		audio.start_sfx(self.name)
 		timer.start()
 	else:
-		begin_end_of_life()
-
-func update(delta:float)->void:
-	pass
-
-func physics_update(delta:float)->void:
-	pass
-
-func begin_end_of_life()->void:
-	corpse_node.end_of_life()
+		corpse_node.end_of_life()
 
 func _collect_dictionary(incoming_dictionary)->void:
 	corpse_node = incoming_dictionary['Corpse']
 	hurtbox = incoming_dictionary['HurtBox']
 	audio = incoming_dictionary['AudioManager']
+
+
+
+func update(delta:float)->void: pass
+func physics_update(delta:float)->void: pass

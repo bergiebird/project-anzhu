@@ -14,8 +14,6 @@ func human_ready()->void:
 
 func __physics_process(delta :float)->void:
 	velocity = Vector2.ZERO
-	abilities.process_able()
-	anim.movement_animation(velocity)
 
 func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
@@ -27,13 +25,6 @@ func process_jump(needs_inverse :bool)->void:
 	var can_go_over_walls :bool = !needs_inverse
 	set_collision_layer_value(1, can_go_over_walls)
 	set_collision_mask_value(1, can_go_over_walls)
-
-
-
-
-
-
-
 
 
 ###

@@ -11,7 +11,7 @@
 [ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="8_i834n"]
 [ext_resource type="Script" uid="uid://c7yi1wu2k8qh2" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearEyesight.gd" id="8_jp6s3"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="11_4sorn"]
-[ext_resource type="Script" uid="uid://77r3fqyd6fhd" path="res://resources/_states/goals/GoalChase.gd" id="12_fnbe6"]
+[ext_resource type="Script" uid="uid://77r3fqyd6fhd" path="res://resources/_states/goals/ActionChase.gd" id="12_fnbe6"]
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="13_bm8wf"]
 [ext_resource type="Script" uid="uid://bjf0pj6ov15cq" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearAudio.gd" id="13_k8gcw"]
 [ext_resource type="Script" uid="uid://cv8vrn7ohwvvv" path="res://resources/_states/goals/GoalHunt.gd" id="13_kkkf8"]
@@ -27,9 +27,9 @@
 [ext_resource type="AudioStream" uid="uid://cfc7k8xu6ve63" path="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3" id="18_5puse"]
 [ext_resource type="AudioStream" uid="uid://cisjs4ks2qp54" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear Bite 1.mp3" id="24_lf0l5"]
 [ext_resource type="AudioStream" uid="uid://dy4gm4o2d242p" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear Bite 2.mp3" id="25_6237r"]
-[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="26_42w22"]
 [ext_resource type="Script" uid="uid://drtuaa2rbofev" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearHurtBox.gd" id="28_ar1ys"]
 [ext_resource type="PackedScene" uid="uid://chicyma06s6la" path="res://resources/anzhuBeing/corpse/Corpse.tscn" id="30_h6tj4"]
+[ext_resource type="PackedScene" uid="uid://qpf733d2727o" path="res://resources/anzhuBeing/snowTracker/SnowTracker2D.tscn" id="31_hho7n"]
 [ext_resource type="Script" uid="uid://ccjwxftmp5da6" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearCorpse.gd" id="31_xf7mx"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jrj27"]
@@ -44,7 +44,7 @@ size = Vector2(8, 8)
 
 [node name="Bear" type="CharacterBody2D"]
 script = ExtResource("1_6aww6")
-debug_all = true
+this_animals_type = 3
 
 [node name="Mask" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
@@ -73,7 +73,6 @@ sprite_frames = ExtResource("6_ybwxf")
 animation = &"Hit"
 autoplay = "Idle"
 script = ExtResource("3_51qta")
-debug_actions = true
 
 [node name="Idle" type="Node" parent="Animations"]
 script = ExtResource("5_gcotj")
@@ -119,9 +118,9 @@ script = ExtResource("16_74pan")
 
 [node name="AudioManager" type="Node2D" parent="."]
 script = ExtResource("13_k8gcw")
-debug_audio = true
 
 [node name="Sfx_Hunt" type="AudioStreamPlayer2D" parent="AudioManager"]
+editor_description = "Bear Hunt Music"
 stream = ExtResource("6_cuqt7")
 max_distance = 500.0
 attenuation = 1.618
@@ -131,11 +130,6 @@ bus = &"PolarBear"
 stream = ExtResource("14_t1s4a")
 max_distance = 350.0
 bus = &"SFX"
-
-[node name="Sfx_Dead" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("15_n3oor")
-volume_db = 2.0
-max_distance = 350.0
 
 [node name="Sfx_OutOfSight" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = ExtResource("16_47icu")
@@ -153,14 +147,16 @@ attenuation = 0.5
 [node name="Sfx_Strike" type="AudioStreamPlayer2D" parent="AudioManager"]
 stream = SubResource("AudioStreamRandomizer_jrj27")
 
+[node name="Sfx_Dead" type="AudioStreamPlayer2D" parent="AudioManager"]
+stream = ExtResource("15_n3oor")
+volume_db = 2.0
+max_distance = 350.0
+
 [node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.4, 0.4)
 script = ExtResource("8_jp6s3")
-
-[node name="SnowTracker" type="Node" parent="."]
-script = ExtResource("26_42w22")
 
 [node name="HurtBox" type="Area2D" parent="."]
 collision_layer = 0
@@ -174,6 +170,8 @@ shape = SubResource("RectangleShape2D_jrj27")
 [node name="Corpse" parent="." instance=ExtResource("30_h6tj4")]
 script = ExtResource("31_xf7mx")
 
-[connection signal="boogie_signal" from="AnimalGoals/Hunt" to="AudioManager" method="start_sfx"]
+[node name="SnowTracker2D" parent="." instance=ExtResource("31_hho7n")]
+position = Vector2(0, 1)
+
 [connection signal="sight_update" from="Eyesight" to="AnimalGoals/Hunt" method="_on_spotted"]
 [connection signal="sight_update" from="Eyesight" to="AudioManager" method="start_sfx"]

@@ -6,7 +6,7 @@ const FLASH_AMOUNT :int = 4
 var is_dead :bool = false
 var is_colored :bool = false
 var anim_direction :String = 'SIDE'
-var is_efficient :bool = false
+var old_flip_h :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 @onready var breath :GPUParticles2D = $Breath
 @onready var abilities :Abilities = parent.get_node('Abilities')
@@ -16,7 +16,6 @@ func _ready()->void:
 	parent.has_died.connect(func(): is_dead = true)
 	abilities.modified_reload.connect(anim_reload_modified)
 	abilities.reloading.connect(anim_reloading_recieved)
-	abilities.efficiency.connect(func(bol): is_efficient = bol)
 	abilities.initializing_jump.connect(begin_jump_animation)
 	abilities.jumping.connect(execute_jump_animations)
 	animation_finished.connect(reload_animation_finished)
@@ -43,44 +42,42 @@ func reload_animation_finished()->void:
 		if_debug('reload finished ' + animation)
 		abilities.has_full_ammo = true
 
-func movement_animation(incoming_velocity :Vector2)->void:
-	var speed = incoming_velocity.length()
+func being_physics_process(delta :float)->void:
+	var speed :int = parent.velocity.length()
 	if abilities.is_reloading or abilities.is_jumping or abilities.is_initializing_jump:
 		return
-	if speed > 30:
-		just_play('run')
-	elif 30 >= speed and speed > 0:
-		just_play('walk')
-	else:
-		just_play('idle')
+	if speed > 30:                  just_play('run')
+	elif 30 >= speed and speed > 0: just_play('walk')
+	else:                           just_play('idle')
 
-var old_flip_h :bool = false
 func just_play(anim_name :String='idle', should_stop :bool=false, force_speed_scale:int = -1)->void:
 	anim_direction = Directon.get_anim_direction()
-	if should_stop:
-		stop()
+	match anim_direction:
+		"_NORTH": breath.z_index = -1
+		"_SOUTH": breath.z_index = 1
+		"_EAST":  breath.z_index = 1
+		"_WEST":  breath.z_index = 1
+	if should_stop: stop()
 	flip_h = Directon.get_should_flip()
 	if flip_h != old_flip_h:
 		breath.change_breath_direction(flip_h)
 		old_flip_h = flip_h
 	efficiency_check(force_speed_scale)
 	play(anim_name + anim_direction)
-	if_debug("anim: " + anim_name)
+	if_debug("anim: " + anim_name + "  anim_direction:  " + anim_direction)
 
 func efficiency_check(force_speed_scale :int = -1)->void:
-	if force_speed_scale != -1:
-		speed_scale = force_speed_scale
-	elif is_efficient:
-		speed_scale = 1
-	else:
-		speed_scale = 0.60
+	if force_speed_scale != -1:  speed_scale = force_speed_scale
+	elif abilities.is_efficient: speed_scale = 1
+	else:                        speed_scale = 0.60
 
 func flash_red()->void:
 	modulate = Swatchton.RED_TOMATO
 	for flashes in FLASH_AMOUNT:
 		is_colored = !is_colored
 		self_modulate = Swatchton.RED_TOMATO if is_colored else Swatchton.BASIC_WHITE
-		if not is_dead: await get_tree().create_timer(.4).timeout
+		if not is_dead:
+			await get_tree().create_timer(.4).timeout
 	modulate = Swatchton.BASIC_WHITE
 	self_modulate = Swatchton.BASIC_WHITE
 

@@ -22,12 +22,8 @@ func character_ready()->void:
 func character_process(delta:float)->void:
 	animal_process(delta)
 
-#func character_signaler()->void:
-	#striking.connect(animal_strike)
-
 func init_scenes_nodes()->void:
 	goals = scenes_nodes['AnimalGoals']
-	mask = scenes_nodes['Mask']
 	current_action = AnimalActions.Idle
 	add_to_group('animal')
 
@@ -76,7 +72,7 @@ func stop_in_tracks(unused_string)->void:
 	velocity = Vector2.ZERO
 
 func how_should_character_die()->void:
-	print('change actions, dead')
+	#print('change actions, dead')
 	change_actions("Dead")
 	animal_death()
 

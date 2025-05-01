@@ -46,6 +46,7 @@ var is_initializing_jump :bool=false:
 		is_initializing_jump = value
 		if_debug('is initializing_jump: ' + str(is_initializing_jump))
 		initializing_jump.emit(is_initializing_jump)
+		can_move = !is_initializing_jump
 
 signal reloading(bol:bool)
 var is_reloading :bool=false:
@@ -67,6 +68,8 @@ var can_move :bool=false:
 			can_move = value
 			if_debug('can_move: '+ str(can_move))
 			enable_move.emit(can_move)
+			if can_move:
+				parent.velocity = Vector2.ZERO
 
 signal efficiency(bol:bool)
 var is_efficient :bool=false:
@@ -75,8 +78,8 @@ var is_efficient :bool=false:
 			if_debug('is_efficient: '+ str(is_efficient))
 			efficiency.emit(is_efficient)
 
-@onready var parent = get_parent()
-@onready var anim = parent.get_node('Animations')
+@onready var parent :Player = get_parent()
+@onready var anim :AnimatedSprite2D = parent.get_node('Animations')
 @onready var children_with_ability_process :Array[Node]
 
 func _ready()->void:
@@ -87,7 +90,7 @@ func _ready()->void:
 			children_with_ability_process.append(child)
 	can_move = true
 
-func process_able()->void:
+func being_physics_process(delta :float)->void:
 	for child in children_with_ability_process:
 		child.process_ability()
 

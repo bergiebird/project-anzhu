@@ -8,8 +8,8 @@ var player :Player:
 			if Signalton.saved_state:
 				set_player_position()
 var tools :Node2D
-var respawner :Marker2D
 var global_scene_dictionary :Dictionary
+@onready var respawner :Marker2D = %RespawnNode
 
 func _ready()->void:
 	assertions()
@@ -30,9 +30,6 @@ func set_global_scene_dictionary(incoming_delivery:Dictionary)->void:
 	tools = global_scene_dictionary['NODE2D']['Tools']
 	respawner = global_scene_dictionary['NODE2D']['Tools']['RespawnNode']
 	assert_set_global_scene_dictionary()
-
-
-
 
 ###
 ## DEBUG

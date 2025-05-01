@@ -65,7 +65,7 @@ func track_and_print(object, property_name, label = ""):
 @onready var pattern_that_lowercases_all = RegEx.new()
 
 # _underscore = don't use. Just for init purposes
-func _remove_digits_from_string()->void: 
+func _remove_digits_from_string()->void:
 	pattern_that_removes_digits.compile('\\d')
 
 func remove_digits_from_string(input_string :String)->String:
@@ -106,6 +106,7 @@ func getChildren_filterDictionary(dictionary :Dictionary, node :Node, callable1 
 ## Simple signals to give out the reference to anyone who wants it in the scene.
 ## reference_emitter handles emitting from all signals here.
 signal player_reference(player_ref :Player)
+var player :Player
 signal entities_reference(entities_ref :CanvasGroup)
 signal tracks_reference(tracks_ref :CanvasGroup)
 signal elevation_reference(elevation_ref :TileMapLayer)
@@ -115,8 +116,12 @@ func reference_emitter_deferred(ref_signal :String, ref)->void:
 	Callable(self, "reference_emitter").bind(ref_signal, ref).call_deferred()
 
 func reference_emitter(ref_signal :String, ref)->void:
-	#printt("Reference_emitter emitted: ", ref_signal, ref)
+	if ref is Player:
+		player = ref
 	emit_signal(ref_signal, ref)
+
+#============================================================
+
 #============================================================
 
 var rng :RandomNumberGenerator

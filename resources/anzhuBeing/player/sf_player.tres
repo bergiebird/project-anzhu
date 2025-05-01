@@ -593,7 +593,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"executeJump_NORTH",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -616,7 +616,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"executeJump_SIDE",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -639,7 +639,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"executeJump_SOUTH",
-"speed": 5.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 10.0,

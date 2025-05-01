@@ -30,13 +30,14 @@ func track_map(who :String, PATH_END :String)->TileMapLayer:
 #===========================================================#===========================================================#
 var active_tweens :Dictionary = {}
 
-func tweener_deferred(object :Variant, property :String, end_result :Variant, time :float, trans_enum :Tween.TransitionType = Tween.TRANS_LINEAR):
+func tweener_deferred(object :Variant, property :String, end_result :Variant,
+								time :float, trans_enum :Tween.TransitionType=Tween.TRANS_LINEAR):
 	return call_deferred("tweener", object, property, end_result, time, trans_enum)
 
-func tweener(object :Variant, property :String, end_result :Variant, time :float, trans_enum :Tween.TransitionType = Tween.TRANS_LINEAR):
+func tweener(object :Variant, property :String, end_result :Variant,
+					time :float, trans_enum :Tween.TransitionType=Tween.TRANS_LINEAR):
 	var tween = create_tween()
 	var key = kill_tweener(object,property)
-	#printt(tween, key)
 	active_tweens[key] = tween
 	return active_tweens[key].tween_property(object, property, end_result, time).set_trans(trans_enum)
 

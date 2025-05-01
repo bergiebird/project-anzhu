@@ -1,35 +1,44 @@
 @icon("res://resources/anzhuBeing/snowTracker/icon_grid.png")
-class_name SnowTracker extends Node #SnowTracker.gd
+class_name SnowTracker extends Marker2D #SnowTracker.gd
+
 enum AltRotation {HORIZONTAL, VERTICAL}
-const MAX_SIZE :int = 3
 const ATLAS_OFFSET :Vector2i = Vector2i(1,1)
-var map_sliding :TileMapLayer
-var map_moving :TileMapLayer
+const MAX_CELL_ARRAY_SIZE :int = 3
 var current_cells :Array[Vector2i] = []
+var last_known_tile_coords :Vector2i
+var personal_maps :Array[TileMapLayer]
 var current_map :TileMapLayer
 var can_make_tracks :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready() -> void:
-	if parent.has_node('Abilities'):
-		parent.get_node('Abilities').jumping.connect(track_enabler)
-	parent.on_new_track_tile.connect(update_tracks)
 	parent.sliding.connect(sliding_enabler)
 	Libraryton.tracks_reference.connect(setup_maps)
 
-func update_tracks(incoming_cell :Vector2i)->void:
+func being_process(delta)->void:
 	if can_make_tracks:
-		while current_cells.size() <= MAX_SIZE:
-			current_cells.push_front(incoming_cell)
-		while current_cells.size() > MAX_SIZE:
-			current_cells.pop_back()
-		var cell_new :Vector2i = current_cells[0]
-		var cell_current :Vector2i = current_cells[1]
-		var cell_previous :Vector2i = current_cells[2]
-		var from_to :Vector2i = (cell_new - cell_current) + (cell_previous - cell_current)
-		var alternative :int = determine_alternative(from_to, cell_new.x - cell_current.x)
-		from_to += ATLAS_OFFSET
-		current_map.set_cell(cell_current, 0, from_to, alternative)
+		check_current_tile()
+
+func check_current_tile()->void:
+	var current_tile_coords :Vector2i = get_track_markers_tile()
+	if current_tile_coords != last_known_tile_coords:
+		last_known_tile_coords = current_tile_coords
+		update_tracks(current_tile_coords)
+	elif last_known_tile_coords == null:
+		last_known_tile_coords = current_tile_coords
+
+func update_tracks(incoming_cell :Vector2i)->void:
+	while current_cells.size() <= MAX_CELL_ARRAY_SIZE:
+		current_cells.push_front(incoming_cell)
+	while current_cells.size() > MAX_CELL_ARRAY_SIZE:
+		current_cells.pop_back()
+	var cell_new :Vector2i = current_cells[0]
+	var cell_current :Vector2i = current_cells[1]
+	var cell_previous :Vector2i = current_cells[2]
+	var from_to :Vector2i = (cell_new - cell_current) + (cell_previous - cell_current)
+	var alternative :int = determine_alternative(from_to, cell_new.x - cell_current.x)
+	from_to += ATLAS_OFFSET
+	current_map.set_cell(cell_current, 0, from_to, alternative)
 
 func determine_alternative(from_to :Vector2i, cell_new_x :int)->int:
 	var alternative :int = AltRotation.HORIZONTAL
@@ -39,19 +48,16 @@ func determine_alternative(from_to :Vector2i, cell_new_x :int)->int:
 	return alternative
 
 func setup_maps(ref)->void:
-	var personal_maps :Array[TileMapLayer] = Builderton.create_trackMap_array(parent.name)
-	map_moving = personal_maps[0]
-	parent.personal_track_map = map_moving
-	current_map = map_moving
-	map_sliding = personal_maps[1]
+	personal_maps = Builderton.create_trackMap_array(parent.name)
+	current_map = personal_maps[0]
 	can_make_tracks = true
 	Libraryton.tracks_reference.disconnect(setup_maps)
 
-func track_enabler(is_jumping :bool)->void:
-	can_make_tracks = !is_jumping
-
 func sliding_enabler(is_sliding :bool)->void:
-	if is_sliding:
-		current_map = map_sliding
-	else:
-		current_map = map_moving
+	current_map = personal_maps[int(is_sliding)]
+
+func get_track_markers_tile()->Vector2i:
+	return current_map.local_to_map(current_map.to_local(global_position))
+
+func enable_tracks_inverse(is_jumping :bool):
+	can_make_tracks = !is_jumping

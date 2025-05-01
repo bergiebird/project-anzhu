@@ -38,7 +38,7 @@ func setup_basics()->void:
 func establish_background()->void:
 	if has_background:
 		background.color = background_color
-		parent.was_struck.connect(take_damage)
+		if parent.has_signal('was_struck'):  parent.was_struck.connect(take_damage)
 		background.size.x = mask_dimensions.x
 		background.size.y = mask_dimensions.y
 		background.position.x = mask_dimensions.x/-2

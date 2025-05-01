@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://jlicup5il7x7"]
+[gd_scene load_steps=6 format=3 uid="uid://jlicup5il7x7"]
 
 [ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/environment/objectsSmart/interactables/Interactable.gd" id="1_jcy0q"]
 [ext_resource type="Texture2D" uid="uid://be0o3t0qs3byi" path="res://warehouse/Misc/PNGs/interior.png" id="2_jcy0q"]
-[ext_resource type="PackedScene" uid="uid://cukrdvxpstpgp" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_p3y1h"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_yjwm8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbk5c"]
+size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsa77"]
 size = Vector2(10, 10)
@@ -11,12 +14,13 @@ size = Vector2(10, 10)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_jcy0q")
+debug = true
 
-[node name="Mask" parent="." instance=ExtResource("3_p3y1h")]
-editor_description = "Place this at the top of the scene tree for z_index purposes.
-"
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_gbk5c")
+script = ExtResource("2_yjwm8")
 set_mask_dimensions = 1
-release_healthbar = true
+has_healthbar = false
 
 [node name="Area2D" type="Area2D" parent="."]
 

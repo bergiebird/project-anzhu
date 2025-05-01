@@ -15,16 +15,16 @@ const VECTORS :Array[Vector2i] = [             Vector2i.UP,     Vector2i.DOWN,  
 const GUN_POSITION :Array[Vector2] = [   Vector2(0.5,-4.0), Vector2(-1.5,3.0),   Vector2(4.0,0.5), Vector2(-4.0,-0.5)]
 const SMOKE_POSITION :Array[Vector2] = [      Vector2.DOWN, Vector2(3.0, 0.0), Vector2(0.0, -5.0), Vector2(-3.0, 0.0)]
 
-func get_vectors(direction:int)->Vector2i:                return VECTORS[direction]
-func get_vectors_with_string(direction:String)->Vector2i: return VECTORS[ENUM_POS[direction]]
-func get_aim(direction)->String:                          return AIM_ACTION[ENUM_POS[direction]]
-func get_should_flip()->bool:                             return SHOULD_FLIP_H[looking_where]
-func change_direction()->Vector2i:                        return VECTORS[randi() % SIZE]
-func get_anim_direction()->String:                        return ANIM_NAME[looking_where]
-func get_current_direction()->String:                     return DIRECTIONS[looking_where]
-func check_direction(direction :String)->bool:            return DIRECTIONS.find(direction) == looking_where
-func jump_distance_calculation(distance :int)->Vector2i:  return VECTORS[looking_where] * distance
-func set_direction(direction:String)->void:                      looking_where = ENUM_POS[direction]
+func get_vectors(direction:int)->Vector2i:                        return VECTORS[direction]
+func get_vectors_with_string(direction:String)->Vector2i:         return VECTORS[ENUM_POS[direction]]
+func get_aim(direction)->String:                                  return AIM_ACTION[ENUM_POS[direction]]
+func get_should_flip()->bool:                                     return SHOULD_FLIP_H[looking_where]
+func change_direction()->String:                                  return DIRECTIONS[randi() % SIZE]
+func get_anim_direction()->String:                                return ANIM_NAME[looking_where]
+func get_current_direction(direction :int=looking_where)->String: return DIRECTIONS[direction]
+func check_direction(direction :String)->bool:                    return DIRECTIONS.find(direction) == looking_where
+func jump_distance_calculation(distance :int)->Vector2i:          return VECTORS[looking_where] * distance
+func set_direction(direction:String)->void:                              looking_where = ENUM_POS[direction]
 
 func match_current_direction(direction:String, north:Callable, south:Callable, east:Callable, west:Callable)->bool:
 	match ENUM_POS[direction]:
@@ -49,3 +49,7 @@ func get_prevalent_direction(vector :Vector2)->int:
 	elif degrees >= 45 and degrees < 135:  return Looking.SOUTH
 	elif degrees >= 135 and degrees < 225: return Looking.WEST
 	else:                                  return Looking.NORTH
+
+
+func get_DIRECTION_via_VECTOR(vector :Vector2)->String:
+	return get_current_direction(get_prevalent_direction(vector))

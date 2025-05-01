@@ -13,9 +13,9 @@ func _ready()->void:
 	assertions()
 	set_process(false)
 	match audio_mode:
-		AudioMode.DayNightAudio:           
+		AudioMode.DayNightAudio:
 			initialize_DayNightAudio()
-		AudioMode.CyclingBackgroundMusic:  
+		AudioMode.CyclingBackgroundMusic:
 			initialize_CyclingBackgroundMusic()
 	%BEGIN.play()
 
@@ -33,12 +33,11 @@ func initialize_CyclingBackgroundMusic()->void:
 		child.finished.connect(play_new_bgm)
 	dictionary_size = audio_dictionary.size()
 	await %BEGIN.finished
-	print('begin finished')
 	play_new_bgm(false)
 
-func play_new_bgm(bol:bool = true)->void:
-	if bol: await get_tree().create_timer(15.0).timeout
-	print('processing new music')
+func play_new_bgm(scene_just_started:bool = true)->void:
+	if scene_just_started:
+		await get_tree().create_timer(15.0).timeout
 	while store_new == store_old:
 		store_new = Libraryton.random_range(0, dictionary_size - 1)
 	store_old = store_new
