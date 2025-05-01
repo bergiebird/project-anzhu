@@ -2108,7 +2108,7 @@ tile_set = ExtResource("14_vtybo")
 [node name="Player" parent="NODE2D/Entities" instance=ExtResource("16_w6htp")]
 unique_name_in_owner = true
 z_index = 100
-position = Vector2(1343, 43)
+position = Vector2(1291, 53)
 collision_layer = 524801
 collision_mask = 524289
 
@@ -2231,9 +2231,9 @@ bus = &"BGM"
 position = Vector2(1344, 30)
 
 [node name="Door" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("30_7jib4")]
-position = Vector2(1367, 60)
+position = Vector2(1268, 37)
 pair = NodePath("../Door2")
 
 [node name="Door2" parent="." node_paths=PackedStringArray("pair") instance=ExtResource("30_7jib4")]
-position = Vector2(1367, 18)
+position = Vector2(220, -19)
 pair = NodePath("../Door")

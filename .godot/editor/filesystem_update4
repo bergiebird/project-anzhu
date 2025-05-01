@@ -6,15 +6,3 @@ res://resources/anzhuBeing/player/abilities/jump/PlayerJump.gd
 res://resources/anzhuBeing/player/sf_player.tres
 res://resources/anzhuBeing/anzhuAnimal/bear/visual/sf_bear.tres
 res://warehouse/_audio/sfx/walk/default_bus_layout.tres
-res://resources/anzhuBeing/player/Player.tscn
-res://main_camera.tscn
-res://resources/anzhuBeing/player/abilities/jump/jump.tscn
-res://gyms/snow_fall.gd
-res://resources/main_scene/singletons/Builderton.gd
-res://main_camera.gd
-res://resources/environment/objectsSmart/interactables/Interactable.tscn
-res://resources/environment/objectsSmart/interactables/Interactable.gd
-res://resources/anzhuBeing/mask/Mask.gd
-res://resources/main_scene/singletons/Debuggerton.gd
-res://Door.gd
-res://door.tscn
