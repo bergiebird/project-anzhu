@@ -11,7 +11,7 @@ var is_capable :bool=true:
 			capability.emit(is_capable)
 
 signal full_ammo(bol:bool)
-var has_full_ammo = true:
+var has_full_ammo :bool= true:
 	set(value): if has_full_ammo != value:
 			has_full_ammo = value
 			if_debug('has_full_ammo: '+ str(has_full_ammo))
@@ -83,16 +83,16 @@ var is_efficient :bool=false:
 @onready var children_with_ability_process :Array[Node]
 
 func _ready()->void:
-	for child in get_children():
-		child.parent = self
-		child.grandparent = parent
-		if child.has_method("process_ability"):
-			children_with_ability_process.append(child)
+	for child:Ability in get_children():
+		for property:Variant in child.get_property_list():
+			child.parent = self
+			child.grandparent = parent
+		children_with_ability_process.append(child)
 	can_move = true
 
 func being_physics_process(delta :float)->void:
-	for child in children_with_ability_process:
-		child.process_ability()
+	for child :Ability in children_with_ability_process:
+		child.process_ability(delta)
 
 ###
 ##DEBUG
@@ -100,7 +100,7 @@ func being_physics_process(delta :float)->void:
 @export_group('Debug')
 @export var debug_abilities :bool = false
 @export var debugger_color :Color = Color("eaf1f0")
-@onready var dcolor = debugger_color.to_html()
+@onready var dcolor :String = debugger_color.to_html()
 
 func debug()->void:
 	Debuggerton.enable_print(self.name, dcolor)

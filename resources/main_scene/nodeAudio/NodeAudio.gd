@@ -8,6 +8,7 @@ var store_new :int = -1
 var store_old :int = -1
 var audio_dictionary :Dictionary
 var dictionary_size :int
+@onready var bgm_begin :AudioStreamPlayer = %BEGIN
 
 func _ready()->void:
 	assertions()
@@ -17,22 +18,24 @@ func _ready()->void:
 			initialize_DayNightAudio()
 		AudioMode.CyclingBackgroundMusic:
 			initialize_CyclingBackgroundMusic()
-	%BEGIN.play()
+	bgm_begin.playing = true
 
 func initialize_DayNightAudio()->void:
-	DayNighton.time_progressed.connect(play_time_music)
-	for child in $DayNightAudio.get_children():
+	Debuggerton.signal_checker([
+		DayNighton.time_progressed.connect(play_time_music)])
+	for child :Node in $DayNightAudio.get_children():
 		audio_dictionary[child.name] = child
-	audio_dictionary['BEGIN'].play()
 
 func initialize_CyclingBackgroundMusic()->void:
 	var index :int = 0
-	for child in $CyclingBackgroundMusic.get_children():
+	for child :AudioStreamPlayer in $CyclingBackgroundMusic.get_children():
 		audio_dictionary[index] = child
 		index += 1
-		child.finished.connect(play_new_bgm)
+		Debuggerton.signal_checker([
+			child.finished.connect(play_new_bgm)
+		], debug)
 	dictionary_size = audio_dictionary.size()
-	await %BEGIN.finished
+	await bgm_begin.finished
 	play_new_bgm(false)
 
 func play_new_bgm(scene_just_started:bool = true)->void:
@@ -41,15 +44,17 @@ func play_new_bgm(scene_just_started:bool = true)->void:
 	while store_new == store_old:
 		store_new = Libraryton.random_range(0, dictionary_size - 1)
 	store_old = store_new
-	audio_dictionary[store_old].play()
+	audio_dictionary[store_old].playing = true
 	Signalton.weather_changed.emit()
 
 func play_time_music(passed_time :int = store_old)->void:
-	audio_dictionary[DayNighton.TimeOfDay.keys()[passed_time]].play()
+	audio_dictionary[DayNighton.TimeOfDay.keys()[passed_time]].playing = true
 	Signalton.weather_changed.emit()
 
 ###
 ## DEBUG
 ###
+@export var debug :bool = false
+
 func assertions()->void:
 	assert(first_time, "first_time bool is not prepared properly in NodeAudio.gd")

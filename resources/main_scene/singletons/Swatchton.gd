@@ -1,9 +1,9 @@
 extends Node #Swatchton.gd
 
 ##Non-Palette "BASIC"
-const BASIC_WHITE_TRANSPARENT = Color("ffffff00")
-const BASIC_WHITE = Color("ffffff")
-const BASIC_BLACK = Color('000000')
+const BASIC_WHITE_TRANSPARENT :Color = Color("ffffff00")
+const BASIC_WHITE :Color = Color("ffffff")
+const BASIC_BLACK :Color = Color('000000')
 
 
 ##The Palette

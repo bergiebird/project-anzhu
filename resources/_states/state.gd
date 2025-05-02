@@ -1,9 +1,12 @@
 @icon("res://warehouse/_icons/node/icon_file.png")
 class_name State extends Node #state.gd
-var parent
-var grandparent
+var parent :Node:
+	set(value): if value != parent:
+		parent = value
+		_parent_reference_acquired(parent)
+var grandparent :AnzhuAnimal
 
-func collect_dictionary(incoming_dictionary, incoming_parent)->void:
+func collect_dictionary(incoming_dictionary :Dictionary, incoming_parent :AnimalAnimations)->void:
 	parent = incoming_parent
 	grandparent = incoming_dictionary['scene_root']
 	animal_icon = grandparent.animal_icon
@@ -45,10 +48,9 @@ func on_exit()->void:
 ##VIRTUALS
 func virtual_exit()->void: pass
 func exit()->void: pass
-func get_scenes_node_dictionary(incoming_dictionary :Dictionary)->void: pass
-func _collect_dictionary(incoming_dictionary)->void: pass
-
-
+func get_scenes_node_dictionary(_incoming_dictionary :Dictionary)->void: pass
+func _collect_dictionary(_incoming_dictionary :Dictionary)->void: pass
+func _parent_reference_acquired(_parent :Node)->void:pass
 
 
 
@@ -56,5 +58,5 @@ func _collect_dictionary(incoming_dictionary)->void: pass
 ## DEBUG
 ###
 @export var self_debug :bool
-var animal_icon = ""
+var animal_icon :String = ""
 @onready var what_state_type :String = "[color=yellow][b]Goal: [/b] " + self.name + '[/color]'

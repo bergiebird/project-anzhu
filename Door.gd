@@ -2,6 +2,7 @@
 class_name Door extends Area2D
 
 @export var pair :Door
+
 var player :Player
 var is_exit :bool = false:
 	set(value): if is_exit != value:
@@ -9,19 +10,24 @@ var is_exit :bool = false:
 		if is_exit:
 			player.position = position
 
+
 func _ready() -> void:
 	_debug()
-	Libraryton.player_reference.connect(func(ref): player = ref)
-	body_entered.connect(teleport_player)
-	body_exited.connect(player_exited)
+	Debuggerton.signal_checker([
+		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref),
+		body_entered.connect(teleport_player),
+		body_exited.connect(player_exited)
+	])
 
 func teleport_player(body: Player)->void:
 	if not is_exit:
 		pair.is_exit = true
+		body.current_direction = body.PersonalDirection.SOUTH
 
-func player_exited(body: Player)->void:
+func player_exited(_body: Player)->void:
 	if is_exit:
 		is_exit = false
+
 
 ###
 ## DEBUG
@@ -29,10 +35,11 @@ func player_exited(body: Player)->void:
 @export_group('debug')
 @export var debug :bool = false
 @export var debug_color :Color = Swatchton.BROWN_DARKEST
+@onready var debug_sprite :Sprite2D = $Sprite2D
 func _debug()->void:
 	assert(pair, self.name + " does not have a pair")
 	if debug:
-		$Sprite2D.visible = true
+		debug_sprite.visible = true
 		Debuggerton.enable_print(self.name, debug_color)
 	else:
-		$Sprite2D.visible = false
+		debug_sprite.visible = false

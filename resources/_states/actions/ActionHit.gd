@@ -23,17 +23,19 @@ func enter()->void:
 
 func was_just_hit()->void:
 	parent.modulate = RED_COLOR
-	for index in BLINKS:
+	for index :int in BLINKS:
 		is_colored = !is_colored
 		parent.self_modulate = RED_COLOR if is_colored else DEFAULT_COLOR
 		await get_tree().create_timer(.4).timeout
-	grandparent.character_was_hit_over()
+	if grandparent.has_method("character_was_hit_over"):
+		grandparent.character_was_hit_over()
 
 func exit()->void:
 	parent.self_modulate = DEFAULT_COLOR
 	parent.modulate = DEFAULT_COLOR
 	hurt_box_node.monitoring = true
-	grandparent.uninjur()
+	if grandparent.has_method("uninjur"):
+		grandparent.uninjur()
 
 
 func _collect_dictionary(incoming_dictionary :Dictionary[String,Node])->void:
@@ -42,5 +44,5 @@ func _collect_dictionary(incoming_dictionary :Dictionary[String,Node])->void:
 	snow_tracker = incoming_dictionary['SnowTracker2D']
 
 # To prevent console's debug from going crazy, these are empty
-func update(delta :float)->void:return
-func physics_update(delta :float)->void:return
+func update(_delta :float)->void:return
+func physics_update(_delta :float)->void:return

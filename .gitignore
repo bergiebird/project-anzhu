@@ -25,3 +25,15 @@ mono_crash.*.json
 
 
 .godot/uid_cache.bin
+
+# Additional Godot editor files
+editor_layout.cfg
+filesystem_cache*
+filesystem_updated
+*-editstate-*
+project_metadata.cfg
+script_editor_cache.cfg
+scene_groups_cache.cfg
+uid_cache.bin
+.godot/editor/
+godot/editor/

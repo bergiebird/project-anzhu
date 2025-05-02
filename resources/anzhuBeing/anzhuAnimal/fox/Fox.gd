@@ -1,6 +1,5 @@
 @icon("res://resources/anzhuAnimal/fox/fox.png")
-class_name Fox extends AnzhuAnimal
-@onready var animal_icon = "[img]res://resources/fox/fox.png[/img]"
+class_name Fox extends AnzhuAnimal #Fox.gd
 
 func early_ready_for_debug()->void:
 	if debug_self:
@@ -9,4 +8,4 @@ func early_ready_for_debug()->void:
 
 
 func animal_ready()->void:
-	add_to_group("fox")
+	add_to_group("Fox")

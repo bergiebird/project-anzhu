@@ -3,11 +3,12 @@ class_name ActionWander extends ActionState #ActionWander.gd
 @export var movement_speed: int = 10
 var current_directional_velocity :Vector2 = Vector2.UP
 @onready var D :Directon = Directon
-@onready var timer = $WanderTimer
+@onready var timer :Timer = $WanderTimer
 
-func _ready()->void:
-	timer.timeout.connect(func():
-		current_directional_velocity = Directon.get_vectors_with_string(parent.change_direction()))
+func _parent_reference_acquired(_parent :Node)->void:
+	Debuggerton.signal_checker([
+		timer.timeout.connect(func()->void:
+			current_directional_velocity = Directon.get_vectors_with_string(str(parent.change_direction())))])
 
 func enter()->void:
 	timer.start()
@@ -23,4 +24,4 @@ func physics_update(delta :float)->void:
 
 
 
-func update(delta :float)->void: pass
+func update(_delta :float)->void: pass

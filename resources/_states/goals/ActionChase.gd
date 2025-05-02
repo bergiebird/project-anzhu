@@ -13,9 +13,9 @@ var player :Player
 @onready var direction_timer :Timer = $DirectionTimer
 
 func _ready()->void:
-	Libraryton.player_reference.connect(func(ref :Player):player=ref)
-	direction_timer.timeout.connect(move_toward_target)
-#	wall_thunk_timer.timeout.connect(func():wall_thunk_occured = false)
+	Debuggerton.signal_checker([
+		Libraryton.player_reference.connect(func(ref :Player)->void:player=ref),
+		direction_timer.timeout.connect(move_toward_target)])
 
 func enter()->void:
 	direction_timer.wait_time = INITIAL_WAIT_TIME
@@ -26,8 +26,6 @@ func move_toward_target(target_position :Vector2 = player.position)->void:
 	_direction_to_target(target_position)
 	if close_enough_to_player_then_stop_moving():
 		return
-	printt(grandparent.name, Directon.get_current_direction(grandparent.current_direction))
-	#grandparent.velocity_force = grandparent.global_position.direction_to(target_position) * chase_speed * max_speed
 
 func _direction_to_target(target_position :Vector2)->void:
 	direction_timer.wait_time = direction_times.pick_random()
@@ -44,8 +42,8 @@ func close_enough_to_player_then_stop_moving()->bool:
 func exit()->void:
 	direction_timer.stop()
 
-func physics_update(delta :float)->void:pass
-func update(delta :float)->void: pass
+func physics_update(_delta :float)->void:pass
+func update(_delta :float)->void: pass
 
 
 

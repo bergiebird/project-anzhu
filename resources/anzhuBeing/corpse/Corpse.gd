@@ -5,9 +5,11 @@ var stored_position :Vector2
 @onready var mask :CollisionShape2D = parent.get_node('Mask')
 
 func _ready()->void:
-	connect('body_entered', _on_body_entered)
+	Debuggerton.signal_checker([
+		body_entered.connect(_on_body_entered)
+	])
 
-func _on_body_entered(body :Node2D)->void:
+func _on_body_entered(_body :Node2D)->void:
 	queue_free()
 
 func end_of_life()->void:
@@ -24,7 +26,8 @@ func reparent_at_same_location()->void:
 
 func construct_new_animation()->void:
 	var new_anim :AnimatedSprite2D = AnimatedSprite2D.new()
-	new_anim.sprite_frames = parent.get_node('Animations').sprite_frames
+	var old_anims :AnimatedSprite2D = parent.get_node('Animations')
+	new_anim.sprite_frames = old_anims.sprite_frames
 	new_anim.animation = "Corpse"
 	new_anim.z_index = 1
 	add_child(new_anim)
@@ -40,6 +43,7 @@ func be_free()->void:
 ###
 func _end_of_life()->void:pass
 ###
+
 ## DEBUG
 ###
 @export_group('DEBUG')
@@ -47,9 +51,3 @@ func _end_of_life()->void:pass
 
 func debug()->void:
 	debug_corpse = true
-
-# WAREHOUSE
-#@export_group('info')
-#@export var is_edible :bool = false
-#@export var is_meat :bool = false
-#@export var energy :int = 1

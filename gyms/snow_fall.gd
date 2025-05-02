@@ -7,23 +7,17 @@ enum WindDirection{NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST
 enum WindSpeed{BLIZZARD,SQUALL,GALE,STRONGBREEZE,MODERATEBREEZE,LIGHTBREEZE,CALM,}
 ## This establishes how many particles are on screen. It simply reduces the spawn radius for severe storms and increases the radius for more calm effects. - BERGIE
 @export_enum("Blizzard","Squall", "Normal", "Dusting", "None") var frequency :int = 0:
-	set(value):
-		if value != frequency:
-			var old_value = frequency
+	set(value): if value != frequency:
+			update_frequency(value, frequency)
 			frequency = value
-			update_frequency(value, old_value)
 @export_enum("North","NorthEast","East","SouthEast","South","SouthWest","West","NorthWest") var direction :int = 0:
-	set(value):
-		if value != direction:
-			var old_value = direction
+	set(value): if value != direction:
+			update_direction(value, direction)
 			direction = value
-			update_direction(value, old_value)
 @export_enum("Blizzard", "Squall","Gale","StrongBreeze","ModerateBreeze","LightBreeze","Calm") var speed :int = 0:
-	set(value):
-		if value != speed:
-			var old_value = speed
+	set(value): if value != speed:
+			update_speed(value, speed)
 			speed = value
-			update_speed(value, old_value)
 var frequencies :Dictionary[int,float] = {FrequencyType.BLIZZARD:200.0,
 														FrequencyType.SQUALL  :300.0,
 														FrequencyType.NORMAL  :700.0,
@@ -52,51 +46,56 @@ var player :Player
 
 func _ready() -> void:
 	_debug()
-	DayNighton.time_progressed.connect(change_weather_randomly)
+	Debuggerton.signal_checker([
+		DayNighton.time_progressed.connect(func()->void: change_weather_randomly()),
+		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)])
+	Libraryton.reference_emitter_deferred("snowfall_reference", self, debug)
 	change_weather_randomly()
-	Libraryton.reference_emitter_deferred("snowfall_reference", self)
-	Libraryton.player_reference.connect(func(ref): player = ref)
 	update_frequency(frequency, frequency)
 	update_direction(direction, direction)
 	update_speed(speed, speed)
 	if not Engine.is_editor_hint():
 		sfx_wind.call_deferred("play")
 
-func update_frequency(val :int, old_val:int)->int:
-	var ftween_time = abs(val-old_val)
+func update_frequency(val :int, old_val:int)->void:
+	var ftween_time :int = abs(val-old_val)
 	if frequency == 5: emitting = false
 	else:              emitting = true
-	Builderton.tweener(process_material, "emission_sphere_radius", frequencies[val], ftween_time)
+	Debuggerton.tweener_property_disposal([
+		Builderton.tweener(process_material, "emission_sphere_radius", frequencies[val], ftween_time)
+	],debug)
 	call_deferred("position_wind_sfx", ftween_time)
-	return val
 
-func update_direction(val :int, old_val:int)->int:
-	var dtween_time = abs(val-old_val)
-	Builderton.tweener(process_material, "direction", directions[val], dtween_time)
+func update_direction(val :int, old_val:int)->void:
+	var dtween_time :int = abs(val-old_val)
+	Debuggerton.tweener_property_disposal([
+		Builderton.tweener(process_material, "direction", directions[val], dtween_time)
+	],debug)
 	wind_direction = Vector2(directions[val].x, directions[val].y)
 	call_deferred("position_wind_sfx", dtween_time)
-	return val
 
-func update_speed(val :int, old_val:int)->int:
-	var stween_time = abs(val-old_val)
-	Builderton.tweener(process_material, "linear_accel_min", speeds[val],stween_time)
-	Builderton.tweener(process_material, "linear_accel_max", speeds[val],stween_time)
+func update_speed(val :int, old_val:int)->void:
+	var stween_time :int = abs(val-old_val)
+	Debuggerton.tweener_property_disposal([
+		Builderton.tweener(process_material, "linear_accel_min", speeds[val],stween_time),
+		Builderton.tweener(process_material, "linear_accel_max", speeds[val],stween_time)
+		], debug)
 	call_deferred("position_wind_sfx", stween_time)
-	return val
 
-func position_wind_sfx(tween_time)->void:
+func position_wind_sfx(tween_time :int)->void:
 	if player:
-		var position_new = parent.position - wind_direction*((speed*speed*speed+10))*10
-		var pitch_new = 1.4 - (float(frequency)*0.1)
-		Builderton.tweener(sfx_wind, "pitch_scale", pitch_new,tween_time)
-		Builderton.tweener(sfx_wind, "position", position_new,tween_time)
+		var position_new :Vector2 = parent.position - wind_direction*((speed*speed*speed+10))*10
+		var pitch_new :float = 1.4 - (float(frequency)*0.1)
+		Debuggerton.tweener_property_disposal([
+			Builderton.tweener(sfx_wind, "pitch_scale", pitch_new, tween_time),
+			Builderton.tweener(sfx_wind, "position", position_new, tween_time)
+			], debug)
 
 func change_weather_randomly()->void:
-	printt('weather changed activated! Old Weather: ', speed, direction, frequency)
 	speed = Libraryton.random_range(0,6)
 	direction = Libraryton.random_range(0,7)
 	frequency = Libraryton.random_range(0,4)
-	printt('weather changed activated! New Weather: ', speed, direction, frequency)
+	_debug_weather_changed()
 
 ###
 ## DEBUG
@@ -109,6 +108,6 @@ func _debug() ->void:
 	if debug:
 		Debuggerton.enable_print(self.name, debug_color)
 
-func debug_weather_changed()->void:
+func _debug_weather_changed()->void:
 	if debug:
 		Debuggerton.dprint('weather update: ' +str(speed)+str(direction)+str(frequency), debug_color)

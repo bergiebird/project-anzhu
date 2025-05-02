@@ -13,13 +13,14 @@ var global_scene_dictionary :Dictionary
 
 func _ready()->void:
 	assertions()
-	Signalton.reload_scene.connect(reload_scene)
-	Inputon.hide_mouse()
-	Libraryton.global_delivery.connect(set_global_scene_dictionary)
-	Libraryton.player_reference.connect(func(ref): player = ref)
+	Debuggerton.signal_checker([
+		Signalton.reload_scene.connect(reload_scene),
+		Libraryton.global_delivery.connect(set_global_scene_dictionary),
+		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)])
 
 func reload_scene()->void:
-	get_tree().reload_current_scene()
+	var error :Error = get_tree().reload_current_scene()
+	debug_scene_reloaded(error)
 	call_deferred("set_player_position")
 
 func set_player_position()->void:
@@ -46,3 +47,8 @@ func assert_set_global_scene_dictionary()->void:
 		assert(global_scene_dictionary, "global_scene_dictionary not properly instantiated in GAME")
 		assert(tools, "Tools not properly instantdiated in GAME")
 		assert(respawner, "Respawner not properly instantiated in GAME")
+
+func debug_scene_reloaded(error :Error)->void:
+	match error:
+		OK:
+			print('GOOD!')

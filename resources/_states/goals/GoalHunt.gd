@@ -1,14 +1,14 @@
 extends GoalState #GoalHunt.gd
 
-signal boogie_signal(string_name :String)
 enum HuntDesire {None, Minimal, Hungry, Unstoppable}
 var current_hunt_desire :int = 0
 var target :AnzhuBeing
 
 func enter()->void:
-	if grandparent is Bear:
+	if grandparent.is_in_group('Bear'):
 		Audioton.can_bear_boogie(grandparent)
-	target = parent.get_parent().player
+	Debuggerton.signal_checker([
+		Libraryton.player_reference.connect(func(ref:Player)->void: target = ref)])
 	grandparent.change_actions('Chase')
 
 func update(_delta:float)->void:

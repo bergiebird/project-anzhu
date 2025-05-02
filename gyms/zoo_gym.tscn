@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://warehouse/Overworld/Resources/ground_and_water_ANZHU.png" id="1_mbc0c"]
 [ext_resource type="Script" uid="uid://djvbu6mh08co4" path="res://resources/anzhuBeing/snowTracker/SnowTracksManager.gd" id="2_4cc5g"]
-[ext_resource type="AudioStream" uid="uid://dmxh3tk3v2jdy" path="res://warehouse/_audio/ambience/368316__ivolipa__strong_waves_2.wav" id="3_nslvf"]
+[ext_resource type="AudioStream" uid="uid://dmxh3tk3v2jdy" path="res://resources/environment/coast/368316__ivolipa__strong_waves_2.wav" id="3_nslvf"]
 [ext_resource type="Script" uid="uid://b4ansl7oxxvje" path="res://resources/environment/coast/CoastalWaves.gd" id="4_rkcle"]
 [ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://warehouse/Overworld/Resources/anzhu_cliffs.png" id="5_h6hdp"]
 [ext_resource type="Texture2D" uid="uid://nxai7gqj4ivy" path="res://resources/tools/invisible walls/invisible_walls.png" id="6_co8le"]

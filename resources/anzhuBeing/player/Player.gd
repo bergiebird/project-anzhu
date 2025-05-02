@@ -4,22 +4,22 @@ class_name Player extends AnzhuHuman
 signal affect_nighlight(is_leaving_campfire :bool)
 
 @onready var camera :Camera2D = $MainCamera
-@onready var abilities: Node = $Abilities
+@onready var abilities :Abilities = $Abilities
 @onready var listener :AudioListener2D = $AudioListener2D
 @onready var nightlight :PointLight2D = $Nightlight
 
 func human_ready()->void:
-	Libraryton.reference_emitter_deferred("player_reference", self)
+	Libraryton.reference_emitter_deferred("player_reference", self, debug_self)
 	add_to_group('player')
 
-func __physics_process(delta :float)->void:
+func __physics_process(_delta :float)->void:
 	velocity = Vector2.ZERO
 
 func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
 
 func character_signaler()->void:
-	abilities.jumping.connect(process_jump)
+	Debuggerton.signal_checker([abilities.jumping.connect(process_jump)])
 
 func process_jump(needs_inverse :bool)->void:
 	var can_go_over_walls :bool = !needs_inverse
@@ -36,4 +36,4 @@ func early_ready_for_debug()->void:
 		print_rich(debug_icon)
 
 func debug()->void:
-	pass
+	assert(affect_nighlight)

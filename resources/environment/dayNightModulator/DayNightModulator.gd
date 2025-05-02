@@ -1,5 +1,5 @@
 @icon("res://warehouse/_icons/node_2D/icon_area_meteo.png")
-extends CanvasModulate #DayNightModulator.gd
+class_name DayNightModulator extends CanvasModulate #DayNightModulator.gd
 const TOO_DARK_THRESHOLD :float = 0.025
 @export_enum("DAWN", "MORNING", "NOON", "AFTERNOON", "DUSK", "NIGHT", "MIDNIGHT", "LATE_NIGHT") var starting_TimeOfDay :int = DayNighton.TimeOfDay.LATE_NIGHT
 @export var dawn_lerp_time :float = 1
@@ -24,27 +24,33 @@ func _ready( )->void:
 	init_assertions()
 	prepare_lerp_time()
 	modulate_dictionary = DayNighton.initialize(self)
-	DayNighton.time_progressed.connect(sun_change)
+	Debuggerton.signal_checker([
+		DayNighton.time_progressed.connect(sun_change)])
 	DayNighton.progress_time(starting_TimeOfDay)
 
-func sun_change(new_time )->void:
-	debug_sun_change(new_time)
+func sun_change(new_time :int)->void:
+	_debug_sun_change(new_time)
 	var rgb :float = modulate_dictionary[new_time]['modulate']/255.0
 	if first_time:
 		first_time = false
-		Builderton.tweener_deferred(self,'color',Color(rgb,rgb,rgb),0)
+		Debuggerton.tweener_property_disposal([
+			Builderton.tweener_deferred(self,'color',Color(rgb,rgb,rgb),0)], debug
+		)
 	else:
-		Builderton.tweener_deferred(self,'color', Color(rgb,rgb,rgb),modulate_dictionary[new_time]['modulate_duration'])
+		Debuggerton.tweener_property_disposal(
+			[Builderton.tweener_deferred(
+				self,'color', Color(rgb,rgb,rgb), 0)], debug)
 
 func prepare_lerp_time( )->void:
-	init_time_lerp.resize(DayNighton.TimeOfDay.size())
-	for index in range(lerp_times.size()):
+	_debug_resize(
+		init_time_lerp.resize(DayNighton.TimeOfDay.size()))
+	for index :int in range(lerp_times.size()):
 		if lerp_times[index] < 1:
 			init_time_lerp[index] = 1
 		else:
 			init_time_lerp[index] = int(time_to_pass/lerp_times[index])
 
-func _process(delta :float)->void:
+func _process(_delta :float)->void:
 	if color.r <= TOO_DARK_THRESHOLD:
 		if not is_nightlight_on:
 			DayNighton.turn_on_night_lights.emit(true)
@@ -61,10 +67,13 @@ func _process(delta :float)->void:
 @export_group('DEBUG')
 @export var debug :bool = true
 
-func debug_sun_change(new_time )->void:
+func _debug_sun_change(new_time :int)->void:
 	if debug:
 		print_rich("[color=#FFD700]⏰ Time has changed:[/color] [color=#87CEEB]" + modulate_dictionary[new_time]['name'] + "[/color]")
 
+func _debug_resize(resize_return :int)->void:
+	if debug:
+		Debuggerton.dprint(str(resize_return))
 
 func init_assertions()->void:
 	assert(time_to_pass, "time_to_pass not properly instantiated in DayNightModulator.gd")

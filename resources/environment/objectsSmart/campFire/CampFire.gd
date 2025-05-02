@@ -9,8 +9,10 @@ var player :AnzhuHuman:
 	set(value): ## If player exists, we enable this functionality.
 		if value != player:
 			player = value
-			on_camera.screen_entered.connect(func(): player.affect_nightlight.emit(false))
-			on_camera.screen_exited.connect(func(): player.affect_nightlight.emit(true))
+			Debuggerton.signal_checker([
+				on_camera.screen_entered.connect(func(): player.affect_nightlight.emit(false)),
+				on_camera.screen_exited.connect(func(): player.affect_nightlight.emit(true))
+			])
 @onready var fire_anim :AnimatedSprite2D = $CampFireAnimation
 @onready var fire_light :PointLight2D = $CampFireLight
 @onready var on_camera :VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
@@ -19,9 +21,11 @@ func _ready()->void:
 	signaler()
 
 func signaler()->void:
-	DayNighton.time_progressed.connect(lerp_light)
-	DayNighton.time_dictionary_delivery.connect(func(delivery :Dictionary): time_dictionary = delivery)
-	Libraryton.player_reference.connect(func(ref): player = ref)
+	Debuggerton.signal_checker([
+		DayNighton.time_progressed.connect(lerp_light),
+		DayNighton.time_dictionary_delivery.connect(func(delivery :Dictionary): time_dictionary = delivery),
+		Libraryton.player_reference.connect(func(ref): player = ref)
+	])
 
 ###
 ## FUNCTIONS

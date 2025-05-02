@@ -8,12 +8,13 @@ extends PointLight2D #PlayerNightLight.gd
 @onready var abilities :Abilities = get_parent().get_node('Abilities')
 
 func _ready()->void:
-	DayNighton.turn_on_night_lights.connect(update_nightlight)
-	abilities.gunfired.connect(func(is_gunfired :bool):
-		if is_gunfired:
-			change_nightlight(minimum_light, fast_time))
-	timer_node.timeout.connect(func():return) #visible = false
+	Debuggerton.signal_checker([
+		DayNighton.turn_on_night_lights.connect(update_nightlight),
+		abilities.gunfired.connect(func(is_gunfired :bool)->void: if is_gunfired: change_nightlight(minimum_light, fast_time)),
+		timer_node.timeout.connect(func()->void:return) #visible = false
+	], debug)
 	energy = minimum_light
+	_debug()
 
 func update_nightlight(should_nightlight_be_on :bool)->void:
 	if should_nightlight_be_on:
@@ -23,11 +24,12 @@ func update_nightlight(should_nightlight_be_on :bool)->void:
 		if visible:
 			change_nightlight(minimum_light, slow_time)
 
-func change_nightlight(m_energy, wait_time)->void:
-	Builderton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)
+func change_nightlight(m_energy :float, wait_time :float)->void:
+	Debuggerton.tweener_property_disposal([
+		Builderton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)
+	], debug)
 	if not visible:
 		return
-#		visible = true
 	if m_energy == minimum_light:
 		timer_node.wait_time = wait_time
 		timer_node.start()
@@ -37,7 +39,7 @@ func change_nightlight(m_energy, wait_time)->void:
 ## DEBUG
 ###
 @export_group("DEBUG")
-@export var debug_night_light = false
-func debug()->void:
-	print_rich('[color=2a2942]NightLight debugging enabled . . .[/color]')
-	debug_night_light = true
+@export var debug :bool = false
+func _debug()->void:
+	if debug:
+		print_rich('[color=2a2942]NightLight debugging enabled . . .[/color]')

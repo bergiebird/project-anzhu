@@ -12,16 +12,17 @@ var node_dictionary :Dictionary[String, Node] = {}:
 		node_dictionary = new_dictionary
 		audio = node_dictionary["AudioManager"]
 		anim = node_dictionary['Animations']
-		for child in get_children():
-			if child is State:
-				child.animal_icon = node_dictionary['scene_root'].animal_icon
-				child.grandparent = node_dictionary['scene_root']
-				child.parent = self
+		for child :State in get_children():
+			for property :Variant in child.get_property_list():
+				match property.name:
+					"animal_icon": child.animal_icon = node_dictionary['scene_root'].animal_icon
+					"grandparent": child.grandparent = node_dictionary['scene_root']
+					"parent":      child.parent = self
 
 func _ready()->void:
 	get_goals()
 
-func on_goal_transition(new_goal_name, old_goal=null)->void:
+func on_goal_transition(new_goal_name :String)->void:
 	if goal_states == {}:
 		return
 	if current_goal != null:
@@ -40,11 +41,10 @@ func transition_part_2()->void:
 	verified_goal.on_enter()
 
 func get_goals()->void:
-	for child in get_children():
-		if child is GoalState:
-			goal_states[child.name] = child
-			if debug_goals:
-				child.self_debug = true
+	for child :GoalState in get_children():
+		goal_states[child.name] = child
+		if debug_goals:
+			child.self_debug = true
 
 
 ###

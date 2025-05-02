@@ -9,12 +9,13 @@ random_volume_offset_db = 1.0
 streams_count = 1
 stream_0/stream = ExtResource("2_angh6")
 
-[node name="Jump" type="Node"]
+[node name="Jump" type="Node2D"]
 script = ExtResource("1_5i785")
 
 [node name="JumpTimer" type="Timer" parent="."]
 one_shot = true
 
-[node name="SfxLand" type="AudioStreamPlayer2D" parent="."]
+[node name="SfxLand" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_angh6")
+volume_db = -5.0
 bus = &"SFX"

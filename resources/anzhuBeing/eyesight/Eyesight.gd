@@ -1,6 +1,6 @@
 class_name Eyesight extends VisibleOnScreenNotifier2D
 
-@onready var parent = get_parent()
+@onready var parent :AnzhuBeing = get_parent()
 
 signal sight_update(string_name :String)
 
@@ -11,3 +11,4 @@ signal sight_update(string_name :String)
 @export var debug_eyesight :bool = false
 func debug()->void:
 	debug_eyesight = true
+	assert(sight_update)

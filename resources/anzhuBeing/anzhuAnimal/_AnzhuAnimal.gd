@@ -16,7 +16,7 @@ func character_ready()->void:
 	init_scenes_nodes()
 	character_signaler()
 	animal_ready()
-	change_goals(AnimalGoals.keys()[starting_goal])
+	change_goals(str(AnimalGoals.keys()[starting_goal]))
 	hurt_box = scenes_nodes['HurtBox']
 
 func character_process(delta:float)->void:
@@ -59,7 +59,7 @@ func change_goals(new_goal_name :String)->void:
 		goals.on_goal_transition(new_goal_name)
 		old_goal_name = new_goal_name
 
-func was_just_struck(damage :int, weapon, who)->void:
+func was_just_struck(_damage :int, _weapon :String, _who :AnzhuBeing)->void:
 	change_actions("Hit")
 	is_sliding = true
 	was_struck.emit()
@@ -68,17 +68,13 @@ func uninjur()->void:
 	is_injured = false
 	is_stunned = false
 
-func stop_in_tracks(unused_string)->void:
-	velocity = Vector2.ZERO
-
 func how_should_character_die()->void:
-	#print('change actions, dead')
 	change_actions("Dead")
 	animal_death()
 
 ###VIRTUALS###
 func animal_ready()->void:pass
-func animal_process(delta:float)->void: pass
+func animal_process(_delta:float)->void: pass
 
 func animal_strike()->void:pass
 func animal_death()->void: pass

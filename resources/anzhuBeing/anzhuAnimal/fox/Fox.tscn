@@ -1,7 +1,7 @@
-[gd_scene load_steps=15 format=3 uid="uid://d06bo8scbr23v"]
+[gd_scene load_steps=16 format=3 uid="uid://d06bo8scbr23v"]
 
 [ext_resource type="Script" uid="uid://du442geuk0s1v" path="res://resources/anzhuBeing/anzhuAnimal/fox/Fox.gd" id="1_yb322"]
-[ext_resource type="PackedScene" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_cuink"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_g45x1"]
 [ext_resource type="SpriteFrames" uid="uid://cfjippld3y5i3" path="res://resources/anzhuBeing/anzhuAnimal/fox/sf_fox.tres" id="3_dk85e"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalActions.gd" id="4_dk85e"]
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_k34b2"]
@@ -14,16 +14,21 @@
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="7_vlwue"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="8_jiw6w"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ro3ou"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x1vn2"]
 size = Vector2(8, 8)
 
-[node name="Fox" type="CharacterBody2D"]
+[node name="Fox" type="CharacterBody2D" groups=["Fox"]]
+position = Vector2(-1, 0)
 script = ExtResource("1_yb322")
+this_animals_type = 4
 debug_all = true
 
-[node name="Stats" parent="." instance=ExtResource("3_cuink")]
-unique_name_in_owner = true
-damage_value = 8
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ro3ou")
+script = ExtResource("2_g45x1")
+set_mask_dimensions = 1
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true

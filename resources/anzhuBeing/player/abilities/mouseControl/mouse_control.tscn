@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://7acqmb7qc7pg"]
+
+[ext_resource type="Script" uid="uid://diojajniip25g" path="res://resources/anzhuBeing/player/abilities/mouseControl/mouse_control.gd" id="1_s3l53"]
+[ext_resource type="Texture2D" uid="uid://c5iwysswhjf06" path="res://resources/anzhuBeing/player/abilities/mouseControl/cursor_idle.png" id="2_7xjkm"]
+[ext_resource type="Texture2D" uid="uid://dwct5s8apk8eh" path="res://resources/anzhuBeing/player/abilities/mouseControl/cursor_click.png" id="3_s76yc"]
+[ext_resource type="AudioStream" uid="uid://du0g21w3j2wem" path="res://resources/anzhuBeing/player/abilities/mouseControl/MenuClick.mp3" id="4_s76yc"]
+
+[node name="MouseControl" type="Node2D"]
+script = ExtResource("1_s3l53")
+
+[node name="CursorImage_Idle" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_7xjkm")
+
+[node name="CursorImage_Click" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("3_s76yc")
+
+[node name="ResetTimer" type="Timer" parent="."]
+wait_time = 0.16
+
+[node name="MenuClick" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_s76yc")

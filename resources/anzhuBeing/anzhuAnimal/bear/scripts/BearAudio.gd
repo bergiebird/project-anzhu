@@ -5,8 +5,10 @@ var sfx_hunt_count :int = 1
 var count :float = 1.0
 var first_time :bool = true
 
-func __signaler():
-	Audioton.permission_granter.connect(func(bear :Bear): if bear == parent: sfx_hunt.play())
+func __signaler()->void:
+	Debuggerton.signal_checker([
+		Audioton.permission_granter.connect(func(bear :Bear)->void: if bear == parent: sfx_hunt.play())
+	], debug)
 
 func _reset_bgm()->void:
 	sfx_hunt.volume_db = 0

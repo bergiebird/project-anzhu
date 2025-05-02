@@ -6,5 +6,5 @@ func _on_body_entered(body :AnzhuBeing)->void:
 		on_cooldown = true
 		hurt_timer.start()
 
-func _physics_process(delta :float)->void:
-	update_and_match_attacking_direction(abs(parent.get_real_velocity()))
+func _physics_process(_delta :float)->void:
+	update_and_match_attacking_direction(parent.get_real_velocity().abs())

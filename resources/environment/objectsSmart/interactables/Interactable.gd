@@ -8,21 +8,22 @@ signal interacted
 @export var interaction_exit :String = 'Have left the interaction zone'
 var player :Player
 
-func _ready():
+func _ready()->void:
 	_debug()
-	Libraryton.player_reference.connect(func(ref): player = ref)
-	interacted.connect(func():_dprint(interacted_with))
+	Debuggerton.signal_checker([
+		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref),
+		interacted.connect(func()->void:_dprint(interacted_with))])
 	set_process(false)
 
-func _on_area_2d_body_entered(body: Player) -> void:
+func _on_area_2d_body_entered(_body :Player)->void:
 	set_process(true)
 	_dprint(interaction_enter)
 
-func _process(delta: float) -> void:
+func _process(_delta :float)->void:
 	if Input.is_action_just_pressed('interact'):
 		interacted.emit()
 
-func _on_area_2d_body_exited(body: Player) -> void:
+func _on_area_2d_body_exited(_body :Player)->void:
 	set_process(false)
 	_dprint(interaction_exit)
 

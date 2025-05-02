@@ -12,10 +12,12 @@ var can_make_tracks :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready() -> void:
-	parent.sliding.connect(sliding_enabler)
-	Libraryton.tracks_reference.connect(setup_maps)
+	Debuggerton.signal_checker([
+		parent.sliding.connect(sliding_enabler),
+		Libraryton.tracks_reference.connect(setup_maps)
+	])
 
-func being_process(delta)->void:
+func being_process(_delta :float)->void:
 	if can_make_tracks:
 		check_current_tile()
 
@@ -47,7 +49,7 @@ func determine_alternative(from_to :Vector2i, cell_new_x :int)->int:
 			alternative = AltRotation.VERTICAL
 	return alternative
 
-func setup_maps(ref)->void:
+func setup_maps(_ref :CanvasGroup)->void:
 	personal_maps = Builderton.create_trackMap_array(parent.name)
 	current_map = personal_maps[0]
 	can_make_tracks = true
@@ -59,5 +61,5 @@ func sliding_enabler(is_sliding :bool)->void:
 func get_track_markers_tile()->Vector2i:
 	return current_map.local_to_map(current_map.to_local(global_position))
 
-func enable_tracks_inverse(is_jumping :bool):
+func enable_tracks_inverse(is_jumping :bool)->void:
 	can_make_tracks = !is_jumping

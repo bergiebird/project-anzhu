@@ -3,7 +3,7 @@ signal time_progressed(current_time :TimeOfDay)
 signal time_dictionary_delivery(time_dictionary :Dictionary)
 signal turn_on_night_lights(should_be_on :bool)
 enum TimeOfDay{DAWN, MORNING, NOON, AFTERNOON, DUSK, NIGHT, MIDNIGHT, LATE_NIGHT}
-const WORLD_TIMER_WAIT_TIME = 180
+const WORLD_TIMER_WAIT_TIME :int = 180
 var time_dictionary :Dictionary = {
 		TimeOfDay.DAWN: {
 			"name": "Dawn",
@@ -74,19 +74,20 @@ var current_time: TimeOfDay = TimeOfDay.DAWN
 var night_lights_on :bool
 @onready var world_timer :Timer = Timer.new()
 
-func _ready() -> void:
+func _ready()->void:
 	world_timer.wait_time = WORLD_TIMER_WAIT_TIME
 	world_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	world_timer.autostart = true
-	world_timer.timeout.connect(progress_time)
+	Debuggerton.signal_checker([
+		world_timer.timeout.connect(progress_time)])
 	add_child(world_timer)
 
-func progress_time(incoming_time :TimeOfDay=current_time)->void:
+func progress_time(_incoming_time :TimeOfDay=current_time)->void:
 	current_time = time_dictionary[current_time]["next_time"]
 	night_lights_on = time_dictionary[current_time]["night_lights_on"]
 	time_progressed.emit(current_time)
 
-func initialize(mod :CanvasModulate)->Dictionary:
+func initialize(mod :DayNightModulator)->Dictionary:
 	time_dictionary[TimeOfDay.DAWN]      ["modulate_duration"] = mod.init_time_lerp[TimeOfDay.DAWN]
 	time_dictionary[TimeOfDay.MORNING]   ["modulate_duration"] = mod.init_time_lerp[TimeOfDay.MORNING]
 	time_dictionary[TimeOfDay.NOON]      ["modulate_duration"] = mod.init_time_lerp[TimeOfDay.NOON]
@@ -97,3 +98,13 @@ func initialize(mod :CanvasModulate)->Dictionary:
 	time_dictionary[TimeOfDay.LATE_NIGHT]["modulate_duration"] = mod.init_time_lerp[TimeOfDay.LATE_NIGHT]
 	time_dictionary_delivery.emit(time_dictionary)
 	return time_dictionary
+
+###
+##	DEBUG
+###
+var debug :bool = false
+
+func _debug()->void:
+	assert(time_progressed)
+	assert(time_dictionary_delivery)
+	assert(turn_on_night_lights)

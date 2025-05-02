@@ -1,5 +1,10 @@
-Sprite2D
+Marker2D
+Node2D
+Node
 CollisionShape2D
+AudioStreamPlayer
+Timer
+Sprite2D
 ColorRect
 Area2D
 AudioStreamPlayer2D
@@ -7,8 +12,3 @@ SubViewport
 CanvasLayer
 BackBufferCopy
 Line2D
-Node2D
-Marker2D
-Node
-AudioStreamPlayer
-Polygon2D

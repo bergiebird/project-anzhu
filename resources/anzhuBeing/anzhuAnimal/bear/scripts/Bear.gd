@@ -18,4 +18,3 @@ func character_was_hit_over()->void:
 ###
 ## DEBUG
 ###
-@onready var animal_icon = "[img]res://resources/bear/bear.png[/img]"
