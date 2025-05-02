@@ -41,7 +41,7 @@ func process_gunshot()->void:
 	parent.is_gunfired = true
 	parent.has_full_ammo = false
 	parent.can_move = false
-	Directon.gunmatch(self, smoke_barrel, smoke_back, gunray)
+	Directon.gunmatch(self, smoke_barrel, smoke_back, gunray, grandparent.current_direction)
 	smoke_back.emitting = true
 	smoke_barrel.emitting = true
 	flash = true

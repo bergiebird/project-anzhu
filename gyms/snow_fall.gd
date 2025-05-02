@@ -47,7 +47,7 @@ var player :Player
 func _ready() -> void:
 	_debug()
 	Debuggerton.signal_checker([
-		DayNighton.time_progressed.connect(func()->void: change_weather_randomly()),
+		DayNighton.time_progressed.connect(func(current_time :DayNighton.TimeOfDay)->void: change_weather_randomly()),
 		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)])
 	Libraryton.reference_emitter_deferred("snowfall_reference", self, debug)
 	change_weather_randomly()

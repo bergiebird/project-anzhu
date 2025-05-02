@@ -1,4 +1,5 @@
 extends AudioStreamPlayer2D #CoastalWaves.gd
+
 var player :Player:
 	set(value): if player != value:
 		player = value
@@ -12,8 +13,8 @@ func _ready()->void:
 	coastline.default_color = Swatchton.BASIC_WHITE_TRANSPARENT
 	set_process(false)
 	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect(func(ref:Player)->void: player = ref)
-	])
+		Libraryton.player_reference.connect(func(ref:Player)->void:
+			player = ref)], debug)
 	_debug()
 
 func _process(_delta :float)->void:

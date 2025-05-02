@@ -37,7 +37,7 @@ func mover(direction :String)->Vector2:
 		elif Inputon.inverse_aim(direction):
 			velocity = efficienctVelocity(speed_normal, false)
 		else:
-			if Directon.check_direction(direction):
+			if Directon.ENUM_POS[direction] == grandparent.current_direction:
 				velocity = efficienctVelocity(speed_efficient, true)
 			else:
 				velocity = efficienctVelocity(speed_normal, false)

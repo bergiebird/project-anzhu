@@ -36,8 +36,8 @@ func setup_basics()->void:
 		])
 	if parent.has_method("set_collision_layer_value"):
 		parent.set_collision_layer_value(5,true)
-	collision_shape.size.x = snapped(mask_dimensions.x - 0.05, 0.01)
-	collision_shape.size.y = snapped(mask_dimensions.y - 0.05, 0.01)
+	collision_shape.size.x = snapped(mask_dimensions.x - 0.1, 0.01)
+	collision_shape.size.y = snapped(mask_dimensions.y - 0.1, 0.01)
 
 func establish_background()->void:
 	if has_background:
