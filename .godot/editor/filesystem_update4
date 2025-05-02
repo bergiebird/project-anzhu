@@ -1,8 +1,0 @@
-res://resources/anzhuBeing/anzhuAnimal/bear/audio/default_bus_layout.tres
-res://resources/main_scene/game/GAME.tscn
-res://warehouse/Overworld/ts_arctic_all.tres
-res://resources/anzhuBeing/player/abilities/jump/PlayerJump.gd
-res://resources/anzhuBeing/player/sf_player.tres
-res://CRT.gdshader
-res://resources/anzhuBeing/anzhuAnimal/bear/visual/sf_bear.tres
-res://warehouse/_audio/sfx/walk/default_bus_layout.tres
