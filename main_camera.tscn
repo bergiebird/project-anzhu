@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=20 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://main_camera.gd" id="1_7nf1k"]
 [ext_resource type="Texture2D" uid="uid://b0pohqgdvwsf4" path="res://resources/environment/snowfall/snowflake.png" id="1_x31i4"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="3_oeyyd"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/environment/dayNightModulator/DayNightModulator.gd" id="4_1xu36"]
 [ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://CRT.gdshader" id="6_wtti6"]
+[ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_06wol"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
 offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
@@ -139,3 +140,32 @@ offset_right = 150.0
 offset_bottom = 150.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerUi" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Reload_Button" type="Button" parent="PlayerUi"]
+offset_left = -96.0
+offset_top = -96.0
+offset_right = 90.0
+offset_bottom = -56.0
+theme = ExtResource("7_06wol")
+text = "Reload Scene"
+
+[node name="Label" type="Label" parent="PlayerUi"]
+layout_mode = 0
+offset_left = -72.0
+offset_top = 45.0
+offset_right = 72.0
+offset_bottom = 96.0
+theme = ExtResource("7_06wol")
+text = " we   ui
+asd   jkl"
+
+[connection signal="pressed" from="PlayerUi/Reload_Button" to="." method="_on_quit_button_pressed"]

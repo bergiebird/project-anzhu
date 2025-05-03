@@ -108,4 +108,15 @@ pitch_scale = 0.7
 unique_name_in_owner = true
 visible = false
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
 [connection signal="jumping" from="Abilities" to="SnowTracker2D" method="enable_tracks_inverse"]

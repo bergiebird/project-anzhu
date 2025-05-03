@@ -39,9 +39,13 @@ func modifier()->bool:
 func gun_reload()->bool:
 	return Input.is_action_just_pressed('gun')
 
+signal cursor_visibility(bol :bool)
+
 func hide_cursor()->void:
+	cursor_visibility.emit(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 func reveal_cursor()->void:
+	cursor_visibility.emit(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 
 func gun_shoot()->bool:

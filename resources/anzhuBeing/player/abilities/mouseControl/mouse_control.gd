@@ -8,9 +8,11 @@ var mouse_idle_timer :float = TIMER_RESETTED:
 		mouse_idle_timer = value
 		match Input.get_mouse_mode():
 			Input.MOUSE_MODE_VISIBLE:
-				if mouse_idle_timer >= mouse_idle_threshold: Inputon.hide_cursor()
+				if mouse_idle_timer >= mouse_idle_threshold:
+					Inputon.hide_cursor()
 			Input.MOUSE_MODE_HIDDEN:
-				if mouse_idle_timer == TIMER_RESETTED:       Inputon.reveal_cursor()
+				if mouse_idle_timer == TIMER_RESETTED:
+					Inputon.reveal_cursor()
 
 var current_cursor :Texture2D:
 	set(value): if value!=current_cursor:
@@ -26,6 +28,7 @@ var current_mouse_position :Vector2
 
 func _ready() -> void:
 	current_cursor = sprite_idle.texture
+	Inputon.hide_cursor()
 	Debuggerton.signal_checker([
 		timer_reset.timeout.connect(func()->void:current_cursor = sprite_idle.texture)
 	])

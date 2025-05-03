@@ -15,12 +15,6 @@ func _ready() -> void:
 	_debug()
 
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_released('quit'):
-		reload_scene.emit()
-
-
-
 ###
 ##	DEBUG
 ###

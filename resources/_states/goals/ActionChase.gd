@@ -14,8 +14,9 @@ var player :Player
 
 func _ready()->void:
 	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect(func(ref :Player)->void:player=ref),
-		direction_timer.timeout.connect(move_toward_target)])
+		Libraryton.player_reference.connect(func(ref :Player)->void:
+			player=ref),
+		direction_timer.timeout.connect(move_toward_target)], debug)
 
 func enter()->void:
 	direction_timer.wait_time = INITIAL_WAIT_TIME
@@ -46,9 +47,12 @@ func physics_update(_delta :float)->void:pass
 func update(_delta :float)->void: pass
 
 
+###
+##	DEBUG
+###
 
-
-
+@export_group('Debug')
+@export var debug :bool = false
 
 
 

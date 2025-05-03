@@ -28,8 +28,9 @@ func process_jump(needs_inverse :bool)->void:
 
 
 ###
-##Debug
+##	Debug
 ###
+
 func early_ready_for_debug()->void:
 	if debug_self:
 		debug_icon = "[img]res://resources/player/player.png[/img]"
