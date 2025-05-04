@@ -23,17 +23,17 @@ general/default_playback_type.web=0
 
 [autoload]
 
-Signalton="*res://resources/main_scene/singletons/Signalton.gd"
-Directon="*res://resources/main_scene/singletons/Directon.gd"
-DayNighton="*res://resources/main_scene/singletons/DayNighton.gd"
-Audioton="*res://resources/main_scene/singletons/Audioton.gd"
-Libraryton="*res://resources/main_scene/singletons/Libraryton.gd"
-Debuggerton="*res://resources/main_scene/singletons/Debuggerton.gd"
-Screenshoton="*res://resources/main_scene/singletons/Screenshoton.gd"
-Swatchton="*res://resources/main_scene/singletons/Swatchton.gd"
-Inputon="*res://resources/main_scene/singletons/Inputon.gd"
-Builderton="*res://resources/main_scene/singletons/Builderton.gd"
-Staton="*res://resources/main_scene/singletons/Staton.gd"
+Signalton="*res://resources/tools/Signalton.gd"
+Directon="*res://resources/anzhuBeing/Directon.gd"
+DayNighton="*res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNighton.gd"
+Audioton="*res://gyms/main_scene/nodeAudio/Audioton.gd"
+Libraryton="*res://resources/tools/Libraryton.gd"
+Debuggerton="*res://resources/tools/Debuggerton.gd"
+Screenshoton="*res://resources/tools/Screenshoton.gd"
+Swatchton="*res://resources/tools/Swatchton.gd"
+Inputon="*res://resources/anzhuBeing/player/Inputon.gd"
+Builderton="*res://resources/tools/Builderton.gd"
+Staton="*res://resources/anzhuBeing/Staton.gd"
 
 [debug]
 

@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c0gafng5vkfn8"
+path="res://.godot/imported/Late Night.mp3-bd7862e1b31d4b101478f2162c288f41.mp3str"
+
+[deps]
+
+source_file="res://gyms/main_scene/nodeAudio/dayNightAudio/Late Night.mp3"
+dest_files=["res://.godot/imported/Late Night.mp3-bd7862e1b31d4b101478f2162c288f41.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -6,8 +6,6 @@ func animal_ready()->void:
 	add_to_group("Bear")
 	current_speed = move_speed
 
-func animal_strike()->void:
-	pass
 
 func character_was_hit_over()->void:
 	hit_over.emit()
