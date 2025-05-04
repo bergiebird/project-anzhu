@@ -1,23 +1,31 @@
-[gd_scene load_steps=20 format=3 uid="uid://b5id41tdwyrd4"]
+[gd_scene load_steps=23 format=3 uid="uid://b5id41tdwyrd4"]
 
 [ext_resource type="Script" uid="uid://d3odvoyfq8ttm" path="res://resources/anzhuBeing/player/Player.gd" id="1_e4mdq"]
 [ext_resource type="Script" uid="uid://82hfueor42tn" path="res://resources/anzhuBeing/player/abilities/PlayerAbilities.gd" id="2_3v2ag"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_el3np"]
 [ext_resource type="Script" uid="uid://bayu55ve5ewdv" path="res://resources/anzhuBeing/player/PlayerAnimations.gd" id="3_ro5pv"]
 [ext_resource type="PackedScene" uid="uid://4h8x1njhms85" path="res://resources/anzhuBeing/player/abilities/jump/jump.tscn" id="7_el3np"]
-[ext_resource type="PackedScene" uid="uid://7acqmb7qc7pg" path="res://resources/anzhuBeing/player/abilities/mouseControl/mouse_control.tscn" id="7_ou8og"]
+[ext_resource type="PackedScene" uid="uid://7acqmb7qc7pg" path="res://resources/anzhuBeing/player/abilities/mouseControl/MouseControl.tscn" id="7_ou8og"]
 [ext_resource type="SpriteFrames" uid="uid://cwrpcmfndlfq1" path="res://resources/anzhuBeing/player/sf_player.tres" id="8_lkdrv"]
 [ext_resource type="PackedScene" uid="uid://qpf733d2727o" path="res://resources/anzhuBeing/snowTracker/SnowTracker2D.tscn" id="10_0oy7p"]
 [ext_resource type="Script" uid="uid://dwl8j1ftfgflh" path="res://resources/anzhuBeing/player/abilities/move/PlayerMovement.gd" id="10_m88x0"]
+[ext_resource type="Script" uid="uid://c0areapnvjvhb" path="res://resources/anzhuBeing/player/ReloadAnimation.gd" id="11_0tu2h"]
 [ext_resource type="PackedScene" uid="uid://b3100fbxnsgc0" path="res://resources/anzhuBeing/player/abilities/gun/GunShot.tscn" id="11_f1ej7"]
 [ext_resource type="PackedScene" uid="uid://dvcwerhsil0og" path="res://resources/anzhuBeing/breath/Breath.tscn" id="12_el3np"]
 [ext_resource type="AudioStream" uid="uid://dt8tbpw6y5t1o" path="res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres" id="13_85ffw"]
+[ext_resource type="AudioStream" uid="uid://dq25p2belirhm" path="res://resources/anzhuBeing/player/abilities/jump/Land(Equip2).mp3" id="13_buxeu"]
 [ext_resource type="Script" uid="uid://dikpaw3yn24t7" path="res://resources/anzhuBeing/player/PlayerNightLight.gd" id="13_f1ej7"]
 [ext_resource type="Script" uid="uid://dj1o0pt3w2llr" path="res://resources/anzhuBeing/player/PlayerAudio.gd" id="14_el3np"]
 [ext_resource type="AudioStream" uid="uid://bq7ijkrb81e5d" path="res://warehouse/_audio/sfx/reload.wav" id="14_iu2d7"]
-[ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/main_camera.tscn" id="15_y6uby"]
+[ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.tscn" id="15_y6uby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b3xi"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_edqir"]
+random_pitch = 1.3
+random_volume_offset_db = 2.0
+streams_count = 1
+stream_0/stream = ExtResource("13_buxeu")
 
 [sub_resource type="Gradient" id="Gradient_3v2ag"]
 offsets = PackedFloat32Array(0.409589, 0.778082, 0.80411, 1)
@@ -63,12 +71,24 @@ jump_distance = 3.0
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
 position = Vector2(0, -1)
 sprite_frames = ExtResource("8_lkdrv")
-animation = &"idle_SIDE"
+animation = &"reload_SOUTH_Stuff"
 autoplay = "idle_SIDE"
 script = ExtResource("3_ro5pv")
 debugger_color = Color(0.901961, 0.478431, 0.517647, 1)
 
 [node name="Breath" parent="Animations" instance=ExtResource("12_el3np")]
+
+[node name="ReloadAnimation" type="Node" parent="Animations"]
+script = ExtResource("11_0tu2h")
+
+[node name="SfxStuff" type="AudioStreamPlayer" parent="Animations/ReloadAnimation"]
+stream = ExtResource("14_iu2d7")
+volume_db = -10.0
+pitch_scale = 0.7
+
+[node name="SfxThonk" type="AudioStreamPlayer" parent="Animations/ReloadAnimation"]
+stream = SubResource("AudioStreamRandomizer_edqir")
+pitch_scale = 2.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 current = true
@@ -100,8 +120,9 @@ volume_db = 3.0
 bus = &"SFX"
 
 [node name="ReloadSFX" type="AudioStreamPlayer2D" parent="AudioManager"]
+process_mode = 4
 stream = ExtResource("14_iu2d7")
-volume_db = -10.0
+volume_db = -5.0
 pitch_scale = 0.7
 
 [node name="MainCamera" parent="." instance=ExtResource("15_y6uby")]

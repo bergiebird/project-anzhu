@@ -10,6 +10,7 @@ var old_flip_h :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 @onready var breath :GPUParticles2D = $Breath
 @onready var abilities :Abilities = parent.get_node('Abilities')
+@onready var reload_anim :ReloadAnimation = $ReloadAnimation
 
 func _ready()->void:
 	Debuggerton.signal_checker([
@@ -21,17 +22,16 @@ func _ready()->void:
 		abilities.reloading.connect(anim_reloading_recieved),
 		abilities.initializing_jump.connect(begin_jump_animation),
 		abilities.jumping.connect(execute_jump_animations),
-		animation_finished.connect(reload_animation_finished),
 	])
 
 func anim_reloading_recieved(is_reloading:bool)->void:
 	if is_reloading:
 		abilities.can_move = false
-		just_play('reload', true, 1)
+		reload_anim.start_routine()
 
 func anim_reload_modified(is_reload_modified :bool)->void:
 	if is_reload_modified:
-		speed_scale+= modified_speed_up
+		speed_scale += modified_speed_up
 
 func execute_jump_animations(is_jumping :bool)->void:
 	if is_jumping:
@@ -49,19 +49,21 @@ func reload_animation_finished()->void:
 func being_physics_process(_delta :float)->void:
 	var speed :int = int(parent.velocity.length())
 	if abilities.is_reloading or abilities.is_jumping or abilities.is_initializing_jump:
+		print('stopped')
 		return
 	if speed > 30:
 		just_play('run')
 	elif 30 >= speed and speed > 0:
 		just_play('walk')
 	else:
+		print('idled')
 		just_play('idle')
 
 func flipper(should_flip :bool=flip_h)->void:
 	if flip_h != should_flip:
 		flip_h = should_flip
 
-func just_play(anim_name :String='idle', should_stop :bool=false, force_speed_scale:int = -1)->void:
+func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int = -1)->void:
 	anim_direction = Directon.ANIM_NAME[parent.current_direction]
 	if should_stop:
 		stop()

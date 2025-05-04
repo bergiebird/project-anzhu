@@ -1,5 +1,7 @@
 extends Node #Signalton.gd
 
+var emit_for :Callable = Callable(self, "emit_signal")
+
 signal loud_noise(who :AnzhuBeing, where :Vector2, noise_db :float)
 signal gunshot
 signal time_progressed
@@ -18,6 +20,7 @@ func reload_current_scene()->void:
 	saved_state = true
 	var error :Error = get_tree().reload_current_scene()
 	debug_scene_reloaded(error)
+
 
 ###
 ##	DEBUG

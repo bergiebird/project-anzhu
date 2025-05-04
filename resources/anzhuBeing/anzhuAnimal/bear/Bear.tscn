@@ -1,7 +1,7 @@
 [gd_scene load_steps=34 format=3 uid="uid://dr7gmcq3ydu2b"]
 
 [ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/Bear.gd" id="1_6aww6"]
-[ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/anzhuBeing/Mask.tres" id="2_h6tj4"]
+[ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/anzhuBeing/mask/Mask.tres" id="2_h6tj4"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalActions.gd" id="3_51qta"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="3_xf7mx"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="5_gcotj"]

@@ -11,7 +11,7 @@ enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
 signal direction_should_flip(should_flip :bool)
 signal direction_changed(direction_int :int)
 signal direction_changed_named(direction_string :String)
-var current_direction :int = PersonalDirection.EAST:
+var current_direction :int:
 	set(value): if current_direction != value:
 		current_direction = value
 		var named_direction :String = Directon.get_current_direction(current_direction)
@@ -81,6 +81,7 @@ func setup_basics()->void:
 	set_motion_mode(MOTION_MODE_FLOATING)
 	set_safe_margin(NEW_SAFE_MARGIN)
 	animal_name = ANIMAL_NAMES[this_animals_type]
+	current_direction = PersonalDirection.EAST
 
 func create_and_ship_scene_nodes()->void:
 	scenes_nodes["scene_root"] = self
