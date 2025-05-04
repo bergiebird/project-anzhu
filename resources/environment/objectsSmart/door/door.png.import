@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0pohqgdvwsf4"
-path="res://.godot/imported/snowflake.png-d92a7fdc941c0013de8aaf45954846bf.ctex"
+uid="uid://ctd5h0hfobwdn"
+path="res://.godot/imported/door.png-4bff35bebf7c69dbb3e69dc9b093adc6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://resources/environment/snowfall/snowflake.png"
-dest_files=["res://.godot/imported/snowflake.png-d92a7fdc941c0013de8aaf45954846bf.ctex"]
+source_file="res://resources/environment/objectsSmart/door/door.png"
+dest_files=["res://.godot/imported/door.png-4bff35bebf7c69dbb3e69dc9b093adc6.ctex"]
 
 [params]
 

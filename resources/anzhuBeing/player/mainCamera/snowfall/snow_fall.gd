@@ -1,4 +1,4 @@
-@icon("res://warehouse/icons/node/icon_gear.png")
+@icon("res://resources/anzhuBeing/player/mainCamera/snowfall/snowflake.png")
 class_name SnowFall extends GPUParticles2D #SnowFall.gd
 
 @export_group('Weather Control')

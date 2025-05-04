@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://dr7gmcq3ydu2b" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear.tscn" id="8_ugmm3"]
 [ext_resource type="Texture2D" uid="uid://pio4q5jvles3" path="res://warehouse/Overworld/PNGs/proto_tiles.png" id="9_4rbuu"]
 [ext_resource type="FontFile" uid="uid://d3rlsmkfww0cc" path="res://warehouse/fonts/[5x6] Direct Message/Direct_Message_Blocky.ttf" id="10_35tqv"]
-[ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://main_camera.tscn" id="10_nslvf"]
+[ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/main_camera.tscn" id="10_nslvf"]
 [ext_resource type="PackedScene" uid="uid://b2ioppk5nryv5" path="res://gyms/ui_canvas.tscn" id="11_qtx55"]
-[ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/environment/dayNightModulator/DayNightModulator.gd" id="12_gqld3"]
+[ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="12_gqld3"]
 [ext_resource type="Script" uid="uid://pss6faxg1mjw" path="res://resources/main_scene/nodeAudio/NodeAudio.gd" id="13_jbsmn"]
 [ext_resource type="AudioStream" uid="uid://dt8tbpw6y5t1o" path="res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres" id="14_njfni"]
 [ext_resource type="AudioStream" uid="uid://b75k7g21yhkww" path="res://resources/main_scene/nodeAudio/DayNightAudio/Begin.mp3" id="15_ropwa"]
@@ -25,6 +25,7 @@
 [ext_resource type="AudioStream" uid="uid://djx5omk6t2ytb" path="res://resources/main_scene/nodeAudio/DayNightAudio/Night.mp3" id="21_rfvj2"]
 [ext_resource type="AudioStream" uid="uid://c0gafng5vkfn8" path="res://resources/main_scene/nodeAudio/DayNightAudio/Late Night.mp3" id="22_ms5q7"]
 [ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="23_ikt0q"]
+
 
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ij44i"]

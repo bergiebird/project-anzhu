@@ -1,7 +1,5 @@
 class_name ElevationsLayer extends TileMapLayer #ElevationsLayer.gd
-
 var player :Player
-
 
 func _ready() -> void:
 	Libraryton.reference_emitter_deferred("elevation_reference", self, debug)

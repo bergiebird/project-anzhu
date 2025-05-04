@@ -15,7 +15,7 @@
 [ext_resource type="Script" uid="uid://dikpaw3yn24t7" path="res://resources/anzhuBeing/player/PlayerNightLight.gd" id="13_f1ej7"]
 [ext_resource type="Script" uid="uid://dj1o0pt3w2llr" path="res://resources/anzhuBeing/player/PlayerAudio.gd" id="14_el3np"]
 [ext_resource type="AudioStream" uid="uid://bq7ijkrb81e5d" path="res://warehouse/_audio/sfx/reload.wav" id="14_iu2d7"]
-[ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://main_camera.tscn" id="15_y6uby"]
+[ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/main_camera.tscn" id="15_y6uby"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b3xi"]
 

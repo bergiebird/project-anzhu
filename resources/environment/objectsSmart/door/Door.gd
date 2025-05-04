@@ -1,4 +1,4 @@
-@icon("res://warehouse/icons/color/icon_teleporter.png")
+@icon("res://resources/environment/objectsSmart/door/door.png")
 class_name Door extends Area2D
 
 @export var pair :Door
@@ -9,7 +9,6 @@ var is_exit :bool = false:
 		is_exit = value
 		if is_exit:
 			player.position = position
-
 
 func _ready() -> void:
 	_debug()
@@ -28,6 +27,13 @@ func player_exited(_body: Player)->void:
 	if is_exit:
 		is_exit = false
 
+func _player_reference_collection(ref :Player)->void:
+	player = ref
+	if is_connected("player_reference", _player_reference_collection):
+		print('success, it is connected')
+	disconnect("player_reference", _player_reference_collection)
+	if Libraryton.is_connected("player_reference", _player_reference_collection):
+		print('need libraryton')
 
 ###
 ## DEBUG
@@ -35,7 +41,8 @@ func player_exited(_body: Player)->void:
 @export_group('debug')
 @export var debug :bool = false
 @export var debug_color :Color = Swatchton.BROWN_DARKEST
-@onready var debug_sprite :Sprite2D = $Sprite2D
+@onready var debug_sprite :Sprite2D = $DebugSprite
+
 func _debug()->void:
 	assert(pair, self.name + " does not have a pair")
 	if debug:

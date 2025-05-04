@@ -1,10 +1,12 @@
-[gd_scene load_steps=38 format=4 uid="uid://bu2w1ukm7uknj"]
+[gd_scene load_steps=40 format=4 uid="uid://bu2w1ukm7uknj"]
 
 [ext_resource type="Script" uid="uid://dla6qde00tedb" path="res://resources/main_scene/game/Game.gd" id="1_hajrx"]
 [ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://warehouse/Overworld/Resources/ground_and_water_ANZHU.png" id="2_wces6"]
-[ext_resource type="PackedScene" uid="uid://bhwvyudx4h5te" path="res://resources/environment/coast/coastline.tscn" id="4_wejbm"]
+[ext_resource type="AudioStream" uid="uid://dmxh3tk3v2jdy" path="res://resources/environment/coast/368316__ivolipa__strong_waves_2.wav" id="3_hk611"]
+[ext_resource type="Script" uid="uid://b4ansl7oxxvje" path="res://resources/environment/coast/CoastalWaves.gd" id="4_wtms1"]
 [ext_resource type="Script" uid="uid://djvbu6mh08co4" path="res://resources/anzhuBeing/snowTracker/SnowTracksManager.gd" id="5_7d02y"]
 [ext_resource type="Script" uid="uid://dumkemcgc1464" path="res://resources/main_scene/game/walls.gd" id="6_tq4j5"]
+[ext_resource type="Texture2D" uid="uid://5kqnbmce5t0e" path="res://warehouse/icons/node/icon_gem.png" id="6_wejbm"]
 [ext_resource type="Script" uid="uid://dry6fdehuce4j" path="res://resources/main_scene/game/Entities.gd" id="9_oowd6"]
 [ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://warehouse/Overworld/Resources/anzhu_cliffs.png" id="12_egt5h"]
 [ext_resource type="Texture2D" uid="uid://pio4q5jvles3" path="res://warehouse/Overworld/PNGs/proto_tiles.png" id="13_opnh5"]
@@ -25,7 +27,7 @@
 [ext_resource type="AudioStream" uid="uid://jfa2si1nbvr6" path="res://resources/main_scene/nodeAudio/DayNightAudio/Noon.mp3" id="28_2rxaw"]
 [ext_resource type="AudioStream" uid="uid://dqm5vov4853q1" path="res://resources/main_scene/nodeAudio/DayNightAudio/Afternoon.mp3" id="29_5pxv5"]
 [ext_resource type="PackedScene" uid="uid://jlicup5il7x7" path="res://resources/environment/objectsSmart/interactables/Interactable.tscn" id="29_wejbm"]
-[ext_resource type="PackedScene" uid="uid://bpweuigbu6cib" path="res://resources/environment/objectsSmart/door/door.tscn" id="30_7jib4"]
+[ext_resource type="PackedScene" uid="uid://bpweuigbu6cib" path="res://door.tscn" id="30_7jib4"]
 [ext_resource type="AudioStream" uid="uid://danm16q6et1a8" path="res://resources/main_scene/nodeAudio/DayNightAudio/Dusk.wav" id="30_wy8nc"]
 [ext_resource type="AudioStream" uid="uid://djx5omk6t2ytb" path="res://resources/main_scene/nodeAudio/DayNightAudio/Night.mp3" id="31_hmmxb"]
 [ext_resource type="AudioStream" uid="uid://c0gafng5vkfn8" path="res://resources/main_scene/nodeAudio/DayNightAudio/Late Night.mp3" id="32_h6j3v"]
@@ -2033,6 +2035,7 @@ unique_name_in_owner = true
 editor_description = "Character tracks, it is important that all tracks are the same color and only vary by transparency."
 z_index = -4095
 script = ExtResource("5_7d02y")
+metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
 [node name="Water" type="CanvasGroup" parent="NODE2D"]
@@ -2048,8 +2051,26 @@ tile_map_data = PackedByteArray("AAAyAKkAAAACAA0AAAAyAKgAAAACAA0AAAAyAKcAAAACAA0
 tile_set = SubResource("TileSet_460u4")
 metadata/_edit_lock_ = true
 
-[node name="Coastline" parent="NODE2D/Water" instance=ExtResource("4_wejbm")]
+[node name="Coastline" type="Line2D" parent="NODE2D/Water"]
+visible = false
 position = Vector2(191, -368)
+points = PackedVector2Array(17, 28, 17, 336, 11, 336, 9, 1224, 129, 1224, 129, 1208, 725, 1208, 725, 1224, 729, 1224, 729, 1228, 809, 1228, 809, 1232, 1297, 1232)
+default_color = Color(1, 1, 1, 0)
+metadata/_edit_lock_ = true
+
+[node name="Waves" type="AudioStreamPlayer2D" parent="NODE2D/Water/Coastline"]
+editor_description = "At the moment, this follows the player's Y value while having a fixed X value. "
+position = Vector2(11, 630)
+stream = ExtResource("3_hk611")
+autoplay = true
+max_distance = 500.0
+attenuation = 2.0
+bus = &"Waves"
+script = ExtResource("4_wtms1")
+
+[node name="DebugPosition" type="Sprite2D" parent="NODE2D/Water/Coastline/Waves"]
+visible = false
+texture = ExtResource("6_wejbm")
 
 [node name="Walls" type="CanvasGroup" parent="NODE2D"]
 editor_description = "Anything that contains a dumb environmental collision should be here.
@@ -2236,3 +2257,5 @@ stream = ExtResource("32_h6j3v")
 bus = &"BGM"
 
 [node name="Tools" type="Node" parent="NODE"]
+
+[node name="ConsoleDev" type="Node" parent="NODE/Tools"]

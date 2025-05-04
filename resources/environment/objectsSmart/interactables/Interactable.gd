@@ -6,13 +6,16 @@ signal interacted
 @export var interaction_enter :String = "Press F to interact"
 @export var interacted_with :String = "This is a note."
 @export var interaction_exit :String = 'Have left the interaction zone'
+@onready var area2d :Area2D = $Area2D
 var player :Player
 
 func _ready()->void:
 	_debug()
 	Debuggerton.signal_checker([
+		area2d.body_entered.connect(_on_area_2d_body_entered),
+		area2d.body_exited.connect(_on_area_2d_body_exited),
 		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref),
-		interacted.connect(func()->void:_dprint(interacted_with))])
+		interacted.connect(func()->void:_dprint(interacted_with))], debug)
 	set_process(false)
 
 func _on_area_2d_body_entered(_body :Player)->void:

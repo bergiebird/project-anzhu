@@ -1,4 +1,4 @@
-@icon("res://warehouse/_icons/node_2D/icon_area_meteo.png")
+@icon("res://resources/anzhuBeing/player/mainCamera/dayNightModulator/icon_area_meteo.png")
 class_name DayNightModulator extends CanvasModulate #DayNightModulator.gd
 const TOO_DARK_THRESHOLD :float = 0.025
 @export_enum("DAWN", "MORNING", "NOON", "AFTERNOON", "DUSK", "NIGHT", "MIDNIGHT", "LATE_NIGHT") var starting_TimeOfDay :int = DayNighton.TimeOfDay.LATE_NIGHT

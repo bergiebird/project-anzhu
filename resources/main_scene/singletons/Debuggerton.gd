@@ -1,5 +1,5 @@
 extends Node #Debuggerton.gd
-var personal_debug :bool = true
+var personal_debug :bool = false
 
 func enable_print(message:String, debugger_color:Color)->void:
 	print_rich('[color='+debugger_color.to_html()+']'+message+' debugging enabled . . .[/color]')

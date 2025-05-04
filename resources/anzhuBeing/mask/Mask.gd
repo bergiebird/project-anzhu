@@ -17,7 +17,7 @@ extends CollisionShape2D #Mask.gd
 var mask_dimensions :Vector2
 var max_hp :int
 var abilities :Abilities
-@onready var parent :Node = get_parent()
+@onready var parent :CollisionObject2D = get_parent()
 @onready var background :ColorRect = ColorRect.new()
 @onready var healthbar :ColorRect = ColorRect.new()
 @onready var collision_shape :RectangleShape2D = shape

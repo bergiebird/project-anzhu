@@ -1,11 +1,11 @@
 [gd_scene load_steps=20 format=3 uid="uid://bqyubqk75ak53"]
 
-[ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://main_camera.gd" id="1_7nf1k"]
-[ext_resource type="Texture2D" uid="uid://b0pohqgdvwsf4" path="res://resources/environment/snowfall/snowflake.png" id="1_x31i4"]
-[ext_resource type="Script" uid="uid://bpm73yq251nvw" path="res://gyms/snow_fall.gd" id="2_oeyyd"]
+[ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/main_camera.gd" id="1_7nf1k"]
+[ext_resource type="Texture2D" uid="uid://b0pohqgdvwsf4" path="res://resources/anzhuBeing/player/mainCamera/snowfall/snowflake.png" id="1_x31i4"]
+[ext_resource type="Script" uid="uid://bpm73yq251nvw" path="res://resources/anzhuBeing/player/mainCamera/snowfall/snow_fall.gd" id="2_oeyyd"]
 [ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="3_oeyyd"]
-[ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/environment/dayNightModulator/DayNightModulator.gd" id="4_1xu36"]
-[ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://CRT.gdshader" id="6_wtti6"]
+[ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="4_1xu36"]
+[ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://resources/ui/CRT.gdshader" id="6_wtti6"]
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_06wol"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
@@ -151,6 +151,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Reload_Button" type="Button" parent="PlayerUi"]
+layout_mode = 0
 offset_left = -96.0
 offset_top = -96.0
 offset_right = 90.0

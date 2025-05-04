@@ -2,16 +2,12 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi2hx24s0msbj"
-path="res://.godot/imported/icon_area_meteo.png-272e897102f1e3b56871136a05f63667.ctex"
-metadata={
-"vram_texture": false
-}
+uid="uid://bu746eyu21wo"
+valid=false
 
 [deps]
 
-source_file="res://warehouse/icons/node_2D/icon_area_meteo.png"
-dest_files=["res://.godot/imported/icon_area_meteo.png-272e897102f1e3b56871136a05f63667.ctex"]
+source_file="res://warehouse/icons/node_2D/icon_event.png"
 
 [params]
 
