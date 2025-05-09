@@ -11,6 +11,7 @@ var old_flip_h :bool = false
 @onready var breath :GPUParticles2D = $Breath
 @onready var abilities :Abilities = parent.get_node('Abilities')
 @onready var reload_anim :ReloadAnimation = $ReloadAnimation
+@export var is_printing :bool = false ##HACK by Vrood
 
 func _ready()->void:
 	Debuggerton.signal_checker([
@@ -49,14 +50,14 @@ func reload_animation_finished()->void:
 func being_physics_process(_delta :float)->void:
 	var speed :int = int(parent.velocity.length())
 	if abilities.is_reloading or abilities.is_jumping or abilities.is_initializing_jump:
-		print('stopped')
+		if is_printing: print('stopped') ## HACK by Vrood
 		return
 	if speed > 30:
 		just_play('run')
 	elif 30 >= speed and speed > 0:
 		just_play('walk')
 	else:
-		print('idled')
+		if is_printing: print('idled')
 		just_play('idle')
 
 func flipper(should_flip :bool=flip_h)->void:

@@ -5,14 +5,15 @@ class_name CampFire extends StaticBody2D #CampFire.gd
 @export var is_lit :bool = true
 var tween :Tween
 var time_dictionary :Dictionary
-var player :AnzhuHuman:
+@export var player :AnzhuHuman :
 	set(value): ## If player exists, we enable this functionality.
 		if value != player:
 			player = value
-			Debuggerton.signal_checker([
-				on_camera.screen_entered.connect(func(): player.affect_nightlight.emit(false)),
-				on_camera.screen_exited.connect(func(): player.affect_nightlight.emit(true))
-			])
+			##HACK: Commented out to get around error: Invalid access to property or key 'screen_entered' on a base object of type 'Nil'.
+			#Debuggerton.signal_checker([
+				#on_camera.screen_entered.connect(func(): player.affect_nightlight.emit(false)),
+				#on_camera.screen_exited.connect(func(): player.affect_nightlight.emit(true))
+			#])
 @onready var fire_anim :AnimatedSprite2D = $CampFireAnimation
 @onready var fire_light :PointLight2D = $CampFireLight
 @onready var on_camera :VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
