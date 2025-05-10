@@ -1,6 +1,7 @@
+res://resources/environment/objectsSmart/collectible
+res://resources/ui
 res://resources/tools/elevationsLayer
 res://resources/environment/coast
-res://resources/ui
 res://resources/anzhuBeing/mask
 res://resources/anzhuBeing/player/abilities/mouseControl
 res://warehouse/UI/PNGs
@@ -8,7 +9,6 @@ res://
 res://resources/anzhuBeing/snowTracker
 /home/bergiebird/Current/Godot/projects/exports/anzhu/2025_04_25_928
 res://resources/anzhuBeing/player
-res://resources/environment/objectsDumb
 /home/bergiebird/.local/share/fonts/comic-code
 /home/bergiebird/Current/Godot/projects/exports/anzhu/031518052025
 res://warehouse/Animals/PNGs

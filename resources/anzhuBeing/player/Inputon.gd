@@ -41,6 +41,8 @@ func modifier()->bool:
 func gun_reload()->bool:
 	return Input.is_action_just_pressed('gun')
 
+func escape()->bool:
+	return Input.is_action_just_released("esc")
 
 func hide_cursor()->void:
 	cursor_movement_report.emit(false)

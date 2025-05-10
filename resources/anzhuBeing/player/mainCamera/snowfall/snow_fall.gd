@@ -46,9 +46,8 @@ var player :Player
 
 func _ready() -> void:
 	_debug()
-	Debuggerton.signal_checker([
-		DayNighton.time_progressed.connect(func(current_time :DayNighton.TimeOfDay)->void: change_weather_randomly()),
-		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)])
+	DayNighton.time_progressed.connect(func(_current_time :DayNighton.TimeOfDay)->void: change_weather_randomly())
+	Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)
 	Libraryton.reference_emitter_deferred("snowfall_reference", self, debug)
 	change_weather_randomly()
 	update_frequency(frequency, frequency)
@@ -92,14 +91,14 @@ func position_wind_sfx(tween_time :int)->void:
 			], debug)
 
 func change_weather_randomly()->void:
-	speed = Libraryton.random_range(0,6)
-	direction = Libraryton.random_range(0,7)
-	frequency = Libraryton.random_range(0,4)
+	speed = Libraryton.rng.randi_range(0,6)
+	direction = Libraryton.rng.randi_range(0,7)
+	frequency = Libraryton.rng.randi_range(0,4)
 	_debug_weather_changed()
 
-###
-## DEBUG
-###
+
+#region DEBUG
+
 @export_group('debug')
 @export var debug :bool = false
 @export var debug_color :Color = Swatchton.WHITE_WHITE
@@ -111,3 +110,5 @@ func _debug() ->void:
 func _debug_weather_changed()->void:
 	if debug:
 		Debuggerton.dprint('weather update: ' +str(speed)+str(direction)+str(frequency), debug_color)
+
+#endregion

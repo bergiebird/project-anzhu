@@ -134,9 +134,6 @@ func _rng()->void:
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 
-func random_range(minimum :int, maximum :int)->int:
-	return rng.randi_range(minimum, maximum)
-
 
 ###
 ## 	DEBUG

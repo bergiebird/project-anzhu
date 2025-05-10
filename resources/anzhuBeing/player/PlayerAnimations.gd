@@ -8,22 +8,20 @@ var is_colored :bool = false
 var anim_direction :String = '_SIDE'
 var old_flip_h :bool = false
 @onready var parent :AnzhuBeing = get_parent()
-@onready var breath :GPUParticles2D = $Breath
+@onready var mask :Mask = parent.get_node("Mask")
 @onready var abilities :Abilities = parent.get_node('Abilities')
+@onready var breath :GPUParticles2D = $Breath
 @onready var reload_anim :ReloadAnimation = $ReloadAnimation
-@export var is_printing :bool = false ##HACK by Vrood
 
 func _ready()->void:
-	Debuggerton.signal_checker([
-		parent.was_struck.connect(flash_red),
-		parent.has_died.connect(func()->void: is_dead = true),
-		parent.direction_should_flip.connect(func(should_flip:bool)->void:
-			flip_h = should_flip),
-		abilities.modified_reload.connect(anim_reload_modified),
-		abilities.reloading.connect(anim_reloading_recieved),
-		abilities.initializing_jump.connect(begin_jump_animation),
-		abilities.jumping.connect(execute_jump_animations),
-	])
+	parent.was_struck.connect(flash_red)
+	mask.has_died.connect(func()->void: is_dead = true)
+	parent.direction_should_flip.connect(func(should_flip:bool)->void: flip_h = should_flip)
+	abilities.modified_reload.connect(anim_reload_modified)
+	abilities.reloading.connect(anim_reloading_recieved)
+	abilities.initializing_jump.connect(begin_jump_animation)
+	abilities.jumping.connect(execute_jump_animations)
+
 
 func anim_reloading_recieved(is_reloading:bool)->void:
 	if is_reloading:
@@ -50,14 +48,14 @@ func reload_animation_finished()->void:
 func being_physics_process(_delta :float)->void:
 	var speed :int = int(parent.velocity.length())
 	if abilities.is_reloading or abilities.is_jumping or abilities.is_initializing_jump:
-		if is_printing: print('stopped') ## HACK by Vrood
+		if_debug('stopped')
 		return
 	if speed > 30:
 		just_play('run')
 	elif 30 >= speed and speed > 0:
 		just_play('walk')
 	else:
-		if is_printing: print('idled')
+		if_debug('idled')
 		just_play('idle')
 
 func flipper(should_flip :bool=flip_h)->void:
@@ -87,9 +85,7 @@ func flash_red()->void:
 	modulate = Swatchton.BASIC_WHITE
 	self_modulate = Swatchton.BASIC_WHITE
 
-###
-## DEBUG
-###
+#region DEBUG
 @export_group('Debug')
 @export var debug_animations :bool = false
 @export var debugger_color :Color = Color("e67a84")
@@ -101,3 +97,5 @@ func debug()->void:
 func if_debug(message :String)->void:
 	if debug_animations:
 		Debuggerton.dprint(message, debugger_color)
+
+#endregion

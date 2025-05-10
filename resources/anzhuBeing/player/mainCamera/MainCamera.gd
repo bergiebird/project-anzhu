@@ -4,9 +4,8 @@ class_name MainCamera extends Camera2D #MainCamera.gd
 
 func _ready()->void:
 	visible = true
-	Debuggerton.signal_checker([
-		Inputon.cursor_movement_report.connect(_on_cursor_visibility_changed),
-	], debug)
+	Inputon.cursor_movement_report.connect(_on_cursor_visibility_changed)
+	_on_cursor_visibility_changed(false)
 
 
 func _reload_scene_on_press() -> void:

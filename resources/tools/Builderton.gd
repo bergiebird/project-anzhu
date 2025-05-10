@@ -52,3 +52,7 @@ func kill_tweener(object :Object, property :String)->String:
 
 func get_key(object :Object, property:String)->String:
 	return str(object.get_instance_id()) + property
+#===========================================================#===========================================================#
+
+func create_ColorRect()->void:
+	pass

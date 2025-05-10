@@ -8,11 +8,9 @@ extends PointLight2D #PlayerNightLight.gd
 @onready var abilities :Abilities = get_parent().get_node('Abilities')
 
 func _ready()->void:
-	Debuggerton.signal_checker([
-		DayNighton.turn_on_night_lights.connect(update_nightlight),
-		abilities.gunfired.connect(func(is_gunfired :bool)->void: if is_gunfired: change_nightlight(minimum_light, fast_time)),
-		timer_node.timeout.connect(func()->void:return) #visible = false
-	], debug)
+	DayNighton.time_progressed_nightlight.connect(update_nightlight)
+	abilities.gunfired.connect(gun_was_fired)
+	timer_node.timeout.connect(func()->void:return) #visible = false
 	energy = minimum_light
 	_debug()
 
@@ -23,6 +21,9 @@ func update_nightlight(should_nightlight_be_on :bool)->void:
 	else:
 		if visible:
 			change_nightlight(minimum_light, slow_time)
+
+func gun_was_fired(did_gun_fire :bool)->void:
+	if did_gun_fire: change_nightlight(minimum_light, fast_time)
 
 func change_nightlight(m_energy :float, wait_time :float)->void:
 	Debuggerton.tweener_property_disposal([

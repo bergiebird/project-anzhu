@@ -1,16 +1,15 @@
 class_name AnzhuBeing extends CharacterBody2D #_AnzhuBeing.gd
 
 signal made_loud_noise (who :AnzhuBeing, how_loud :float)
-signal has_died
 signal on_new_track_tile (new_tile_coordinates :Vector2i)
 signal hit_over
 signal striking (attacking_who :AnzhuBeing, who_is_attacking :AnzhuBeing, what_weapon :Variant)
 signal was_struck
 
 enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
-signal direction_should_flip(should_flip :bool)
-signal direction_changed(direction_int :int)
-signal direction_changed_named(direction_string :String)
+signal direction_should_flip(bool)
+signal direction_changed(int)
+signal direction_changed_named(String)
 var current_direction :int:
 	set(value): if current_direction != value:
 		current_direction = value
@@ -66,7 +65,7 @@ var scenes_nodes :Dictionary[String, Node]
 var player :Player
 var being_process_array :Array[Node]
 var being_physics_process_array :Array[Node]
-
+@onready var mask :Mask = $Mask
 ### READY #################################
 
 func _ready()->void:
@@ -93,17 +92,22 @@ func create_and_ship_scene_nodes()->void:
 			if child_node.has_method("being_process"):         being_process_array.append(child_node)
 			if child_node.has_method("being_physics_process"): being_physics_process_array.append(child_node)
 	anim = scenes_nodes['Animations']
-	audio = scenes_nodes['AudioManager']
 
 func signaler()->void:
-	Debuggerton.signal_checker([
-		DayNighton.time_dictionary_delivery.connect(func(delivery :Dictionary)->void:daynight_dictionary = delivery),
-		DayNighton.time_progressed.connect(time_progressed),
-		Libraryton.player_reference.connect(func(ref :Player)->void:player = ref),
-		was_struck.connect(process_character_strike),
-		has_died.connect(how_should_character_die)
-	], debug_self)
+	DayNighton.time_dictionary_delivery.connect(get_daynight_dictionary)
+	DayNighton.time_progressed.connect(time_progressed)
+	Libraryton.player_reference.connect(get_player_reference)
+	was_struck.connect(process_character_strike)
+	mask.has_died.connect(how_should_character_die)
 	character_signaler()
+
+func get_player_reference(ref :Player)->void:
+	player = ref
+	Libraryton.player_reference.disconnect(get_player_reference)
+
+func get_daynight_dictionary(delivery :Dictionary)->void:
+	daynight_dictionary = delivery
+	DayNighton.time_dictionary_delivery.disconnect(get_daynight_dictionary)
 
 ### PROCESS ####################################
 
@@ -121,23 +125,16 @@ func _physics_process(delta: float) -> void:
 		pass #Place collision with wall code here
 
 func velocity_force_filter_for_direction(delta:float)->void:
-	if self is Player:
-		return
-	if velocity_force != Vector2.ZERO:
-		var new_direction :int = Directon.get_prevalent_direction(velocity_force)
-		if current_direction != new_direction: current_direction = new_direction
-	match current_direction:
-		PersonalDirection.NORTH:
-			velocity.y -= velocity_force.y * delta
-		PersonalDirection.SOUTH:
-			velocity.y += velocity_force.y *delta
-		PersonalDirection.EAST:
-			velocity.x += velocity_force.x *delta
-		PersonalDirection.WEST:
-			velocity.x -= velocity_force.x *delta
-	velocity_force = Vector2.ZERO
-
-
+	if self is not Player:
+		if velocity_force != Vector2.ZERO:
+			var new_direction :int = Directon.get_prevalent_direction(velocity_force)
+			if current_direction != new_direction: current_direction = new_direction
+		match current_direction:
+			PersonalDirection.NORTH:  velocity.y -= velocity_force.y * delta
+			PersonalDirection.SOUTH:  velocity.y += velocity_force.y *delta
+			PersonalDirection.EAST:   velocity.x += velocity_force.x *delta
+			PersonalDirection.WEST:   velocity.x -= velocity_force.x *delta
+		velocity_force = Vector2.ZERO
 
 ### Signals ####################################
 
@@ -157,7 +154,7 @@ func was_just_struck(damage :int, weapon :String, who:AnzhuBeing)->void:
 		process_character_strike()
 		was_struck.emit()
 
-###VIRTUALS####################################
+#region # VIRTUALS
 func __physics_process(_delta:float)->void:pass
 func parse_incoming_damage(_damage :int, _weapon :String, _who:AnzhuBeing)->bool: return true
 func how_should_character_die()->void: pass
@@ -168,8 +165,9 @@ func character_process(_delta:float)->void:pass
 func character_time_progressed(_current_time :DayNighton.TimeOfDay)->void: pass
 func process_character_strike()->void:pass
 func character_was_hit_over()->void: pass
-###VIRTUALS####################################
+#endregion
 
+#region Debug
 @export_group('DEBUG')
 @export var debug_all :bool = false
 @export var debug_self :bool = false
@@ -184,20 +182,8 @@ func initialize_debugging()->void:
 	else:
 		debug_lambda = func(_child :Node)->void:pass
 	early_ready_for_debug()
-	assertions()
 
 func if_debug(message :String)->void:
 	if debug_self:
 		Debuggerton.dprint(message)
-
-func assertions()->void:
-	if debug_self:
-		assert(made_loud_noise)
-		assert(has_died)
-		assert(on_new_track_tile)
-		assert(hit_over)
-		assert(striking)
-		assert(was_struck)
-		assert(direction_should_flip)
-		assert(direction_changed)
-		assert(direction_changed_named)
+#endregion

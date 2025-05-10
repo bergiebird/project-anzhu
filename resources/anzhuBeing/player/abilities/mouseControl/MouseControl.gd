@@ -29,9 +29,8 @@ var current_mouse_position :Vector2
 func _ready()->void:
 	current_cursor = sprite_idle.texture
 	Inputon.hide_cursor()
-	Debuggerton.signal_checker([
-		timer_reset.timeout.connect(func()->void:current_cursor = sprite_idle.texture)
-	])
+	timer_reset.timeout.connect(func()->void:current_cursor = sprite_idle.texture)
+
 
 
 func process_ability(delta :float)->void:
@@ -44,9 +43,9 @@ func process_ability(delta :float)->void:
 		previous_mouse_position = current_mouse_position
 
 func _input(event :InputEvent)->void:
-	if event is InputEventMouseButton and Inputon.left_mouse_release():
+	if event is InputEventMouseButton and Inputon.left_mouse_release() or Inputon.escape():
 		current_cursor = sprite_click.texture
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN: 
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN:
 			mouse_idle_timer = TIMER_RESETTED
 
 
@@ -54,6 +53,3 @@ func execute_click()->void:
 	if current_cursor == sprite_click.texture: #This prevents multiple executions
 		sfx_click.play()
 		timer_reset.start()
-
-func is_entity()->void:
-	pass

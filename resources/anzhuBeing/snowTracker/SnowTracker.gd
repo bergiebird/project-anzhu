@@ -12,10 +12,10 @@ var can_make_tracks :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready() -> void:
-	Debuggerton.signal_checker([
-		parent.sliding.connect(sliding_enabler),
-		Libraryton.tracks_reference.connect(setup_maps)
-	])
+	if parent is Player:
+		parent.get_node('Abilities').jumping.connect(track_set_for_jump)
+	parent.sliding.connect(sliding_enabler)
+	Libraryton.tracks_reference.connect(setup_maps)
 
 func being_process(_delta :float)->void:
 	if can_make_tracks:
@@ -61,5 +61,6 @@ func sliding_enabler(is_sliding :bool)->void:
 func get_track_markers_tile()->Vector2i:
 	return current_map.local_to_map(current_map.to_local(global_position))
 
-func enable_tracks_inverse(is_jumping :bool)->void:
-	can_make_tracks = !is_jumping
+func track_set_for_jump(is_jumping :bool)->void:
+	if is_jumping: can_make_tracks = false
+	else:          can_make_tracks = true

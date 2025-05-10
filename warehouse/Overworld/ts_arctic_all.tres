@@ -1,8 +1,9 @@
-[gd_resource type="TileSet" load_steps=7 format=3 uid="uid://io7ysittrqe2"]
+[gd_resource type="TileSet" load_steps=9 format=3 uid="uid://io7ysittrqe2"]
 
 [ext_resource type="Texture2D" uid="uid://dmf5w3rvo712t" path="res://warehouse/Overworld/PNGs/arctic.png" id="1_oh8xw"]
 [ext_resource type="Texture2D" uid="uid://dsjaoi0jd7e7o" path="res://warehouse/Overworld/PNGs/original.png" id="2_iomjw"]
 [ext_resource type="Texture2D" uid="uid://bnab78iefsocj" path="res://warehouse/Overworld/PNGs/ocean.png" id="2_lwst1"]
+[ext_resource type="PackedScene" uid="uid://dtdhu37x0dhxo" path="res://resources/environment/objectsSmart/collectible/Wood.tscn" id="5_gjvmd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qeyib"]
 texture = ExtResource("1_oh8xw")
@@ -3044,6 +3045,10 @@ texture_region_size = Vector2i(8, 8)
 4:43/0 = 0
 4:43/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_gjvmd"]
+resource_name = "Collectibles"
+scenes/2/scene = ExtResource("5_gjvmd")
+
 [resource]
 tile_size = Vector2i(8, 8)
 physics_layer_0/collision_layer = 1
@@ -3052,3 +3057,4 @@ custom_data_layer_0/type = 4
 sources/0 = SubResource("TileSetAtlasSource_qeyib")
 sources/2 = SubResource("TileSetAtlasSource_4bcoa")
 sources/1 = SubResource("TileSetAtlasSource_gjvmd")
+sources/3 = SubResource("TileSetScenesCollectionSource_gjvmd")

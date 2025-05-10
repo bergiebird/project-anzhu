@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3100fbxnsgc0"]
+[gd_scene load_steps=9 format=3 uid="uid://b3100fbxnsgc0"]
 
 [ext_resource type="Script" uid="uid://88twws4eaxq0" path="res://resources/anzhuBeing/player/abilities/gun/Gun.gd" id="1_1tum2"]
+[ext_resource type="AudioStream" uid="uid://dt8tbpw6y5t1o" path="res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres" id="2_mnp2n"]
 
 [sub_resource type="Gradient" id="Gradient_d1bta"]
 offsets = PackedFloat32Array(0, 0.0805195, 0.628571)
@@ -97,3 +98,8 @@ rotation = 1.5708
 target_position = Vector2(120, 0)
 collision_mask = 16
 collide_with_bodies = false
+
+[node name="SfxGunshot" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_mnp2n")
+volume_db = 3.0
+bus = &"SFX"

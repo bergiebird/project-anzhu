@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://c0pl44e11q0uf"]
+[gd_scene load_steps=37 format=3 uid="uid://c0pl44e11q0uf"]
 
 [ext_resource type="Script" uid="uid://ce1y6f37kb76j" path="res://resources/environment/objectsSmart/campFire/CampFire.gd" id="1_ggvyn"]
 [ext_resource type="Texture2D" uid="uid://b5golrueqxb8h" path="res://warehouse/Structures/PNGs/original.png" id="2_fmlbm"]
@@ -6,7 +6,9 @@
 [ext_resource type="Texture2D" uid="uid://dnj80iffowsn1" path="res://warehouse/Structures/PNGs/arctic.png" id="3_hc0ee"]
 [ext_resource type="Texture2D" uid="uid://c43gja4g441vn" path="res://resources/environment/objectsSmart/campFire/camp_fire_light.tres" id="4_8np16"]
 [ext_resource type="AudioStream" uid="uid://dgnxwh4t4p2vs" path="res://warehouse/_audio/sfx/Campfire.mp3" id="7_6e312"]
+[ext_resource type="PackedScene" uid="uid://jlicup5il7x7" path="res://resources/environment/objectsSmart/interactables/Interactable.tscn" id="8_jyux6"]
 [ext_resource type="AudioStream" uid="uid://buls2uubesprq" path="res://warehouse/_audio/music/bgm/Menu (start - I think).mp3" id="8_obei1"]
+[ext_resource type="Shape2D" uid="uid://ksw2huxa5fht" path="res://resources/environment/objectsSmart/collectible/interaction_shape.tres" id="9_lc4nv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jyux6"]
 
@@ -238,34 +240,39 @@ animations = [{
 [node name="CampFire" type="StaticBody2D"]
 script = ExtResource("1_ggvyn")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_jyux6")
 script = ExtResource("2_mi3f3")
+set_mask_dimensions = 1
 
 [node name="CampFireAnimation" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -4)
 sprite_frames = SubResource("SpriteFrames_wmliu")
-animation = &"unlit"
+animation = &"lit"
 autoplay = "unlit"
-frame_progress = 0.44404
 
 [node name="CampFireLight" type="PointLight2D" parent="."]
+visible = false
+energy = 0.1
+range_z_min = -4096
+range_z_max = 4096
 shadow_filter = 2
 texture = ExtResource("4_8np16")
 
-[node name="Sfx_Crackle" type="AudioStreamPlayer2D" parent="."]
+[node name="SfxCrackle" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("7_6e312")
-autoplay = true
 max_distance = 75.0
-attenuation = 0.5
 bus = &"SFX"
 
-[node name="Bgm_CalmCampfire" type="AudioStreamPlayer2D" parent="."]
-process_mode = 4
+[node name="BgmCampFire" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("8_obei1")
-max_distance = 150.0
-attenuation = 0.2
+max_distance = 75.0
 bus = &"PolarBear"
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 rect = Rect2(-4, -4, 8, 8)
+
+[node name="Interactible" parent="." instance=ExtResource("8_jyux6")]
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible"]
+shape = ExtResource("9_lc4nv")

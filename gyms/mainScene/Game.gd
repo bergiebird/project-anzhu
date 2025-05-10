@@ -6,8 +6,7 @@ var global_scene_dictionary :Dictionary
 @onready var respawner :Marker2D = %RespawnNode
 
 func _ready()->void:
-	Debuggerton.signal_checker([
-		Libraryton.global_delivery.connect(set_global_scene_dictionary)], debug)
+	Libraryton.global_delivery.connect(set_global_scene_dictionary)
 
 
 func set_global_scene_dictionary(incoming_delivery :Dictionary)->void:
@@ -16,9 +15,8 @@ func set_global_scene_dictionary(incoming_delivery :Dictionary)->void:
 	respawner = global_scene_dictionary['NODE2D']['Tools']['RespawnNode']
 	assert_set_global_scene_dictionary()
 
-###
-## DEBUG
-###
+
+#region DEBUG
 @export_group('DEBUG')
 @export var debug :bool = false
 
@@ -27,3 +25,4 @@ func assert_set_global_scene_dictionary()->void:
 		assert(global_scene_dictionary, "global_scene_dictionary not properly instantiated in GAME")
 		assert(tools, "Tools not properly instantdiated in GAME")
 		assert(respawner, "Respawner not properly instantiated in GAME")
+#endregion

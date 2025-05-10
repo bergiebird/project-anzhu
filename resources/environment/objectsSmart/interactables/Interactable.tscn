@@ -1,34 +1,13 @@
-[gd_scene load_steps=6 format=3 uid="uid://jlicup5il7x7"]
+[gd_scene load_steps=3 format=3 uid="uid://jlicup5il7x7"]
 
-[ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/environment/objectsSmart/interactables/Interactable.gd" id="1_jcy0q"]
-[ext_resource type="Texture2D" uid="uid://be0o3t0qs3byi" path="res://warehouse/Misc/PNGs/interior.png" id="2_jcy0q"]
-[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_yjwm8"]
+[ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/environment/objectsSmart/interactables/Interactible.gd" id="1_jcy0q"]
+[ext_resource type="Shape2D" uid="uid://ksw2huxa5fht" path="res://resources/environment/objectsSmart/collectible/interaction_shape.tres" id="2_mjta7"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gbk5c"]
-size = Vector2(8, 8)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xsa77"]
-size = Vector2(10, 10)
-
-[node name="Interactable" type="StaticBody2D"]
-collision_layer = 2
-collision_mask = 2
+[node name="Interactible" type="Area2D"]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("1_jcy0q")
 debug = true
 
-[node name="Mask" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_gbk5c")
-script = ExtResource("2_yjwm8")
-set_mask_dimensions = 1
-has_healthbar = false
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="InteractShape" type="CollisionShape2D" parent="Area2D"]
-visible = false
-shape = SubResource("RectangleShape2D_xsa77")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_jcy0q")
-region_enabled = true
-region_rect = Rect2(40, 0, 8, 8)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = ExtResource("2_mjta7")

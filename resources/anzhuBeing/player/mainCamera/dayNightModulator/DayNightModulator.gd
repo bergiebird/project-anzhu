@@ -24,8 +24,7 @@ func _ready( )->void:
 	init_assertions()
 	prepare_lerp_time()
 	modulate_dictionary = DayNighton.initialize(self)
-	Debuggerton.signal_checker([
-		DayNighton.time_progressed.connect(sun_change)])
+	DayNighton.time_progressed.connect(sun_change)
 	DayNighton.progress_time(starting_TimeOfDay)
 
 func sun_change(new_time :int)->void:
@@ -33,17 +32,12 @@ func sun_change(new_time :int)->void:
 	var rgb :float = modulate_dictionary[new_time]['modulate']/255.0
 	if first_time:
 		first_time = false
-		Debuggerton.tweener_property_disposal([
-			Builderton.tweener_deferred(self,'color',Color(rgb,rgb,rgb),0)], debug
-		)
+		Builderton.tweener_deferred(self,'color',Color(rgb,rgb,rgb),0)
 	else:
-		Debuggerton.tweener_property_disposal(
-			[Builderton.tweener_deferred(
-				self,'color', Color(rgb,rgb,rgb), 0)], debug)
+		Builderton.tweener_deferred(self,'color', Color(rgb,rgb,rgb), 0)
 
 func prepare_lerp_time( )->void:
-	_debug_resize(
-		init_time_lerp.resize(DayNighton.TimeOfDay.size()))
+	_debug_resize(init_time_lerp.resize(DayNighton.TimeOfDay.size()))
 	for index :int in range(lerp_times.size()):
 		if lerp_times[index] < 1:
 			init_time_lerp[index] = 1
@@ -53,12 +47,12 @@ func prepare_lerp_time( )->void:
 func _process(_delta :float)->void:
 	if color.r <= TOO_DARK_THRESHOLD:
 		if not is_nightlight_on:
-			DayNighton.turn_on_night_lights.emit(true)
+			DayNighton.time_progressed_nightlight.emit(true)
 			is_nightlight_on = true
 	elif color.r > TOO_DARK_THRESHOLD:
 		if is_nightlight_on:
 			is_nightlight_on = false
-			DayNighton.turn_on_night_lights.emit(false)
+			DayNighton.time_progressed_nightlight.emit(false)
 
 
 ###

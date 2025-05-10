@@ -14,8 +14,9 @@ const SHOULD_FLIP_H :Array[bool] = [                false,             false,   
 const HEAD_COVERING :Array[int] = [                    -1,                 0,                  0,                  0]
 const ROTATE :Array[int] = [                          270,                90,                  0,                180]
 const VECTORS :Array[Vector2i] = [            Vector2i.UP,     Vector2i.DOWN,     Vector2i.RIGHT,      Vector2i.LEFT]
-const GUN_POSITION :Array[Vector2] = [  Vector2(0.5,-4.0), Vector2(-1.5,3.0),   Vector2(4.0,0.5), Vector2(-4.0,-0.5)]
-const SMOKE_POSITION :Array[Vector2] = [     Vector2.DOWN, Vector2(0.0,-5.0), Vector2(-4.0,-3.0), Vector2(-3.0, 0.0)]
+const GUN_POSITION :Array[Vector2] = [  Vector2(1.5,-6.0), Vector2(-1.5,2.0),   Vector2(5.5,-1.5), Vector2(-5.0,-1.5)]
+const SMOKE_POSITION :Array[Vector2] = [ Vector2(0.0,2.0), Vector2(0.0,-4.0), Vector2(-5.0, -1.25), Vector2(4.0, -0.75)]
+const GUN_Z_INDEX :Array[int]= [                        1,                 2,                   2,                 2]
 
 func get_vectors(direction:int)->Vector2i:
 	return VECTORS[direction]
@@ -44,12 +45,12 @@ func match_current_direction(direction:String, north:Callable, south:Callable, e
 	return true
 
 
-func gunmatch(who :Node2D, smoke_barrel :CPUParticles2D ,smoke_back :CPUParticles2D ,gunray :RayCast2D, direction :int)->void:
-
+func gunmatch(who :Gunshot, smoke_barrel :CPUParticles2D, smoke_back :CPUParticles2D, gunray :RayCast2D, direction :int):
 	gunray.rotation_degrees = ROTATE[direction]
 	who.position = GUN_POSITION[direction]
 	smoke_barrel.direction = VECTORS[direction]
 	smoke_back.position = SMOKE_POSITION[direction]
+	#who.z_index = GUN_Z_INDEX[direction]
 
 func get_prevalent_direction(vector :Vector2)->int:
 	var degrees :float = rad_to_deg(vector.angle())

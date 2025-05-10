@@ -21,8 +21,7 @@ func _ready()->void:
 	bgm_begin.playing = true
 
 func initialize_DayNightAudio()->void:
-	Debuggerton.signal_checker([
-		DayNighton.time_progressed.connect(play_time_music)])
+	DayNighton.time_progressed.connect(play_time_music)
 	for child :Node in $DayNightAudio.get_children():
 		audio_dictionary[child.name] = child
 
@@ -42,7 +41,7 @@ func play_new_bgm(scene_just_started:bool = true)->void:
 	if scene_just_started:
 		await get_tree().create_timer(15.0).timeout
 	while store_new == store_old:
-		store_new = Libraryton.random_range(0, dictionary_size - 1)
+		store_new = Libraryton.rng.randi_range(0, dictionary_size - 1)
 	store_old = store_new
 	audio_dictionary[store_old].playing = true
 	Signalton.weather_changed.emit()

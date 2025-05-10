@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b0pohqgdvwsf4" path="res://resources/anzhuBeing/player/mainCamera/snowfall/snowflake.png" id="3_ch1di"]
 [ext_resource type="Script" uid="uid://bpm73yq251nvw" path="res://resources/anzhuBeing/player/mainCamera/snowfall/snow_fall.gd" id="4_jg3oj"]
 [ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="5_xgl6y"]
-[ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://resources/ui/crt.gdshader" id="6_p1x0l"]
+[ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://resources/ui/CRT.gdshader" id="6_p1x0l"]
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_5ib5g"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
@@ -150,6 +150,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="PlayerUi"]
+z_index = 4096
 layout_mode = 0
 offset_left = -72.0
 offset_top = 45.0
@@ -160,6 +161,7 @@ text = " we   ui
 asd   jkl"
 
 [node name="ReloadButton" type="Button" parent="PlayerUi"]
+z_index = 4096
 layout_mode = 2
 offset_left = -96.0
 offset_top = -96.0

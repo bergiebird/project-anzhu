@@ -15,14 +15,11 @@ var current_direction :String
 @onready var sfx_thonk :AudioStreamPlayer = $SfxThonk
 
 func _ready()->void:
-	grandparent.direction_changed_named.connect(
-		func(incoming_name :String)->void: 
-			current_direction = Directon.get_personal_anim_direction(incoming_name))
+	grandparent.direction_changed_named.connect(direction_changed)
 
 func start_routine()->void:
 	parent.speed_scale = 1
 	animation = "reload" + current_direction + "_"
-	print(animation)
 	parent.stop()
 	parent.play(animation + START)
 	await parent.animation_finished
@@ -41,3 +38,6 @@ func start_routine()->void:
 	parent.play(animation + RETURN_TO_IDLE)
 	await parent.animation_finished
 	parent.reload_animation_finished()
+
+func direction_changed(incoming_name :String):
+	current_direction = Directon.get_personal_anim_direction(incoming_name)
