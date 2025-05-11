@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=22 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.gd" id="1_prs41"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="2_o8pbx"]
@@ -7,6 +7,8 @@
 [ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="5_xgl6y"]
 [ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://resources/ui/CRT.gdshader" id="6_p1x0l"]
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_5ib5g"]
+[ext_resource type="Script" uid="uid://bgvdyvmgehdix" path="res://resources/anzhuBeing/player/mainCamera/Framing.gd" id="7_ch1di"]
+[ext_resource type="FontFile" uid="uid://cgo6bosv028ow" path="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark_Pressed.ttf" id="8_o8pbx"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
 offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
@@ -97,7 +99,7 @@ shader_parameter/vignette_intensity = 0.0
 shader_parameter/vignette_opacity = 0.0
 
 [node name="MainCamera" type="Camera2D"]
-zoom = Vector2(10, 10)
+zoom = Vector2(12, 9)
 position_smoothing_speed = 8.0
 script = ExtResource("1_prs41")
 
@@ -124,50 +126,82 @@ stream = ExtResource("5_xgl6y")
 pitch_scale = 1.4
 attenuation = 0.8
 bus = &"Wind"
-metadata/_edit_lock_ = true
 
 [node name="CRT" type="ColorRect" parent="SnowFall"]
-z_index = 4096
+z_index = 4000
 material = SubResource("ShaderMaterial_06wol")
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -150.0
-offset_top = -150.0
-offset_right = 150.0
-offset_bottom = 150.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="PlayerUi" type="Control" parent="."]
-layout_mode = 3
+[node name="Framing" type="CanvasLayer" parent="."]
+script = ExtResource("7_ch1di")
+
+[node name="LeftPanel" type="ColorRect" parent="Framing"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -3333.59
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="PlayerUi"]
+[node name="Controls" type="Label" parent="Framing/LeftPanel"]
 z_index = 4096
-layout_mode = 0
-offset_left = -72.0
-offset_top = 45.0
-offset_right = 72.0
-offset_bottom = 96.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -381.703
+offset_top = -318.0
+offset_right = -237.703
+offset_bottom = -267.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+tooltip_text = "WASD ~ Moves the character
+JIKL ~ Turns the character
+E ~ Jump! Won't execute if you don't have a place to jump to.
+U ~ Shoot! Reload!"
+mouse_filter = 0
 theme = ExtResource("7_5ib5g")
+theme_override_fonts/font = ExtResource("8_o8pbx")
 text = " we   ui
 asd   jkl"
 
-[node name="ReloadButton" type="Button" parent="PlayerUi"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Framing/LeftPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = -1.0
+offset_bottom = 87.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="Reset" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
+unique_name_in_owner = true
 z_index = 4096
 layout_mode = 2
-offset_left = -96.0
-offset_top = -96.0
-offset_right = 90.0
-offset_bottom = -56.0
 theme = ExtResource("7_5ib5g")
+action_mode = 0
 text = "Reload Scene"
 
-[connection signal="pressed" from="PlayerUi/ReloadButton" to="." method="_reload_scene_on_press"]
+[node name="RightPanel" type="ColorRect" parent="Framing"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3333.5
+offset_right = -0.09375
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

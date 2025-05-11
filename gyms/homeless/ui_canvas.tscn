@@ -8,14 +8,16 @@ custom_minimum_size = Vector2(80, 100)
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -101.0
-offset_right = 80.0
+offset_left = 47.0
+offset_top = -2352.0
+offset_right = 127.0
+offset_bottom = -2251.0
 grow_vertical = 0
 pivot_offset = Vector2(10, 10)
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "button 1
+text = "Yarp
 "
 
 [node name="Button2" type="Button" parent="VBoxContainer"]

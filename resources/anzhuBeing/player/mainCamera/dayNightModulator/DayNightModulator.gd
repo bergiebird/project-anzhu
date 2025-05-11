@@ -12,7 +12,6 @@ const TOO_DARK_THRESHOLD :float = 0.025
 @export var late_night_lerp_time :float = 1
 var init_time_lerp :Array = []
 var modulate_dictionary :Dictionary
-var tween :Tween
 var first_time :bool = true
 var is_nightlight_on :bool
 @onready var time_to_pass :int = int(DayNighton.WORLD_TIMER_WAIT_TIME)
@@ -21,7 +20,6 @@ var is_nightlight_on :bool
 	dusk_lerp_time, night_lerp_time, midnight_lerp_time, late_night_lerp_time]
 
 func _ready( )->void:
-	init_assertions()
 	prepare_lerp_time()
 	modulate_dictionary = DayNighton.initialize(self)
 	DayNighton.time_progressed.connect(sun_change)
@@ -68,15 +66,3 @@ func _debug_sun_change(new_time :int)->void:
 func _debug_resize(resize_return :int)->void:
 	if debug:
 		Debuggerton.dprint(str(resize_return))
-
-func init_assertions()->void:
-	assert(time_to_pass, "time_to_pass not properly instantiated in DayNightModulator.gd")
-	assert(starting_TimeOfDay, "starting_TimeOfDay not properly instantiated in DayNightModulator.gd")
-	assert(dawn_lerp_time, "dawn_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(morning_lerp_time, "morning_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(noon_lerp_time, "noon_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(afternoon_lerp_time, "afternoon_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(dusk_lerp_time, "dusk_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(night_lerp_time, "night_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(midnight_lerp_time, "midnight_lerp_time not properly instantiated in DayNightModulator.gd")
-	assert(late_night_lerp_time, "late_night_lerp_time not properly instantiated in DayNightModulator.gd")

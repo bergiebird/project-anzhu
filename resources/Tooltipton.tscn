@@ -1,0 +1,39 @@
+[gd_scene load_steps=2 format=3 uid="uid://b20o5er4rm0vy"]
+
+[sub_resource type="GDScript" id="GDScript_p1t28"]
+script/source = "extends Control #Tooltipton
+
+@onready var tip :PopupPanel = %Tip
+
+func tip_show(slot,item):
+	tip.popup() # set position and size
+
+func tip_hide():
+	tip.hide()
+"
+
+[node name="Tooltip" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = SubResource("GDScript_p1t28")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Tip" type="PopupPanel" parent="CanvasLayer"]
+unique_name_in_owner = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/Tip"]
+offset_left = 4.0
+offset_top = 4.0
+offset_right = 96.0
+offset_bottom = 96.0
+
+[node name="Title" type="Label" parent="CanvasLayer/Tip/VBoxContainer"]
+layout_mode = 2
+text = "TITLE"
+
+[node name="Content" type="Label" parent="CanvasLayer/Tip/VBoxContainer"]
+layout_mode = 2
+text = "CONTENT"

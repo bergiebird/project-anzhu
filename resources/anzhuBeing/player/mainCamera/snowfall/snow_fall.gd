@@ -55,6 +55,7 @@ func _ready() -> void:
 	update_speed(speed, speed)
 	if not Engine.is_editor_hint():
 		sfx_wind.call_deferred("play")
+	emitting = true
 
 func update_frequency(val :int, old_val:int)->void:
 	var ftween_time :int = abs(val-old_val)
