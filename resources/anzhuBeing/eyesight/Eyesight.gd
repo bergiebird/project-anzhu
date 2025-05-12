@@ -2,13 +2,22 @@ class_name Eyesight extends VisibleOnScreenNotifier2D
 
 @onready var parent :AnzhuBeing = get_parent()
 
-signal sight_update(string_name :String)
+signal spotted_player(bool)
 
-###
-## DEBUG
-###
+func _ready() -> void:
+	__ready()
+	_signaler()
+	__signaler()
+
+func __ready()->void:    pass
+func _signaler()->void:  pass
+func __signaler()->void: pass
+
+
+#region # DEBUG
 @export_category('DEBUG')
 @export var debug_eyesight :bool = false
 func debug()->void:
 	debug_eyesight = true
-	assert(sight_update)
+	assert(spotted_player)
+#endregion

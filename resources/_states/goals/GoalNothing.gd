@@ -7,11 +7,11 @@ var chosen_state :String
 var old_chosen_state :String
 @onready var timer :Timer = $Timer
 
-func _ready()->void:
+func ___ready()->void:
 	Debuggerton.signal_checker([
 		timer.timeout.connect(_on_timeout)])
 
-func enter()->void:
+func ___enter()->void:
 	timer.start()
 	_on_timeout()
 

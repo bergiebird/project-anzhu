@@ -10,11 +10,8 @@ var grandparent :Player:
 		grandparent = value
 		_grandparent_set()
 
-func _parent_set()->void:
-	pass
+func _parent_set()->void: pass
 
-func _grandparent_set()->void:
-	pass
+func _grandparent_set()->void: pass
 
-func process_ability(_delta:float)->void:
-	pass
+func process_ability(_delta:float)->void: pass

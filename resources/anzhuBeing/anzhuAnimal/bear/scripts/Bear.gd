@@ -2,17 +2,12 @@
 class_name Bear extends AnzhuAnimal #Bear.gd
 
 
-func animal_ready()->void:
+func ___ready()->void:
 	add_to_group("Bear")
 	current_speed = move_speed
 
 
-func character_was_hit_over()->void:
-	hit_over.emit()
+func ___was_just_struck(_damage :int, _weapon :String, _who:AnzhuBeing)->void:
+	observer_null.emit("hit_over")
 	is_sliding = false
 	change_actions("Chase")
-
-
-###
-## DEBUG
-###

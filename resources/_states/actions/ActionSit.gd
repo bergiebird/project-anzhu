@@ -1,7 +1,1 @@
-extends ActionState #ActionSit.gd
-
-func update(_delta:float)->void:
-	pass
-
-func physics_update(_delta:float)->void:
-	pass
+class_name ActionSit extends ActionState

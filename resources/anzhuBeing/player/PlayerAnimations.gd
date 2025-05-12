@@ -14,29 +14,30 @@ var old_flip_h :bool = false
 @onready var reload_anim :ReloadAnimation = $ReloadAnimation
 
 func _ready()->void:
-	parent.was_struck.connect(flash_red)
-	mask.has_died.connect(func()->void: is_dead = true)
-	parent.direction_should_flip.connect(func(should_flip:bool)->void: flip_h = should_flip)
-	abilities.modified_reload.connect(anim_reload_modified)
-	abilities.reloading.connect(anim_reloading_recieved)
-	abilities.initializing_jump.connect(begin_jump_animation)
-	abilities.jumping.connect(execute_jump_animations)
+	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	parent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+	parent.observer_two.connect(func(func_name, one :Variant, two :Variant): Observerton.match_two(self, func_name, one, two))
 
+func has_died()->void:
+	is_dead = true
 
-func anim_reloading_recieved(is_reloading:bool)->void:
+func should_flip(yes :bool):
+	flip_h = yes
+
+func reloading(is_reloading:bool)->void:
 	if is_reloading:
 		abilities.can_move = false
 		reload_anim.start_routine()
 
-func anim_reload_modified(is_reload_modified :bool)->void:
+func modified_reload(is_reload_modified :bool)->void:
 	if is_reload_modified:
 		speed_scale += modified_speed_up
 
-func execute_jump_animations(is_jumping :bool)->void:
+func jumping(is_jumping :bool)->void:
 	if is_jumping:
 		just_play('executeJump', true, 1)
 
-func begin_jump_animation(is_jump_initialized :bool)->void:
+func initializing_jump(is_jump_initialized :bool)->void:
 	if is_jump_initialized:
 		just_play('readyJump', true, 1)
 
@@ -58,9 +59,9 @@ func being_physics_process(_delta :float)->void:
 		if_debug('idled')
 		just_play('idle')
 
-func flipper(should_flip :bool=flip_h)->void:
-	if flip_h != should_flip:
-		flip_h = should_flip
+func direction_flipped(flipper :bool=flip_h)->void:
+	if flip_h != flipper:
+		flip_h = flipper
 
 func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int = -1)->void:
 	anim_direction = Directon.ANIM_NAME[parent.current_direction]
@@ -75,7 +76,7 @@ func efficiency_check(force_speed_scale :int = -1)->void:
 	elif abilities.is_efficient: speed_scale = 1
 	else:                        speed_scale = 0.60
 
-func flash_red()->void:
+func was_struck()->void:
 	modulate = Swatchton.RED_TOMATO
 	for flashes :int in FLASH_AMOUNT:
 		is_colored = !is_colored

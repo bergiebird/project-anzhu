@@ -34,6 +34,7 @@ Swatchton="*res://resources/tools/Swatchton.gd"
 Inputon="*res://resources/anzhuBeing/player/Inputon.gd"
 Builderton="*res://resources/tools/Builderton.gd"
 Staton="*res://resources/anzhuBeing/Staton.gd"
+Observerton="*res://Observerton.gd"
 
 [debug]
 
@@ -47,8 +48,12 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
-mouse_cursor/custom_image_hotspot=Vector2(1000, 0)
+mouse_cursor/custom_image_hotspot=Vector2(100, 100)
 window/tooltip_delay_sec=0.1
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/beehave/plugin.cfg", "res://addons/simple_gdscript_formatter/plugin.cfg")
 
 [file_customization]
 

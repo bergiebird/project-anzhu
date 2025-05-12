@@ -6,10 +6,11 @@ extends PointLight2D #PlayerNightLight.gd
 @export var slow_time :float = 35.0
 @onready var timer_node :Timer = $Timer
 @onready var abilities :Abilities = get_parent().get_node('Abilities')
+@onready var parent:Player = get_parent()
 
 func _ready()->void:
 	DayNighton.time_progressed_nightlight.connect(update_nightlight)
-	abilities.gunfired.connect(gun_was_fired)
+	parent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
 	timer_node.timeout.connect(func()->void:return) #visible = false
 	energy = minimum_light
 	_debug()
@@ -22,18 +23,17 @@ func update_nightlight(should_nightlight_be_on :bool)->void:
 		if visible:
 			change_nightlight(minimum_light, slow_time)
 
-func gun_was_fired(did_gun_fire :bool)->void:
+func gunfired(did_gun_fire :bool)->void:
 	if did_gun_fire: change_nightlight(minimum_light, fast_time)
 
 func change_nightlight(m_energy :float, wait_time :float)->void:
 	Debuggerton.tweener_property_disposal([
 		Builderton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)
 	], debug)
-	if not visible:
-		return
-	if m_energy == minimum_light:
-		timer_node.wait_time = wait_time
-		timer_node.start()
+	if visible:
+		if m_energy == minimum_light:
+			timer_node.wait_time = wait_time
+			timer_node.start()
 
 
 ###

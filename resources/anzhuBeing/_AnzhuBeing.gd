@@ -1,22 +1,22 @@
 class_name AnzhuBeing extends CharacterBody2D #_AnzhuBeing.gd
 
-signal made_loud_noise (who :AnzhuBeing, how_loud :float)
-signal on_new_track_tile (new_tile_coordinates :Vector2i)
-signal hit_over
-signal striking (attacking_who :AnzhuBeing, who_is_attacking :AnzhuBeing, what_weapon :Variant)
+signal observer_null(method_name :String)
+signal observer_one(method_name :String, one :Variant)
+signal observer_two(method_name :String, one :Variant, two :Variant)
+signal observer_three(method_name :String, one :Variant, two :Variant, three :Variant)
+
+signal tell_self_is_striking (attacking_who :AnzhuBeing, who_is_attacking :AnzhuBeing, what_weapon :Variant)
 signal was_struck
 
 enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
-signal direction_should_flip(bool)
-signal direction_changed(int)
-signal direction_changed_named(String)
 var current_direction :int:
-	set(value): if current_direction != value:
-		current_direction = value
-		var named_direction :String = Directon.get_current_direction(current_direction)
-		direction_should_flip.emit(Directon.get_personal_should_flip(named_direction))
-		direction_changed.emit(current_direction)
-		direction_changed_named.emit(named_direction)
+	set(value):
+		if current_direction != value:
+			current_direction = value
+			var named_direction:String = Directon.get_current_direction(current_direction)
+			observer_one.emit('direction_flipped', Directon.get_personal_should_flip(named_direction))
+			observer_one.emit('direction_changed_with_value', current_direction)
+			observer_one.emit('direction_changed_with_name', named_direction)
 var velocity_force :Vector2
 var old_velocity_force :Vector2
 const MAX_FORCE :Vector2 = Vector2(100,100)
@@ -39,8 +39,6 @@ var animal_name :String:
 
 const NEW_SAFE_MARGIN :float = 0.05
 @export var this_animals_type :AnimalType
-var anim :AnimatedSprite2D
-var audio :Node2D
 
 signal sliding(is_sliding :bool)
 var is_sliding :bool = false:
@@ -66,14 +64,14 @@ var player :Player
 var being_process_array :Array[Node]
 var being_physics_process_array :Array[Node]
 @onready var mask :Mask = $Mask
-### READY #################################
 
+#region #READY
 func _ready()->void:
 	initialize_debugging()
 	setup_basics()
-	signaler()
-	create_and_ship_scene_nodes()
-	character_ready()
+	_signaler()
+	__ready()
+	___ready()
 
 func setup_basics()->void:
 	add_to_group("being")
@@ -81,25 +79,21 @@ func setup_basics()->void:
 	set_safe_margin(NEW_SAFE_MARGIN)
 	animal_name = ANIMAL_NAMES[this_animals_type]
 	current_direction = PersonalDirection.EAST
+	for child in get_children():
+		if child.has_method('being_process'):         being_process_array.append(child)
+		if child.has_method('being_physics_process'): being_physics_process_array.append(child)
 
-func create_and_ship_scene_nodes()->void:
-	scenes_nodes["scene_root"] = self
-	scenes_nodes = Libraryton.getChildren_filterDictionary(scenes_nodes, self, debug_lambda)
-	for child_name :String in scenes_nodes:
-		var child_node :Node = scenes_nodes[child_name]
-		if child_node != null and child_name != self.name:
-			if child_node.get("node_dictionary") != null:      child_node.node_dictionary = scenes_nodes
-			if child_node.has_method("being_process"):         being_process_array.append(child_node)
-			if child_node.has_method("being_physics_process"): being_physics_process_array.append(child_node)
-	anim = scenes_nodes['Animations']
-
-func signaler()->void:
-	DayNighton.time_dictionary_delivery.connect(get_daynight_dictionary)
-	DayNighton.time_progressed.connect(time_progressed)
-	Libraryton.player_reference.connect(get_player_reference)
-	was_struck.connect(process_character_strike)
+func _signaler()->void:
+	DayNighton.time_dictionary_delivery.connect(get_daynight_dictionary) # One time signal
+	DayNighton.time_progressed.connect(_time_progressed)                 # Unused, for future usage
+	Libraryton.player_reference.connect(get_player_reference)            # One time signal
+	observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	observer_one.connect(func(func_name, one): Observerton.match_one(self, func_name, one))
+	observer_two.connect(func(func_name, one, two): Observerton.match_two(self, func_name, one, two))
+	observer_three.connect(func(func_name, one, two, three): Observerton.match_three(self, func_name, one, two, three))
 	mask.has_died.connect(how_should_character_die)
-	character_signaler()
+	__signaler()
+	___signaler()
 
 func get_player_reference(ref :Player)->void:
 	player = ref
@@ -109,61 +103,73 @@ func get_daynight_dictionary(delivery :Dictionary)->void:
 	daynight_dictionary = delivery
 	DayNighton.time_dictionary_delivery.disconnect(get_daynight_dictionary)
 
-### PROCESS ####################################
-
+#region #PROCESS
 func _process(delta:float)->void:
-	character_process(delta)
-	for being :Node in being_process_array:
+	__process(delta)
+	___process(delta)
+	for being:Node in being_process_array:
 		being.being_process(delta)
+
 
 func _physics_process(delta: float) -> void:
 	__physics_process(delta)
-	for being :Node in being_physics_process_array:
+	___physics_process(delta)
+	for being:Node in being_physics_process_array:
 		being.being_physics_process(delta)
 	velocity_force_filter_for_direction(delta)
 	if move_and_slide():
-		pass #Place collision with wall code here
+		pass
 
 func velocity_force_filter_for_direction(delta:float)->void:
 	if self is not Player:
 		if velocity_force != Vector2.ZERO:
 			var new_direction :int = Directon.get_prevalent_direction(velocity_force)
-			if current_direction != new_direction: current_direction = new_direction
+			if current_direction != new_direction:
+				current_direction = new_direction
 		match current_direction:
-			PersonalDirection.NORTH:  velocity.y -= velocity_force.y * delta
-			PersonalDirection.SOUTH:  velocity.y += velocity_force.y *delta
-			PersonalDirection.EAST:   velocity.x += velocity_force.x *delta
-			PersonalDirection.WEST:   velocity.x -= velocity_force.x *delta
+			PersonalDirection.NORTH:
+				velocity.y -= velocity_force.y * delta
+			PersonalDirection.SOUTH:
+				velocity.y += velocity_force.y *delta
+			PersonalDirection.EAST:
+				velocity.x += velocity_force.x *delta
+			PersonalDirection.WEST:
+				velocity.x -= velocity_force.x *delta
 		velocity_force = Vector2.ZERO
+#endregion
 
-### Signals ####################################
-
-func time_progressed(current_time :DayNighton.TimeOfDay)->void:
-	if debug_self:
-		print_rich('[color=eaf1f0] Time has progressed')
-	character_time_progressed(current_time)
-
-###Attack Functions###
+#region #Functions
+func _time_progressed(current_time :DayNighton.TimeOfDay)->void:
+	if debug_self: print_rich('[color=eaf1f0] Time has progressed')
+	__time_progressed(current_time)
 
 func strike_target(damage :int, weapon :String, who:AnzhuBeing)->void:
-	striking.emit()
-	who.was_just_struck(damage,weapon,self)
+	tell_self_is_striking.emit()
+	who._was_just_struck(damage,weapon,self)
 
-func was_just_struck(damage :int, weapon :String, who:AnzhuBeing)->void:
+func _was_just_struck(damage :int, weapon :String, who:AnzhuBeing)->void:
 	if parse_incoming_damage(damage,weapon,who):
-		process_character_strike()
-		was_struck.emit()
+		_was_just_struck(damage, weapon, who)
+		__was_just_struck(damage, weapon, who)
+		observer_null.emit("was_struck")
+#endregion
+
 
 #region # VIRTUALS
-func __physics_process(_delta:float)->void:pass
 func parse_incoming_damage(_damage :int, _weapon :String, _who:AnzhuBeing)->bool: return true
 func how_should_character_die()->void: pass
-func character_signaler()->void: pass
-func character_ready()->void: pass
+func __signaler()->void: pass
+func ___signaler()->void: pass
+func __ready()->void: pass
+func ___ready()->void: pass
 func early_ready_for_debug()->void: pass
-func character_process(_delta:float)->void:pass
-func character_time_progressed(_current_time :DayNighton.TimeOfDay)->void: pass
-func process_character_strike()->void:pass
+func __process(_delta:float)->void:pass
+func ___process(_delta:float)->void:pass
+func __physics_process(_delta:float)->void:pass
+func ___physics_process(_delta:float)->void:pass
+func __time_progressed(_current_time :DayNighton.TimeOfDay)->void: pass
+func __was_just_struck(_damage :int, _weapon :String, _who:AnzhuBeing)->void:pass
+func ___was_just_struck(_damage :int, _weapon :String, _who:AnzhuBeing)->void:pass
 func character_was_hit_over()->void: pass
 #endregion
 
@@ -177,13 +183,10 @@ var debug_lambda :Callable = func(child :Node)->void:
 		child.debug()
 
 func initialize_debugging()->void:
-	if debug_self or debug_all:
-		debug_self = true
-	else:
-		debug_lambda = func(_child :Node)->void:pass
+	if debug_self or debug_all: debug_self = true
+	else: debug_lambda = func(_child :Node)->void:pass
 	early_ready_for_debug()
 
 func if_debug(message :String)->void:
-	if debug_self:
-		Debuggerton.dprint(message)
+	if debug_self: Debuggerton.dprint(message)
 #endregion

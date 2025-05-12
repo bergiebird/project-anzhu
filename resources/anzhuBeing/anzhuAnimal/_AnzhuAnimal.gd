@@ -10,20 +10,20 @@ var current_goal :AnimalGoals
 var old_goal_name :String
 var old_action_name :String
 var hurt_box :Area2D
+@onready var anim :AnimalAnimations = $Animations
 
-
-func character_ready()->void:
+func __ready()->void:
 	init_scenes_nodes()
-	character_signaler()
+	__signaler()
 	animal_ready()
 	change_goals(str(AnimalGoals.keys()[starting_goal]))
-	hurt_box = scenes_nodes['HurtBox']
 
-func character_process(delta:float)->void:
-	animal_process(delta)
+func __process(_delta:float)->void:
+	pass
 
 func init_scenes_nodes()->void:
-	goals = scenes_nodes['AnimalGoals']
+	goals = $AnimalGoals
+	hurt_box = $HurtBox
 	current_action = AnimalActions.Idle
 	add_to_group('animal')
 
@@ -59,10 +59,9 @@ func change_goals(new_goal_name :String)->void:
 		goals.on_goal_transition(new_goal_name)
 		old_goal_name = new_goal_name
 
-func was_just_struck(_damage :int, _weapon :String, _who :AnzhuBeing)->void:
+func __was_just_struck(_damage :int, _weapon :String, _who :AnzhuBeing)->void:
 	change_actions("Hit")
 	is_sliding = true
-	was_struck.emit()
 
 func uninjur()->void:
 	is_injured = false

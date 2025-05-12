@@ -1,4 +1,4 @@
-extends HurtBox #BearHurtBox.gd
+class_name BearHurtBox extends HurtBox
 
 func _on_body_entered(body :AnzhuBeing)->void:
 	if not on_cooldown:

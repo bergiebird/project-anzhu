@@ -1,22 +1,20 @@
 @icon("res://resources/tools/respawnNode/icon_reset.png")
 extends Marker2D #RespawnNode.gd
 
-
-var player :Player:
+var player:Player:
 	set(value): if player != value:
 		player = value
 		self.global_position = player.global_position
 
+func _ready():
+	Libraryton.player_reference.connect(collect_player_reference)
 
-func _ready() -> void:
-	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect
-		(func(ref:Player)->void: 
-				player = ref),
-	], debug)
+func collect_player_reference(ref:Player):
+	player = ref
+	Libraryton.player_reference.disconnect(collect_player_reference)
 
 
-###
-##	DEBUG
-###
+#region	DEBUG
+
 @export var debug :bool
+#endregion

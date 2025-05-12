@@ -1,5 +1,5 @@
 @icon("res://resources/anzhuBeing/player/player.png") #Player.gd
-class_name Player extends AnzhuHuman
+class_name Player extends Human
 
 signal affect_nighlight(bool)
 
@@ -8,29 +8,25 @@ signal affect_nighlight(bool)
 @onready var listener :AudioListener2D = $AudioListener2D
 @onready var nightlight :PointLight2D = $Nightlight
 
-func human_ready()->void:
+func ___ready()->void:
 	Libraryton.reference_emitter_deferred("player_reference", self, debug_self)
 	add_to_group('player')
 
-func __physics_process(_delta :float)->void:
+func ___physics_process(_delta :float)->void:
 	velocity = Vector2.ZERO
 
 func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
 
-func character_signaler()->void:
-	abilities.jumping.connect(process_jump)
+func ___signaler()->void:
+	observer_one.connect(func(func_name, one): Observerton.match_one(self, func_name, one))
 
-func process_jump(needs_inverse :bool)->void:
-	var can_go_over_walls :bool = !needs_inverse
-	set_collision_layer_value(1, can_go_over_walls)
-	set_collision_mask_value(1, can_go_over_walls)
+func jumping(needs_inverse :bool)->void:
+	set_collision_layer_value(1, !needs_inverse)
+	set_collision_mask_value(1, !needs_inverse)
 
 
-###
-##	Debug
-###
-
+#region #	Debug
 func early_ready_for_debug()->void:
 	if debug_self:
 		debug_icon = "[img]res://resources/player/player.png[/img]"
@@ -38,3 +34,4 @@ func early_ready_for_debug()->void:
 
 func debug()->void:
 	assert(affect_nighlight)
+ #endregion

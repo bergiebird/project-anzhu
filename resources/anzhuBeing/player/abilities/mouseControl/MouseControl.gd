@@ -42,8 +42,7 @@ func process_ability(delta :float)->void:
 		mouse_idle_timer += delta                                  # Increment the idle timer
 
 func _input(event :InputEvent)->void:
-	if event is InputEventMouseButton and Inputon.left_mouse_release() \
-	or Inputon.escape():
+	if event is InputEventMouseButton and Inputon.left_mouse_release() or Inputon.escape():
 		current_cursor = sprite_click
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN:
 			mouse_idle_timer = TIMER_RESETTED

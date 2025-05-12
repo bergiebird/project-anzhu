@@ -70,7 +70,7 @@ wait_time = 6.0
 unique_name_in_owner = true
 z_index = 10
 sprite_frames = ExtResource("6_ybwxf")
-animation = &"Hit"
+animation = &"Wander"
 autoplay = "Idle"
 script = ExtResource("3_51qta")
 
@@ -154,8 +154,7 @@ max_distance = 350.0
 
 [node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
-position = Vector2(2.38419e-07, 2.38419e-07)
-scale = Vector2(0.4, 0.4)
+rect = Rect2(-4, -4, 8, 8)
 script = ExtResource("8_jp6s3")
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -172,6 +171,3 @@ script = ExtResource("31_xf7mx")
 
 [node name="SnowTracker2D" parent="." instance=ExtResource("31_hho7n")]
 position = Vector2(0, 1)
-
-[connection signal="sight_update" from="Eyesight" to="AnimalGoals/Hunt" method="_on_spotted"]
-[connection signal="sight_update" from="Eyesight" to="AudioManager" method="start_sfx"]

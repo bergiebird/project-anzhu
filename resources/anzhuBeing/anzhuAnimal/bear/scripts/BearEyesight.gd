@@ -1,34 +1,28 @@
-extends Eyesight #BearEyesight.gd
+class_name BearEyeSight extends Eyesight #BearEyesight.gd
 
 var has_grievance :bool = false
 var is_spotted :bool = false
 
-func _ready() -> void:
-	signaler()
-
 func _on_screen_exited() -> void:
 	if has_grievance:
-		sight_update.emit("OutOfSight")
+		parent.observer_null.emit("player_out_of_sight")
 	is_spotted = false
 
 func _on_screen_entered() -> void:
 	if has_grievance:
-		sight_update.emit("Spotted")
+		parent.observer_null.emit("player_spotted")
 	is_spotted = true
 
 func just_shot()->void:
-	if has_grievance:
-		return
-	has_grievance = true
+	if not has_grievance:
+		has_grievance = true
 
-func react_to_loud_noise(_player :Player, _location :Vector2, _noise_db :float)->void:
+func loud_noise(_player :Player, _location :Vector2, _noise_db :float)->void:
 	if is_spotted:
 		parent.change_goals('Hunt')
 
-func signaler()->void:
-	Debuggerton.signal_checker([
-		self.screen_entered.connect(_on_screen_entered),
-		self.screen_exited.connect(_on_screen_exited),
-		parent.was_struck.connect(just_shot),
-		Signalton.loud_noise.connect(react_to_loud_noise),
-	])
+func __signaler()->void:
+	screen_entered.connect(_on_screen_entered)
+	screen_exited.connect(_on_screen_exited)
+	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	Signalton.loud_noise.connect(loud_noise)

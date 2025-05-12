@@ -12,13 +12,11 @@ var player :Player
 
 @onready var direction_timer :Timer = $DirectionTimer
 
-func _ready()->void:
-	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect(func(ref :Player)->void:
-			player=ref),
-		direction_timer.timeout.connect(move_toward_target)], debug)
+func ___ready()->void:
+	Libraryton.player_reference.connect(func(ref :Player)->void:player=ref)
+	direction_timer.timeout.connect(move_toward_target)
 
-func enter()->void:
+func ___enter()->void:
 	direction_timer.wait_time = INITIAL_WAIT_TIME
 	direction_timer.start()
 	current_speed = chase_speed

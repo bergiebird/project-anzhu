@@ -1,10 +1,6 @@
 extends AudioStreamPlayer2D #CoastalWaves.gd
 
-var player :Player:
-	set(value): if player != value:
-		player = value
-		set_process(true)
-
+var player :Player
 @onready var coastline :Line2D = get_parent()
 @onready var line_points :PackedVector2Array = coastline.points
 @onready var line_points_size :int = line_points.size()
@@ -12,10 +8,14 @@ var player :Player:
 func _ready()->void:
 	coastline.default_color = Swatchton.BASIC_WHITE_TRANSPARENT
 	set_process(false)
-	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect(func(ref:Player)->void:
-			player = ref)], debug)
+	Libraryton.player_reference.connect(collect_player_reference)
 	_debug()
+
+func collect_player_reference(ref:Player):
+	player = ref
+	set_process(true)
+	Libraryton.player_reference.disconnect(collect_player_reference)
+
 
 func _process(_delta :float)->void:
 	if player and coastline:
@@ -43,15 +43,11 @@ func get_closest_point_on_segment(point :Vector2, segment_start :Vector2, segmen
 	var projection :float = clamp(segment.dot(point - segment_start) / segment_length_squared, 0.0, 1.0)
 	return segment_start + segment * projection
 
-###
-## DEBUG
-###
+#region	DEBUG
 @export_group('DEBUG')
 @export var debug :bool = false
 @onready var debug_image :Sprite2D = $DebugPosition
 
 func _debug()->void:
-	if debug:
-		debug_image.visible = true
-	else:
-		debug_image.visible = false
+	debug_image.visible = debug
+#endregion

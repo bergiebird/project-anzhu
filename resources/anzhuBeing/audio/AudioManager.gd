@@ -12,10 +12,7 @@ func _ready()->void:
 	__signaler()
 
 func _signaler()->void:
-	Debuggerton.signal_checker([
-		parent.was_struck.connect(__was_just_struck),
-		parent.striking.connect(__character_is_striking)
-	], debug)
+	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
 	__signaler()
 
 func start_sfx(name_of_sfx :String)->void:
@@ -25,21 +22,19 @@ func stop_sfx(name_of_sfx :String)->void:
 func get_is_playing(name_of_sfx :String)->bool:
 	return audio_dictionary.get(audio_string + name_of_sfx).playing
 
+#region # VIRTUALS
 
-###
-## VIRTUALS
-###
 func __ready()->void:pass
 func __signaler()->void:pass
 func __was_just_struck()->void: 	pass
-func __character_is_striking()->void:pass
+func __match_observer(_method_name:String)->void:pass
+#endregion
 
-###
-## DEBUG
-###
+#region # DEBUG
 @export_group('DEBUG')
 @export var debug :bool = false
 
 func _debug()->void:
 	print_rich('[color=ebb85b]Audio debugging enabled . . .[/color]')
 	debug = true
+#endregion

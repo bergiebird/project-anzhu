@@ -6,9 +6,7 @@ var count :float = 1.0
 var first_time :bool = true
 
 func __signaler()->void:
-	Debuggerton.signal_checker([
-		Audioton.permission_granter.connect(func(bear :Bear)->void: if bear == parent: sfx_hunt.play())
-	], debug)
+	Audioton.permission_granter.connect(func(bear :Bear)->void: if bear == parent: sfx_hunt.play())
 
 func _reset_bgm()->void:
 	sfx_hunt.volume_db = 0
@@ -21,10 +19,9 @@ func __was_just_struck()->void:
 		return
 	count *= 1.1
 	sfx_hunt_count += 1
-	if sfx_hunt_count >= 8:
-		return
-	sfx_hunt.volume_db += (count/100)
-	sfx_hunt.pitch_scale += (count/100)
+	if sfx_hunt_count < 8:
+		sfx_hunt.volume_db += (count/100)
+		sfx_hunt.pitch_scale += (count/100)
 
 func __character_is_striking()->void:
 	start_sfx("Strike")

@@ -150,6 +150,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Framing" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("7_ch1di")
 
 [node name="LeftPanel" type="ColorRect" parent="Framing"]

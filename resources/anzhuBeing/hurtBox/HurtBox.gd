@@ -19,10 +19,8 @@ func _init_nodes()->void:
 	hurt_timer.wait_time = wait_time
 
 func _signal_connector()->void:
-	Debuggerton.signal_checker([
-		body_entered.connect(on_body_entered),
-		hurt_timer.timeout.connect(on_timeout)
-	])
+	body_entered.connect(on_body_entered)
+	hurt_timer.timeout.connect(end_attack_cooldown)
 	signal_connector()
 
 func update_and_match_attacking_direction(incoming_direction :Vector2)->void:
@@ -38,7 +36,7 @@ func update_and_match_attacking_direction(incoming_direction :Vector2)->void:
 	else:
 		return
 
-func on_timeout()->void:
+func end_attack_cooldown()->void:
 	on_cooldown = false
 
 ###

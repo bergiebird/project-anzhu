@@ -5,9 +5,8 @@ var stored_position :Vector2
 @onready var mask :CollisionShape2D = parent.get_node('Mask')
 
 func _ready()->void:
-	Debuggerton.signal_checker([
-		body_entered.connect(_on_body_entered)
-	])
+	body_entered.connect(_on_body_entered)
+	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
 
 func _on_body_entered(_body :Node2D)->void:
 	queue_free()
@@ -40,14 +39,14 @@ func be_free()->void:
 	monitoring = true
 	parent.queue_free()
 
-###
+#region Virtuals
 func _end_of_life()->void:pass
-###
+#endregion
 
-## DEBUG
-###
+#region DEBUG
 @export_group('DEBUG')
 @export var debug_corpse :bool = false
 
 func debug()->void:
 	debug_corpse = true
+#endregion

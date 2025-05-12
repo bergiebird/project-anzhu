@@ -1,5 +1,4 @@
-extends TileMapLayer # Props.gd
-# Should be a resource in a later stage maybe
+extends TileMapLayer # Props.gd # Should be a resource in a later stage maybe
 enum EdiblePlantType{SHRUB, BERRY, HERB, FUNGI}
 var plant_encyclopedia :Dictionary = {
 	"Arc Willow":
@@ -99,7 +98,6 @@ var plant_encyclopedia :Dictionary = {
 func _ready() -> void:
 	Libraryton.reference_emitter_deferred("props_reference", self, debug)
 
-###
-## DEBUG
-###
+#region # DEBUG
 @export var debug:bool = false
+#endregion

@@ -12,9 +12,7 @@ var can_make_tracks :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready() -> void:
-	if parent is Player:
-		parent.get_node('Abilities').jumping.connect(track_set_for_jump)
-	parent.sliding.connect(sliding_enabler)
+	parent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
 	Libraryton.tracks_reference.connect(setup_maps)
 
 func being_process(_delta :float)->void:
@@ -55,12 +53,11 @@ func setup_maps(_ref :CanvasGroup)->void:
 	can_make_tracks = true
 	Libraryton.tracks_reference.disconnect(setup_maps)
 
-func sliding_enabler(is_sliding :bool)->void:
+func sliding(is_sliding :bool)->void:
 	current_map = personal_maps[int(is_sliding)]
 
 func get_track_markers_tile()->Vector2i:
 	return current_map.local_to_map(current_map.to_local(global_position))
 
-func track_set_for_jump(is_jumping :bool)->void:
-	if is_jumping: can_make_tracks = false
-	else:          can_make_tracks = true
+func jumping(is_jumping :bool)->void:
+	can_make_tracks = !is_jumping

@@ -1,62 +1,63 @@
 @icon("res://warehouse/_icons/node/icon_file.png")
 class_name State extends Node #state.gd
-var parent :Node:
-	set(value): if value != parent:
-		parent = value
-		_parent_reference_acquired(parent)
+var parent :Node
 var grandparent :AnzhuAnimal
 
-func collect_dictionary(incoming_dictionary :Dictionary, incoming_parent :AnimalAnimations)->void:
-	parent = incoming_parent
-	grandparent = incoming_dictionary['scene_root']
-	animal_icon = grandparent.animal_icon
-	_collect_dictionary(incoming_dictionary)
-
 func _ready() -> void:
-	if self is ActionState and self_debug:
-		what_state_type = "[color=seashell]Action: " + self.name + '[/color]'
+	parent = get_parent()
+	grandparent = parent.get_parent()
+	grandparent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	grandparent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+	grandparent.observer_two.connect(func(func_name, one :Variant, two :Variant): Observerton.match_two(self, func_name, one, two))
 
-func on_enter()->void:
-	if self_debug:
-		print_rich( animal_icon + "[color=firebrick] Entering [/color]" + what_state_type )
-	virtual_enter()
-	enter()
-func virtual_enter()->void:pass
-func enter()->void:pass
+	_action_state_debug()
+	__ready()
+	___ready()
+
+func _enter()->void:
+	if self_debug: print_rich( animal_icon + "[color=firebrick] Entering [/color]" + what_state_type )
+	__enter()
+	___enter()
 
 func update(_delta:float)->void:
-	if self_debug:
-		print_rich("[bgcolor=purple][color=white]UPDATE ERROR [/color][/bgcolor] [color=yellow]"
-		+ self.name + " has not been assigned a process function[/color]")
+	_debug_update()
 
 func physics_update(_delta:float)->void:
-	if self_debug:
-		print_rich("[bgcolor=blue][color=white]PHYSICS ERROR [/color][/bgcolor] [color=yellow]"
-		 + self.name + " has not been assigned a physics_process function[/color]")
+	_debug_physics_update()
 
-
-func on_exit()->void:
-	#if self_debug:
-		#print_rich( animal_icon + "[color=dimgray] Leaving [/color] " + what_state_type)
-	exit()
+func _exit()->void:
+	if self_debug: print_rich( animal_icon + "[color=dimgray] Leaving [/color] " + what_state_type)
+	__exit()
+	___exit()
 	parent.transition_part_2()
 
 
 
 
 
-##VIRTUALS
-func virtual_exit()->void: pass
-func exit()->void: pass
-func get_scenes_node_dictionary(_incoming_dictionary :Dictionary)->void: pass
-func _collect_dictionary(_incoming_dictionary :Dictionary)->void: pass
-func _parent_reference_acquired(_parent :Node)->void:pass
+#region #VIRTUALS
+func __enter()->void:pass
+func ___enter()->void:pass
+func __ready()->void:pass
+func ___ready()->void:pass
+func __exit()->void: pass
+func ___exit()->void: pass
+#endregion
 
+#region # DEBUG
 
-
-###
-## DEBUG
-###
 @export var self_debug :bool
 var animal_icon :String = ""
 @onready var what_state_type :String = "[color=yellow][b]Goal: [/b] " + self.name + '[/color]'
+
+func _action_state_debug():
+	if self is ActionState and self_debug: what_state_type = "[color=seashell]Action: " + self.name + '[/color]'
+	if self is ActionState:
+		printt(self, parent, grandparent)
+
+func _debug_update():
+	if self_debug: print_rich("[bgcolor=purple][color=white]UPDATE ERROR [/color][/bgcolor] [color=yellow]" + self.name + " has not been assigned a process function[/color]")
+func _debug_physics_update():
+	if self_debug: print_rich("[bgcolor=blue][color=white]PHYSICS ERROR [/color][/bgcolor] [color=yellow]"  + self.name + " has not been assigned a physics_process function[/color]")
+
+#endregion

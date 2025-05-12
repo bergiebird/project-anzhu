@@ -8,9 +8,9 @@ var old_flip_h :bool = false
 
 func _ready()->void:
 	position = INITIALIZED_POSITION
-	Debuggerton.signal_checker([
-		grandparent.direction_changed_named.connect(change_breath_direction)
-	],debug)
+
+	grandparent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+
 
 func change_breath_direction(new_direction :String)->void:
 	match new_direction:

@@ -2077,30 +2077,12 @@ metadata/_edit_lock_ = true
 [node name="Player" parent="NODE2D/Entities" instance=ExtResource("13_aqo2m")]
 unique_name_in_owner = true
 z_index = 100
-position = Vector2(171, 287)
+position = Vector2(220, 216)
 collision_layer = 524929
 collision_mask = 524417
 
 [node name="Bear" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
 position = Vector2(1054, 130)
-
-[node name="Bear2" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
-position = Vector2(952, 196)
-
-[node name="Bear3" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
-position = Vector2(978, 252)
-
-[node name="Bear4" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
-position = Vector2(1115, 188)
-
-[node name="Bear5" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
-position = Vector2(1004, 163)
-
-[node name="Bear6" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
-position = Vector2(950, 129)
-
-[node name="Bear7" parent="NODE2D/Entities" instance=ExtResource("14_4osoh")]
-position = Vector2(1117, 263)
 
 [node name="CampFire" parent="NODE2D/Entities" node_paths=PackedStringArray("player") instance=ExtResource("16_es6t5")]
 position = Vector2(1363, 678)
