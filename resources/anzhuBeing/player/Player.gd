@@ -1,7 +1,7 @@
 @icon("res://resources/anzhuBeing/player/player.png") #Player.gd
 class_name Player extends AnzhuHuman
 
-signal affect_nighlight(is_leaving_campfire :bool)
+signal affect_nighlight(bool)
 
 @onready var camera :Camera2D = $MainCamera
 @onready var abilities :Abilities = $Abilities
@@ -19,7 +19,7 @@ func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
 
 func character_signaler()->void:
-	Debuggerton.signal_checker([abilities.jumping.connect(process_jump)])
+	abilities.jumping.connect(process_jump)
 
 func process_jump(needs_inverse :bool)->void:
 	var can_go_over_walls :bool = !needs_inverse

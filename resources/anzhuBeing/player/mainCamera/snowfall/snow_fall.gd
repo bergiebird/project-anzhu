@@ -3,42 +3,37 @@ class_name SnowFall extends GPUParticles2D #SnowFall.gd
 
 @export_group('Weather Control')
 enum FrequencyType{BLIZZARD,SQUALL, NORMAL,DUSTING, NONE}
-enum WindDirection{NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST}
-enum WindSpeed{BLIZZARD,SQUALL,GALE,STRONGBREEZE,MODERATEBREEZE,LIGHTBREEZE,CALM,}
-## This establishes how many particles are on screen. It simply reduces the spawn radius for severe storms and increases the radius for more calm effects. - BERGIE
-@export_enum("Blizzard","Squall", "Normal", "Dusting", "None") var frequency :int = 0:
-	set(value): if value != frequency:
+@export var frequency :FrequencyType:
+	set(value):
+		if value != frequency:
 			update_frequency(value, frequency)
 			frequency = value
-@export_enum("North","NorthEast","East","SouthEast","South","SouthWest","West","NorthWest") var direction :int = 0:
-	set(value): if value != direction:
+var frequencies :Dictionary[int,float] = {
+	FrequencyType.BLIZZARD:200.0, FrequencyType.SQUALL  :300.0, FrequencyType.NORMAL  :700.0,
+	FrequencyType.DUSTING :1900.0, FrequencyType.NONE    :12000.0,}
+
+enum WindDirection{NORTH,NORTHEAST,EAST,SOUTHEAST,SOUTH,SOUTHWEST,WEST,NORTHWEST}
+@export var direction :WindDirection:
+	set(value):
+		if value != direction:
 			update_direction(value, direction)
 			direction = value
-@export_enum("Blizzard", "Squall","Gale","StrongBreeze","ModerateBreeze","LightBreeze","Calm") var speed :int = 0:
-	set(value): if value != speed:
+var directions :Dictionary[int,Vector3] = {
+	WindDirection.NORTH: Vector3.DOWN, WindDirection.NORTHEAST: Vector3.DOWN + Vector3.RIGHT,
+	WindDirection.EAST: Vector3.RIGHT, WindDirection.SOUTHEAST: Vector3.UP + Vector3.RIGHT,
+	WindDirection.SOUTH: Vector3.UP, WindDirection.SOUTHWEST: Vector3.UP + Vector3.LEFT,
+	WindDirection.WEST: Vector3.LEFT, WindDirection.NORTHWEST: Vector3.DOWN + Vector3.LEFT,}
+
+enum WindSpeed{BLIZZARD,SQUALL,GALE,STRONGBREEZE,MODERATEBREEZE,LIGHTBREEZE,CALM,}
+@export var speed :WindSpeed:
+	set(value):
+		if value != speed:
 			update_speed(value, speed)
 			speed = value
-var frequencies :Dictionary[int,float] = {FrequencyType.BLIZZARD:200.0,
-														FrequencyType.SQUALL  :300.0,
-														FrequencyType.NORMAL  :700.0,
-														FrequencyType.DUSTING :1900.0,
-														FrequencyType.NONE    :12000.0,}
-var directions :Dictionary[int,Vector3] = { WindDirection.NORTH     :Vector3.DOWN,
-															WindDirection.NORTHEAST :Vector3.DOWN + Vector3.RIGHT,
-															WindDirection.EAST      :Vector3.RIGHT,
-															WindDirection.SOUTHEAST :Vector3.UP + Vector3.RIGHT,
-															WindDirection.SOUTH     :Vector3.UP,
-															WindDirection.SOUTHWEST :Vector3.UP + Vector3.LEFT,
-															WindDirection.WEST      :Vector3.LEFT,
-															WindDirection.NORTHWEST :Vector3.DOWN + Vector3.LEFT,}
-var speeds :Dictionary[int, int] = { WindSpeed.BLIZZARD      :128,
-												 WindSpeed.SQUALL        :64,
-												 WindSpeed.GALE          :48,
-												 WindSpeed.STRONGBREEZE  :32,
-												 WindSpeed.MODERATEBREEZE:16,
-												 WindSpeed.LIGHTBREEZE   :8,
-												 WindSpeed.CALM          :4,
-												}
+var speeds :Dictionary[int, int] = {
+	WindSpeed.BLIZZARD: 128, WindSpeed.SQUALL: 64, WindSpeed.GALE: 48, WindSpeed.STRONGBREEZE: 32,
+	WindSpeed.MODERATEBREEZE: 16, WindSpeed.LIGHTBREEZE: 8, WindSpeed.CALM: 4,}
+
 var wind_direction :Vector2
 @onready var sfx_wind :AudioStreamPlayer2D = $WindSFX
 @onready var parent :Camera2D = get_parent()
@@ -53,8 +48,7 @@ func _ready() -> void:
 	update_frequency(frequency, frequency)
 	update_direction(direction, direction)
 	update_speed(speed, speed)
-	if not Engine.is_editor_hint():
-		sfx_wind.call_deferred("play")
+	if not Engine.is_editor_hint(): sfx_wind.call_deferred("play")
 	emitting = true
 
 func update_frequency(val :int, old_val:int)->void:

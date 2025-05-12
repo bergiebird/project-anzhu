@@ -8,12 +8,14 @@ signal time_progressed
 signal weather_changed
 signal player_hit
 signal reload_scene
+signal toggle_debug_collision
+signal toggle_debug_elevation
+signal toggle_debug_invisible
 
 var saved_state :bool = false
 
 func _ready() -> void:
-	Debuggerton.signal_checker([
-		reload_scene.connect(reload_current_scene)])
+	reload_scene.connect(reload_current_scene)
 	_debug()
 
 func reload_current_scene()->void:

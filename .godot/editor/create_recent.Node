@@ -1,3 +1,6 @@
+HSeparator
+RichTextLabel
+Button
 Control
 VBoxContainer
 HBoxContainer
@@ -10,5 +13,3 @@ Popup
 Panel
 TextureRect
 PanelContainer
-RichTextLabel
-MarginContainer

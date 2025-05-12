@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=24 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.gd" id="1_prs41"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="2_o8pbx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_5ib5g"]
 [ext_resource type="Script" uid="uid://bgvdyvmgehdix" path="res://resources/anzhuBeing/player/mainCamera/Framing.gd" id="7_ch1di"]
 [ext_resource type="FontFile" uid="uid://cgo6bosv028ow" path="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark_Pressed.ttf" id="8_o8pbx"]
+[ext_resource type="Script" uid="uid://ic0gfnpadgiw" path="res://TextEffects.gd" id="10_jg3oj"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
 offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
@@ -98,6 +99,10 @@ shader_parameter/warp_amount = 0.0
 shader_parameter/vignette_intensity = 0.0
 shader_parameter/vignette_opacity = 0.0
 
+[sub_resource type="RichTextEffect" id="RichTextEffect_jg3oj"]
+script = ExtResource("10_jg3oj")
+metadata/_custom_type_script = "uid://ic0gfnpadgiw"
+
 [node name="MainCamera" type="Camera2D"]
 zoom = Vector2(12, 9)
 position_smoothing_speed = 8.0
@@ -119,6 +124,8 @@ randomness = 0.1
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4cc5g")
 script = ExtResource("4_jg3oj")
+direction = 5
+speed = 6
 
 [node name="WindSFX" type="AudioStreamPlayer2D" parent="SnowFall"]
 position = Vector2(0, 100)
@@ -176,10 +183,11 @@ U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
 theme_override_fonts/font = ExtResource("8_o8pbx")
-text = " we   ui
-asd   jkl"
+text = " wer  ui
+asdf  jkl"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Framing/LeftPanel"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -189,12 +197,32 @@ grow_horizontal = 2
 mouse_filter = 2
 
 [node name="Reset" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
-unique_name_in_owner = true
 z_index = 4096
 layout_mode = 2
 theme = ExtResource("7_5ib5g")
 action_mode = 0
-text = "Reload Scene"
+text = "Reload/Randomize"
+
+[node name="Elevation" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
+z_index = 4096
+layout_mode = 2
+theme = ExtResource("7_5ib5g")
+action_mode = 0
+text = "Debug: Elevation"
+
+[node name="Invisible" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
+z_index = 4096
+layout_mode = 2
+theme = ExtResource("7_5ib5g")
+action_mode = 0
+text = "Debug: Invisible Walls"
+
+[node name="Quit" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
+z_index = 4096
+layout_mode = 2
+theme = ExtResource("7_5ib5g")
+action_mode = 0
+text = "Quit & Close Game"
 
 [node name="RightPanel" type="ColorRect" parent="Framing"]
 anchors_preset = 15
@@ -205,3 +233,24 @@ offset_right = -0.09375
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Framing/RightPanel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 77.0
+offset_top = 200.0
+offset_right = -232.406
+offset_bottom = 1800.0
+grow_horizontal = 2
+scale = Vector2(1.2, 1.2)
+theme = ExtResource("7_5ib5g")
+bbcode_enabled = true
+text = "
+[i][fx]\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\""
+custom_effects = [SubResource("RichTextEffect_jg3oj")]
+
+[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Reset" to="Framing" method="_on_reset_pressed"]
+[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Elevation" to="Framing" method="_on_elevation_pressed"]
+[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Invisible" to="Framing" method="_on_invisible_toggled"]
+[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Quit" to="Framing" method="_on_quit_pressed"]

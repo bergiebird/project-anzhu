@@ -31,6 +31,3 @@ const PINK_LIGHT :Color = Color("e67a84")
 const PINK_DARK :Color = Color("c23753")
 const WHITE_YELLOW :Color = Color("fff1a9")
 const WHITE_WHITE :Color = Color("eaf1f0")
-
-##
-const VR00D_BLACK :Color = Color('100816')

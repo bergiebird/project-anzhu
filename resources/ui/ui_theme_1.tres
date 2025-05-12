@@ -1,8 +1,9 @@
-[gd_resource type="Theme" load_steps=5 format=3 uid="uid://bmnjnrxcaql6w"]
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://bmnjnrxcaql6w"]
 
 [ext_resource type="FontFile" uid="uid://syf7yjmtwkpi" path="res://warehouse/fonts/[8] High Birth/High-Birth-All/High_Birth.ttf" id="1_0cjbr"]
 [ext_resource type="FontFile" uid="uid://ccur3rfj361dw" path="res://warehouse/fonts/[24] Pixel Promise/Pixel_Promise.ttf" id="1_gd557"]
 [ext_resource type="FontFile" uid="uid://7momh5us32hv" path="res://warehouse/fonts/[10] Fabled-Font/Fabled_Font.ttf" id="2_lwg40"]
+[ext_resource type="FontFile" uid="uid://cxt83l7bp58bs" path="res://warehouse/fonts/[24] Pixel Promise/Pixel_Promise_Monospaced.ttf" id="4_u1ghw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gd557"]
 
@@ -17,3 +18,8 @@ Label/colors/font_shadow_color = Color(0, 0, 0, 0)
 Label/fonts/font = ExtResource("1_0cjbr")
 PopupPanel/fonts/title_font = ExtResource("2_lwg40")
 PopupPanel/styles/panel = SubResource("StyleBoxEmpty_gd557")
+RichTextLabel/colors/default_color = Color(0.917647, 0.945098, 0.941176, 1)
+RichTextLabel/font_sizes/italics_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 24
+RichTextLabel/fonts/italics_font = ExtResource("4_u1ghw")
+RichTextLabel/fonts/normal_font = ExtResource("1_gd557")
