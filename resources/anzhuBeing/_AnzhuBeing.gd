@@ -1,9 +1,9 @@
 class_name AnzhuBeing extends CharacterBody2D #_AnzhuBeing.gd
 
-signal observer_null(method_name :String)
-signal observer_one(method_name :String, one :Variant)
-signal observer_two(method_name :String, one :Variant, two :Variant)
-signal observer_three(method_name :String, one :Variant, two :Variant, three :Variant)
+signal publisher_null(method_name :String)
+signal publisher_one(method_name :String, one :Variant)
+signal publisher_two(method_name :String, one :Variant, two :Variant)
+signal publisher_three(method_name :String, one :Variant, two :Variant, three :Variant)
 
 signal tell_self_is_striking (attacking_who :AnzhuBeing, who_is_attacking :AnzhuBeing, what_weapon :Variant)
 signal was_struck
@@ -14,9 +14,9 @@ var current_direction :int:
 		if current_direction != value:
 			current_direction = value
 			var named_direction:String = Directon.get_current_direction(current_direction)
-			observer_one.emit('direction_flipped', Directon.get_personal_should_flip(named_direction))
-			observer_one.emit('direction_changed_with_value', current_direction)
-			observer_one.emit('direction_changed_with_name', named_direction)
+			publisher_one.emit('direction_flipped', Directon.get_personal_should_flip(named_direction))
+			publisher_one.emit('direction_changed_with_value', current_direction)
+			publisher_one.emit('direction_changed_with_name', named_direction)
 var velocity_force :Vector2
 var old_velocity_force :Vector2
 const MAX_FORCE :Vector2 = Vector2(100,100)
@@ -87,10 +87,10 @@ func _signaler()->void:
 	DayNighton.time_dictionary_delivery.connect(get_daynight_dictionary) # One time signal
 	DayNighton.time_progressed.connect(_time_progressed)                 # Unused, for future usage
 	Libraryton.player_reference.connect(get_player_reference)            # One time signal
-	observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
-	observer_one.connect(func(func_name, one): Observerton.match_one(self, func_name, one))
-	observer_two.connect(func(func_name, one, two): Observerton.match_two(self, func_name, one, two))
-	observer_three.connect(func(func_name, one, two, three): Observerton.match_three(self, func_name, one, two, three))
+	publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
+	publisher_one.connect(func(func_name, one): Observerton.subscribe_one(self, func_name, one))
+	publisher_two.connect(func(func_name, one, two): Observerton.subscribe_two(self, func_name, one, two))
+	publisher_three.connect(func(func_name, one, two, three): Observerton.subscribe_three(self, func_name, one, two, three))
 	mask.has_died.connect(how_should_character_die)
 	__signaler()
 	___signaler()
@@ -151,7 +151,7 @@ func _was_just_struck(damage :int, weapon :String, who:AnzhuBeing)->void:
 	if parse_incoming_damage(damage,weapon,who):
 		_was_just_struck(damage, weapon, who)
 		__was_just_struck(damage, weapon, who)
-		observer_null.emit("was_struck")
+		publisher_null.emit("was_struck")
 #endregion
 
 

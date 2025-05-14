@@ -4,6 +4,8 @@ class_name ActionWander extends ActionState
 var current_directional_velocity :Vector2 = Vector2.UP
 @onready var timer :Timer = $WanderTimer #should probably do something with this. I deleted it
 
+
+
 func ___enter()->void:
 	timer.start()
 func ___exit()->void:

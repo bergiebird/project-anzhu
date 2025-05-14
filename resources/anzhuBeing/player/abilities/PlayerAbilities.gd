@@ -2,65 +2,47 @@
 class_name Abilities extends Node2D #PlayerAbilities.gd
 
 @export var shoot_cooldown :float = 0.4
+enum AbilityStates {NONE, IDLING, MOVING, INIT_JUMP, JUMPING, RELOADING, GUNFIRED}
 
-var is_capable :bool=true:
-	set(value): if is_capable != value:
-			is_capable = value
-			if_debug('is_capable: '+ str(is_capable))
-			parent.observer_one.emit('capability', is_capable)
+@onready var old_state :AbilityStates = AbilityStates.NONE: #
+	set(value): if old_state != value:
+		old_state = value
+		match old_state:
+			AbilityStates.NONE:
+				pass
+			AbilityStates.IDLING:
+				pass
+			AbilityStates.MOVING:
+				pass
+			AbilityStates.JUMPING:
+				parent.observer_one.emit('jumping', false)
+			AbilityStates.RELOADING:
+				parent.observer_one.emit('reloading', false)
+				parent.observer_one.emit('full_ammo', true)
+			AbilityStates.INIT_JUMP:
+				parent.observer_one.emit('initializing_jump', false)
+			AbilityStates.GUNFIRED:
+				pass
 
-var has_full_ammo :bool= true:
-	set(value): if has_full_ammo != value:
-			has_full_ammo = value
-			if_debug('has_full_ammo: '+ str(has_full_ammo))
-			parent.observer_one.emit('full_ammo', has_full_ammo)
-
-var is_gunfired :bool=false:
-	set(value): if is_gunfired != value:
-			is_gunfired = value
-			if_debug('is_gunfired: '+ str(is_gunfired))
-			parent.observer_one.emit('gunfired', is_gunfired)
-
-var is_reload_modified :bool=false:
-	set(value): if is_reload_modified != value:
-			is_reload_modified = true
-			if_debug('is_reload_modified: '+ str(is_reload_modified))
-			parent.observer_one.emit('modified_reload', is_reload_modified)
-			if is_reload_modified:
-				is_reload_modified = false
-
-var is_jumping :bool=false:
-	set(value): if is_jumping!=value:
-			is_jumping = value
-			if_debug('is_jumping: '+ str(is_jumping))
-			parent.observer_one.emit('jumping', is_jumping)
-
-var is_initializing_jump :bool=false:
-	set(value): if value != is_initializing_jump:
-		is_initializing_jump = value
-		if_debug('is initializing_jump: ' + str(is_initializing_jump))
-		parent.observer_one.emit('initializing_jump', is_initializing_jump)
-		can_move = !is_initializing_jump
-
-var is_reloading :bool=false:
-	set(value): if is_reloading!=value:
-			is_reloading = value
-			if_debug('is_reloading: '+ str(is_reloading))
-			parent.observer_one.emit('reloading', is_reloading)
-
-var can_jump :bool=true:
-	set(value): if can_jump!=value:
-			can_jump = value
-			if_debug('can_jump: '+ str(can_jump))
-			parent.observer_one.emit('enable_jump', can_jump)
-
-var can_move :bool=false:
-	set(value): if can_move!=value:
-			can_move = value
-			if_debug('can_move: '+ str(can_move))
-			parent.observer_one.emit('enable_move', can_move)
-			if can_move:
-				parent.velocity = Vector2.ZERO
+@onready var current_state :int = AbilityStates.NONE:
+	set(value): if current_state != value:
+		old_state = current_state
+		current_state = value
+		match current_state:
+			AbilityStates.NONE:
+				pass
+			AbilityStates.IDLING:
+				pass
+			AbilityStates.MOVING:
+				pass
+			AbilityStates.JUMPING:
+				parent.observer_one.emit('jumping', true)
+			AbilityStates.RELOADING:
+				parent.observer_one.emit('reloading', true)
+			AbilityStates.INIT_JUMP:
+				parent.observer_one.emit('initializing_jump', true)
+			AbilityStates.GUNFIRED:
+				current_state = AbilityStates.IDLING
 
 var is_efficient :bool=false:
 	set(value): if is_efficient!=value:
@@ -81,14 +63,13 @@ func _ready()->void:
 			child.parent = self
 			child.grandparent = parent
 		children_with_ability_process.append(child)
-	can_move = true
+	current_state =AbilityStates.IDLING
 
 func being_physics_process(delta :float)->void:
 	for child:Ability in children_with_ability_process:
 		child.process_ability(delta)
 
-###
-##DEBUG
+#region #DEBUG
 ###
 @export_group('Debug')
 @export var debug_abilities :bool = false
@@ -102,3 +83,4 @@ func debug()->void:
 func if_debug(message :String)->void:
 	if debug_abilities:
 		Debuggerton.dprint(message, dcolor)
+#endregion

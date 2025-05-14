@@ -19,7 +19,7 @@ func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
 
 func ___signaler()->void:
-	observer_one.connect(func(func_name, one): Observerton.match_one(self, func_name, one))
+	publisher_one.connect(func(func_name, one): Observerton.subscriber_one(self, func_name, one))
 
 func jumping(needs_inverse :bool)->void:
 	set_collision_layer_value(1, !needs_inverse)

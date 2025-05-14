@@ -4,6 +4,7 @@
 [ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/anzhuBeing/mask/Mask.tres" id="2_h6tj4"]
 [ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalActions.gd" id="3_51qta"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="3_xf7mx"]
+[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/bear/_AnimalActions.gd" id="4_hho7n"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="5_gcotj"]
 [ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
 [ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="6_pyaxb"]
@@ -13,7 +14,6 @@
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="11_4sorn"]
 [ext_resource type="Script" uid="uid://77r3fqyd6fhd" path="res://resources/_states/goals/ActionChase.gd" id="12_fnbe6"]
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="13_bm8wf"]
-[ext_resource type="Script" uid="uid://bjf0pj6ov15cq" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearAudio.gd" id="13_k8gcw"]
 [ext_resource type="Script" uid="uid://cv8vrn7ohwvvv" path="res://resources/_states/goals/GoalHunt.gd" id="13_kkkf8"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="13_qx7fo"]
 [ext_resource type="Script" uid="uid://dxof6153gn57" path="res://resources/_states/actions/ActionSearch.gd" id="14_1lng4"]
@@ -32,15 +32,15 @@
 [ext_resource type="PackedScene" uid="uid://qpf733d2727o" path="res://resources/anzhuBeing/snowTracker/SnowTracker2D.tscn" id="31_hho7n"]
 [ext_resource type="Script" uid="uid://ccjwxftmp5da6" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearCorpse.gd" id="31_xf7mx"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrj27"]
+size = Vector2(8, 8)
+
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jrj27"]
 random_pitch = 1.16
 random_volume_offset_db = 1.16
 streams_count = 2
 stream_0/stream = ExtResource("24_lf0l5")
 stream_1/stream = ExtResource("25_6237r")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_jrj27"]
-size = Vector2(8, 8)
 
 [node name="Bear" type="CharacterBody2D"]
 script = ExtResource("1_6aww6")
@@ -52,16 +52,93 @@ shape = ExtResource("2_h6tj4")
 script = ExtResource("3_xf7mx")
 set_mask_dimensions = 5
 
-[node name="AnimalGoals" type="Node" parent="."]
+[node name="Actions" type="Node2D" parent="."]
+script = ExtResource("4_hho7n")
+
+[node name="Idle" type="Node2D" parent="Actions"]
+script = ExtResource("5_gcotj")
+
+[node name="Sit" type="Node2D" parent="Actions"]
+script = ExtResource("8_i834n")
+
+[node name="Wander" type="Node2D" parent="Actions"]
+script = ExtResource("13_qx7fo")
+
+[node name="WanderTimer" type="Timer" parent="Actions/Wander"]
+editor_description = "Will change the animal's trajectory every timeout."
+wait_time = 3.0
+
+[node name="SfxWander" type="AudioStreamPlayer2D" parent="Actions/Wander"]
+stream = ExtResource("17_fjh5o")
+max_distance = 250.0
+
+[node name="Hit" type="Node2D" parent="Actions"]
+script = ExtResource("6_pyaxb")
+
+[node name="Dead" type="Node2D" parent="Actions"]
+script = ExtResource("13_bm8wf")
+has_death_howl = true
+
+[node name="Timer" type="Timer" parent="Actions/Dead"]
+wait_time = 2.61
+one_shot = true
+
+[node name="Sfx_Dead" type="AudioStreamPlayer2D" parent="Actions/Dead"]
+stream = ExtResource("15_n3oor")
+volume_db = 2.0
+max_distance = 350.0
+
+[node name="Search" type="Node2D" parent="Actions"]
+script = ExtResource("14_1lng4")
+
+[node name="Chase" type="Node2D" parent="Actions"]
+script = ExtResource("12_fnbe6")
+
+[node name="DirectionTimer" type="Timer" parent="Actions/Chase"]
+wait_time = 1.5
+
+[node name="WallThunkTimer" type="Timer" parent="Actions/Chase"]
+one_shot = true
+
+[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Actions/Chase"]
+stream = ExtResource("18_5puse")
+max_distance = 225.0
+attenuation = 0.5
+
+[node name="Charge" type="Node2D" parent="Actions"]
+script = ExtResource("16_6x4uf")
+
+[node name="Sleep" type="Node2D" parent="Actions"]
+script = ExtResource("16_74pan")
+
+[node name="AnimalGoals" type="Node2D" parent="."]
 unique_name_in_owner = true
 script = ExtResource("11_4sorn")
 
-[node name="Hunt" type="Node" parent="AnimalGoals"]
+[node name="Hunt" type="Node2D" parent="AnimalGoals"]
 script = ExtResource("13_kkkf8")
+self_debug = true
 
-[node name="Nothing" type="Node" parent="AnimalGoals"]
+[node name="BgmHunt" type="AudioStreamPlayer2D" parent="AnimalGoals/Hunt"]
+editor_description = "Bear Hunt Music"
+stream = ExtResource("6_cuqt7")
+max_distance = 500.0
+attenuation = 1.618
+bus = &"PolarBear"
+
+[node name="SfxSpotted" type="AudioStreamPlayer2D" parent="AnimalGoals/Hunt"]
+stream = ExtResource("14_t1s4a")
+max_distance = 350.0
+bus = &"SFX"
+
+[node name="SfxOutOfSight" type="AudioStreamPlayer2D" parent="AnimalGoals/Hunt"]
+stream = ExtResource("16_47icu")
+max_distance = 350.0
+
+[node name="Nothing" type="Node2D" parent="AnimalGoals"]
 script = ExtResource("14_k7mq3")
 time_options = Array[int]([6, 9, 5, 4, 3, 5, 4])
+self_debug = true
 
 [node name="Timer" type="Timer" parent="AnimalGoals/Nothing"]
 wait_time = 6.0
@@ -73,84 +150,6 @@ sprite_frames = ExtResource("6_ybwxf")
 animation = &"Wander"
 autoplay = "Idle"
 script = ExtResource("3_51qta")
-
-[node name="Idle" type="Node" parent="Animations"]
-script = ExtResource("5_gcotj")
-
-[node name="Sit" type="Node" parent="Animations"]
-script = ExtResource("8_i834n")
-
-[node name="Wander" type="Node" parent="Animations"]
-script = ExtResource("13_qx7fo")
-
-[node name="WanderTimer" type="Timer" parent="Animations/Wander"]
-editor_description = "Will change the animal's trajectory every timeout."
-wait_time = 3.0
-
-[node name="Hit" type="Node" parent="Animations"]
-script = ExtResource("6_pyaxb")
-
-[node name="Dead" type="Node" parent="Animations"]
-script = ExtResource("13_bm8wf")
-has_death_howl = true
-
-[node name="Timer" type="Timer" parent="Animations/Dead"]
-wait_time = 2.61
-one_shot = true
-
-[node name="Search" type="Node" parent="Animations"]
-script = ExtResource("14_1lng4")
-
-[node name="Chase" type="Node" parent="Animations"]
-script = ExtResource("12_fnbe6")
-
-[node name="DirectionTimer" type="Timer" parent="Animations/Chase"]
-wait_time = 1.5
-
-[node name="WallThunkTimer" type="Timer" parent="Animations/Chase"]
-one_shot = true
-
-[node name="Charge" type="Node" parent="Animations"]
-script = ExtResource("16_6x4uf")
-
-[node name="Sleep" type="Node" parent="Animations"]
-script = ExtResource("16_74pan")
-
-[node name="AudioManager" type="Node2D" parent="."]
-script = ExtResource("13_k8gcw")
-
-[node name="Sfx_Hunt" type="AudioStreamPlayer2D" parent="AudioManager"]
-editor_description = "Bear Hunt Music"
-stream = ExtResource("6_cuqt7")
-max_distance = 500.0
-attenuation = 1.618
-bus = &"PolarBear"
-
-[node name="Sfx_Spotted" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("14_t1s4a")
-max_distance = 350.0
-bus = &"SFX"
-
-[node name="Sfx_OutOfSight" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("16_47icu")
-max_distance = 350.0
-
-[node name="Sfx_Idle" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("17_fjh5o")
-max_distance = 250.0
-
-[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("18_5puse")
-max_distance = 225.0
-attenuation = 0.5
-
-[node name="Sfx_Strike" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = SubResource("AudioStreamRandomizer_jrj27")
-
-[node name="Sfx_Dead" type="AudioStreamPlayer2D" parent="AudioManager"]
-stream = ExtResource("15_n3oor")
-volume_db = 2.0
-max_distance = 350.0
 
 [node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
@@ -165,6 +164,9 @@ script = ExtResource("28_ar1ys")
 [node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
 visible = false
 shape = SubResource("RectangleShape2D_jrj27")
+
+[node name="Sfx_Strike" type="AudioStreamPlayer2D" parent="HurtBox"]
+stream = SubResource("AudioStreamRandomizer_jrj27")
 
 [node name="Corpse" parent="." instance=ExtResource("30_h6tj4")]
 script = ExtResource("31_xf7mx")

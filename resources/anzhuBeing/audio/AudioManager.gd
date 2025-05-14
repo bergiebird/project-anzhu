@@ -12,7 +12,7 @@ func _ready()->void:
 	__signaler()
 
 func _signaler()->void:
-	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 	__signaler()
 
 func start_sfx(name_of_sfx :String)->void:

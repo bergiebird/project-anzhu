@@ -24,5 +24,5 @@ func loud_noise(_player :Player, _location :Vector2, _noise_db :float)->void:
 func __signaler()->void:
 	screen_entered.connect(_on_screen_entered)
 	screen_exited.connect(_on_screen_exited)
-	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 	Signalton.loud_noise.connect(loud_noise)

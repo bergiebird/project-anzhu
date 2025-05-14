@@ -1,36 +1,44 @@
-@icon("res://warehouse/icons/node/icon_transition.png")
-class_name AnimalGoalsMachine extends Node #AnimalGoals.gd
+class_name AnimalGoalsMachine extends StateMachine
 
-var goal_states :Dictionary = {}
-var current_goal :GoalState
-var verified_goal :GoalState
-var verified_name :String
+enum AnimalGoals {Nothing,Hunt}
+@export var starting_goal :AnimalGoals = AnimalGoals.Nothing
+@onready var current_goal :AnimalGoals = -1
+var goals :Dictionary[AnimalGoals,GoalState]
 
-func _ready()->void:
-	for child :GoalState in get_children():
-		goal_states[child.name] = child
-		if debug_goals:
-			child.self_debug = true
+func __ready()->void:
+	change_goals(starting_goal)                          # Run the first goal because current_goal should be null
 
-func on_goal_transition(new_goal_name :String)->void:
-	if goal_states != {}:
-		if current_goal != null:
-			if new_goal_name == current_goal.name:
-				return
-		verified_goal = goal_states.get(new_goal_name)
-		if verified_goal:
-			if current_goal:
-				current_goal._exit()
-			else:
-				verified_goal._enter()
-			current_goal = verified_goal
 
-func transition_part_2()->void:
-	verified_goal._enter()
+func change_goals(incoming_goal)->void:
+	if incoming_goal is String:                           # Makes it easy for other nodes to call this without knowing the enum
+		incoming_goal = get_node(incoming_goal).which_goal
+	if incoming_goal is AnimalGoals:                      # Was highly type unsafe up to this point, this should lock in the type
+		if current_goal != incoming_goal:                  # Check if redundant, we don't execute redundancies
+			current_goal = incoming_goal
+			on_transition(goals[current_goal])
 
-func _match_null(method_name :String):
-	if has_method(method_name):
-		Callable(self, method_name)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #region # DEBUG

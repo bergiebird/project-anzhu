@@ -1,11 +1,11 @@
 @icon("res://resources/anzhuBeing/player/abilities/gun/icons8-sniper-rifle-100.png")
 class_name Gunshot extends Ability #Gun.gd
 
-@export_range(0, 0.5, 0.01) var bullet_travel_time:float = 0.16
-@export var shoot_cooldown:float = 0.1
+@export_range(0, 0.5, 0.01) var bullet_travel_time:float = 0.26
 @export var flash_time:float = 0.1
 @export var modified_speed_up:float = 0.16
 @export var noise_db:float = 300.0
+var is_empty :bool = false
 @onready var can_shoot:bool = true
 @onready var vfx_flash:PointLight2D = $VfxFlash
 @onready var flash:bool = vfx_flash.visible:
@@ -20,31 +20,26 @@ class_name Gunshot extends Ability #Gun.gd
 @onready var sfx_gunshot:AudioStreamPlayer = $SfxGunshot
 
 func _grandparent_set():
-	grandparent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+	grandparent.observer_one.connect(func(func_name, one:Variant): Observerton.match_one(self, func_name, one))
 
 func process_ability(_delta :float):
-	if parent.is_reloading:
-		if Inputon.modifier():
-			parent.is_reload_modified = true
-	elif parent.has_full_ammo:
-		if Inputon.gun_shoot():
-			process_gunshot()
-	elif not parent.has_full_ammo:
-		if Inputon.gun_reload():
-			parent.is_reloading = true
+	match parent.current_state:
+		parent.AbilityStates.RELOADING:
+			pass
+		parent.AbilityStates.IDLING:
+			if not is_empty and Inputon.gun_shoot():
+				process_gunshot()
+			elif is_empty and Inputon.gun_reload():
+				parent.current_state = parent.AbilityStates.RELOADING
 
 func process_gunshot():
+	is_empty = true
 	sfx_gunshot.play()
 	position = Vector2.ZERO
-	parent.is_gunfired = true
-	parent.has_full_ammo = false
-	parent.can_move = false
 	Directon.gunmatch(self, smoke_barrel, smoke_back, gunray, grandparent.current_direction)
 	smoke_back.emitting = true
 	smoke_barrel.emitting = true
 	flash = true
-	await get_tree().create_timer(shoot_cooldown).timeout
-	parent.can_move = true
 	await get_tree().create_timer(bullet_travel_time).timeout
 	gunray.collide_with_bodies = true
 	gunray.force_raycast_update()
@@ -54,14 +49,10 @@ func process_gunshot():
 		gunray.collide_with_bodies = false
 
 func full_ammo(has_ammo :bool):
-	if has_ammo:
-		parent.can_move = true
-		parent.is_reloading = false
-		parent.is_gunfired = false
+	is_empty = !has_ammo
 
-###
-##DEBUGGER
-###
+
+#region #DEBUGGER
 @export_group('Debug')
 @export var debug_gunshot :bool = false
 @export var debugger_color :Color = Color("fff1a9")
@@ -69,3 +60,4 @@ func full_ammo(has_ammo :bool):
 func debug()->void:
 	Debuggerton.enable_print(self.name, debugger_color)
 	debug_gunshot = true
+#endregion

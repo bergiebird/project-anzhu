@@ -6,7 +6,6 @@ const FLASH_AMOUNT :int = 4
 var is_dead :bool = false
 var is_colored :bool = false
 var anim_direction :String = '_SIDE'
-var old_flip_h :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 @onready var mask :Mask = parent.get_node("Mask")
 @onready var abilities :Abilities = parent.get_node('Abilities')
@@ -14,9 +13,9 @@ var old_flip_h :bool = false
 @onready var reload_anim :ReloadAnimation = $ReloadAnimation
 
 func _ready()->void:
-	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
-	parent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
-	parent.observer_two.connect(func(func_name, one :Variant, two :Variant): Observerton.match_two(self, func_name, one, two))
+	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
+	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
+	parent.publisher_two.connect(func(func_name, one :Variant, two :Variant): Observerton.subscribe_two(self, func_name, one, two))
 
 func has_died()->void:
 	is_dead = true
@@ -26,7 +25,6 @@ func should_flip(yes :bool):
 
 func reloading(is_reloading:bool)->void:
 	if is_reloading:
-		abilities.can_move = false
 		reload_anim.start_routine()
 
 func modified_reload(is_reload_modified :bool)->void:
@@ -42,22 +40,26 @@ func initializing_jump(is_jump_initialized :bool)->void:
 		just_play('readyJump', true, 1)
 
 func reload_animation_finished()->void:
-	if abilities.has_full_ammo == false:
-		if_debug('reload finished ' + animation)
-		abilities.has_full_ammo = true
+	if_debug('reload finished ' + animation)
+	abilities.current_state = abilities.AbilityStates.IDLING
 
 func being_physics_process(_delta :float)->void:
 	var speed :int = int(parent.velocity.length())
-	if abilities.is_reloading or abilities.is_jumping or abilities.is_initializing_jump:
-		if_debug('stopped')
-		return
-	if speed > 30:
-		just_play('run')
-	elif 30 >= speed and speed > 0:
-		just_play('walk')
-	else:
-		if_debug('idled')
-		just_play('idle')
+	match abilities.current_state:
+		abilities.AbilityStates.RELOADING:
+			return
+		abilities.AbilityStates.JUMPING:
+			return
+		abilities.AbilityStates.RELOADING:
+			return
+		abilities.AbilityStates.MOVING:
+			if speed > 30:
+				just_play('run')
+			else:
+				just_play('walk')
+		abilities.AbilityStates.IDLING:
+				just_play('idle')
+
 
 func direction_flipped(flipper :bool=flip_h)->void:
 	if flip_h != flipper:
@@ -72,9 +74,13 @@ func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int
 	if_debug("anim: " + anim_name + "  anim_direction:  " + anim_direction)
 
 func efficiency_check(force_speed_scale :int = -1)->void:
-	if force_speed_scale != -1:  speed_scale = force_speed_scale
-	elif abilities.is_efficient: speed_scale = 1
-	else:                        speed_scale = 0.60
+	if force_speed_scale == -1:
+		if abilities.is_efficient:
+			speed_scale = 1
+		else:
+			speed_scale = 0.60
+	else:
+		speed_scale = force_speed_scale
 
 func was_struck()->void:
 	modulate = Swatchton.RED_TOMATO

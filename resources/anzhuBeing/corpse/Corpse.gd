@@ -6,7 +6,7 @@ var stored_position :Vector2
 
 func _ready()->void:
 	body_entered.connect(_on_body_entered)
-	parent.observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
 func _on_body_entered(_body :Node2D)->void:
 	queue_free()

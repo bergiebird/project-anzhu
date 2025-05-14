@@ -1,10 +1,7 @@
 @icon("res://resources/environment/objectsSmart/campFire/campfire.png")
 class_name CampFire extends StaticBody2D #CampFire.gd
 
-signal observer_null(method_name :String)
-signal observer_one(method_name :String, one :Variant)
-signal observer_two(method_name :String, one :Variant, two :Variant)
-signal observer_three(method_name :String, one :Variant, two :Variant, three :Variant)
+signal publisher_null(method_name :String)
 
 @export var min_light :float = 0.1
 @export var max_light :float = 1.0
@@ -37,11 +34,13 @@ func _ready()->void:
 
 func signaler()->void:
 	Libraryton.player_reference.connect(func(ref): player = ref)
-	observer_null.connect(func(func_name): Observerton.match_null(self, func_name))
+	publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
-func light_fire()->void:
-	if is_lit: is_lit = false
-	else:      is_lit = true
+func interacted()->void:
+	if is_lit:
+		is_lit = false
+	else:
+		is_lit = true
 
 
 func lerp_light(new_time :int)->void:

@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://ddv3nvhdwptc4"]
+
+[ext_resource type="Script" uid="uid://pss6faxg1mjw" path="res://gyms/mainScene/nodeAudio/NodeAudio.gd" id="1_r7y1b"]
+[ext_resource type="AudioStream" uid="uid://hvyddlreidmd" path="res://gyms/mainScene/nodeAudio/CyclingBGM/Music Historic 1.mp3" id="2_jndcq"]
+[ext_resource type="AudioStream" uid="uid://bsck3qaty34rh" path="res://gyms/mainScene/nodeAudio/CyclingBGM/Music Historic 2 (baroque).mp3" id="3_3dvoj"]
+[ext_resource type="AudioStream" uid="uid://towmm2aavkd0" path="res://gyms/mainScene/nodeAudio/CyclingBGM/Music historic 3.mp3" id="4_482o6"]
+[ext_resource type="AudioStream" uid="uid://b75k7g21yhkww" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Begin.mp3" id="5_7duu1"]
+[ext_resource type="AudioStream" uid="uid://cx8c4g6ss24t" path="res://gyms/mainScene/nodeAudio/dayNightAudio/DawnStart.mp3" id="6_g21ax"]
+[ext_resource type="AudioStream" uid="uid://cnlvuutd3eh62" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Morning.mp3" id="7_rshdm"]
+[ext_resource type="AudioStream" uid="uid://jfa2si1nbvr6" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Noon.mp3" id="8_e57et"]
+[ext_resource type="AudioStream" uid="uid://dqm5vov4853q1" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Afternoon.mp3" id="9_rlbw3"]
+[ext_resource type="AudioStream" uid="uid://danm16q6et1a8" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Dusk.wav" id="10_dipk5"]
+[ext_resource type="AudioStream" uid="uid://djx5omk6t2ytb" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Night.mp3" id="11_fiao6"]
+[ext_resource type="AudioStream" uid="uid://c0gafng5vkfn8" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Late Night.mp3" id="12_2cdd8"]
+
+[node name="Audio" type="Node"]
+editor_description = "This contains all of our audio that plays regardless of location.
+
+You can find character specific audio located in their respective scenes."
+script = ExtResource("1_r7y1b")
+audio_mode = 0
+
+[node name="CyclingBackgroundMusic" type="Node" parent="."]
+
+[node name="Historic1" type="AudioStreamPlayer" parent="CyclingBackgroundMusic"]
+stream = ExtResource("2_jndcq")
+bus = &"BGM"
+
+[node name="Historic2Baroque" type="AudioStreamPlayer" parent="CyclingBackgroundMusic"]
+stream = ExtResource("3_3dvoj")
+bus = &"BGM"
+
+[node name="Historic3" type="AudioStreamPlayer" parent="CyclingBackgroundMusic"]
+stream = ExtResource("4_482o6")
+bus = &"BGM"
+
+[node name="DayNightAudio" type="Node" parent="."]
+
+[node name="BEGIN" type="AudioStreamPlayer" parent="DayNightAudio"]
+unique_name_in_owner = true
+stream = ExtResource("5_7duu1")
+bus = &"BGM"
+
+[node name="DAWN" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("6_g21ax")
+bus = &"BGM"
+
+[node name="MORNING" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("7_rshdm")
+bus = &"BGM"
+
+[node name="NOON" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("8_e57et")
+bus = &"BGM"
+
+[node name="AFTERNOON" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("9_rlbw3")
+bus = &"BGM"
+
+[node name="DUSK" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("10_dipk5")
+bus = &"BGM"
+
+[node name="NIGHT" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("11_fiao6")
+bus = &"BGM"
+
+[node name="MIDNIGHT" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("12_2cdd8")
+volume_db = 1.5
+pitch_scale = 0.75
+bus = &"BGM"
+
+[node name="LATE_NIGHT" type="AudioStreamPlayer" parent="DayNightAudio"]
+stream = ExtResource("12_2cdd8")
+bus = &"BGM"

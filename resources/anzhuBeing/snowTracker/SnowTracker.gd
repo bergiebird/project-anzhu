@@ -12,7 +12,7 @@ var can_make_tracks :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready() -> void:
-	parent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
 	Libraryton.tracks_reference.connect(setup_maps)
 
 func being_process(_delta :float)->void:

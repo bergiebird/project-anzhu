@@ -8,6 +8,6 @@ func ___ready()->void:
 
 
 func ___was_just_struck(_damage :int, _weapon :String, _who:AnzhuBeing)->void:
-	observer_null.emit("hit_over")
+	publisher_null.emit("hit_over")
 	is_sliding = false
-	change_actions("Chase")
+	publisher_one.emit("change_actions", "Chase")

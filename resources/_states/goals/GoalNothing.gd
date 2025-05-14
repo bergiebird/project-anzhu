@@ -2,14 +2,14 @@ extends GoalState #GoalNothing.gd
 
 @export var state_options :Array[String] = ["Idle","Sit","Wander"]
 @export var time_options :Array[int] = [6,9,30,12,15,5,4]
+var which_state :int
 var chosen_time :int
 var chosen_state :String
 var old_chosen_state :String
 @onready var timer :Timer = $Timer
 
 func ___ready()->void:
-	Debuggerton.signal_checker([
-		timer.timeout.connect(_on_timeout)])
+	timer.timeout.connect(_on_timeout)
 
 func ___enter()->void:
 	timer.start()
@@ -26,3 +26,6 @@ func _on_timeout() -> void:
 
 func exit()->void:
 	timer.stop()
+
+func ___get_state_value(_parent :StateMachine):
+	which_state = _parent.AnimalGoals.Nothing

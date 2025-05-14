@@ -1,29 +1,19 @@
-[gd_scene load_steps=33 format=4 uid="uid://c17cw7tkkjo8a"]
+[gd_scene load_steps=23 format=4 uid="uid://c17cw7tkkjo8a"]
 
+[ext_resource type="Script" uid="uid://b6a83rf68g2eq" path="res://gyms/Zoo/zoo_gym.gd" id="1_081gq"]
 [ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://warehouse/Overworld/Resources/ground_and_water_ANZHU.png" id="1_qx4d4"]
 [ext_resource type="Script" uid="uid://djvbu6mh08co4" path="res://resources/anzhuBeing/snowTracker/SnowTracksManager.gd" id="2_fxva6"]
-[ext_resource type="AudioStream" uid="uid://dmxh3tk3v2jdy" path="res://resources/environment/coast/368316__ivolipa__strong_waves_2.wav" id="3_dwm7r"]
-[ext_resource type="Script" uid="uid://b4ansl7oxxvje" path="res://resources/environment/coast/CoastalWaves.gd" id="4_7tnj4"]
+[ext_resource type="PackedScene" uid="uid://bhwvyudx4h5te" path="res://resources/environment/coast/coastline.tscn" id="3_aexdd"]
 [ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://warehouse/Overworld/Resources/anzhu_cliffs.png" id="5_nmdn8"]
 [ext_resource type="Texture2D" uid="uid://nxai7gqj4ivy" path="res://resources/tools/invisibleWalls/invisible_walls.png" id="6_k4luy"]
 [ext_resource type="TileSet" uid="uid://io7ysittrqe2" path="res://warehouse/Overworld/ts_arctic_all.tres" id="7_16scg"]
-[ext_resource type="Script" uid="uid://c5q5gpnueiedb" path="res://gyms/zoo/ZooEntities.gd" id="8_yihgq"]
+[ext_resource type="Script" uid="uid://c5q5gpnueiedb" path="res://gyms/Zoo/ZooEntities.gd" id="8_yihgq"]
 [ext_resource type="PackedScene" uid="uid://dr7gmcq3ydu2b" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear.tscn" id="9_8jy0f"]
 [ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.tscn" id="10_1s0vo"]
 [ext_resource type="Texture2D" uid="uid://pio4q5jvles3" path="res://resources/tools/elevationsLayer/proto_tiles.png" id="11_hmi4i"]
 [ext_resource type="FontFile" uid="uid://d3rlsmkfww0cc" path="res://warehouse/fonts/[5x6] Direct Message/Direct_Message_Blocky.ttf" id="12_aew4v"]
+[ext_resource type="PackedScene" uid="uid://ddv3nvhdwptc4" path="res://gyms/mainScene/nodeAudio/node_audio.tscn" id="13_a1mdy"]
 [ext_resource type="PackedScene" uid="uid://b2ioppk5nryv5" path="res://gyms/homeless/ui_canvas.tscn" id="13_cgo3a"]
-[ext_resource type="Script" uid="uid://pss6faxg1mjw" path="res://gyms/mainScene/nodeAudio/NodeAudio.gd" id="14_2wa3v"]
-[ext_resource type="AudioStream" uid="uid://dt8tbpw6y5t1o" path="res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres" id="15_h7hqg"]
-[ext_resource type="AudioStream" uid="uid://b75k7g21yhkww" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Begin.mp3" id="16_dui6v"]
-[ext_resource type="AudioStream" uid="uid://cx8c4g6ss24t" path="res://gyms/mainScene/nodeAudio/dayNightAudio/DawnStart.mp3" id="17_yyckn"]
-[ext_resource type="AudioStream" uid="uid://cnlvuutd3eh62" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Morning.mp3" id="18_v048v"]
-[ext_resource type="AudioStream" uid="uid://jfa2si1nbvr6" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Noon.mp3" id="19_mp8tc"]
-[ext_resource type="AudioStream" uid="uid://dqm5vov4853q1" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Afternoon.mp3" id="20_n44cr"]
-[ext_resource type="AudioStream" uid="uid://danm16q6et1a8" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Dusk.wav" id="21_k8q47"]
-[ext_resource type="AudioStream" uid="uid://djx5omk6t2ytb" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Night.mp3" id="22_3bdn1"]
-[ext_resource type="AudioStream" uid="uid://c0gafng5vkfn8" path="res://gyms/mainScene/nodeAudio/dayNightAudio/Late Night.mp3" id="23_k1ccs"]
-[ext_resource type="AudioStream" uid="uid://dtjkl0eql0m0h" path="res://warehouse/_audio/ambience/607839__sonically_sound__polar-wind-synthetic.wav" id="24_gle3j"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ij44i"]
 texture = ExtResource("1_qx4d4")
@@ -1938,6 +1928,7 @@ custom_data_layer_0/type = 2
 sources/0 = SubResource("TileSetAtlasSource_88xlc")
 
 [node name="ZooGym" type="Node2D"]
+script = ExtResource("1_081gq")
 
 [node name="NODE2D" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -1969,17 +1960,8 @@ tile_set = SubResource("TileSet_qalkd")
 tile_map_data = PackedByteArray("AAAyAKkAAAACAA0AAAAyAKgAAAACAA0AAAAyAKcAAAACAA0AAAAyAKYAAAACAA0AAAAyAKQAAAACAAwAAAAyAKUAAAACAA0AAAAzAKUAAAAKAAoAAAAzAKQAAAAKAAoAAAAzAKYAAAAKAAoAAAAzAKgAAAAKAAoAAAAzAKcAAAAKAAoAAAAzAKkAAAAKAAoAAAA=")
 tile_set = SubResource("TileSet_qalkd")
 
-[node name="Waves" type="AudioStreamPlayer2D" parent="NODE2D/Water"]
-process_mode = 4
-editor_description = "At the moment, this follows the player's Y value while having a fixed X value. "
-visible = false
+[node name="Coastline" parent="NODE2D/Water" instance=ExtResource("3_aexdd")]
 position = Vector2(202, 262)
-stream = ExtResource("3_dwm7r")
-autoplay = true
-max_distance = 500.0
-attenuation = 2.0
-bus = &"Waves"
-script = ExtResource("4_7tnj4")
 
 [node name="Walls" type="CanvasGroup" parent="NODE2D"]
 
@@ -2005,27 +1987,42 @@ script = ExtResource("8_yihgq")
 
 [node name="Bear" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(457, 541)
+debug_all = null
+debug_self = null
 
 [node name="Bear2" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(871, 139)
+debug_all = null
+debug_self = null
 
 [node name="Bear3" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(862, 543)
+debug_all = null
+debug_self = null
 
 [node name="Bear4" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(457, 135)
+debug_all = null
+debug_self = null
 
 [node name="Bear5" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(759, 285)
+debug_all = null
+debug_self = null
 
 [node name="Bear6" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(573, 245)
+debug_all = null
+debug_self = null
 
 [node name="Bear7" parent="NODE2D/Entities" instance=ExtResource("9_8jy0f")]
 position = Vector2(506, 398)
+debug_all = null
+debug_self = null
 
 [node name="MainCamera" parent="NODE2D/Entities" instance=ExtResource("10_1s0vo")]
 position = Vector2(663, 346)
+zoom = Vector2(5, 5)
 
 [node name="SnowFall" parent="NODE2D/Entities/MainCamera" index="1"]
 visible = false
@@ -2078,64 +2075,10 @@ editor_description = "This is containing all of my Node nodes."
 
 [node name="Events" type="Node" parent="NODE"]
 
-[node name="Audio" type="Node" parent="NODE"]
-editor_description = "This contains all of our audio that plays regardless of location."
-script = ExtResource("14_2wa3v")
-
-[node name="Gunshot" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("15_h7hqg")
-volume_db = 3.0
-bus = &"SFX"
-
-[node name="BEGIN" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("16_dui6v")
-bus = &"BGM"
-
-[node name="DAWN" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("17_yyckn")
-bus = &"BGM"
-
-[node name="MORNING" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("18_v048v")
-bus = &"BGM"
-
-[node name="NOON" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("19_mp8tc")
-bus = &"BGM"
-
-[node name="AFTERNOON" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("20_n44cr")
-bus = &"BGM"
-
-[node name="DUSK" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("21_k8q47")
-bus = &"BGM"
-
-[node name="NIGHT" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("22_3bdn1")
-bus = &"BGM"
-
-[node name="MIDNIGHT" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("23_k1ccs")
-volume_db = 1.5
-pitch_scale = 0.75
-bus = &"BGM"
-
-[node name="LATE_NIGHT" type="AudioStreamPlayer" parent="NODE/Audio"]
-stream = ExtResource("23_k1ccs")
-bus = &"BGM"
-
-[node name="Ambience" type="Node" parent="NODE/Audio"]
-
-[node name="Ambience" type="AudioStreamPlayer" parent="NODE/Audio/Ambience"]
-stream = ExtResource("24_gle3j")
-autoplay = true
-bus = &"Wind"
+[node name="Audio" parent="NODE" instance=ExtResource("13_a1mdy")]
 
 [node name="Tools" type="Node" parent="NODE"]
 
 [node name="ConsoleDev" type="Node" parent="NODE/Tools"]
-
-[connection signal="finished" from="NODE/Audio/BEGIN" to="NODE/Audio" method="_on_begin_finished"]
 
 [editable path="NODE2D/Entities/MainCamera"]

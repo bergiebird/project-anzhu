@@ -50,7 +50,7 @@ func gunmatch(who :Gunshot, smoke_barrel :CPUParticles2D, smoke_back :CPUParticl
 	who.position = GUN_POSITION[direction]
 	smoke_barrel.direction = VECTORS[direction]
 	smoke_back.position = SMOKE_POSITION[direction]
-	#who.z_index = GUN_Z_INDEX[direction]
+#	who.z_index = GUN_Z_INDEX[direction]
 
 func get_prevalent_direction(vector :Vector2)->int:
 	var degrees :float = rad_to_deg(vector.angle())

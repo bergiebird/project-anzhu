@@ -11,7 +11,6 @@ var snow_tracker :Node
 func ___ready() -> void:
 	hurt_box_node = grandparent.hurt_box
 
-
 func enter()->void:
 	grandparent.is_stunned = true
 	grandparent.is_injured = true
@@ -26,8 +25,6 @@ func was_just_hit()->void:
 		is_colored = !is_colored
 		parent.self_modulate = RED_COLOR if is_colored else DEFAULT_COLOR
 		await get_tree().create_timer(.4).timeout
-	#if grandparent.has_method("character_was_hit_over"):
-		#grandparent.character_was_hit_over()
 
 func exit()->void:
 	parent.self_modulate = DEFAULT_COLOR
