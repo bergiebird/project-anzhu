@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://deq42m7k6wkb4"
-path="res://.godot/imported/Enter-Input.png-101b1a1a4fee41ddb9a318322ea0f117.ctex"
+path="res://.godot/imported/Enter-Input.png-07b774a59449fe04a166c5b130b2334c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter-Input.png"
-dest_files=["res://.godot/imported/Enter-Input.png-101b1a1a4fee41ddb9a318322ea0f117.ctex"]
+source_file="res://warehouse/fonts/[16] Enter Inputa/local/Enter-Input-All/Enter-Input.png"
+dest_files=["res://.godot/imported/Enter-Input.png-07b774a59449fe04a166c5b130b2334c.ctex"]
 
 [params]
 

@@ -10,6 +10,10 @@ var grandparent :Player:
 		grandparent = value
 		_grandparent_set()
 
+func _ready() -> void:
+	set_process(false)
+	set_physics_process(false)
+
 func _parent_set()->void: pass
 
 func _grandparent_set()->void: pass

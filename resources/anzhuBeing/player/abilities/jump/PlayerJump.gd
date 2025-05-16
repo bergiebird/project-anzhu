@@ -11,7 +11,7 @@ var only_one_may_enter :bool = true
 func _ready() -> void:
 	Libraryton.elevation_reference.connect(func(ref :TileMapLayer)->void:elevation_map = ref)
 
-func process_ability(_delta :float)->void:
+func _physics_process(_delta :float)->void:
 	match parent.current_state:
 		parent.AbilityStates.IDLING:    check_for_init_jump()
 		parent.AbilityStates.MOVING:    check_for_init_jump()

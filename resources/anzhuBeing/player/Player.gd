@@ -19,14 +19,13 @@ func how_should_character_die()->void:
 	Signalton.reload_scene.emit()
 
 func ___signaler()->void:
-	publisher_one.connect(func(func_name, one): Observerton.subscriber_one(self, func_name, one))
+	publisher_one.connect(func(func_name, one): Observerton.subscribe_one(self, func_name, one))
 
 func jumping(needs_inverse :bool)->void:
 	set_collision_layer_value(1, !needs_inverse)
 	set_collision_mask_value(1, !needs_inverse)
 
-
-#region #	Debug
+#region	Debug
 func early_ready_for_debug()->void:
 	if debug_self:
 		debug_icon = "[img]res://resources/player/player.png[/img]"

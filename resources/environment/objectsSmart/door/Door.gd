@@ -2,7 +2,6 @@
 class_name Door extends Area2D
 
 @export var pair :Door
-
 var player :Player
 var is_exit :bool = false:
 	set(value): if is_exit != value:
@@ -12,32 +11,25 @@ var is_exit :bool = false:
 
 func _ready() -> void:
 	_debug()
-	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref),
-		body_entered.connect(teleport_player),
-		body_exited.connect(player_exited)
-	])
+	Libraryton.player_reference.connect(_player_reference_collection)
+	body_entered.connect(_teleport_player)
+	body_exited.connect(_player_exited)
 
-func teleport_player(body: Player)->void:
-	if not is_exit:
+func _teleport_player(body: Node2D)->void:
+	if not is_exit and body is Player:
 		pair.is_exit = true
 		body.current_direction = body.PersonalDirection.SOUTH
 
-func player_exited(_body: Player)->void:
-	if is_exit:
+func _player_exited(body: Node2D)->void:
+	if is_exit and body is Player:
 		is_exit = false
 
 func _player_reference_collection(ref :Player)->void:
 	player = ref
-	if is_connected("player_reference", _player_reference_collection):
-		print('success, it is connected')
-	disconnect("player_reference", _player_reference_collection)
-	if Libraryton.is_connected("player_reference", _player_reference_collection):
-		print('need libraryton')
+	Libraryton.player_reference.disconnect(_player_reference_collection)
 
-###
-## DEBUG
-###
+#region	 DEBUG
+
 @export_group('debug')
 @export var debug :bool = false
 @export var debug_color :Color = Swatchton.BROWN_DARKEST
@@ -50,3 +42,4 @@ func _debug()->void:
 		Debuggerton.enable_print(self.name, debug_color)
 	else:
 		debug_sprite.visible = false
+#endregion

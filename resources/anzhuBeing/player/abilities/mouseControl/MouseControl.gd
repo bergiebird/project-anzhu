@@ -33,7 +33,7 @@ func _ready()->void:
 
 
 
-func process_ability(delta :float)->void:
+func _physics_process(delta :float)->void:
 	current_mouse_position = get_viewport().get_mouse_position()  # Every frame we check for the mouse's position
 	if current_mouse_position != previous_mouse_position:         # If the position is new
 		mouse_idle_timer = TIMER_RESETTED                          # We reset the timer to 0

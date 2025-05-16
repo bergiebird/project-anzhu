@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dr7gmcq3ydu2b"]
+[gd_scene load_steps=30 format=3 uid="uid://dr7gmcq3ydu2b"]
 
 [ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/Bear.gd" id="1_6aww6"]
 [ext_resource type="Shape2D" uid="uid://c4r6d5ato0hir" path="res://resources/anzhuBeing/mask/Mask.tres" id="2_h6tj4"]
@@ -7,7 +7,6 @@
 [ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/bear/_AnimalActions.gd" id="4_hho7n"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="5_gcotj"]
 [ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
-[ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="6_pyaxb"]
 [ext_resource type="SpriteFrames" uid="uid://1t351xrrxt6d" path="res://resources/anzhuBeing/anzhuAnimal/bear/visual/sf_bear.tres" id="6_ybwxf"]
 [ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="8_i834n"]
 [ext_resource type="Script" uid="uid://c7yi1wu2k8qh2" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearEyesight.gd" id="8_jp6s3"]
@@ -16,19 +15,15 @@
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="13_bm8wf"]
 [ext_resource type="Script" uid="uid://cv8vrn7ohwvvv" path="res://resources/_states/goals/GoalHunt.gd" id="13_kkkf8"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="13_qx7fo"]
-[ext_resource type="Script" uid="uid://dxof6153gn57" path="res://resources/_states/actions/ActionSearch.gd" id="14_1lng4"]
 [ext_resource type="Script" uid="uid://n4g3epvshvea" path="res://resources/_states/goals/GoalNothing.gd" id="14_k7mq3"]
 [ext_resource type="AudioStream" uid="uid://dighd7kxlaht8" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (saw player).mp3" id="14_t1s4a"]
 [ext_resource type="AudioStream" uid="uid://b1e37kdue1g3v" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (hurt).mp3" id="15_n3oor"]
-[ext_resource type="Script" uid="uid://rbqqv7itpil0" path="res://resources/_states/actions/ActionCharge.gd" id="16_6x4uf"]
 [ext_resource type="AudioStream" uid="uid://cjfo3gmgsqhpb" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (normal).mp3" id="16_47icu"]
-[ext_resource type="Script" uid="uid://cbso40iygppbl" path="res://resources/_states/actions/ActionSleep.gd" id="16_74pan"]
 [ext_resource type="AudioStream" uid="uid://bh3tjtuu7g7a2" path="res://warehouse/_audio/sfx/walk/default_bus_layout.tres" id="17_fjh5o"]
 [ext_resource type="AudioStream" uid="uid://cfc7k8xu6ve63" path="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3" id="18_5puse"]
 [ext_resource type="AudioStream" uid="uid://cisjs4ks2qp54" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear Bite 1.mp3" id="24_lf0l5"]
 [ext_resource type="AudioStream" uid="uid://dy4gm4o2d242p" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear Bite 2.mp3" id="25_6237r"]
 [ext_resource type="Script" uid="uid://drtuaa2rbofev" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearHurtBox.gd" id="28_ar1ys"]
-[ext_resource type="PackedScene" uid="uid://chicyma06s6la" path="res://resources/anzhuBeing/corpse/Corpse.tscn" id="30_h6tj4"]
 [ext_resource type="PackedScene" uid="uid://qpf733d2727o" path="res://resources/anzhuBeing/snowTracker/SnowTracker2D.tscn" id="31_hho7n"]
 [ext_resource type="Script" uid="uid://ccjwxftmp5da6" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearCorpse.gd" id="31_xf7mx"]
 
@@ -42,15 +37,20 @@ streams_count = 2
 stream_0/stream = ExtResource("24_lf0l5")
 stream_1/stream = ExtResource("25_6237r")
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_2bntw"]
+radius = 11.0
+
 [node name="Bear" type="CharacterBody2D"]
+collision_layer = 17
+collision_mask = 17
 script = ExtResource("1_6aww6")
 this_animals_type = 3
 
 [node name="Mask" type="CollisionShape2D" parent="."]
-unique_name_in_owner = true
 shape = ExtResource("2_h6tj4")
 script = ExtResource("3_xf7mx")
 set_mask_dimensions = 5
+takes_how_much_on_hit = 6
 
 [node name="Actions" type="Node2D" parent="."]
 script = ExtResource("4_hho7n")
@@ -72,24 +72,18 @@ wait_time = 3.0
 stream = ExtResource("17_fjh5o")
 max_distance = 250.0
 
-[node name="Hit" type="Node2D" parent="Actions"]
-script = ExtResource("6_pyaxb")
-
 [node name="Dead" type="Node2D" parent="Actions"]
+editor_description = "If you want a deathhowl, give this an AudioStreamPlayer2D with a name \"SfxDeathHowl\""
 script = ExtResource("13_bm8wf")
-has_death_howl = true
 
 [node name="Timer" type="Timer" parent="Actions/Dead"]
 wait_time = 2.61
 one_shot = true
 
-[node name="Sfx_Dead" type="AudioStreamPlayer2D" parent="Actions/Dead"]
+[node name="SfxDeathHowl" type="AudioStreamPlayer2D" parent="Actions/Dead"]
 stream = ExtResource("15_n3oor")
 volume_db = 2.0
 max_distance = 350.0
-
-[node name="Search" type="Node2D" parent="Actions"]
-script = ExtResource("14_1lng4")
 
 [node name="Chase" type="Node2D" parent="Actions"]
 script = ExtResource("12_fnbe6")
@@ -105,19 +99,11 @@ stream = ExtResource("18_5puse")
 max_distance = 225.0
 attenuation = 0.5
 
-[node name="Charge" type="Node2D" parent="Actions"]
-script = ExtResource("16_6x4uf")
-
-[node name="Sleep" type="Node2D" parent="Actions"]
-script = ExtResource("16_74pan")
-
 [node name="AnimalGoals" type="Node2D" parent="."]
-unique_name_in_owner = true
 script = ExtResource("11_4sorn")
 
 [node name="Hunt" type="Node2D" parent="AnimalGoals"]
 script = ExtResource("13_kkkf8")
-self_debug = true
 
 [node name="BgmHunt" type="AudioStreamPlayer2D" parent="AnimalGoals/Hunt"]
 editor_description = "Bear Hunt Music"
@@ -138,16 +124,14 @@ max_distance = 350.0
 [node name="Nothing" type="Node2D" parent="AnimalGoals"]
 script = ExtResource("14_k7mq3")
 time_options = Array[int]([6, 9, 5, 4, 3, 5, 4])
-self_debug = true
 
 [node name="Timer" type="Timer" parent="AnimalGoals/Nothing"]
 wait_time = 6.0
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
 z_index = 10
 sprite_frames = ExtResource("6_ybwxf")
-animation = &"Wander"
+animation = &"Dead"
 autoplay = "Idle"
 script = ExtResource("3_51qta")
 
@@ -168,8 +152,15 @@ shape = SubResource("RectangleShape2D_jrj27")
 [node name="Sfx_Strike" type="AudioStreamPlayer2D" parent="HurtBox"]
 stream = SubResource("AudioStreamRandomizer_jrj27")
 
-[node name="Corpse" parent="." instance=ExtResource("30_h6tj4")]
+[node name="Corpse" type="Area2D" parent="."]
+position = Vector2(-1, 0)
+monitoring = false
+monitorable = false
 script = ExtResource("31_xf7mx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse"]
+position = Vector2(1, 0)
+shape = SubResource("CircleShape2D_2bntw")
 
 [node name="SnowTracker2D" parent="." instance=ExtResource("31_hho7n")]
 position = Vector2(0, 1)

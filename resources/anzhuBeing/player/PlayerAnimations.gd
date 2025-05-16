@@ -43,7 +43,7 @@ func reload_animation_finished()->void:
 	if_debug('reload finished ' + animation)
 	abilities.current_state = abilities.AbilityStates.IDLING
 
-func being_physics_process(_delta :float)->void:
+func _physics_process(_delta :float)->void:
 	var speed :int = int(parent.velocity.length())
 	match abilities.current_state:
 		abilities.AbilityStates.RELOADING:
@@ -53,7 +53,7 @@ func being_physics_process(_delta :float)->void:
 		abilities.AbilityStates.RELOADING:
 			return
 		abilities.AbilityStates.MOVING:
-			if speed > 30:
+			if speed > 25:
 				just_play('run')
 			else:
 				just_play('walk')
@@ -61,7 +61,7 @@ func being_physics_process(_delta :float)->void:
 				just_play('idle')
 
 
-func direction_flipped(flipper :bool=flip_h)->void:
+func update_direction(flipper :bool=flip_h)->void:
 	if flip_h != flipper:
 		flip_h = flipper
 

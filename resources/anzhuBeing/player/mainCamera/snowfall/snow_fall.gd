@@ -86,7 +86,6 @@ func position_wind_sfx(tween_time :int)->void:
 			], debug)
 
 func change_weather_randomly()->void:
-	speed = Libraryton.rng.randi_range(0,6)
 	direction = Libraryton.rng.randi_range(0,7)
 	frequency = Libraryton.rng.randi_range(0,4)
 	_debug_weather_changed()

@@ -1,1 +1,1 @@
-extends Corpse #BearCorpse.gd
+class_name BearCorpse extends Corpse

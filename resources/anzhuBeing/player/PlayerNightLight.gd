@@ -10,7 +10,7 @@ extends PointLight2D #PlayerNightLight.gd
 
 func _ready()->void:
 	DayNighton.time_progressed_nightlight.connect(update_nightlight)
-	parent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
 	timer_node.timeout.connect(func()->void:return) #visible = false
 	energy = minimum_light
 	_debug()

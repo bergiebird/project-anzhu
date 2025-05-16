@@ -2,18 +2,18 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://di75q7qw7ytfg"
-path="res://.godot/imported/Enter_Input_Dark.ttf-7bb388f8e1d7529be73c7b879b7b8f33.fontdata"
+uid="uid://1w6oyvtkj55b"
+path="res://.godot/imported/Enter_Input_Light_Extra_Pressed.ttf-04be38fee0020e77579bffb5c098751e.fontdata"
 
 [deps]
 
-source_file="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark.ttf"
-dest_files=["res://.godot/imported/Enter_Input_Dark.ttf-7bb388f8e1d7529be73c7b879b7b8f33.fontdata"]
+source_file="res://warehouse/fonts/[16] Enter Inputa/local/Enter-Input-All/Enter_Input_Light_Extra_Pressed.ttf"
+dest_files=["res://.godot/imported/Enter_Input_Light_Extra_Pressed.ttf-04be38fee0020e77579bffb5c098751e.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=2
+antialiasing=1
 generate_mipmaps=true
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false

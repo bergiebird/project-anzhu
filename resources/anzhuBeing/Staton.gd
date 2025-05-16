@@ -1,47 +1,65 @@
-class_name CharacterSheet extends Node #Staton.gd
+extends Node #Staton.gd
 
-const ANIMAL_INFO :Dictionary = {
-	"Walrus": { 
+const CHARACTER_SHEET :Dictionary[int,Dictionary] = {
+	0: {
+		"Group": "Walrus",
+		"Icon": "uid://cnal7mdp3mmck",
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,
 		},
-	"Owl":{ 
+	1:{
+		"Group": "Owl",
+		"Icon": "uid://71j8kiflxsk2",  # needs unique icon
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,
 		},
-	"Human":{ 
+	2:{
+		"Group": "Human",
+		"Icon": "uid://b5w8irxl1q86d",
+		"StartingHealth": 8,
+		"DamagePerHit":1,
+		"BaseMoveSpeed": 30,
+		},
+	3:{
+		"Group": "Bear",
+		"Icon": "uid://biih26xvgaec6",
+		"StartingHealth": 8,
+		"DamagePerHit":1,
+		"BaseMoveSpeed": 50,
+		},
+	4:{
+		"Group": "Fox",
+		"Icon": "uid://71j8kiflxsk2",
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,
 		},
-	"Bear":{ 
+	5:{
+		"Group": "Hare",
+		"Icon": "uid://71j8kiflxsk2", # needs unique icon
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,
 		},
-	"Fox":{ 
+	6:{
+		"Group": "Wolf",
+		"Icon": "uid://d11nkbyklfwt6",
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,
 		},
-	"Hare":{ 
+	7:{
+		"Group": "Deer",
+		"Icon": "uid://1lv1vg0ga3o",
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,
 		},
-	"Wolf":{ 
-		"StartingHealth": 8,
-		"DamagePerHit":1,
-		"BaseMoveSpeed": 5,
-		},
-	"Reindeer":{ 
-		"StartingHealth": 8,
-		"DamagePerHit":1,
-		"BaseMoveSpeed": 5,
-		},
-	"Mammoth":{ 
+	8:{
+		"Group": "Mammoth",
+		"Icon": "uid://71j8kiflxsk2", # needs unique icon
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"BaseMoveSpeed": 5,

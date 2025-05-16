@@ -111,6 +111,3 @@ one_shot = true
 [node name="MainCamera" parent="." instance=ExtResource("15_y6uby")]
 unique_name_in_owner = true
 visible = false
-
-[node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(-1, -2)

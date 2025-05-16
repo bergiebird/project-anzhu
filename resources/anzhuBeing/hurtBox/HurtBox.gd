@@ -12,16 +12,16 @@ var current_attacking_direction :AttackingDirection = AttackingDirection.None
 
 func _ready() -> void:
 	_init_nodes()
-	_signal_connector()
-	ready()
+	_signaler()
+	__ready()
 
 func _init_nodes()->void:
 	hurt_timer.wait_time = wait_time
 
-func _signal_connector()->void:
-	body_entered.connect(on_body_entered)
-	hurt_timer.timeout.connect(end_attack_cooldown)
-	signal_connector()
+func _signaler()->void:
+	body_entered.connect(_on_body_entered)
+	hurt_timer.timeout.connect(_end_attack_cooldown)
+	__signaler()
 
 func update_and_match_attacking_direction(incoming_direction :Vector2)->void:
 	if incoming_direction.y > 0 and current_attacking_direction != AttackingDirection.Vertical:
@@ -36,16 +36,21 @@ func update_and_match_attacking_direction(incoming_direction :Vector2)->void:
 	else:
 		return
 
-func end_attack_cooldown()->void:
+func _end_attack_cooldown()->void:
 	on_cooldown = false
 
-###
-## Virtuals
-func on_body_entered(_body :AnzhuBeing)->void:pass
-func ready()->void:pass
-func signal_connector()->void:pass
-###
-##DEBUG
-###
+func set_hurtbox_monitoring(_is_monitoring :bool):
+	monitoring = _is_monitoring
+
+func has_died():
+	set_hurtbox_monitoring(false)
+
+#region # Virtuals
+func _on_body_entered(_body :AnzhuBeing)->void:pass
+func __ready()->void:pass
+func __signaler()->void:pass
+#endregion
+#region #DEBUG
 @export_category('DEBUG')
 @export var debug_hurt_box :bool = false
+#endregion

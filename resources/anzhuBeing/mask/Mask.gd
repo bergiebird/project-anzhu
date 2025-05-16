@@ -1,7 +1,6 @@
 @icon("res://resources/anzhuBeing/mask/mask.png")
 class_name Mask extends CollisionShape2D #Mask.gd
 
-signal has_died
 ## Powerful variable change. Affects collision and HP.
 @export_enum("null", "8x8", "10x10", "12x10", "10x12", "12x12") var set_mask_dimensions :int = 0:
 	set(value):
@@ -30,12 +29,6 @@ func _ready():
 	_establish_healthbar()
 
 func _setup_basics():
-	parent.publisher_null.connect(func(func_name):
-		Observerton.subscribe_null(self, func_name))
-	parent.publisher_one.connect(func(func_name, one :Variant):
-		Observerton.subscribe_one(self, func_name, one))
-	parent.publisher_two.connect(func(func_name, one :Variant, two :Variant):
-		Observerton.subscribe_two(self, func_name, one, two))
 	if parent is Player:                                               # Player specific changes
 		parent.set_collision_layer_value(5,true)                        # We also handle the player's collider from here.
 	collision_shape.size.x = snapped(mask_dimensions.x - 0.1, 0.01)    # Algorithm to set the dimensions
@@ -68,9 +61,11 @@ func was_struck(incoming_value :int = takes_how_much_on_hit):
 	if has_healthbar:                                               # This handles incrementing the healthbar
 		healthbar.size.y += incoming_value                           # The incoming value will raise the healthbar by that many pixels
 		healthbar.position.y -= incoming_value                       # The position needs to compensate
-		if healthbar.size.y >= max_hp and healthbar.position.y <= 0: # Now we check to see if the player has died
-			parent.publisher_null.emit(self, 'has_died')
-			parent.has_died.emit()                                    # And if so, we signal to the rest of the scene.
+		check_if_should_start_death()
+
+func check_if_should_start_death():
+	if healthbar.size.y >= max_hp and healthbar.position.y <= 0:
+		parent.publisher_one.emit('change_actions', "Dead")
 
 #region DEBUG
 @export var debug :bool = false

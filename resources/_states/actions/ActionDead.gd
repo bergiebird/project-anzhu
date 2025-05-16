@@ -1,28 +1,16 @@
 extends ActionState #ActionDead.gd
-@export var has_death_howl :bool = false
-@onready var timer :Timer = $Timer
-var corpse_node :Corpse
-var hurtbox :HurtBox
-var audio :AudioManager
+var sfx_death_howl :AudioStreamPlayer2D
 
-func _ready() -> void:
-	Debuggerton.signal_checker([
-		timer.timeout.connect(func()->void:corpse_node.end_of_life())])
+func ___get_state_value(_parent :StateMachine):
+	which_state = _parent.AnimalActions.Dead
 
-func enter()->void:
-	hurtbox.monitoring = false
-	if has_death_howl:
-		audio.start_sfx(self.name)
-		timer.start()
-	else:
-		corpse_node.end_of_life()
+func ___grandparent_acquired():
+	grandparent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
-func _collect_dictionary(incoming_dictionary :Dictionary)->void:
-	corpse_node = incoming_dictionary['Corpse']
-	hurtbox = incoming_dictionary['HurtBox']
-	audio = incoming_dictionary['AudioManager']
-
-
-
-func update(_delta:float)->void: pass
-func physics_update(_delta:float)->void: pass
+func ___enter()->void:
+	grandparent.publisher_null.emit("has_died")
+	if has_node("SfxDeathHowl"):
+		sfx_death_howl = get_node("SfxDeathHowl")
+		sfx_death_howl.play()
+		await get_tree().create_timer(sfx_death_howl.get_stream().get_length() + 0.1).timeout
+	grandparent.publisher_null.emit("end_of_life")

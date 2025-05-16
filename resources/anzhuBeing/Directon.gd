@@ -55,10 +55,14 @@ func gunmatch(who :Gunshot, smoke_barrel :CPUParticles2D, smoke_back :CPUParticl
 func get_prevalent_direction(vector :Vector2)->int:
 	var degrees :float = rad_to_deg(vector.angle())
 	if degrees < 0: degrees += 360
-	if degrees >= 315 or degrees < 45:     return Looking.EAST
-	elif degrees >= 45 and degrees < 135:  return Looking.SOUTH
-	elif degrees >= 135 and degrees < 225: return Looking.WEST
-	else:                                  return Looking.NORTH
+	if degrees >= 315 or degrees < 45:
+		return Looking.EAST
+	elif degrees >= 45 and degrees < 135:
+		return Looking.SOUTH
+	elif degrees >= 135 and degrees < 225:
+		return Looking.WEST
+	else:
+		return Looking.NORTH
 
 
 func get_DIRECTION_via_VECTOR(vector :Vector2)->int:

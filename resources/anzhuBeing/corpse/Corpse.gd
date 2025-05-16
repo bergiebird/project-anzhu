@@ -32,7 +32,8 @@ func construct_new_animation()->void:
 	add_child(new_anim)
 
 func be_free()->void:
-	$OnlyHereToBeDestroyed.queue_free()
+	if has_node("CollisionShape2D"):
+		$CollisionShape2D.queue_free()
 	parent.remove_child(mask)
 	add_child(mask)
 	monitorable = true

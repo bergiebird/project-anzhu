@@ -1,5 +1,5 @@
 @icon("res://resources/anzhuBeing/snowTracker/icon_grid.png")
-class_name SnowTracker extends Marker2D #SnowTracker.gd
+class_name SnowTracker extends Marker2D
 
 enum AltRotation {HORIZONTAL, VERTICAL}
 const ATLAS_OFFSET :Vector2i = Vector2i(1,1)
@@ -12,10 +12,9 @@ var can_make_tracks :bool = false
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready() -> void:
-	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
 	Libraryton.tracks_reference.connect(setup_maps)
 
-func being_process(_delta :float)->void:
+func _physics_process(_delta: float) -> void:
 	if can_make_tracks:
 		check_current_tile()
 

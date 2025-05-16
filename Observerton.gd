@@ -23,7 +23,9 @@ func subscribe_two(target :Object, func_name :String, one :Variant, two :Variant
 	if target.has_method(func_name):
 		Callable(target, func_name).call(one, two)
 
-
+func subscribe_three(target :Object, func_name :String, one :Variant, two :Variant, three :Variant):
+	if target.has_method(func_name):
+		Callable(target, func_name).call(one, two, three)
 
 
 ## This is for testing purposes, not ready for the field yet.

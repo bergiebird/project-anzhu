@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cfm1bjuvgtkw3"
-path="res://.godot/imported/Enter_Input_Dark_Extra.ttf-0537118ff0a3f1d09c9be23cf533117b.fontdata"
+uid="uid://caky5mm10lbtq"
+path="res://.godot/imported/Enter_Input_Light_Pressed.ttf-7a056b9cd8d735af690f5996e57fc5bd.fontdata"
 
 [deps]
 
-source_file="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark_Extra.ttf"
-dest_files=["res://.godot/imported/Enter_Input_Dark_Extra.ttf-0537118ff0a3f1d09c9be23cf533117b.fontdata"]
+source_file="res://warehouse/fonts/[16] Enter Inputa/local/Enter-Input-All/Enter_Input_Light_Pressed.ttf"
+dest_files=["res://.godot/imported/Enter_Input_Light_Pressed.ttf-7a056b9cd8d735af690f5996e57fc5bd.fontdata"]
 
 [params]
 

@@ -15,7 +15,7 @@ var current_direction :String
 @onready var sfx_thonk :AudioStreamPlayer = $SfxThonk
 
 func _ready():
-	grandparent.observer_one.connect(func(func_name, one :Variant): Observerton.match_one(self, func_name, one))
+	grandparent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
 
 func start_routine():
 	parent.speed_scale = 1

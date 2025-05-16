@@ -11,11 +11,10 @@ var abilities :Abilities
 var shot_db :float
 
 func _ready()->void:
-	Debuggerton.signal_checker([
-		Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)])
+	Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)
 
-func look_direction(direction :String)->String:
-	return direction if Input.is_action_pressed(Directon.get_aim(direction)) else ""
+func look_direction(direction :String)->bool:
+	return true if Input.is_action_pressed(Directon.get_aim(direction)) else false
 
 func aim(direction :String)->bool:
 	return Input.is_action_pressed("aim_" + direction)
@@ -53,7 +52,8 @@ func reveal_cursor()->void:
 
 func gun_shoot()->bool:
 	var shot :bool = Input.is_action_just_pressed('gun')
-	if shot: Signalton.loud_noise.emit(player, player.global_position, shot_db)
+	if shot:
+		Signalton.loud_noise.emit(player, player.global_position, shot_db)
 	return shot
 
 func left_mouse_release()->bool:

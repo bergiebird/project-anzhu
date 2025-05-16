@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=25 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.gd" id="1_prs41"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="2_o8pbx"]
@@ -10,8 +10,7 @@
 [ext_resource type="Script" uid="uid://bgvdyvmgehdix" path="res://resources/anzhuBeing/player/mainCamera/Framing.gd" id="7_ch1di"]
 [ext_resource type="Script" uid="uid://0xvc5hkssbts" path="res://resources/anzhuBeing/player/mainCamera/ui_controls.gd" id="9_p1x0l"]
 [ext_resource type="Script" uid="uid://ic0gfnpadgiw" path="res://TextEffects.gd" id="10_jg3oj"]
-[ext_resource type="FontFile" uid="uid://ca5g8gcgl3dw" path="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark(1).ttf" id="10_p1x0l"]
-[ext_resource type="FontFile" uid="uid://di75q7qw7ytfg" path="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark.ttf" id="11_5ib5g"]
+[ext_resource type="FontFile" uid="uid://cydaeja4giwbn" path="res://warehouse/fonts/[16] Enter Input/Enter-Input-All/Enter_Input_Dark.ttf" id="10_xgl6y"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
 offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
@@ -83,9 +82,9 @@ shader_parameter/scanlines_width = 0.04
 shader_parameter/grille_opacity = 0.04
 shader_parameter/resolution = Vector2(200, 200)
 shader_parameter/pixelate = false
-shader_parameter/roll = true
-shader_parameter/roll_speed = 8.0
-shader_parameter/roll_size = 15.0
+shader_parameter/roll = false
+shader_parameter/roll_speed = 0.1
+shader_parameter/roll_size = 5.0
 shader_parameter/roll_variation = 1.8
 shader_parameter/distort_intensity = 0.002
 shader_parameter/noise_opacity = 0.016
@@ -138,6 +137,7 @@ bus = &"Wind"
 
 [node name="CRT" type="ColorRect" parent="SnowFall"]
 z_index = 4000
+z_as_relative = false
 material = SubResource("ShaderMaterial_06wol")
 anchors_preset = 8
 anchor_left = 0.5
@@ -152,6 +152,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Framing" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("7_ch1di")
 
 [node name="LeftPanel" type="ColorRect" parent="Framing"]
@@ -162,6 +163,7 @@ offset_right = -3333.59
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Framing/LeftPanel"]
 unique_name_in_owner = true
@@ -241,19 +243,20 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -303.0
-offset_top = 1856.0
-offset_right = -271.0
-offset_bottom = 1890.0
+offset_left = 156.0
+offset_top = 1912.0
+offset_right = 188.0
+offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 0
+scale = Vector2(5, 5)
 tooltip_text = "WASD ~ Moves the character
 JIKL ~ Turns the character
 E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("10_p1x0l")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "w"
 
 [node name="A" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -267,7 +270,7 @@ anchor_bottom = 1.0
 offset_left = 44.0
 offset_top = 2064.0
 offset_right = 76.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -277,7 +280,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "a"
 
 [node name="S" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -291,7 +294,7 @@ anchor_bottom = 1.0
 offset_left = 196.0
 offset_top = 2064.0
 offset_right = 228.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -301,7 +304,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "s"
 
 [node name="D" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -315,7 +318,7 @@ anchor_bottom = 1.0
 offset_left = 348.0
 offset_top = 2064.0
 offset_right = 380.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -325,7 +328,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "d"
 
 [node name="E" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -339,7 +342,7 @@ anchor_bottom = 1.0
 offset_left = 308.0
 offset_top = 1912.0
 offset_right = 340.0
-offset_bottom = 1960.0
+offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -349,7 +352,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "e"
 
 [node name="F" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -363,7 +366,7 @@ anchor_bottom = 1.0
 offset_left = 500.0
 offset_top = 2064.0
 offset_right = 532.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -373,7 +376,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "f"
 
 [node name="I" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -387,7 +390,7 @@ anchor_bottom = 1.0
 offset_left = 3836.0
 offset_top = 1912.0
 offset_right = 3868.0
-offset_bottom = 1960.0
+offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -397,7 +400,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "i"
 
 [node name="U" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -411,7 +414,7 @@ anchor_bottom = 1.0
 offset_left = 3684.0
 offset_top = 1912.0
 offset_right = 3716.0
-offset_bottom = 1960.0
+offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -421,7 +424,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "u"
 
 [node name="J" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -435,7 +438,7 @@ anchor_bottom = 1.0
 offset_left = 3724.0
 offset_top = 2064.0
 offset_right = 3756.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -445,7 +448,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "j"
 
 [node name="K" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -459,7 +462,7 @@ anchor_bottom = 1.0
 offset_left = 3876.0
 offset_top = 2064.0
 offset_right = 3908.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -469,7 +472,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "k"
 
 [node name="L" type="Label" parent="Framing/LeftPanel/UiControls"]
@@ -483,7 +486,7 @@ anchor_bottom = 1.0
 offset_left = 4028.0
 offset_top = 2064.0
 offset_right = 4060.0
-offset_bottom = 2112.0
+offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
@@ -493,7 +496,7 @@ E ~ Jump! Won't execute if you don't have a place to jump to.
 U ~ Shoot! Reload!"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("11_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "l"
 
 [node name="RightPanel" type="ColorRect" parent="Framing"]
@@ -505,6 +508,7 @@ offset_right = 2.40625
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
 
 [node name="RichTextLabel" type="RichTextLabel" parent="Framing/RightPanel"]
 layout_mode = 1

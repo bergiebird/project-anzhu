@@ -5,13 +5,6 @@ var preferred_distance :int = 50
 var min_distance :int = 20
 var max_distance :int = 100
 
-
-func animal_ready()->void:
-	add_to_group("reindeer")
-	Debuggerton.signal_checker([
-		Signalton.gunshot.connect(on_gunshot)
-	])
-
 func _process(_delta :float)->void:
 	update_herd_awareness()
 
@@ -21,7 +14,7 @@ func update_herd_awareness()->void:
 
 func on_gunshot()->void:
 	if player and global_position.distance_to(player.global_position) < 200:
-		change_goals('FleeFromThreat')
+		publisher_one.emit("change_goals","FleeFromThreat")
 		for member :Reindeer in herd_members:
 			if member.global_position.distance_to(global_position) < 100:
 				member.change_goals('FleeFromThreat')

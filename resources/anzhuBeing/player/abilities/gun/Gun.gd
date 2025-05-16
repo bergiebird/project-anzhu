@@ -5,24 +5,26 @@ class_name Gunshot extends Ability #Gun.gd
 @export var flash_time:float = 0.1
 @export var modified_speed_up:float = 0.16
 @export var noise_db:float = 300.0
+
 var is_empty :bool = false
-@onready var can_shoot:bool = true
-@onready var vfx_flash:PointLight2D = $VfxFlash
-@onready var flash:bool = vfx_flash.visible:
-	set(value): if flash!=value:
+
+@onready var can_shoot :bool = true
+@onready var vfx_flash :PointLight2D = $VfxFlash
+@onready var flash :bool = vfx_flash.visible:
+	set(value):
 		flash = value
 		if flash:
 			await get_tree().create_timer(flash_time).timeout
 			flash = false
-@onready var smoke_barrel:CPUParticles2D = $VfxSmoke
-@onready var smoke_back:CPUParticles2D = $VfxSmoke2
-@onready var gunray:RayCast2D = $GunRay
-@onready var sfx_gunshot:AudioStreamPlayer = $SfxGunshot
+@onready var smoke_barrel :CPUParticles2D = $VfxSmoke
+@onready var smoke_back :CPUParticles2D = $VfxSmoke2
+@onready var gunray :RayCast2D = $GunRay
+@onready var sfx_gunshot :AudioStreamPlayer = $SfxGunshot
 
 func _grandparent_set():
-	grandparent.observer_one.connect(func(func_name, one:Variant): Observerton.match_one(self, func_name, one))
+	grandparent.publisher_one.connect(func(func_name, one:Variant): Observerton.subscribe_one(self, func_name, one))
 
-func process_ability(_delta :float):
+func _physics_process(_delta: float):
 	match parent.current_state:
 		parent.AbilityStates.RELOADING:
 			pass

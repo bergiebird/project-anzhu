@@ -2,19 +2,19 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://caky5mm10lbtq"
-path="res://.godot/imported/Enter_Input_Light_Pressed.ttf-c28d0907d3f41f4995c1ee9b74d8da4d.fontdata"
+uid="uid://cydaeja4giwbn"
+path="res://.godot/imported/Enter_Input_Dark.ttf-99b59a5d5cc09262a4e675b7c2aab2f7.fontdata"
 
 [deps]
 
-source_file="res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Light_Pressed.ttf"
-dest_files=["res://.godot/imported/Enter_Input_Light_Pressed.ttf-c28d0907d3f41f4995c1ee9b74d8da4d.fontdata"]
+source_file="res://warehouse/fonts/[16] Enter Input/Enter-Input-All/Enter_Input_Dark.ttf"
+dest_files=["res://.godot/imported/Enter_Input_Dark.ttf-99b59a5d5cc09262a4e675b7c2aab2f7.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
-generate_mipmaps=true
+antialiasing=2
+generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
 msdf_pixel_range=8
@@ -24,11 +24,11 @@ force_autohinter=false
 hinting=2
 subpixel_positioning=3
 keep_rounding_remainders=true
-oversampling=2.0
+oversampling=3.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
-compress=false
+compress=true
 preload=[]
 language_support={}
 script_support={}

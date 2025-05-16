@@ -16,7 +16,6 @@ var saved_state :bool = false
 
 func _ready() -> void:
 	reload_scene.connect(reload_current_scene)
-	_debug()
 
 func reload_current_scene()->void:
 	saved_state = true
@@ -24,21 +23,10 @@ func reload_current_scene()->void:
 	debug_scene_reloaded(error)
 
 
-###
-##	DEBUG
-###
+#region	DEBUG
 var debug:bool = false
-func _debug()->void:
-	if debug:
-		assert(loud_noise)
-		assert(gunshot)
-		assert(time_progressed)
-		assert(weather_changed)
-		assert(player_hit)
-		assert(reload_scene)
-
-
 func debug_scene_reloaded(error :Error)->void:
 	match error:
 		OK:
 			print('GOOD!')
+#endregion

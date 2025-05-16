@@ -2,7 +2,9 @@
 class_name CampFire extends StaticBody2D #CampFire.gd
 
 signal publisher_null(method_name :String)
-
+signal publisher_one(method_name :String, one :Variant)
+signal publisher_two(method_name :String, one :Variant, two :Variant)
+signal publisher_three(method_name :String, one :Variant, two :Variant, three :Variant)
 @export var min_light :float = 0.1
 @export var max_light :float = 1.0
 @export var is_lit :bool:

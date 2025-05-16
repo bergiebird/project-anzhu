@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Project: Anzhu"
-run/main_scene="uid://c17cw7tkkjo8a"
+run/main_scene="uid://bu2w1ukm7uknj"
 config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="res://warehouse/~examples/arctic-3.png"
@@ -39,6 +39,8 @@ Observerton="*res://Observerton.gd"
 [debug]
 
 gdscript/warnings/unused_signal=0
+gdscript/warnings/standalone_expression=0
+gdscript/warnings/int_as_enum_without_cast=0
 
 [display]
 

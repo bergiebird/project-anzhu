@@ -2,8 +2,8 @@ class_name UiControls extends Control
 
 var dict :Dictionary[String,Label]
 
-@onready var pressed :FontFile = preload("uid://ca5g8gcgl3dw")
-@onready var unpressed :FontFile = preload("res://warehouse/fonts/[16] Enter Input/local/Enter-Input-All/Enter_Input_Dark.ttf")
+@onready var pressed :FontFile = preload("uid://7nmwvli4a0me")
+@onready var unpressed :FontFile = preload("uid://cydaeja4giwbn")
 
 
 func _ready() -> void:
