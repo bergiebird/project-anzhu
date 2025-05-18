@@ -1,4 +1,4 @@
-extends CanvasGroup #Walls.gd
+class_name Walls extends CanvasGroup
 
 @onready var invisible:TileMapLayer = $InvisibleWalls
 @onready var elevation:TileMapLayer = $ElevationsLayer

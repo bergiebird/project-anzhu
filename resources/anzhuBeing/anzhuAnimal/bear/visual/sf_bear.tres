@@ -2,13 +2,13 @@
 
 [ext_resource type="Texture2D" uid="uid://s1cniu4sbdaa" path="res://resources/anzhuBeing/anzhuAnimal/bear/visual/bear_0326_2025.png" id="1_3765l"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_pdjyt"]
-atlas = ExtResource("1_3765l")
-region = Rect2(48, 0, 12, 10)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_afr3e"]
 atlas = ExtResource("1_3765l")
 region = Rect2(60, 0, 12, 10)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pdjyt"]
+atlas = ExtResource("1_3765l")
+region = Rect2(48, 0, 12, 10)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3765l"]
 atlas = ExtResource("1_3765l")
@@ -54,14 +54,14 @@ region = Rect2(48, 0, 12, 10)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_pdjyt")
+"texture": SubResource("AtlasTexture_afr3e")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_afr3e")
+"texture": SubResource("AtlasTexture_pdjyt")
 }],
 "loop": true,
 "name": &"Chase",
-"speed": 5.0
+"speed": 7.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -78,14 +78,6 @@ animations = [{
 "loop": true,
 "name": &"Dead",
 "speed": 2.0
-}, {
-"frames": [{
-"duration": 8.0,
-"texture": SubResource("AtlasTexture_3765l")
-}],
-"loop": false,
-"name": &"Hit",
-"speed": 3.0
 }, {
 "frames": [{
 "duration": 10.0,
@@ -145,6 +137,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Sit",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 8.0,
+"texture": SubResource("AtlasTexture_3765l")
+}],
+"loop": false,
+"name": &"Stunned",
 "speed": 3.0
 }, {
 "frames": [{

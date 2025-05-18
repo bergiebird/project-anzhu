@@ -1,6 +1,8 @@
-@icon("res://resources/AnzhuBeing/corpse/icon_bag.png")
-class_name Corpse extends Area2D #Corpse.gd
+@icon("res://resources/anzhuBeing/corpse/icon_bag.png")
+class_name Corpse extends Area2D
+
 var stored_position :Vector2
+var is_dead :bool
 @onready var parent :AnzhuBeing = get_parent()
 @onready var mask :CollisionShape2D = parent.get_node('Mask')
 
@@ -8,20 +10,23 @@ func _ready()->void:
 	body_entered.connect(_on_body_entered)
 	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
-func _on_body_entered(_body :Node2D)->void:
-	queue_free()
+func _on_body_entered(body :Node2D)->void:
+	if body is Player and is_dead:
+		queue_free()
 
-func end_of_life()->void:
-	_end_of_life()
+func has_died()->void:
+	is_dead = true
+	await _has_died()
 	reparent_at_same_location()
 	construct_new_animation()
 	be_free()
 
 func reparent_at_same_location()->void:
 	stored_position = parent.global_position
+	var new_parent = parent.get_parent()
 	parent.remove_child(self)
-	parent.get_parent().add_child(self)
-	self.global_position = stored_position
+	new_parent.add_child(self)
+	global_position = stored_position
 
 func construct_new_animation()->void:
 	var new_anim :AnimatedSprite2D = AnimatedSprite2D.new()
@@ -34,16 +39,17 @@ func construct_new_animation()->void:
 func be_free()->void:
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.queue_free()
-	parent.remove_child(mask)
-	add_child(mask)
+	if mask.get_parent() == parent:
+		parent.remove_child(mask)
+	if mask.get_parent() != self:
+		add_child(mask)
 	monitorable = true
 	monitoring = true
 	parent.queue_free()
 
 #region Virtuals
-func _end_of_life()->void:pass
+func _has_died()->void:pass
 #endregion
-
 #region DEBUG
 @export_group('DEBUG')
 @export var debug_corpse :bool = false

@@ -1,22 +1,23 @@
 class_name ActionWander extends ActionState
-@onready var timer :Timer = $WanderTimer #should probably do something with this. I deleted it.
+var target_acquired :bool = false
+func ___get_state_value(_parent :StateMachine): which_state = _parent.AnimalActions.Wander
 
-func ___get_state_value(_parent :StateMachine):
-	which_state = _parent.AnimalActions.Wander
 
 func ___enter()->void:
 	grandparent.publisher_one.emit("update_animations", "Wander")
-	timer.timeout.connect(_on_wander_timer_timeout)
-	timer.start()
-func ___exit()->void:
-	timer.timeout.disconnect(_on_wander_timer_timeout)
-	timer.stop()
+	grandparent.publisher_null.emit("set_new_GoTo_location")
 
-func _on_wander_timer_timeout():
-	_choose_random_direction()
-	timer.wait_time = Libraryton.rng.randf_range(1.5,3.0)
+func on_location_reached():
+	if is_active:
+		grandparent.publisher_one.emit("set_new_GoTo_location")
 
-func _choose_random_direction():
-	var random_angle = Libraryton.rng.randf_range(0,2*PI)
-	var direction = Vector2(cos(random_angle), sin(random_angle))
-	grandparent.parse_movement_vector(direction)
+func new_target_position(_incoming_position :Vector2):
+	if is_active:
+		target_acquired = true
+
+func ___exit():
+	target_acquired = false
+
+func _physics_process(_delta):
+	if target_acquired:
+		grandparent.publisher_one.emit("move_towards_target", grandparent.SpeedType.WALK)

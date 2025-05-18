@@ -1,4 +1,4 @@
-class_name ElevationsLayer extends TileMapLayer #ElevationsLayer.gd
+class_name ElevationsLayer extends TileMapLayer
 
 const CANT_JUMP_HERE: int = 0
 const CANT_JUMP_UP_HERE: int = 10

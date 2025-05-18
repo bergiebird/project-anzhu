@@ -3,11 +3,9 @@ extends Node #Inputon.gd
 signal cursor_movement_report(bol :bool)
 
 var player :Player:
-	set(value): #Collect player information on reference setup, for now just the shot decibal level
+	set(value):
 		if player != value:
 			player = value
-			abilities = player.abilities
-var abilities :Abilities
 var shot_db :float
 
 func _ready()->void:
@@ -44,17 +42,13 @@ func escape()->bool:
 	return Input.is_action_just_released("esc")
 
 func hide_cursor()->void:
-	cursor_movement_report.emit(false)
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	cursor_movement_report.emit(false)            # Godot doesn't offer a signal that emits on cursor visibility changed
 func reveal_cursor()->void:
-	cursor_movement_report.emit(true)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	cursor_movement_report.emit(true)
 
-func gun_shoot()->bool:
-	var shot :bool = Input.is_action_just_pressed('gun')
-	if shot:
-		Signalton.loud_noise.emit(player, player.global_position, shot_db)
-	return shot
+
 
 func left_mouse_release()->bool:
 	return Input.is_action_just_released("left_click")

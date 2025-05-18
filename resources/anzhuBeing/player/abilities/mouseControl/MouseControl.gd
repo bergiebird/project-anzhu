@@ -1,54 +1,49 @@
 @icon("res://resources/anzhuBeing/player/abilities/mouseControl/icon_search.png")
-extends Ability #MouseControl.gd
-const TIMER_RESETTED :float = 0.0
-@export var mouse_idle_threshold :float = 2.0
+class_name MouseControl extends Ability
 
-var mouse_idle_timer :float = TIMER_RESETTED:
-	set(value): if value != mouse_idle_timer:
-		mouse_idle_timer = value                            # Set value
-		match Input.get_mouse_mode():                       # Checks the current mode of cursor
-			Input.MOUSE_MODE_VISIBLE:                        # On visibility
-				if mouse_idle_timer >= mouse_idle_threshold:  #
-					Inputon.hide_cursor()
-			Input.MOUSE_MODE_HIDDEN:
-				if mouse_idle_timer == TIMER_RESETTED:
-					Inputon.reveal_cursor()
-
-var current_cursor :Texture2D:
-	set(value): if value!=current_cursor:
-		current_cursor = value
-		execute_click()                                  # On the changing of cursors, play Sfx and start timer
-		Input.set_custom_mouse_cursor(current_cursor)    # Set the cursor to the new value
-var current_mouse_position :Vector2
+@onready var can_click :bool = true
 @onready var sfx_click :AudioStreamPlayer = $MenuClick
-@onready var timer_reset :Timer = $ResetTimer
+@onready var click_reset_timer :Timer = $ClickResetTimer
+@onready var idle_mouse_timer :Timer = $MouseIdleTimer
 @onready var sprite_idle :Texture2D = preload("uid://c5iwysswhjf06")
 @onready var sprite_click :Texture2D = preload("uid://dwct5s8apk8eh")
 @onready var previous_mouse_position :Vector2 = get_viewport().get_mouse_position()
 
+
 func _ready()->void:
-	current_cursor = sprite_idle
+	Input.set_custom_mouse_cursor(sprite_idle)
 	Inputon.hide_cursor()
-	timer_reset.timeout.connect(func()->void:current_cursor = sprite_idle)
+	click_reset_timer.timeout.connect(click_restted)
+	idle_mouse_timer.timeout.connect(mouse_idled_too_long)
 
-
-
-func _physics_process(delta :float)->void:
-	current_mouse_position = get_viewport().get_mouse_position()  # Every frame we check for the mouse's position
+func _process(_delta :float)->void:
+	var current_mouse_position :Vector2 = get_viewport().get_mouse_position()  # Every frame we check for the mouse's position
 	if current_mouse_position != previous_mouse_position:         # If the position is new
-		mouse_idle_timer = TIMER_RESETTED                          # We reset the timer to 0
-		previous_mouse_position = current_mouse_position           # Now we set the previous position
-	else:                                                         # On other hand, if the position is the same
-		mouse_idle_timer += delta                                  # Increment the idle timer
+		Inputon.reveal_cursor()
+		idle_mouse_timer.stop()
+		idle_mouse_timer.start()
+		previous_mouse_position = current_mouse_position
 
 func _input(event :InputEvent)->void:
-	if event is InputEventMouseButton and Inputon.left_mouse_release() or Inputon.escape():
-		current_cursor = sprite_click
-		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN:
-			mouse_idle_timer = TIMER_RESETTED
-
+	if event is InputEventMouseButton and Inputon.left_mouse_release() and can_click or Inputon.escape() and can_click:
+		execute_click()
 
 func execute_click()->void:
-	if current_cursor == sprite_click: # This prevents multiple executions
+	if can_click:
+		can_click = false
+		Input.set_custom_mouse_cursor(sprite_click)
 		sfx_click.play()
-		timer_reset.start()
+		click_reset_timer.start()
+		idle_mouse_timer.stop()
+		idle_mouse_timer.start()
+
+func mouse_idled_too_long():
+		match Input.get_mouse_mode():
+			Input.MOUSE_MODE_VISIBLE:
+					Inputon.hide_cursor()
+			Input.MOUSE_MODE_HIDDEN:
+					Inputon.reveal_cursor()
+
+func click_restted():
+	can_click = true
+	Input.set_custom_mouse_cursor(sprite_idle)

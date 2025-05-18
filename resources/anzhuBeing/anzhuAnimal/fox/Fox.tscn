@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://du442geuk0s1v" path="res://resources/anzhuBeing/anzhuAnimal/fox/Fox.gd" id="1_yb322"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_g45x1"]
 [ext_resource type="SpriteFrames" uid="uid://cfjippld3y5i3" path="res://resources/anzhuBeing/anzhuAnimal/fox/sf_fox.tres" id="3_dk85e"]
-[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalActions.gd" id="4_dk85e"]
+[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalAnimations.gd" id="4_dk85e"]
 [ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_k34b2"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="5_0508v"]
 [ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="5_dk85e"]

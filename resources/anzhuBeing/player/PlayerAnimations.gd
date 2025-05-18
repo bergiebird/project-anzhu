@@ -1,4 +1,4 @@
-class_name PlayerAnimations extends AnimatedSprite2D #PlayerAnimations.gd
+class_name PlayerAnimations extends AnimatedSprite2D
 
 const FLASH_AMOUNT :int = 4
 @export var animations_reloads_reload_time :float = 0.5
@@ -53,7 +53,7 @@ func _physics_process(_delta :float)->void:
 		abilities.AbilityStates.RELOADING:
 			return
 		abilities.AbilityStates.MOVING:
-			if speed > 25:
+			if speed > 200:
 				just_play('run')
 			else:
 				just_play('walk')

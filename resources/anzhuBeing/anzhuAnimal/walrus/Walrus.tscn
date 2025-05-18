@@ -1,20 +1,22 @@
 [gd_scene load_steps=16 format=3 uid="uid://cy8x2rpiisi4c"]
 
 [ext_resource type="Script" uid="uid://cuyuuhi5p5vat" path="res://resources/anzhuBeing/anzhuAnimal/walrus/scripts/Warlus.gd" id="1_qyjs8"]
-[ext_resource type="PackedScene" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="3_emk87"]
-[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalActions.gd" id="4_1tkhr"]
-[ext_resource type="Script" uid="uid://dci6tfym4ktc6" path="res://resources/_states/actions/ActionDead.gd" id="4_5bcdx"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_o0tca"]
 [ext_resource type="SpriteFrames" uid="uid://dxm2bxjoy2ikb" path="res://resources/anzhuBeing/anzhuAnimal/walrus/visual/sf_walrus.tres" id="4_xras0"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="4_y54qn"]
+[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/bear/_AnimalActions.gd" id="5_drws8"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="5_emk87"]
-[ext_resource type="Script" uid="uid://cjorccmpecej0" path="res://resources/_states/actions/ActionHit.gd" id="5_fqfuq"]
-[ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="6_cvvs1"]
+[ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuBeing/corpse/Corpse.gd" id="6_k3hd0"]
+[ext_resource type="Script" uid="uid://bcp0mgrl6h2bk" path="res://resources/anzhuBeing/anzhuAnimal/walrus/scripts/actionroll.gd" id="6_uk2hj"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="9_xras0"]
-[ext_resource type="Script" uid="uid://d1sowtr56fff4" path="res://resources/anzhuBeing/audio/AudioManager.gd" id="10_r8wrc"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="10_sm0p4"]
 [ext_resource type="Script" uid="uid://n4g3epvshvea" path="res://resources/_states/goals/GoalNothing.gd" id="12_wf8cq"]
-[ext_resource type="PackedScene" uid="uid://c31orajqrt5wx" path="res://resources/anzhuBeing/hurtBox/hurt_box.tscn" id="13_n2suv"]
-[ext_resource type="PackedScene" uid="uid://chicyma06s6la" path="res://resources/anzhuBeing/corpse/Corpse.tscn" id="15_sm0p4"]
+[ext_resource type="PackedScene" uid="uid://c1you2bnyaapu" path="res://resources/anzhuBeing/go_to/go_to.tscn" id="13_33w8m"]
+[ext_resource type="Script" uid="uid://bq60swmc8fweg" path="res://resources/anzhuBeing/anzhuAnimal/walrus/WalrusAnimations.gd" id="13_jmnr7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3x73f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o0tca"]
 
 [node name="Walrus" type="CharacterBody2D"]
 collision_layer = 17
@@ -23,70 +25,57 @@ script = ExtResource("1_qyjs8")
 debug_all = true
 debug_self = true
 
-[node name="Mask" parent="." instance=ExtResource("3_emk87")]
-unique_name_in_owner = true
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_3x73f")
+script = ExtResource("2_o0tca")
 set_mask_dimensions = 1
+damage_recieved = 4
+metadata/_custom_type_script = "uid://60saxsgwo84g"
+
+[node name="Actions" type="Node2D" parent="."]
+script = ExtResource("5_drws8")
+debug_self = true
+metadata/_custom_type_script = "uid://72ydk5v1g7hl"
+
+[node name="Idle" type="Node2D" parent="Actions"]
+script = ExtResource("9_xras0")
+metadata/_custom_type_script = "uid://crgdesgb0g5fd"
+
+[node name="Wander" type="Node2D" parent="Actions"]
+script = ExtResource("10_sm0p4")
+metadata/_custom_type_script = "uid://dpcgwylrmycpp"
+
+[node name="Roll" type="Node2D" parent="Actions"]
+script = ExtResource("6_uk2hj")
+
+[node name="Corpse" type="Area2D" parent="."]
+script = ExtResource("6_k3hd0")
+metadata/_custom_type_script = "uid://bm6h3sq2ypia"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse"]
+shape = SubResource("CircleShape2D_o0tca")
+
+[node name="Goals" type="Node2D" parent="."]
+script = ExtResource("5_emk87")
+metadata/_custom_type_script = "uid://bn1ww4f4t115g"
+
+[node name="GoalNothing" type="Node2D" parent="Goals"]
+script = ExtResource("12_wf8cq")
+state_options = Array[String](["Idle", "Wander", "Roll"])
+metadata/_custom_type_script = "uid://n4g3epvshvea"
+
+[node name="Timer" type="Timer" parent="Goals/GoalNothing"]
+
+[node name="SnowTracker" type="Marker2D" parent="."]
+position = Vector2(0, 1)
+script = ExtResource("4_y54qn")
+metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
 sprite_frames = ExtResource("4_xras0")
 animation = &"Wander"
-autoplay = "Idle"
-script = ExtResource("4_1tkhr")
+frame_progress = 0.389699
+script = ExtResource("13_jmnr7")
 
-[node name="Dead" type="Node" parent="Animations"]
-script = ExtResource("4_5bcdx")
-
-[node name="Timer" type="Timer" parent="Animations/Dead"]
-wait_time = 2.61
-one_shot = true
-
-[node name="Hit" type="Node" parent="Animations"]
-script = ExtResource("5_fqfuq")
-
-[node name="Timer" type="Timer" parent="Animations/Hit"]
-editor_description = "This handles the Slower"
-wait_time = 10.0
-one_shot = true
-
-[node name="Sit" type="Node" parent="Animations"]
-script = ExtResource("6_cvvs1")
-
-[node name="Idle" type="Node" parent="Animations"]
-script = ExtResource("9_xras0")
-
-[node name="Wander" type="Node" parent="Animations"]
-script = ExtResource("10_sm0p4")
-
-[node name="WanderTimer" type="Timer" parent="Animations/Wander"]
-editor_description = "Will change the animal's trajectory every timeout."
-wait_time = 3.0
-
-[node name="SnowTracker" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("4_y54qn")
-
-[node name="AnimalGoals" type="Node" parent="."]
-unique_name_in_owner = true
-script = ExtResource("5_emk87")
-debug_goals = true
-
-[node name="Nothing" type="Node" parent="AnimalGoals"]
-script = ExtResource("12_wf8cq")
-time_options = Array[int]([6, 9, 5, 4, 3, 5, 4])
-
-[node name="Timer" type="Timer" parent="AnimalGoals/Nothing"]
-wait_time = 6.0
-
-[node name="AudioManager" type="Node2D" parent="."]
-unique_name_in_owner = true
-script = ExtResource("10_r8wrc")
-
-[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(2.38419e-07, 2.38419e-07)
-scale = Vector2(0.4, 0.4)
-
-[node name="HurtBox" parent="." instance=ExtResource("13_n2suv")]
-
-[node name="Corpse" parent="." instance=ExtResource("15_sm0p4")]
+[node name="GoTo" parent="." instance=ExtResource("13_33w8m")]
+debug_self = true

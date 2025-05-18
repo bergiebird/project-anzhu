@@ -19,6 +19,7 @@ editor_description = "This contains all of our audio that plays regardless of lo
 You can find character specific audio located in their respective scenes."
 script = ExtResource("1_r7y1b")
 audio_mode = 0
+should_start_with_begin = false
 
 [node name="CyclingBackgroundMusic" type="Node" parent="."]
 

@@ -14,7 +14,6 @@ func _ready() -> void:
 		if file_name.ends_with(".png"):
 			count += 1
 			if count >= end_count:
-				print(file_name)
 				break
 	folder.list_dir_end()
 	texture = load(parent.png_folder + file_name)

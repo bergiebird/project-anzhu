@@ -1,14 +1,15 @@
 @icon("res://gyms/mainScene/nodeAudio/node_audio.png")
-extends Node #NodeAudio.gd
-
+class_name NodeAudio extends Node
 
 enum AudioMode{DayNightAudio, CyclingBackgroundMusic}
-@export var audio_mode :AudioMode = AudioMode.CyclingBackgroundMusic
 
+@export var audio_mode :AudioMode = AudioMode.CyclingBackgroundMusic
+@export var should_start_with_begin :bool = true
 var store_new :int = -1
 var store_old :int = -1
 var audio_dictionary :Dictionary
 var dictionary_size :int
+
 @onready var bgm_begin :AudioStreamPlayer = %BEGIN
 
 func _ready()->void:
@@ -18,7 +19,8 @@ func _ready()->void:
 			initialize_DayNightAudio()
 		AudioMode.CyclingBackgroundMusic:
 			initialize_CyclingBackgroundMusic()
-	bgm_begin.playing = true
+	if should_start_with_begin:
+		bgm_begin.playing = true
 
 func initialize_DayNightAudio()->void:
 	DayNighton.time_progressed.connect(play_time_music)

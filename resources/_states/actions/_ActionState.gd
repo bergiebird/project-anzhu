@@ -1,1 +1,1 @@
-class_name ActionState extends State #_ActionState.gd
+class_name ActionState extends State

@@ -256,6 +256,7 @@ visible = false
 energy = 0.1
 range_z_min = -4096
 range_z_max = 4096
+shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("4_8np16")
 

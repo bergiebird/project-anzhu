@@ -1,7 +1,13 @@
+res://resources/anzhuBeing/anzhuAnimal/walrus/scripts
+res://resources/anzhuBeing/go_to
+res://resources/anzhuBeing/anzhuAnimal/walrus/visual
+res://resources/environment/sign
+res://resources/environment/cliffs
+/home/bergiebird/.local/share/fonts/comic-code
+res://
 res://resources/anzhuBeing/anzhuAnimal/bear/scripts
 res://resources/anzhuBeing/corpse
 res://warehouse/fonts/[16] Enter Input/Enter-Input-All
-/home/bergiebird/.local/share/fonts/comic-code
 res://gyms/mainScene
 res://gyms/Zoo
 res://resources/tools/nodeAudio
@@ -10,14 +16,8 @@ res://resources/ui/buttons/checkButton/
 res://resources/ui/buttons/togglebutton
 res://warehouse/UI/PNGs
 res://resources/ui/ninePatchRects
-res://
 res://resources
 res://resources/environment/objectsSmart/collectible
 res://resources/ui
 res://resources/tools/elevationsLayer
-res://resources/environment/coast
-res://resources/anzhuBeing/mask
-res://resources/anzhuBeing/player/abilities/mouseControl
-res://resources/anzhuBeing/snowTracker
 /home/bergiebird/Current/Godot/projects/exports/anzhu/2025_04_25_928
-/home/bergiebird/Current/Godot/projects/exports/anzhu/031518052025

@@ -6,13 +6,13 @@ enum AnimalGoals {Nothing,Hunt}
 var goals :Dictionary[AnimalGoals,GoalState]
 
 func __ready()->void:
-	change_goals(starting_goal)      # Run the first goal because current_goal should be null
+	change_goals(starting_goal)
 
 func change_goals(incoming_goal)->void:
-	if incoming_goal is String:                              # Only unsafe type that this translates
+	if incoming_goal is String:
 		incoming_goal = get_node(incoming_goal).which_state
 	if incoming_goal is AnimalGoals:                          # Ensures Typesafety
-		if current_goal != incoming_goal:                      # Check if redundant, we don't execute redundancies
+		if current_goal != incoming_goal:
 			current_goal = incoming_goal
 			on_transition(states[current_goal])
 

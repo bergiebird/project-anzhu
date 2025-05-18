@@ -54,9 +54,15 @@ func setup_maps(_ref :CanvasGroup)->void:
 
 func sliding(is_sliding :bool)->void:
 	current_map = personal_maps[int(is_sliding)]
-
 func get_track_markers_tile()->Vector2i:
 	return current_map.local_to_map(current_map.to_local(global_position))
 
 func jumping(is_jumping :bool)->void:
 	can_make_tracks = !is_jumping
+
+func change_actions(new_action):
+	match new_action:
+		"Stunned":
+			sliding(true)
+		_:
+			sliding(false)

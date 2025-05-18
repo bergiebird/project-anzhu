@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b3100fbxnsgc0"]
 
-[ext_resource type="Script" uid="uid://88twws4eaxq0" path="res://resources/anzhuBeing/player/abilities/gun/Gun.gd" id="1_1tum2"]
+[ext_resource type="Script" uid="uid://88twws4eaxq0" path="res://resources/anzhuBeing/player/abilities/gun/Gunshot.gd" id="1_1tum2"]
 [ext_resource type="AudioStream" uid="uid://dt8tbpw6y5t1o" path="res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres" id="2_mnp2n"]
 
 [sub_resource type="Gradient" id="Gradient_d1bta"]

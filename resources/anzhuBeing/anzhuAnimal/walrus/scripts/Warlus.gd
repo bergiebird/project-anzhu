@@ -1,12 +1,7 @@
-@icon("res://resources/anzhuAnimal/walrus/walrus.png")
-class_name Walrus extends AnzhuAnimal #Walrus.gd
-@onready var animal_icon = "[img]res://resources/walrus/walrus.png[/img]"
+@icon("res://resources/anzhuBeing/anzhuAnimal/walrus/walrus.png")
+class_name Walrus extends AnzhuAnimal
 
-func early_ready_for_debug()->void:
+func early_ready_for_debug():
 	if debug_self:
-		debug_icon = "[img]res://resources/walrus/walrus.png[/img]"
+		debug_icon = "[img]res://resources/anzhuBeing/anzhuAnimal/walrus/walrus.png[/img]"
 		print_rich(debug_icon)
-
-
-func animal_ready()->void:
-	add_to_group("walrus")

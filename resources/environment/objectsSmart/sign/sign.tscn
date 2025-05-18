@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://c7v51glm6p1uh"]
+
+[ext_resource type="Script" uid="uid://d4m486q5717mh" path="res://resources/environment/objectsSmart/sign/sign.gd" id="1_v0fcl"]
+[ext_resource type="Texture2D" uid="uid://bhfsv1mjeh0yr" path="res://warehouse/~documented/original/Misc.png" id="2_1gegj"]
+[ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/environment/objectsSmart/interactables/Interactible.gd" id="3_n703m"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="4_k120j"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6se5w"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s36i"]
+size = Vector2(8, 8)
+
+[node name="Sign" type="StaticBody2D"]
+script = ExtResource("1_v0fcl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_1gegj")
+region_enabled = true
+region_rect = Rect2(9, 265, 6, 6)
+
+[node name="Interactible" type="Area2D" parent="."]
+script = ExtResource("3_n703m")
+metadata/_custom_type_script = "uid://b0b683moir7cy"
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible"]
+visible = false
+shape = SubResource("CircleShape2D_6se5w")
+
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_0s36i")
+script = ExtResource("4_k120j")
+set_mask_dimensions = 1
+has_healthbar = false
+metadata/_custom_type_script = "uid://60saxsgwo84g"

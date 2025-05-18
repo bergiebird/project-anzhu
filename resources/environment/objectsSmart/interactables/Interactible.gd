@@ -16,15 +16,18 @@ func _ready()->void:
 
 func _on_body_entered(body :Node2D)->void:
 	if body is Player:
+		parent.publisher_null.emit('player_entered_the_space')
 		set_process(true)
 		_dprint(interaction_enter)
 
 func _process(_delta :float)->void:
 	if Input.is_action_just_pressed('interact'):
+		_dprint('interaction occured at ' + parent.name)
 		parent.publisher_null.emit('interacted')
 
 func _on_body_exited(body :Node2D)->void:
 	if body is Player:
+		parent.publisher_null.emit('player_left_the_space')
 		set_process(false)
 		_dprint(interaction_exit)
 
@@ -37,6 +40,7 @@ func _signaler()->void:
 	body_exited.connect(_on_body_exited)
 	Libraryton.player_reference.connect(_get_player_reference)
 	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
+
 
 #region DEBUG
 @export_group('debug')

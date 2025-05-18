@@ -5,18 +5,15 @@ signal publisher_one(String, one:Variant)
 signal publisher_two(String, one:Variant, two:Variant)
 
 @export var png_folder :String = "res://resources/environment/objectsSmart/collectible/logs/"
-@onready var interactible :Interactible = $Interactible
-@onready var mask :Mask = $Mask
-@onready var sprite :Sprite2D = $Sprite2D
 @onready var sfx_collect :AudioStreamPlayer = $SfxCollect
 
 func _ready() -> void:
 	publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
 func interacted()->void:
-	interactible.queue_free()
-	mask.queue_free()
-	sprite.queue_free()
+	$Interactible.queue_free()
+	$Mask.queue_free()
+	$Sprite2D.queue_free()
 	await get_tree().create_timer(0.1).timeout
 	sfx_collect.play()
 	await sfx_collect.finished

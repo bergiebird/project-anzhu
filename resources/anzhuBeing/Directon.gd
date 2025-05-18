@@ -26,8 +26,7 @@ func get_aim(direction :String)->String:
 	return AIM_ACTION[ENUM_POS[direction]]
 func get_personal_should_flip(direction :String)->bool:
 	return SHOULD_FLIP_H[ENUM_POS[direction]]
-func change_direction()->String:
-	return DIRECTIONS[randi() % SIZE]
+
 func get_personal_anim_direction(enum_pos :String)->String:
 	return ANIM_NAME[ENUM_POS[enum_pos]]
 func get_current_direction(direction :int)->String:
@@ -35,22 +34,11 @@ func get_current_direction(direction :int)->String:
 func jump_distance_calculation(distance :int, direction:int)->Vector2i:
 	return VECTORS[direction] * distance
 
-func match_current_direction(direction:String, north:Callable, south:Callable, east:Callable, west:Callable)->bool:
-	match ENUM_POS[direction]:
-		Looking.NORTH:  north.call()
-		Looking.SOUTH:  south.call()
-		Looking.EAST:   east.call()
-		Looking.WEST:   west.call()
-		_: return false
-	return true
-
-
 func gunmatch(who :Gunshot, smoke_barrel :CPUParticles2D, smoke_back :CPUParticles2D, gunray :RayCast2D, direction :int):
 	gunray.rotation_degrees = ROTATE[direction]
 	who.position = GUN_POSITION[direction]
 	smoke_barrel.direction = VECTORS[direction]
 	smoke_back.position = SMOKE_POSITION[direction]
-#	who.z_index = GUN_Z_INDEX[direction]
 
 func get_prevalent_direction(vector :Vector2)->int:
 	var degrees :float = rad_to_deg(vector.angle())
@@ -64,6 +52,8 @@ func get_prevalent_direction(vector :Vector2)->int:
 	else:
 		return Looking.NORTH
 
+func choose_random_direction()->Vector2i:
+	return VECTORS[ENUM_POS[DIRECTIONS[randi() % SIZE]]]
 
 func get_DIRECTION_via_VECTOR(vector :Vector2)->int:
 	return get_prevalent_direction(vector)

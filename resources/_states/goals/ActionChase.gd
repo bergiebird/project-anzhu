@@ -1,6 +1,7 @@
 class_name ActionChase extends ActionState
 
 var player :Player
+var current_speed
 @onready var direction_timer :Timer = $DirectionTimer
 
 func ___get_state_value(_parent :StateMachine):
@@ -8,26 +9,42 @@ func ___get_state_value(_parent :StateMachine):
 
 func ___ready()->void:
 	Libraryton.player_reference.connect(func(ref :Player)->void:player=ref)
+	direction_timer.timeout.connect(_direction_timed_out)
 
-func ___enter()->void:
-	direction_timer.timeout.connect(move_toward_target)
-	direction_timer.wait_time =  0.1
+func ___enter():
+	grandparent.publisher_one.emit("set_GoTo_node", player)
 	direction_timer.start()
+	charge()
 
-func move_toward_target(target_position :Vector2 = player.position)->void:
-	direction_timer.wait_time = Libraryton.rng.randf_range(2.0,2.5)
-	grandparent.current_direction = Directon.get_DIRECTION_via_VECTOR(target_position)
-	var abs_position_difference :Vector2 = abs(grandparent.player.position - grandparent.global_position)
-	if abs_position_difference.x < 9.3 and abs_position_difference.y < 9.3:
-		grandparent.velocity = Vector2.ZERO
+func player_spotted():
+	if is_active:
+		charge()
 
-func ___exit()->void:
-	direction_timer.timeout.disconnect(move_toward_target)
+
+func player_out_of_sight():
+	if is_active:
+		current_speed = grandparent.SpeedType.WALK
+
+func _physics_process(_delta: float) -> void:
+	if is_active:
+		grandparent.publisher_one.emit("move_towards_target", current_speed)
+
+func _direction_timed_out():
+	grandparent.publisher_one.emit("set_GoTo_node", player)
+
+func ___exit():
 	direction_timer.stop()
 
+func reached_target():
+	if is_active:
+		grandparent.publisher_one.emit("set_GoTo_node", player)
 
+
+func charge():
+	current_speed = grandparent.SpeedType.RUN
+	await get_tree().create_timer(10.0).timeout
+	current_speed = grandparent.SpeedType.JOG
 #region	DEBUG
-
 @export_group('Debug')
 @export var debug :bool = false
 #endregion

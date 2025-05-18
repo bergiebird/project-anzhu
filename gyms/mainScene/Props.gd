@@ -1,4 +1,5 @@
-extends TileMapLayer # Props.gd # Should be a resource in a later stage maybe
+class_name Props extends TileMapLayer
+# Should be a resource in a later stage maybe
 enum EdiblePlantType{SHRUB, BERRY, HERB, FUNGI}
 var plant_encyclopedia :Dictionary = {
 	"Arc Willow":

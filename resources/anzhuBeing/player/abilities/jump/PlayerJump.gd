@@ -1,5 +1,5 @@
 @icon("res://resources/anzhuBeing/player/abilities/jump/icons8-track-and-field-skin-type-1-100.png")
-extends Ability #PlayerJump.gd
+class_name PlayerJump extends Ability
 @export var jump_time :float = 1.0
 @export var jump_distance :float = 2.0
 

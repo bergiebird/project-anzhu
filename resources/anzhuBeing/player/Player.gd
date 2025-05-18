@@ -1,12 +1,5 @@
-@icon("res://resources/anzhuBeing/player/player.png") #Player.gd
+@icon("res://resources/anzhuBeing/player/player.png")
 class_name Player extends Human
-
-signal affect_nighlight(bool)
-
-@onready var camera :Camera2D = $MainCamera
-@onready var abilities :Abilities = $Abilities
-@onready var listener :AudioListener2D = $AudioListener2D
-@onready var nightlight :PointLight2D = $Nightlight
 
 func ___ready()->void:
 	Libraryton.reference_emitter_deferred("player_reference", self, debug_self)
@@ -14,9 +7,6 @@ func ___ready()->void:
 
 func ___physics_process(_delta :float)->void:
 	velocity = Vector2.ZERO
-
-func how_should_character_die()->void:
-	Signalton.reload_scene.emit()
 
 func ___signaler()->void:
 	publisher_one.connect(func(func_name, one): Observerton.subscribe_one(self, func_name, one))
@@ -31,6 +21,4 @@ func early_ready_for_debug()->void:
 		debug_icon = "[img]res://resources/player/player.png[/img]"
 		print_rich(debug_icon)
 
-func debug()->void:
-	assert(affect_nighlight)
  #endregion

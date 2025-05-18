@@ -1,5 +1,4 @@
-
-class_name State extends Node2D #state.gd
+class_name State extends Node2D
 var parent :Node:
 	set(value):
 		parent = value
@@ -8,13 +7,12 @@ var parent :Node:
 var grandparent :AnzhuAnimal:
 	set(value):
 		grandparent = value
-		printt(self.name, grandparent)
 		__grandparent_acquired()
 		___grandparent_acquired()
 var is_active :bool
 var which_state
-@onready var _is_processing :bool = true
-@onready var _is_physicing :bool = true
+@onready var _can_process :bool = true
+@onready var _can_physics_process :bool = true
 func _ready() -> void:
 	parent = get_parent()
 	grandparent = parent.get_parent()
@@ -31,8 +29,8 @@ func _enter()->void:
 		print_rich( animal_icon + "[color=firebrick] Entering [/color]" + what_state_type )
 	__enter()
 	___enter()
-	set_physics_process(_is_physicing)
-	set_process(_is_processing)
+	set_physics_process(_can_physics_process)
+	set_process(_can_process)
 
 func _process(_delta: float) -> void:
 	_debug_update()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=26 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.gd" id="1_prs41"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="2_o8pbx"]
@@ -9,8 +9,9 @@
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_5ib5g"]
 [ext_resource type="Script" uid="uid://bgvdyvmgehdix" path="res://resources/anzhuBeing/player/mainCamera/Framing.gd" id="7_ch1di"]
 [ext_resource type="Script" uid="uid://0xvc5hkssbts" path="res://resources/anzhuBeing/player/mainCamera/ui_controls.gd" id="9_p1x0l"]
-[ext_resource type="Script" uid="uid://ic0gfnpadgiw" path="res://TextEffects.gd" id="10_jg3oj"]
+[ext_resource type="Script" uid="uid://ic0gfnpadgiw" path="res://resources/ui/TextEffects.gd" id="10_jg3oj"]
 [ext_resource type="FontFile" uid="uid://cydaeja4giwbn" path="res://warehouse/fonts/[16] Enter Input/Enter-Input-All/Enter_Input_Dark.ttf" id="10_xgl6y"]
+[ext_resource type="Script" uid="uid://1nq2ap21xj6y" path="res://resources/anzhuBeing/player/mainCamera/console.gd" id="12_p1x0l"]
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
 offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
@@ -76,29 +77,22 @@ turbulence_influence_max = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_06wol"]
 shader = ExtResource("6_p1x0l")
-shader_parameter/overlay = false
 shader_parameter/scanlines_opacity = 0.03
 shader_parameter/scanlines_width = 0.04
 shader_parameter/grille_opacity = 0.04
 shader_parameter/resolution = Vector2(200, 200)
-shader_parameter/pixelate = false
-shader_parameter/roll = false
 shader_parameter/roll_speed = 0.1
 shader_parameter/roll_size = 5.0
 shader_parameter/roll_variation = 1.8
 shader_parameter/distort_intensity = 0.002
 shader_parameter/noise_opacity = 0.016
 shader_parameter/noise_speed = 1000.0
-shader_parameter/static_noise_intensity = 0.0
 shader_parameter/aberration = 0.00200005
 shader_parameter/brightness = 1.055
 shader_parameter/discolor = true
 shader_parameter/discolor_saturation = 0.1
 shader_parameter/discolor_contrast = 1.0
 shader_parameter/clip_warp = true
-shader_parameter/warp_amount = 0.0
-shader_parameter/vignette_intensity = 0.0
-shader_parameter/vignette_opacity = 0.0
 
 [sub_resource type="RichTextEffect" id="RichTextEffect_jg3oj"]
 script = ExtResource("10_jg3oj")
@@ -510,7 +504,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Framing/RightPanel"]
+[node name="Console" type="RichTextLabel" parent="Framing/RightPanel"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -524,6 +518,12 @@ bbcode_enabled = true
 text = "
 [i][fx]\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \""
 custom_effects = [SubResource("RichTextEffect_jg3oj")]
+script = ExtResource("12_p1x0l")
+metadata/_edit_lock_ = true
+
+[node name="TextDisappearTimer" type="Timer" parent="Framing/RightPanel/Console"]
+wait_time = 3.2
+one_shot = true
 
 [connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Reset" to="Framing" method="_on_reset_pressed"]
 [connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Elevation" to="Framing" method="_on_elevation_pressed"]

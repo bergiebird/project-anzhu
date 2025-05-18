@@ -1,5 +1,7 @@
 class_name BearHurtBox extends HurtBox
 
+@onready var sfx_strike :AudioStreamPlayer2D = $SfxStrike
+
 func _on_body_entered(body :AnzhuBeing)->void:
 	if not on_cooldown:
 		on_cooldown = true
@@ -10,4 +12,7 @@ func _physics_process(_delta :float)->void:
 	update_and_match_attacking_direction(parent.get_real_velocity().abs())
 
 func was_just_hit():
-	set_hurtbox_monitoring(false)
+	monitoring = false
+
+func strike_target(_one,_two,_three):
+	sfx_strike.play()

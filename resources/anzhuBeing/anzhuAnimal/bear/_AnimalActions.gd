@@ -1,31 +1,42 @@
 class_name AnimalActionsMachine extends StateMachine
 
-enum AnimalActions {Idle, Sit, Wander, Hit, Dead, Chase}
+enum AnimalActions {Idle,Stunned,Sit,Wander,Chase,Roll}
+var animal_actions :Dictionary[AnimalActions, String] = {
+	AnimalActions.Idle:"Idle",
+	AnimalActions.Stunned: "Stunned",
+	AnimalActions.Sit: "Sit",
+	AnimalActions.Wander: "Wander",
+	AnimalActions.Chase: "Chase",
+	AnimalActions.Roll: "Roll",
+}
 @export var starting_action :AnimalActions = AnimalActions.Idle
-@onready var current_action :AnimalActions = -1
 var actions :Dictionary[AnimalActions, ActionState]
+@onready var current_action :AnimalActions = -1
+
+
 func __ready()->void:
-	for child:ActionState in get_children():             # May be redundant as statemachine gets same children
-		child.___get_state_value(self)                    # Each state initializes its own AnimalActions key
-		actions[child.which_state] = child                # Put together dictionary
-	parent.publisher_one.emit("change_actions", starting_action)
+	for child :ActionState in get_children():             # May be redundant as statemachine gets same children
+		child.___get_state_value(self)                     # Each state initializes its own AnimalActions key
+		actions[child.which_state] = child
+	call_deferred("get_yo_start")
+
 
 func change_actions(incoming_action):
-	if incoming_action is String:                               # The simple argument
-		if incoming_action == "has_died":
-			pass
-		incoming_action = get_node(incoming_action).which_state  # Translate String to AnimalActions
-	if incoming_action is AnimalActions:                        # Ensures typesafety
-		if current_action != incoming_action:                    # Check if redundant, we don't execute redundancies
-			current_action = incoming_action                      # Set this for redundancy checking
-			on_transition(actions[current_action])                # Call super class's method
-
-	else:                                                       # Catches unsafe arguments
+	if incoming_action is String:
+		incoming_action = get_node(incoming_action).which_state
+	if incoming_action is AnimalActions:
+		if current_action != incoming_action:
+			current_action = incoming_action
+			on_transition(actions[current_action])
+	else:
 		_debug()
 
 
+func get_yo_start():
+	parent.publisher_one.emit("change_actions", animal_actions[starting_action])
 
-#region	DEBUG
+
+#region #==========================================================# DEBUG
 @export_group('DEBUG')
 @export var debug_self :bool = false
 
@@ -34,6 +45,6 @@ func debug()->void:
 	debug_self = true
 
 func _debug():
-	pass
+	print(current_action)
 
 #endregion

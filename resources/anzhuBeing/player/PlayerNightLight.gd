@@ -1,4 +1,4 @@
-extends PointLight2D #PlayerNightLight.gd
+class_name PlayerNightLight extends PointLight2D
 
 @export var minimum_light :float = 0.06
 @export var maximum_light :float = 0.17
@@ -35,12 +35,11 @@ func change_nightlight(m_energy :float, wait_time :float)->void:
 			timer_node.wait_time = wait_time
 			timer_node.start()
 
-
-###
-## DEBUG
+#region # DEBUG
 ###
 @export_group("DEBUG")
 @export var debug :bool = false
 func _debug()->void:
 	if debug:
 		print_rich('[color=2a2942]NightLight debugging enabled . . .[/color]')
+#endregion

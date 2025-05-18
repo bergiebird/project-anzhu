@@ -1,25 +1,21 @@
 @icon("res://resources/anzhuBeing/player/abilities/move/icons8-exercise-100.png")
-extends Ability #PlayerMovement.gd
-
+class_name PlayerMovement extends Ability
+enum SpeedType{CREEP, WALK, JOG, RUN}
 @export_group('Movement')
 @export var efficient_bonus :int = 15
 @export var run_bonus :int = 20
-var speed_efficient :int
-var speed_run :int
-var speed_normal :int
+@onready var sheet = Staton.CHARACTER_SHEET[Staton.AnimalType.Human]["SpeedType"]
+@onready var speed_jog = sheet[Staton.Speed.JOG]
+@onready var speed_run :int = sheet[Staton.Speed.RUN]
+@onready var speed_normal :int = sheet[Staton.Speed.WALK]
 var velocity :Vector2
 
 func _grandparent_set():
-	grandparent.publisher_one.connect(
-		func(func_name, one:Variant): Observerton.subscribe_one(self, func_name, one))  ## Get Observer Pattern
-
-func move_speed_delivery(incoming_move_speed :int):
-	speed_normal = incoming_move_speed
-	speed_efficient = speed_normal + efficient_bonus
-	speed_run = speed_efficient + run_bonus
+	grandparent.publisher_one.connect(func(func_name, one:Variant): Observerton.subscribe_one(self, func_name, one))
 
 func _physics_process(_delta: float) -> void:                   ## Every physics frame
-	if parent.current_state == parent.AbilityStates.IDLING or parent.current_state == parent.AbilityStates.MOVING:
+	if parent.current_state == parent.AbilityStates.IDLING \
+	or parent.current_state == parent.AbilityStates.MOVING:
 		velocity = Vector2.ZERO                                   ## If current state is Idling or Moving, initialize
 		for direction:String in Directon.DIRECTIONS:              ## Cycle through all 4 direction
 			if Inputon.look_direction(direction):                  ## JIKL check
@@ -27,15 +23,12 @@ func _physics_process(_delta: float) -> void:                   ## Every physics
 				if enput != grandparent.current_direction:          ## Mostly for animation reasons
 					grandparent.current_direction = enput
 			velocity = mover(direction)                            ## WASD check
-			if velocity != Vector2.ZERO:                           ## Do something if unique
-				parent.current_state = parent.AbilityStates.MOVING  ## Set state to Moving
-				break
-		if velocity == Vector2.ZERO:                  ##
-			parent.current_state = parent.AbilityStates.IDLING
-			grandparent.velocity_force = Vector2.ZERO
-
-
-		grandparent.parse_movement_vector(velocity)
+			if velocity != Vector2.ZERO:
+				grandparent.velocity_force = velocity               ## Do something if unique
+				parent.current_state = parent.AbilityStates.MOVING
+				return
+		parent.current_state = parent.AbilityStates.IDLING
+		grandparent.velocity_force = Vector2.ZERO
 
 func mover(direction :String)->Vector2:
 	if Inputon.move(direction):
@@ -46,7 +39,7 @@ func mover(direction :String)->Vector2:
 			velocity = set_efficiency(speed_normal, false)
 		else:
 			if Directon.ENUM_POS[direction] == grandparent.current_direction:
-				velocity = set_efficiency(speed_efficient, true)
+				velocity = set_efficiency(speed_jog, true)
 			else:
 				velocity = set_efficiency(speed_normal, false)
 		return velocity
@@ -55,3 +48,7 @@ func mover(direction :String)->Vector2:
 func set_efficiency(speed :int, efficiency :bool)->Vector2:
 	parent.is_efficient = efficiency
 	return velocity * speed
+
+func blah():
+
+	pass

@@ -24,8 +24,6 @@ var time_dictionary :Dictionary
 @export var player :Player
 @onready var fire_anim :AnimatedSprite2D = $CampFireAnimation
 @onready var fire_light :PointLight2D = $CampFireLight
-@onready var on_camera :VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
-@onready var interactible :Interactible = $Interactible
 @onready var bgm_camp_fire :AudioStreamPlayer2D = $BgmCampFire
 @onready var sfx_crackle :AudioStreamPlayer2D = $SfxCrackle
 

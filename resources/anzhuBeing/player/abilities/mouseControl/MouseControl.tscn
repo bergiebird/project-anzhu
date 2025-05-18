@@ -6,8 +6,13 @@
 [node name="MouseControl" type="Node2D"]
 script = ExtResource("1_s3l53")
 
-[node name="ResetTimer" type="Timer" parent="."]
+[node name="ClickResetTimer" type="Timer" parent="."]
 wait_time = 0.16
+one_shot = true
+
+[node name="MouseIdleTimer" type="Timer" parent="."]
+wait_time = 3.2
+one_shot = true
 
 [node name="MenuClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_s76yc")

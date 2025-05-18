@@ -34,13 +34,15 @@ Swatchton="*res://resources/tools/Swatchton.gd"
 Inputon="*res://resources/anzhuBeing/player/Inputon.gd"
 Builderton="*res://resources/tools/Builderton.gd"
 Staton="*res://resources/anzhuBeing/Staton.gd"
-Observerton="*res://Observerton.gd"
+Observerton="*res://resources/tools/Observerton.gd"
 
 [debug]
 
 gdscript/warnings/unused_signal=0
 gdscript/warnings/standalone_expression=0
+gdscript/warnings/redundant_await=0
 gdscript/warnings/int_as_enum_without_cast=0
+gdscript/warnings/int_as_enum_without_match=0
 
 [display]
 
@@ -55,7 +57,7 @@ window/tooltip_delay_sec=0.1
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
 
 [file_customization]
 
