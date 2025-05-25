@@ -786,7 +786,7 @@ position = Vector2(860, 369)
 
 [node name="Player" parent="NODE2D/Entities/Beings" instance=ExtResource("13_aqo2m")]
 z_index = 100
-position = Vector2(1002, 808)
+position = Vector2(1345, 679)
 collision_layer = 524929
 collision_mask = 524417
 
@@ -844,3 +844,5 @@ editor_description = "Everything and anything that doesn't require a location in
 
 [node name="Audio" parent="NODE" instance=ExtResource("18_b8ymc")]
 editor_description = ""
+audio_mode = 1
+should_start_with_begin = true
