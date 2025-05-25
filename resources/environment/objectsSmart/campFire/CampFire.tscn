@@ -90,6 +90,7 @@ script = ExtResource("1_ggvyn")
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_jyux6")
 script = ExtResource("2_mi3f3")
+description = "A campfire"
 set_mask_dimensions = 1
 has_background = false
 

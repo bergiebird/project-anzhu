@@ -148,6 +148,7 @@ grow_vertical = 2
 script = ExtResource("7_l833n")
 
 [node name="Framing" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("7_ch1di")
 keep_controls = true
 

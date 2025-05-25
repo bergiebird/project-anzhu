@@ -51,6 +51,7 @@ collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_6aww6")
 this_animals_type = 3
+visual_description = "POLAR BEAR!"
 
 [node name="Mask" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_nr2iy")

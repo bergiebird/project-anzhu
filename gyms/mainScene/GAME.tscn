@@ -612,17 +612,27 @@ metadata/_edit_lock_ = true
 [node name="CampFire" parent="NODE2D/Entities/Props" instance=ExtResource("14_avu1l")]
 position = Vector2(1346, 749)
 
+[node name="CampFire2" parent="NODE2D/Entities/Props" instance=ExtResource("14_avu1l")]
+position = Vector2(241, -240)
+
 [node name="Bear Warning" parent="NODE2D/Entities/Props" instance=ExtResource("14_b8ymc")]
 position = Vector2(263, 646)
-sign_contents = "There are Bears in these lands. Careful!"
+sign_contents = "There are Bears in these lands. Careful!
+
+
+Use your gun {E} if you have to!"
 visual_description = "A warning sign"
 
 [node name="Bear Warning2" parent="NODE2D/Entities/Props" instance=ExtResource("14_b8ymc")]
 position = Vector2(1476, 597)
-sign_contents = "There are Bears in these lands. Careful!"
+sign_contents = "There are Bears in these lands. Careful!
+
+Use your gun {E} if you have to!"
 visual_description = "A warning sign."
 
 [node name="Corner Sign" parent="NODE2D/Entities/Props" instance=ExtResource("14_b8ymc")]
+z_index = 1
+z_as_relative = false
 position = Vector2(216, -260)
 sign_contents = "You found a corner!
 
@@ -646,7 +656,10 @@ visual_description = "Barnacles seem to be accumulating on the post"
 
 [node name="Controls; Campfire" parent="NODE2D/Entities/Props" instance=ExtResource("14_b8ymc")]
 position = Vector2(1325, 733)
-sign_contents = "Use F to turn the Campfire on/off"
+sign_contents = "Use {F} to turn the Campfire on/off.
+
+Campfires will heal you if you get damaged!"
+visual_description = ""
 
 [node name="Controls; Jump Down" parent="NODE2D/Entities/Props" instance=ExtResource("14_b8ymc")]
 position = Vector2(335, 686)
@@ -666,7 +679,7 @@ visual_description = "A helpul sign that seems to be instructing on what can be 
 position = Vector2(1317, 678)
 sign_contents = "Welcome! You're on the Anzhu Islands in the 18th century. You were shipwrecked and now you're confined to this small zone so you can learn jumping. 
 
-Press E to jump. You can jump down hills. "
+Press {U} to jump. You can jump down hills. "
 visual_description = "A helpul sign that seems to be instructing on what can be jumped over."
 
 [node name="Cave; Greeting" parent="NODE2D/Entities/Props" instance=ExtResource("14_b8ymc")]
@@ -773,13 +786,14 @@ position = Vector2(860, 369)
 
 [node name="Player" parent="NODE2D/Entities/Beings" instance=ExtResource("13_aqo2m")]
 z_index = 100
-position = Vector2(1336, 678)
+position = Vector2(1002, 808)
 collision_layer = 524929
 collision_mask = 524417
-visual_description = "It's you"
 
 [node name="Walrus" parent="NODE2D/Entities/Beings" instance=ExtResource("17_gei0v")]
 position = Vector2(932, 773)
+visual_description = "A Walrus who is under heavy construction!
+Please don't judge too harshly."
 
 [node name="Bear" parent="NODE2D/Entities/Beings" instance=ExtResource("16_b8ymc")]
 position = Vector2(1009, 341)

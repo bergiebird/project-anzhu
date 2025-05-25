@@ -7,6 +7,7 @@ var is_stunned :bool= false
 @onready var location :Area2D = $Location
 
 func _ready():
+	_debug()
 	location.global_position = Vector2.ZERO
 	location.body_entered.connect(func(body): if body.name == parent.name: parent.publisher_null.emit("reached_target"))
 
