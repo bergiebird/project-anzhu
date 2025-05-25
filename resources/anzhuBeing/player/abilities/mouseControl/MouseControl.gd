@@ -1,49 +1,47 @@
 @icon("res://resources/anzhuBeing/player/abilities/mouseControl/icon_search.png")
-class_name MouseControl extends Ability
-
+extends Ability
+class_name MouseControl
 @onready var can_click :bool = true
-@onready var sfx_click :AudioStreamPlayer = $MenuClick
-@onready var click_reset_timer :Timer = $ClickResetTimer
-@onready var idle_mouse_timer :Timer = $MouseIdleTimer
-@onready var sprite_idle :Texture2D = preload("uid://c5iwysswhjf06")
-@onready var sprite_click :Texture2D = preload("uid://dwct5s8apk8eh")
 @onready var previous_mouse_position :Vector2 = get_viewport().get_mouse_position()
-
-
-func _ready()->void:
-	Input.set_custom_mouse_cursor(sprite_idle)
+@onready var mouse_idle_timer :Timer = $MouseIdleTimer
+@onready var menu_click_audio :AudioStreamPlayer = $MenuClick
+@onready var click_reset_timer :Timer = $ClickResetTimer
+func _ready():
+	Inputon.set_player_cursors() # Initializer
 	Inputon.hide_cursor()
 	click_reset_timer.timeout.connect(click_restted)
-	idle_mouse_timer.timeout.connect(mouse_idled_too_long)
+	mouse_idle_timer.timeout.connect(func():Inputon.hide_cursor())
 
-func _process(_delta :float)->void:
-	var current_mouse_position :Vector2 = get_viewport().get_mouse_position()  # Every frame we check for the mouse's position
-	if current_mouse_position != previous_mouse_position:         # If the position is new
-		Inputon.reveal_cursor()
-		idle_mouse_timer.stop()
-		idle_mouse_timer.start()
+func _process(_delta :float):
+	var current_mouse_position :Vector2 = get_viewport().get_mouse_position()
+	if current_mouse_position != previous_mouse_position:
 		previous_mouse_position = current_mouse_position
+		mouse_moved()
 
-func _input(event :InputEvent)->void:
-	if event is InputEventMouseButton and Inputon.left_mouse_release() and can_click or Inputon.escape() and can_click:
-		execute_click()
+func _input(event :InputEvent):
+	if event is InputEventMouse or Inputon.escape():
+		mouse_moved()
+		if can_click:
+			if Inputon.left_mouse_release():
+				execute_click()
 
-func execute_click()->void:
+func execute_click():
 	if can_click:
 		can_click = false
-		Input.set_custom_mouse_cursor(sprite_click)
-		sfx_click.play()
+		Inputon.set_cursor_to_click()
+		menu_click_audio.play()
 		click_reset_timer.start()
-		idle_mouse_timer.stop()
-		idle_mouse_timer.start()
 
-func mouse_idled_too_long():
-		match Input.get_mouse_mode():
-			Input.MOUSE_MODE_VISIBLE:
-					Inputon.hide_cursor()
-			Input.MOUSE_MODE_HIDDEN:
-					Inputon.reveal_cursor()
+func mouse_moved():
+	mouse_idle_timer.start()
+	Inputon.reveal_cursor()
 
 func click_restted():
 	can_click = true
-	Input.set_custom_mouse_cursor(sprite_idle)
+	Inputon.set_cursor_to_resting()
+
+
+#region   #======================================================# Debug
+@export_group("Debug")
+@export var debug_should_disable :bool = false
+#endregion #======================================================# Debug

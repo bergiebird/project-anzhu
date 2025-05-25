@@ -1,4 +1,4 @@
-class_name Ability extends Node2D #_Ability.gd
+class_name Ability extends Node2D
 
 var parent :Abilities:
 	set(value):

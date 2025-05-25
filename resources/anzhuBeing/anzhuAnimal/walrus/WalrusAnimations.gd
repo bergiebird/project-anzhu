@@ -1,14 +1,15 @@
-class_name WalrusAnimations extends AnimalAnimations
+extends AnimalAnimations
+class_name WalrusAnimations
 
 
 func change_actions(new_action :String):
+	print('==', new_action)
 	match new_action:
-		"Stunned":
-			update_animations("Stunned")
-			stunned_anim()
-		"Wander":
-			update_animations("Wander")
 		"Idle":
 			update_animations("Idle")
+		"Stunned":
+			update_animations("Stunned")
+		"Wander":
+			update_animations("Wander")
 		"Roll":
 			update_animations("Roll")

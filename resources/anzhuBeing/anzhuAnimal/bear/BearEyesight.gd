@@ -1,5 +1,7 @@
 @icon('res://resources/anzhuBeing/eyesight/icon_visibility.png')
-class_name BearEyesight extends Area2D
+extends Area2D
+class_name BearEyesight
+
 var is_spotted :bool = false:
 	set(value): if value != is_spotted:
 		is_spotted = value
@@ -29,7 +31,7 @@ func loud_noise()->void:
 
 func was_struck():
 	has_grievance = true
-	parent.publisher_two.emit("start_stun", 5.0, "Chase")
+	parent.publisher_one.emit("start_stun", "Chase")
 
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:

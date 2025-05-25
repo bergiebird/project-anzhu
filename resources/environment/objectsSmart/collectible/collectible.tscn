@@ -16,6 +16,7 @@ script = ExtResource("1_rvcnw")
 [node name="Mask" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_f356s")
 script = ExtResource("1_on5ne")
+description = "Driftwood!"
 set_mask_dimensions = 1
 has_healthbar = false
 metadata/_custom_type_script = "uid://60saxsgwo84g"

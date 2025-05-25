@@ -16,3 +16,5 @@ one_shot = true
 
 [node name="MenuClick" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_s76yc")
+volume_db = -13.0
+mix_target = 2

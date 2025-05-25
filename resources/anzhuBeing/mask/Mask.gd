@@ -1,6 +1,8 @@
-@icon("res://resources/anzhuBeing/mask/mask.png")
-class_name Mask extends CollisionShape2D #Mask.gd
+#@icon("res://resources/anzhuBeing/mask/mask.png")
+extends CollisionShape2D
+class_name Mask
 
+@export_multiline var description :String = """"""
 ## Powerful variable change. Affects collision and HP.
 @export_enum("null", "8x8", "10x10", "12x10", "10x12", "12x12") var set_mask_dimensions :int = 0:
 	set(value):
@@ -16,45 +18,84 @@ class_name Mask extends CollisionShape2D #Mask.gd
 @export var damage_recieved :int = 1
 @export var background_color :Color = Swatchton.BLACK
 @export var healthbar_color :Color = Swatchton.RED_TOMATO
+
 var mask_dimensions :Vector2
 var max_hp :int
 var background :ColorRect
 var healthbar :ColorRect
+var enable_click :bool=false:
+	set(value):
+		enable_click = value
+		if enable_click:
+			Inputon.set_cursor_to_ibeam()  # on_entering the sign's area
+		else:
+			Inputon.set_cursor_to_point()  # on_exiting the sign's area //DEFAULT
+
 @onready var collision_shape :RectangleShape2D = shape
 @onready var parent :CollisionObject2D = get_parent()
 
 func _ready():
-	_setup_basics()            # Ensure the misc properties are set
+	_setup_basics()                                            # Ensure the misc properties are set
 	visible = true
 	if has_background: _establish_background()
-	if has_healthbar: _establish_healthbar()
+	if has_healthbar:  _establish_healthbar()
+	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
+	Signalton.heal_player.connect(_heal_player)
+	(func():parent.publisher_one.emit("collision_size_delivery",collision_shape.size)).call_deferred()
+
+func override_visual_description(new_description :String):
+	if new_description:
+		description = new_description
 
 func _setup_basics():
-	if parent is Player:                                               # Player specific changes
-		parent.set_collision_layer_value(5,true)                        # We also handle the player's collider from here.
-	collision_shape.size.x = snapped(mask_dimensions.x - 0.1, 0.01)    # Algorithm to set the dimensions
-	collision_shape.size.y = snapped(mask_dimensions.y - 0.1, 0.01)    # It is just a little smaller than advertised.
+	collision_shape.size.x = snapped(mask_dimensions.x - 0.1, 0.01)  # Algorithm to set the dimensions
+	collision_shape.size.y = snapped(mask_dimensions.y - 0.1, 0.01)  # It is just a little smaller than advertised.
 
+var minimum_hp_size :float
+var minimum_hp_position :float
 func _establish_background():
-		background = ColorRect.new()                  # Its Alive!
-		background.color = background_color           # Exported color set as background
-		background.size.x = mask_dimensions.x         # Size of the image set here
-		background.size.y = mask_dimensions.y
-		background.position.x = mask_dimensions.x/-2  # Position set as per the size
-		background.position.y = mask_dimensions.y/-2
-		add_child(background)                         # Setup for ColorRect background done! instaniate
+	background = ColorRect.new()                             # Its Alive!
+	background.set_mouse_filter(Control.MOUSE_FILTER_STOP)
+	background.set_default_cursor_shape(Control.CURSOR_IBEAM)
+	background.color = background_color                       # Exported color set as background
+
+	background.size.x = mask_dimensions.x                     # Size of the image set here
+	background.size.y = mask_dimensions.y
+
+	background.position.x = mask_dimensions.x/-2              # Position set as per the size
+	background.position.y = mask_dimensions.y/-2
+	background.mouse_entered.connect(func(): enable_click = true)
+	background.mouse_exited.connect(func(): enable_click = false)
+	add_child(background)                                     # Setup for ColorRect background done! instaniate
 
 func _establish_healthbar():
-		healthbar = ColorRect.new()                        # Yess! Yesss, more power!
-		healthbar.color = healthbar_color                  # Set the color of the healthbar via whats set in export
-		max_hp = int(mask_dimensions.y)                    # Instantiate max_hp's value for intuitivity in another method
-		healthbar.size.x = background.size.x               # size is set to be as wide as the collision box. Y value is ignored
-		healthbar.position.x = background.position.x       # Position the healthbar appropriately.
-		healthbar.position.y = abs(background.position.y)  # You know, I forget why I needed to absolute it. But it works!
-		add_child(healthbar)                               # Add
+	healthbar = ColorRect.new()                               # Yess! Yesss, more power!
+	healthbar.set_mouse_filter(Control.MOUSE_FILTER_IGNORE)
+	healthbar.set_default_cursor_shape(Control.CURSOR_IBEAM)
+	healthbar.color = healthbar_color                         # Set the color of the healthbar via whats set in export
+	max_hp = int(mask_dimensions.y)                           # Instantiate max_hp's value for intuitivity in another method
+	minimum_hp_size = mask_dimensions.y
+	healthbar.size.x = mask_dimensions.x                      # size is set to be as wide as the collision box. Y value is ignored
+	minimum_hp_position = abs(mask_dimensions.y/-2)
+	healthbar.position.x = mask_dimensions.x/-2               # Position the healthbar appropriately.
+	healthbar.position.y = abs(mask_dimensions.y/-2)          # You know, I forget why I needed to absolute it. But it works!
+	add_child(healthbar)                                      # Add
 
-func jumping(needs_inverse:bool)->void:                  # needs inverse because the signal incoming says is_jumping = true
-	visible=!needs_inverse                                # and we want to say if is_jumping = true, set_visibility(false)
+func _input(event: InputEvent):
+	if enable_click:
+		if event is InputEventMouseButton:
+				Signalton.update_console.emit(description)
+
+func jumping(needs_inverse:bool):   # needs inverse because the signal incoming says is_jumping = true
+	visible=!needs_inverse           # and we want to say if is_jumping = true, set_visibility(false)
+
+func _heal_player():
+	if parent is Player:
+		printt('parent is player', healthbar.size.y > minimum_hp_size and healthbar.position.y < minimum_hp_position, healthbar.size.y, minimum_hp_size, healthbar.position.y, minimum_hp_position)
+		if healthbar.size.y > 0.0 and healthbar.position.y < minimum_hp_position:
+			print('heal requirements met')
+			healthbar.size.y -= 1                    # The incoming value will raise the healthbar by that many pixels
+			healthbar.position.y += 1                # The position needs to compensate
 
 func was_struck(incoming_value :int = damage_recieved):
 		healthbar.size.y += incoming_value                    # The incoming value will raise the healthbar by that many pixels

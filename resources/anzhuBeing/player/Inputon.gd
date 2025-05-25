@@ -1,6 +1,5 @@
-extends Node #Inputon.gd
-
-signal cursor_movement_report(bol :bool)
+extends Node
+#Inputon.gd
 
 var player :Player:
 	set(value):
@@ -8,9 +7,10 @@ var player :Player:
 			player = value
 var shot_db :float
 
-func _ready()->void:
+func _ready():
 	Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)
-
+	set_player_cursors()
+#region #=======================================================================================# KEYBOARD
 func look_direction(direction :String)->bool:
 	return true if Input.is_action_pressed(Directon.get_aim(direction)) else false
 
@@ -40,15 +40,47 @@ func gun_reload()->bool:
 
 func escape()->bool:
 	return Input.is_action_just_released("esc")
+#endregion #====================================================================================# KEYBOARD
+#region #=======================================================================================# MOUSE
+signal cursor_movement_report(bol :bool)
+const CURSOR_HOTSPOT :Vector2 = Vector2(14,4)
 
-func hide_cursor()->void:
+var current_resting_cursor :DisplayServer.CursorShape
+
+@onready var sprite_idle :Texture2D = preload("uid://c5iwysswhjf06")
+@onready var sprite_click :Texture2D = preload("uid://dwct5s8apk8eh")
+@onready var sprite_inspect :Texture2D = preload("uid://dyeo6vbhfj0rt")
+
+func set_player_cursors():
+	Input.set_custom_mouse_cursor(sprite_idle, Input.CURSOR_ARROW, CURSOR_HOTSPOT)
+	Input.set_custom_mouse_cursor(sprite_inspect, Input.CURSOR_IBEAM, CURSOR_HOTSPOT)
+	Input.set_custom_mouse_cursor(sprite_click, Input.CURSOR_POINTING_HAND, CURSOR_HOTSPOT)
+	set_cursor_to_point()
+
+func hide_cursor():
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	cursor_movement_report.emit(false)            # Godot doesn't offer a signal that emits on cursor visibility changed
-func reveal_cursor()->void:
+	cursor_movement_report.emit(false) # Godot doesn't offer a signal that emits on cursor visibility changed
+
+func reveal_cursor():
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	cursor_movement_report.emit(true)
+
+func set_cursor_to_resting():
+	DisplayServer.cursor_set_shape(current_resting_cursor)
+
+func set_cursor_to_point():
+	current_resting_cursor = DisplayServer.CURSOR_ARROW
+	DisplayServer.cursor_set_shape(current_resting_cursor)
+
+func set_cursor_to_ibeam():
+	current_resting_cursor = DisplayServer.CURSOR_IBEAM
+	DisplayServer.cursor_set_shape(current_resting_cursor)
+
+func set_cursor_to_click():
+	DisplayServer.cursor_set_shape(DisplayServer.CURSOR_POINTING_HAND)
 
 
 
 func left_mouse_release()->bool:
 	return Input.is_action_just_released("left_click")
+#endregion #====================================================================================# MOUSE

@@ -95,7 +95,7 @@ color_ramp = SubResource("Gradient_naea4")
 
 [node name="GunRay" type="RayCast2D" parent="."]
 rotation = 1.5708
-target_position = Vector2(120, 0)
+target_position = Vector2(84, 0)
 collision_mask = 16
 collide_with_bodies = false
 

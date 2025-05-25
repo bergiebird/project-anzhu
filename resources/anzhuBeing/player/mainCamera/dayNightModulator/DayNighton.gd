@@ -1,4 +1,6 @@
-extends Node #DayNighton.gd
+extends Node
+#DayNighton.gd
+
 signal new_hour
 signal time_progressed(TimeOfDay)
 signal time_progressed_name(String)
@@ -6,8 +8,14 @@ signal time_progressed_melatonin(int)
 signal time_dictionary_delivery(Dictionary)
 signal time_progressed_nightlight(bool)
 signal time_progressed_campfire(float)
+
 enum TimeOfDay{DAWN, MORNING, NOON, AFTERNOON, DUSK, NIGHT, MIDNIGHT, LATE_NIGHT}
-enum SunAmount{Most=-3, Great=-2, Good=-1, Alright=0,ItWillComeBack=1,MissingSun=2, WhatIsThisSunYouSpeakOf=3}
+enum SunAmount{
+	Most=-3,   WhatIsThisSunYouSpeakOf=3,
+	Great=-2,  MissingSun=2,
+	Good=-1,   ItWillComeBack=1,
+	Alright=0,
+	}
 const WORLD_TIMER_WAIT_TIME :int = 180
 var time_dictionary :Dictionary = {
 		TimeOfDay.DAWN: {
@@ -87,7 +95,7 @@ var current_time: TimeOfDay = TimeOfDay.DAWN
 var night_lights_on :bool
 @onready var world_timer :Timer = Timer.new()
 
-func _ready()->void:
+func _ready():
 	world_timer.wait_time = WORLD_TIMER_WAIT_TIME
 	world_timer.process_callback = Timer.TIMER_PROCESS_PHYSICS
 	world_timer.autostart = true
@@ -95,10 +103,10 @@ func _ready()->void:
 	add_child(world_timer)
 	call_deferred("progress_for_campfire")
 
-func progress_for_campfire()->void:
+func progress_for_campfire():
 	time_progressed_campfire.emit(time_dictionary[current_time]['camp_fire_energy'])
 
-func progress_time(_incoming_time :TimeOfDay=current_time)->void:
+func progress_time(_incoming_time :TimeOfDay=current_time):
 	current_time = time_dictionary[current_time]["next_time"]
 	var dict :Dictionary = time_dictionary[current_time]
 	new_hour.emit()

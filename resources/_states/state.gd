@@ -1,4 +1,5 @@
-class_name State extends Node2D
+extends Node2D
+class_name State
 var parent :Node:
 	set(value):
 		parent = value

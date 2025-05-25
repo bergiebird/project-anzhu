@@ -1,4 +1,5 @@
-class_name AnzhuBeing extends CharacterBody2D
+extends CharacterBody2D
+class_name AnzhuBeing
 #region    #============================================================# Signals
 signal publisher_null(method_name :String)
 signal publisher_one(method_name :String, one :Variant)
@@ -7,7 +8,7 @@ signal publisher_three(method_name :String, one :Variant, two :Variant, three :V
 #endregion #============================================================# Signals
 #region    #============================================================# Variables
 enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
-enum SpeedType{CREEP,WALK,JOG,RUN}
+enum SpeedType {CREEP,WALK,JOG,RUN}
 @export var this_animals_type :AnimalType
 var current_direction :int:
 	set(value):
@@ -32,12 +33,14 @@ var animal_name :String
 var velocity_force :Vector2
 var is_stunned :bool = false
 var player :Player
-@export var SAFE_MARGIN :float = 0.05 ## Lower than 0.08 reduces jitteryness, higher than makes it better at detecting walls.
+
+## Lower than 0.08 reduces jitteryness, higher than makes it better at detecting walls.
+@export var SAFE_MARGIN :float = 0.05
 var is_sliding :bool = false:
 	set(value): if value!=is_sliding:
 		is_sliding = value
 		publisher_one.emit("sliding", is_sliding)
-
+@export_multiline var visual_description :String = ""
 #endregion #============================================================# Variables
 #region    #============================================================# Ready
 func _ready():
@@ -59,6 +62,7 @@ func _setup_basics():
 func _signaler():
 	Libraryton.player_reference.connect(player_ref)
 	Signalton.loud_noise.connect(func(_who :AnzhuBeing, _where :Vector2, _db :float): publisher_null.emit("loud_noise"))
+	publisher_one.emit("override_visual_description", visual_description)
 	publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 	publisher_one.connect(func(func_name, one): Observerton.subscribe_one(self, func_name, one))
 	publisher_two.connect(func(func_name, one, two): Observerton.subscribe_two(self, func_name, one, two))
@@ -102,6 +106,13 @@ func _was_just_struck(damage :int, weapon :String, who:AnzhuBeing):
 		publisher_null.emit("was_struck")
 
 #endregion #============================================================# Strikes
+#region    #============================================================# MISC
+
+func collide_with_(layer :int, is_enabled :bool):
+	set_collision_layer_value(layer, is_enabled)
+	set_collision_mask_value(layer, is_enabled)
+
+#endregion #============================================================# MISC
 #region    #============================================================# VIRTUALS
 func parse_incoming_damage(_damage :int, _weapon :String, _who:AnzhuBeing)->bool: return true
 func __setup_basics(): pass

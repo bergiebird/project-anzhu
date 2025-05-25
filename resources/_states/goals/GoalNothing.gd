@@ -1,19 +1,22 @@
-class_name GoalNothing extends GoalState
+extends GoalState
+class_name GoalNothing
 
 @export var state_options :Array[String] = ["Idle","Sit","Wander"]
 @export var time_options :Array[int] = [6,9,30,12,15,5,4]
+
 var chosen_time :int
 var chosen_state :String
 var old_chosen_state :String
+
 @onready var timer :Timer = $Timer
 
-func ___ready()->void:
+func ___ready():
 	timer.timeout.connect(_on_timeout)
 
-func ___enter()->void:
+func ___enter():
 	_on_timeout()
 
-func _on_timeout() -> void:
+func _on_timeout():
 	if is_active:
 		chosen_state = state_options.pick_random()
 		match chosen_state:
@@ -24,11 +27,11 @@ func _on_timeout() -> void:
 				timer.wait_time = time_options.pick_random()
 				timer.start()
 			"Wander":
-				grandparent.publisher_null.emit("set_new_GoTo_location")
+				timer.stop()
+				grandparent.publisher_null.emit("set_GoTo_node")
 			"Roll":
 				timer.wait_time = time_options.pick_random()
 				timer.start()
-		print(chosen_state)
 		if chosen_state != old_chosen_state:
 			grandparent.publisher_one.emit("change_actions", chosen_state)
 			old_chosen_state = chosen_state

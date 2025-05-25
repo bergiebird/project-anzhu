@@ -1,13 +1,13 @@
 [gd_scene load_steps=2 format=3 uid="uid://dysp0fhml7l32"]
 
-[ext_resource type="Texture2D" uid="uid://c0ut0fq5sihpa" path="res://warehouse/UI/PNGs/Banners.png" id="1_o0gxg"]
+[ext_resource type="Texture2D" uid="uid://c0ut0fq5sihpa" path="res://warehouse/UI/PNGs/Banners.png" id="1_j42h8"]
 
-[node name="Scroll" type="NinePatchRect"]
+[node name="UiScroll" type="NinePatchRect"]
 offset_left = 84.0
 offset_top = 12.0
 offset_right = 142.0
 offset_bottom = 24.0
-texture = ExtResource("1_o0gxg")
+texture = ExtResource("1_j42h8")
 region_rect = Rect2(3, 241, 58, 78)
 patch_margin_top = 6
 patch_margin_bottom = 6

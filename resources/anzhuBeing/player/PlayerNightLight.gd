@@ -1,4 +1,5 @@
-class_name PlayerNightLight extends PointLight2D
+extends PointLight2D
+class_name PlayerNightLight
 
 @export var minimum_light :float = 0.06
 @export var maximum_light :float = 0.17
@@ -11,7 +12,7 @@ class_name PlayerNightLight extends PointLight2D
 func _ready()->void:
 	DayNighton.time_progressed_nightlight.connect(update_nightlight)
 	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
-	timer_node.timeout.connect(func()->void:return) #visible = false
+	timer_node.timeout.connect(func()->void:return)
 	energy = minimum_light
 	_debug()
 
@@ -28,15 +29,13 @@ func gunfired(did_gun_fire :bool)->void:
 
 func change_nightlight(m_energy :float, wait_time :float)->void:
 	Debuggerton.tweener_property_disposal([
-		Builderton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)
-	], debug)
+		Builderton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)], debug)
 	if visible:
 		if m_energy == minimum_light:
 			timer_node.wait_time = wait_time
 			timer_node.start()
 
 #region # DEBUG
-###
 @export_group("DEBUG")
 @export var debug :bool = false
 func _debug()->void:

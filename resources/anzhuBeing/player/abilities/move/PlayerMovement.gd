@@ -1,5 +1,7 @@
 @icon("res://resources/anzhuBeing/player/abilities/move/icons8-exercise-100.png")
-class_name PlayerMovement extends Ability
+extends Ability
+class_name PlayerMovement
+
 enum SpeedType{CREEP, WALK, JOG, RUN}
 @export_group('Movement')
 @export var efficient_bonus :int = 15
@@ -48,7 +50,3 @@ func mover(direction :String)->Vector2:
 func set_efficiency(speed :int, efficiency :bool)->Vector2:
 	parent.is_efficient = efficiency
 	return velocity * speed
-
-func blah():
-
-	pass

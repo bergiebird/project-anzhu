@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=27 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.gd" id="1_prs41"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="2_o8pbx"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://resources/ui/CRT.gdshader" id="6_p1x0l"]
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_5ib5g"]
 [ext_resource type="Script" uid="uid://bgvdyvmgehdix" path="res://resources/anzhuBeing/player/mainCamera/Framing.gd" id="7_ch1di"]
+[ext_resource type="Script" uid="uid://ccpck3l3c6mix" path="res://resources/anzhuBeing/player/mainCamera/crt.gd" id="7_l833n"]
 [ext_resource type="Script" uid="uid://0xvc5hkssbts" path="res://resources/anzhuBeing/player/mainCamera/ui_controls.gd" id="9_p1x0l"]
 [ext_resource type="Script" uid="uid://ic0gfnpadgiw" path="res://resources/ui/TextEffects.gd" id="10_jg3oj"]
 [ext_resource type="FontFile" uid="uid://cydaeja4giwbn" path="res://warehouse/fonts/[16] Enter Input/Enter-Input-All/Enter_Input_Dark.ttf" id="10_xgl6y"]
@@ -102,6 +103,7 @@ metadata/_custom_type_script = "uid://ic0gfnpadgiw"
 zoom = Vector2(12, 9)
 position_smoothing_speed = 8.0
 script = ExtResource("1_prs41")
+debug_view = 100
 
 [node name="DayNightModulator" type="CanvasModulate" parent="."]
 unique_name_in_owner = true
@@ -119,8 +121,7 @@ randomness = 0.1
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_4cc5g")
 script = ExtResource("4_jg3oj")
-direction = 5
-speed = 6
+direction = 7
 
 [node name="WindSFX" type="AudioStreamPlayer2D" parent="SnowFall"]
 position = Vector2(0, 100)
@@ -144,12 +145,165 @@ offset_right = 200.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("7_l833n")
 
 [node name="Framing" type="CanvasLayer" parent="."]
-visible = false
 script = ExtResource("7_ch1di")
+keep_controls = true
 
-[node name="LeftPanel" type="ColorRect" parent="Framing"]
+[node name="EastPanel" type="ColorRect" parent="Framing"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 3336.0
+offset_right = 2402.59
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+metadata/_edit_lock_ = true
+
+[node name="Console" type="RichTextLabel" parent="Framing/EastPanel"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 136.0
+offset_right = -2445.59
+offset_bottom = 1912.0
+grow_horizontal = 2
+theme = ExtResource("7_5ib5g")
+bbcode_enabled = true
+text = "
+[i][fx]\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \""
+custom_effects = [SubResource("RichTextEffect_jg3oj")]
+script = ExtResource("12_p1x0l")
+
+[node name="TextDisappearTimer" type="Timer" parent="Framing/EastPanel/Console"]
+wait_time = 3.2
+one_shot = true
+
+[node name="UiControls" type="Control" parent="Framing/EastPanel"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -3336.0
+offset_right = -3296.0
+offset_bottom = 40.0
+script = ExtResource("9_p1x0l")
+metadata/_custom_type_script = "uid://0xvc5hkssbts"
+
+[node name="I" type="Label" parent="Framing/EastPanel/UiControls"]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3836.0
+offset_top = 1912.0
+offset_right = 3868.0
+offset_bottom = 1946.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+tooltip_text = "Look North"
+mouse_filter = 0
+theme = ExtResource("7_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
+text = "i"
+
+[node name="U" type="Label" parent="Framing/EastPanel/UiControls"]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3684.0
+offset_top = 1912.0
+offset_right = 3716.0
+offset_bottom = 1946.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+tooltip_text = "Jump"
+mouse_filter = 0
+theme = ExtResource("7_5ib5g")
+theme_override_colors/font_color = Color(0.788235, 0.752941, 0.239216, 1)
+theme_override_fonts/font = ExtResource("10_xgl6y")
+text = "u"
+
+[node name="J" type="Label" parent="Framing/EastPanel/UiControls"]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3724.0
+offset_top = 2064.0
+offset_right = 3756.0
+offset_bottom = 2098.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+tooltip_text = "Look West"
+mouse_filter = 0
+theme = ExtResource("7_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
+text = "j"
+
+[node name="K" type="Label" parent="Framing/EastPanel/UiControls"]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 3876.0
+offset_top = 2064.0
+offset_right = 3908.0
+offset_bottom = 2098.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+tooltip_text = "Look South"
+mouse_filter = 0
+theme = ExtResource("7_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
+text = "k"
+
+[node name="L" type="Label" parent="Framing/EastPanel/UiControls"]
+z_index = 1
+z_as_relative = false
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 4028.0
+offset_top = 2064.0
+offset_right = 4060.0
+offset_bottom = 2098.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(5, 5)
+tooltip_text = "Look East"
+mouse_filter = 0
+theme = ExtResource("7_5ib5g")
+theme_override_fonts/font = ExtResource("10_xgl6y")
+text = "l"
+
+[node name="WestPanel" type="ColorRect" parent="Framing"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -159,7 +313,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Framing/LeftPanel"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Framing/WestPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 8
@@ -175,14 +329,14 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Reset" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
+[node name="Reset" type="Button" parent="Framing/WestPanel/VBoxContainer"]
 z_index = 4096
 layout_mode = 2
 theme = ExtResource("7_5ib5g")
 action_mode = 0
 text = "Reload/Randomize"
 
-[node name="Elevation" type="CheckButton" parent="Framing/LeftPanel/VBoxContainer"]
+[node name="Elevation" type="CheckButton" parent="Framing/WestPanel/VBoxContainer"]
 z_index = 4096
 layout_mode = 2
 theme = ExtResource("7_5ib5g")
@@ -192,7 +346,8 @@ alignment = 2
 icon_alignment = 2
 vertical_icon_alignment = 0
 
-[node name="KeepControls" type="CheckButton" parent="Framing/LeftPanel/VBoxContainer"]
+[node name="KeepControls" type="CheckButton" parent="Framing/WestPanel/VBoxContainer"]
+unique_name_in_owner = true
 z_index = 4096
 layout_mode = 2
 theme = ExtResource("7_5ib5g")
@@ -202,7 +357,7 @@ alignment = 2
 icon_alignment = 2
 vertical_icon_alignment = 0
 
-[node name="InvisibleWalls" type="CheckButton" parent="Framing/LeftPanel/VBoxContainer"]
+[node name="InvisibleWalls" type="CheckButton" parent="Framing/WestPanel/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("7_5ib5g")
@@ -214,23 +369,23 @@ icon_alignment = 1
 vertical_icon_alignment = 0
 expand_icon = true
 
-[node name="Quit" type="Button" parent="Framing/LeftPanel/VBoxContainer"]
+[node name="Quit" type="Button" parent="Framing/WestPanel/VBoxContainer"]
 z_index = 4096
 layout_mode = 2
 theme = ExtResource("7_5ib5g")
 action_mode = 0
 text = "Quit & Close Game"
 
-[node name="UiControls" type="Control" parent="Framing/LeftPanel"]
-unique_name_in_owner = true
+[node name="UiControls" type="Control" parent="Framing/WestPanel"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("9_p1x0l")
 
-[node name="W" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
+[node name="W" type="Label" parent="Framing/WestPanel/UiControls"]
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -244,17 +399,15 @@ offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
+tooltip_text = "Move North"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "w"
 
-[node name="A" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
+[node name="A" type="Label" parent="Framing/WestPanel/UiControls"]
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -268,17 +421,15 @@ offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
+tooltip_text = "Move West"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "a"
 
-[node name="S" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
+[node name="S" type="Label" parent="Framing/WestPanel/UiControls"]
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -292,17 +443,15 @@ offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
+tooltip_text = "Move South"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "s"
 
-[node name="D" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
+[node name="D" type="Label" parent="Framing/WestPanel/UiControls"]
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -316,17 +465,15 @@ offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
+tooltip_text = "Move East"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "d"
 
-[node name="E" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
+[node name="E" type="Label" parent="Framing/WestPanel/UiControls"]
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -340,17 +487,17 @@ offset_bottom = 1946.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
+tooltip_text = "Fire gun if loaded
+Reload gun if empty"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
+theme_override_colors/font_color = Color(0.717647, 0.254902, 0.196078, 1)
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "e"
 
-[node name="F" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
+[node name="F" type="Label" parent="Framing/WestPanel/UiControls"]
+z_index = 1
+z_as_relative = false
 layout_mode = 1
 anchors_preset = 7
 anchor_left = 0.5
@@ -364,169 +511,15 @@ offset_bottom = 2098.0
 grow_horizontal = 2
 grow_vertical = 0
 scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
+tooltip_text = "Pickup Items"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
+theme_override_colors/font_color = Color(0.25098, 0.180392, 0.168627, 1)
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "f"
 
-[node name="I" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 3836.0
-offset_top = 1912.0
-offset_right = 3868.0
-offset_bottom = 1946.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
-mouse_filter = 0
-theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("10_xgl6y")
-text = "i"
-
-[node name="U" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 3684.0
-offset_top = 1912.0
-offset_right = 3716.0
-offset_bottom = 1946.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
-mouse_filter = 0
-theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("10_xgl6y")
-text = "u"
-
-[node name="J" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 3724.0
-offset_top = 2064.0
-offset_right = 3756.0
-offset_bottom = 2098.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
-mouse_filter = 0
-theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("10_xgl6y")
-text = "j"
-
-[node name="K" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 3876.0
-offset_top = 2064.0
-offset_right = 3908.0
-offset_bottom = 2098.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
-mouse_filter = 0
-theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("10_xgl6y")
-text = "k"
-
-[node name="L" type="Label" parent="Framing/LeftPanel/UiControls"]
-z_index = 4096
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 4028.0
-offset_top = 2064.0
-offset_right = 4060.0
-offset_bottom = 2098.0
-grow_horizontal = 2
-grow_vertical = 0
-scale = Vector2(5, 5)
-tooltip_text = "WASD ~ Moves the character
-JIKL ~ Turns the character
-E ~ Jump! Won't execute if you don't have a place to jump to.
-U ~ Shoot! Reload!"
-mouse_filter = 0
-theme = ExtResource("7_5ib5g")
-theme_override_fonts/font = ExtResource("10_xgl6y")
-text = "l"
-
-[node name="RightPanel" type="ColorRect" parent="Framing"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 3336.0
-offset_right = 2.40625
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_lock_ = true
-
-[node name="Console" type="RichTextLabel" parent="Framing/RightPanel"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_left = 8.0
-offset_top = 8.0
-offset_right = -13.4062
-offset_bottom = 1984.0
-grow_horizontal = 2
-theme = ExtResource("7_5ib5g")
-bbcode_enabled = true
-text = "
-[i][fx]\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \""
-custom_effects = [SubResource("RichTextEffect_jg3oj")]
-script = ExtResource("12_p1x0l")
-metadata/_edit_lock_ = true
-
-[node name="TextDisappearTimer" type="Timer" parent="Framing/RightPanel/Console"]
-wait_time = 3.2
-one_shot = true
-
-[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Reset" to="Framing" method="_on_reset_pressed"]
-[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Elevation" to="Framing" method="_on_elevation_pressed"]
-[connection signal="toggled" from="Framing/LeftPanel/VBoxContainer/KeepControls" to="Framing" method="_on_keep_controls_toggled"]
-[connection signal="toggled" from="Framing/LeftPanel/VBoxContainer/InvisibleWalls" to="Framing" method="_on_invisible_walls_toggled"]
-[connection signal="pressed" from="Framing/LeftPanel/VBoxContainer/Quit" to="Framing" method="_on_quit_pressed"]
+[connection signal="pressed" from="Framing/WestPanel/VBoxContainer/Reset" to="Framing" method="_on_reset_pressed"]
+[connection signal="pressed" from="Framing/WestPanel/VBoxContainer/Elevation" to="Framing" method="_on_elevation_pressed"]
+[connection signal="toggled" from="Framing/WestPanel/VBoxContainer/KeepControls" to="Framing" method="_on_keep_controls_toggled"]
+[connection signal="toggled" from="Framing/WestPanel/VBoxContainer/InvisibleWalls" to="Framing" method="_on_invisible_walls_toggled"]
+[connection signal="pressed" from="Framing/WestPanel/VBoxContainer/Quit" to="Framing" method="_on_quit_pressed"]

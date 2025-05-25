@@ -52,12 +52,16 @@ window/size/window_width_override=1280
 window/size/window_height_override=720
 window/stretch/mode="viewport"
 window/vsync/vsync_mode=0
-mouse_cursor/custom_image_hotspot=Vector2(100, 100)
+mouse_cursor/custom_image_hotspot=Vector2(20, 20)
 window/tooltip_delay_sec=0.1
+
+[editor]
+
+movie_writer/movie_file="/home/bergiebird/Current/Godot/projects/project-anzhu/warehouse/_screenshots/only_movie_file.avi"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/ridiculous_coding/plugin.cfg")
+enabled=PackedStringArray("res://addons/fancy_editor_sounds/plugin.cfg", "res://addons/wingman/plugin.cfg")
 
 [file_customization]
 

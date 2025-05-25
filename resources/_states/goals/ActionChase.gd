@@ -1,14 +1,16 @@
-class_name ActionChase extends ActionState
+extends ActionState
+class_name ActionChase
 
 var player :Player
 var current_speed
+
 @onready var direction_timer :Timer = $DirectionTimer
 
 func ___get_state_value(_parent :StateMachine):
 	which_state = _parent.AnimalActions.Chase
 
-func ___ready()->void:
-	Libraryton.player_reference.connect(func(ref :Player)->void:player=ref)
+func ___ready():
+	Libraryton.player_reference.connect(func(ref :Player):player=ref)
 	direction_timer.timeout.connect(_direction_timed_out)
 
 func ___enter():
@@ -20,12 +22,11 @@ func player_spotted():
 	if is_active:
 		charge()
 
-
 func player_out_of_sight():
 	if is_active:
 		current_speed = grandparent.SpeedType.WALK
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(_delta: float):
 	if is_active:
 		grandparent.publisher_one.emit("move_towards_target", current_speed)
 
@@ -39,11 +40,12 @@ func reached_target():
 	if is_active:
 		grandparent.publisher_one.emit("set_GoTo_node", player)
 
-
 func charge():
 	current_speed = grandparent.SpeedType.RUN
 	await get_tree().create_timer(10.0).timeout
 	current_speed = grandparent.SpeedType.JOG
+
+
 #region	DEBUG
 @export_group('Debug')
 @export var debug :bool = false

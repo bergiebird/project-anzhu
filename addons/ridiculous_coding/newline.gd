@@ -19,6 +19,7 @@ func _ready():
 	timer.start()
 
 
+
 func _on_Timer_timeout():
 	if destroy:
 		queue_free()

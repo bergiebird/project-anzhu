@@ -9,7 +9,7 @@ const CHARACTER_SHEET :Dictionary[AnimalType,Dictionary] = {
 		"StartingHealth": 8,
 		"DamagePerHit":1,
 		"SpeedType": {
-			Speed.CREEP: 100,
+			Speed.CREEP: 100,   # Creeep for all characters needs to be given a purpose
 			Speed.WALK: 500,
 			Speed.JOG: 600,
 			Speed.RUN: 700,
@@ -42,13 +42,13 @@ const CHARACTER_SHEET :Dictionary[AnimalType,Dictionary] = {
 	AnimalType.Bear:{
 		"Group": "Bear",
 		"Icon": "uid://biih26xvgaec6",
-		"StartingHealth": 8,
+		"StartingHealth": 12,  # These guys are TANKS
 		"DamagePerHit":1,
 		"SpeedType": {
 			Speed.CREEP: 10,
-			Speed.WALK:700,
-			Speed.JOG: 1100,
-			Speed.RUN: 2200,
+			Speed.WALK: 600, # Make very slow so player can get far away, half speed of jog
+			Speed.JOG: 1400,  # Keep at 10% slower than player
+			Speed.RUN: 2200, # Keep at 10% faster than player
 			},
 		},
 	AnimalType.Fox:{

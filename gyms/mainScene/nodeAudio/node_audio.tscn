@@ -21,57 +21,57 @@ script = ExtResource("1_r7y1b")
 audio_mode = 0
 should_start_with_begin = false
 
-[node name="CyclingBackgroundMusic" type="Node" parent="."]
+[node name="CylcleBGMusic" type="Node" parent="."]
 
-[node name="Historic1" type="AudioStreamPlayer" parent="CyclingBackgroundMusic"]
+[node name="Historic1" type="AudioStreamPlayer" parent="CylcleBGMusic"]
 stream = ExtResource("2_jndcq")
 bus = &"BGM"
 
-[node name="Historic2Baroque" type="AudioStreamPlayer" parent="CyclingBackgroundMusic"]
+[node name="Historic2Baroque" type="AudioStreamPlayer" parent="CylcleBGMusic"]
 stream = ExtResource("3_3dvoj")
 bus = &"BGM"
 
-[node name="Historic3" type="AudioStreamPlayer" parent="CyclingBackgroundMusic"]
+[node name="Historic3" type="AudioStreamPlayer" parent="CylcleBGMusic"]
 stream = ExtResource("4_482o6")
 bus = &"BGM"
 
-[node name="DayNightAudio" type="Node" parent="."]
+[node name="DayNightMusic" type="Node" parent="."]
 
-[node name="BEGIN" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="BEGIN" type="AudioStreamPlayer" parent="DayNightMusic"]
 unique_name_in_owner = true
 stream = ExtResource("5_7duu1")
 bus = &"BGM"
 
-[node name="DAWN" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="DAWN" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("6_g21ax")
 bus = &"BGM"
 
-[node name="MORNING" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="MORNING" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("7_rshdm")
 bus = &"BGM"
 
-[node name="NOON" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="NOON" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("8_e57et")
 bus = &"BGM"
 
-[node name="AFTERNOON" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="AFTERNOON" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("9_rlbw3")
 bus = &"BGM"
 
-[node name="DUSK" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="DUSK" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("10_dipk5")
 bus = &"BGM"
 
-[node name="NIGHT" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="NIGHT" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("11_fiao6")
 bus = &"BGM"
 
-[node name="MIDNIGHT" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="MIDNIGHT" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("12_2cdd8")
 volume_db = 1.5
 pitch_scale = 0.75
 bus = &"BGM"
 
-[node name="LATE_NIGHT" type="AudioStreamPlayer" parent="DayNightAudio"]
+[node name="LATE_NIGHT" type="AudioStreamPlayer" parent="DayNightMusic"]
 stream = ExtResource("12_2cdd8")
 bus = &"BGM"

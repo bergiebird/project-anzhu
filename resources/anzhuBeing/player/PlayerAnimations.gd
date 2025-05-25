@@ -1,4 +1,5 @@
-class_name PlayerAnimations extends AnimatedSprite2D
+extends AnimatedSprite2D
+class_name PlayerAnimations
 
 const FLASH_AMOUNT :int = 4
 @export var animations_reloads_reload_time :float = 0.5
@@ -12,38 +13,33 @@ var anim_direction :String = '_SIDE'
 @onready var breath :GPUParticles2D = $Breath
 @onready var reload_anim :ReloadAnimation = $ReloadAnimation
 
-func _ready()->void:
-	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
-	parent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
-	parent.publisher_two.connect(func(func_name, one :Variant, two :Variant): Observerton.subscribe_two(self, func_name, one, two))
-
-func has_died()->void:
+func has_died():
 	is_dead = true
 
 func should_flip(yes :bool):
 	flip_h = yes
 
-func reloading(is_reloading:bool)->void:
+func reloading(is_reloading :bool):
 	if is_reloading:
 		reload_anim.start_routine()
 
-func modified_reload(is_reload_modified :bool)->void:
+func modified_reload(is_reload_modified :bool):
 	if is_reload_modified:
 		speed_scale += modified_speed_up
 
-func jumping(is_jumping :bool)->void:
+func jumping(is_jumping :bool):
 	if is_jumping:
 		just_play('executeJump', true, 1)
 
-func initializing_jump(is_jump_initialized :bool)->void:
+func initializing_jump(is_jump_initialized :bool):
 	if is_jump_initialized:
 		just_play('readyJump', true, 1)
 
-func reload_animation_finished()->void:
+func reload_animation_finished():
 	if_debug('reload finished ' + animation)
 	abilities.current_state = abilities.AbilityStates.IDLING
 
-func _physics_process(_delta :float)->void:
+func _process(_delta :float):
 	var speed :int = int(parent.velocity.length())
 	match abilities.current_state:
 		abilities.AbilityStates.RELOADING:
@@ -61,11 +57,11 @@ func _physics_process(_delta :float)->void:
 				just_play('idle')
 
 
-func update_direction(flipper :bool=flip_h)->void:
+func update_direction(flipper :bool=flip_h):
 	if flip_h != flipper:
 		flip_h = flipper
 
-func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int = -1)->void:
+func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int = -1):
 	anim_direction = Directon.ANIM_NAME[parent.current_direction]
 	if should_stop:
 		stop()
@@ -73,7 +69,7 @@ func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int
 	play(anim_name + anim_direction)
 	if_debug("anim: " + anim_name + "  anim_direction:  " + anim_direction)
 
-func efficiency_check(force_speed_scale :int = -1)->void:
+func efficiency_check(force_speed_scale :int = -1):
 	if force_speed_scale == -1:
 		if abilities.is_efficient:
 			speed_scale = 1
@@ -82,7 +78,7 @@ func efficiency_check(force_speed_scale :int = -1)->void:
 	else:
 		speed_scale = force_speed_scale
 
-func was_struck()->void:
+func was_struck():
 	modulate = Swatchton.RED_TOMATO
 	for flashes :int in FLASH_AMOUNT:
 		is_colored = !is_colored
@@ -97,11 +93,11 @@ func was_struck()->void:
 @export var debug_animations :bool = false
 @export var debugger_color :Color = Color("e67a84")
 
-func debug()->void:
+func debug():
 	Debuggerton.enable_print(self.name, debugger_color)
 	debug_animations = true
 
-func if_debug(message :String)->void:
+func if_debug(message :String):
 	if debug_animations:
 		Debuggerton.dprint(message, debugger_color)
 

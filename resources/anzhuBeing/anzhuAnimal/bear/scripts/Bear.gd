@@ -1,2 +1,3 @@
 @icon("res://resources/anzhuBeing/anzhuAnimal/bear/bear.png")
-class_name Bear extends AnzhuAnimal
+extends AnzhuAnimal
+class_name Bear

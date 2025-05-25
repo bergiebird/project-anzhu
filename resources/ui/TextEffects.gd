@@ -13,21 +13,3 @@ func _process_custom_fx(char_fx :CharFXTransform):
 	char_fx.offset.x = amplitude*cos(
 		char_fx.elapsed_time * frequency
 		+ char_fx.relative_index * offset)
-
-
-
-
-
-
-
-
-
-
-	#char_fx.offset.y = amplitude*sin(
-		#char_fx.elapsed_time * frequency
-		#+ char_fx.relative_index * offset)
-
-	#char_fx.transform = char_fx.transform.translated(Vector2(char_fx.elapsed_time, 0.0))
-
-	#rotates the entire body
-	#char_fx.transform = char_fx.transform.rotated(0.02)

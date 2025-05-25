@@ -1,2 +1,2 @@
-
-class_name GoalState extends State #GoalState.gd
+extends State
+class_name GoalState

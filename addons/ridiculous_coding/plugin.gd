@@ -3,7 +3,6 @@ extends EditorPlugin
 
 signal typing
 
-# Scenes preloaded
 const Boom: PackedScene = preload("res://addons/ridiculous_coding/boom.tscn")
 const Blip: PackedScene = preload("res://addons/ridiculous_coding/blip.tscn")
 const Newline: PackedScene = preload("res://addons/ridiculous_coding/newline.tscn")
@@ -12,11 +11,11 @@ const Dock: PackedScene = preload("res://addons/ridiculous_coding/dock.tscn")
 # Inner Variables
 const PITCH_DECREMENT := 2.0
 
-var shake: float = 0.0
-var shake_intensity:float  = 0.0
-var timer: float = 0.0
-var last_key: String = ""
-var pitch_increase: float = 0.0
+var shake :float = 0.0
+var shake_intensity :float  = 0.0
+var timer :float = 0.0
+var last_key :String = ""
+var pitch_increase :float = 0.0
 var editors = {}
 var dock
 
@@ -150,7 +149,6 @@ func text_changed(textedit : TextEdit):
 			textedit.add_child(thing)
 
 			if dock.shake:
-				# Shake
 				shake_screen(0.05, 5)
 
 		# Newline

@@ -1,5 +1,6 @@
 @icon("res://resources/anzhuBeing/player/mainCamera/snowfall/snowflake.png")
-class_name SnowFall extends GPUParticles2D #SnowFall.gd
+extends GPUParticles2D
+class_name SnowFall
 
 @export_group('Weather Control')
 enum FrequencyType{BLIZZARD,SQUALL, NORMAL,DUSTING, NONE}
@@ -37,72 +38,72 @@ var speeds :Dictionary[int, int] = {
 var wind_direction :Vector2
 @onready var sfx_wind :AudioStreamPlayer2D = $WindSFX
 @onready var parent :Camera2D = get_parent()
-var player :Player
 
-func _ready() -> void:
+func _ready():
 	_debug()
-	DayNighton.time_progressed.connect(func(_current_time :DayNighton.TimeOfDay)->void: change_weather_randomly())
-	Libraryton.player_reference.connect(func(ref :Player)->void: player = ref)
+	DayNighton.time_progressed.connect(func(_current_time :DayNighton.TimeOfDay): change_weather_randomly())
+	Libraryton.player_reference.connect(player_reference_collector)
 	Libraryton.reference_emitter_deferred("snowfall_reference", self, debug)
 	change_weather_randomly()
 	update_frequency(frequency, frequency)
 	update_direction(direction, direction)
 	update_speed(speed, speed)
-	if not Engine.is_editor_hint(): sfx_wind.call_deferred("play")
+	if not Engine.is_editor_hint():
+		sfx_wind.call_deferred("play")
 	emitting = true
 
-func update_frequency(val :int, old_val:int)->void:
+func update_frequency(val :int, old_val:int):
 	var ftween_time :int = abs(val-old_val)
 	if frequency == 5: emitting = false
 	else:              emitting = true
 	Debuggerton.tweener_property_disposal([
-		Builderton.tweener(process_material, "emission_sphere_radius", frequencies[val], ftween_time)
-	],debug)
+		Builderton.tweener(process_material, "emission_sphere_radius", frequencies[val], ftween_time)],debug)
 	call_deferred("position_wind_sfx", ftween_time)
 
-func update_direction(val :int, old_val:int)->void:
+func update_direction(val :int, old_val:int):
 	var dtween_time :int = abs(val-old_val)
 	Debuggerton.tweener_property_disposal([
-		Builderton.tweener(process_material, "direction", directions[val], dtween_time)
-	],debug)
+		Builderton.tweener(process_material, "direction", directions[val], dtween_time)],debug)
 	wind_direction = Vector2(directions[val].x, directions[val].y)
 	call_deferred("position_wind_sfx", dtween_time)
 
-func update_speed(val :int, old_val:int)->void:
-	var stween_time :int = abs(val-old_val)
+func update_speed(val :int, old_val :int):
+	var stween_time :int = abs(val - old_val)
 	Debuggerton.tweener_property_disposal([
 		Builderton.tweener(process_material, "linear_accel_min", speeds[val],stween_time),
-		Builderton.tweener(process_material, "linear_accel_max", speeds[val],stween_time)
-		], debug)
+		Builderton.tweener(process_material, "linear_accel_max", speeds[val],stween_time)], debug)
 	call_deferred("position_wind_sfx", stween_time)
 
-func position_wind_sfx(tween_time :int)->void:
+func position_wind_sfx(tween_time :int):
 	if player:
 		var position_new :Vector2 = parent.position - wind_direction*((speed*speed*speed+10))*10
 		var pitch_new :float = 1.4 - (float(frequency)*0.1)
 		Debuggerton.tweener_property_disposal([
 			Builderton.tweener(sfx_wind, "pitch_scale", pitch_new, tween_time),
-			Builderton.tweener(sfx_wind, "position", position_new, tween_time)
-			], debug)
+			Builderton.tweener(sfx_wind, "position", position_new, tween_time)], debug)
 
-func change_weather_randomly()->void:
+func change_weather_randomly():
 	direction = Libraryton.rng.randi_range(0,7)
 	frequency = Libraryton.rng.randi_range(0,4)
 	_debug_weather_changed()
 
+var player :Player
+func player_reference_collector(ref :Player):
+	player = ref
+	Libraryton.player_reference.disconnect(player_reference_collector)
 
-#region DEBUG
+#region #========================================================================================================# DEBUG
 
 @export_group('debug')
 @export var debug :bool = false
 @export var debug_color :Color = Swatchton.WHITE_WHITE
 
-func _debug() ->void:
+func _debug() :
 	if debug:
 		Debuggerton.enable_print(self.name, debug_color)
 
-func _debug_weather_changed()->void:
+func _debug_weather_changed():
 	if debug:
 		Debuggerton.dprint('weather update: ' +str(speed)+str(direction)+str(frequency), debug_color)
 
-#endregion
+#endregion #=====================================================================================================# DEBUG

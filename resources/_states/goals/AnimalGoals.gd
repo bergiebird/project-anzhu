@@ -1,4 +1,5 @@
-class_name AnimalGoalsMachine extends StateMachine
+extends StateMachine
+class_name AnimalGoalsMachine
 
 enum AnimalGoals {Nothing,Hunt}
 @export var starting_goal :AnimalGoals = AnimalGoals.Nothing

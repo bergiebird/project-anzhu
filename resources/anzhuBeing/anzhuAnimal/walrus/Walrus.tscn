@@ -22,19 +22,18 @@
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_qyjs8")
-debug_all = true
-debug_self = true
 
 [node name="Mask" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3x73f")
 script = ExtResource("2_o0tca")
+description = "[DEFAULT WALRUS DESCRIPTION]"
 set_mask_dimensions = 1
 damage_recieved = 4
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
 [node name="Actions" type="Node2D" parent="."]
 script = ExtResource("5_drws8")
-debug_self = true
+starting_action = 3
 metadata/_custom_type_script = "uid://72ydk5v1g7hl"
 
 [node name="Idle" type="Node2D" parent="Actions"]
@@ -73,9 +72,7 @@ metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("4_xras0")
-animation = &"Wander"
-frame_progress = 0.389699
+animation = &"Idle"
 script = ExtResource("13_jmnr7")
 
 [node name="GoTo" parent="." instance=ExtResource("13_33w8m")]
-debug_self = true

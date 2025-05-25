@@ -1,5 +1,7 @@
 @icon("res://warehouse/icons/node/icon_human_controller.png")
-class_name Abilities extends Node2D
+extends Node2D
+class_name Abilities
+
 @export var shoot_cooldown :float = 0.4
 enum AbilityStates {NONE, IDLING, MOVING, INIT_JUMP, JUMPING, RELOADING, GUNFIRED,}
 
@@ -58,10 +60,10 @@ func _ready()->void:
 		child.parent = self
 		child.grandparent = parent
 		child.set_physics_process(true)
+		child.set_process(true)
 	current_state =AbilityStates.IDLING
 
-#region #DEBUG
-###
+#region   #=======================================================# DEBUG
 @export_group('Debug')
 @export var debug_abilities :bool = false
 @export var debugger_color :Color = Color("eaf1f0")
@@ -74,4 +76,4 @@ func debug()->void:
 func if_debug(message :String)->void:
 	if debug_abilities:
 		Debuggerton.dprint(message, dcolor)
-#endregion
+#endregion #=======================================================# DEBUG

@@ -1,10 +1,9 @@
-#===========================================================#===========================================================#
-#===========================================================#===========================================================#
-extends Node #Builderton.gd
+extends Node
+#Builderton.gd
 ## Builder Pattern: "Separate the construction of a complex object from its representation
 ## so that the same construction process can create different representations." - Design Patterns Pg[97]
-#===========================================================#===========================================================#
-#===========================================================#===========================================================#
+#=====================================================#=====================================================#
+#=====================================================#=====================================================#
 ## Creates a TileMapLayer, places it as a child of %Tracks, and returns the reference
 ## %Tracks tells Builderton its reference.
 const tracks_PATH_START :String = "res://resources/anzhuBeing/snowTracker/"
@@ -13,7 +12,7 @@ const MOVE_PATH_END :String = "_move.tres"
 const SLIDE_PATH_END :String = "_slide.tres"
 var tracks :CanvasGroup
 
-func _ready()->void:
+func _ready():
 	Debuggerton.signal_checker([
 		Libraryton.tracks_reference.connect(func(ref :CanvasGroup)->void: tracks = ref)])
 
@@ -29,7 +28,7 @@ func track_map(who :String, PATH_END :String)->TileMapLayer:
 	tile_map.name = who + PATH_END
 	tracks.add_child(tile_map)
 	return tile_map
-#===========================================================#===========================================================#
+#=====================================================#=====================================================#
 var active_tweens :Dictionary[String,Tween] = {}
 
 func tweener_deferred(object :Object, property :String, end_result :Variant,
@@ -52,10 +51,10 @@ func kill_tweener(object :Object, property :String)->String:
 
 func get_key(object :Object, property:String)->String:
 	return str(object.get_instance_id()) + property
-#===========================================================#===========================================================#
+#=====================================================#=====================================================#
 
 func create_ColorRect()->void:
 	pass
 
 
-#===========================================================#===========================================================#
+#=====================================================#=====================================================#

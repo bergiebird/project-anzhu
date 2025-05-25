@@ -1,16 +1,12 @@
 @icon("res://resources/tools/respawnNode/icon_reset.png")
-class_name Respawner extends Marker2D
-
-var player:Player:
-	set(value): if player != value:
-		player = value
-		self.global_position = player.global_position
+extends Marker2D
+class_name Respawner
 
 func _ready():
 	Libraryton.player_reference.connect(collect_player_reference)
 
 func collect_player_reference(ref:Player):
-	player = ref
+	self.global_position = ref.global_position
 	Libraryton.player_reference.disconnect(collect_player_reference)
 
 

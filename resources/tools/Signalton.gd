@@ -1,12 +1,10 @@
-extends Node #Signalton.gd
-
-var emit_for :Callable = Callable(self, "emit_signal")
-
+extends Node
+#Signalton.gd
+signal update_console(String)
+signal heal_player
 signal loud_noise(who :AnzhuBeing, where :Vector2, noise_db :float)
 signal gunshot
 signal time_progressed
-signal weather_changed
-signal player_hit
 signal reload_scene
 signal toggle_debug_collision
 signal toggle_debug_elevation
@@ -14,10 +12,10 @@ signal toggle_debug_invisible
 
 var saved_state :bool = false
 
-func _ready() -> void:
+func _ready():
 	reload_scene.connect(reload_current_scene)
 
-func reload_current_scene()->void:
+func reload_current_scene():
 	saved_state = true
 	var error :Error = get_tree().reload_current_scene()
 	debug_scene_reloaded(error)
@@ -25,7 +23,7 @@ func reload_current_scene()->void:
 
 #region	DEBUG
 var debug:bool = false
-func debug_scene_reloaded(error :Error)->void:
+func debug_scene_reloaded(error :Error):
 	match error:
 		OK:
 			print('GOOD!')

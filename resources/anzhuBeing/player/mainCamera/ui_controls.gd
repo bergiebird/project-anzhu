@@ -1,4 +1,5 @@
-class_name UiControls extends Control
+extends Control
+class_name UiControls
 
 var dict :Dictionary[String,Label]
 
@@ -6,11 +7,11 @@ var dict :Dictionary[String,Label]
 @onready var unpressed :FontFile = preload("uid://cydaeja4giwbn")
 
 
-func _ready() -> void:
+func _ready():
 	for child:Label in get_children():
 		dict[child.name] = child
 
-func _input(event: InputEvent) -> void:
+func _input(event: InputEvent):
 	if event is InputEventKey:
 		var key_string = OS.get_keycode_string(event.keycode)
 		if key_string in dict:

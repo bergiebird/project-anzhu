@@ -1,44 +1,41 @@
 @icon("res://resources/environment/objectsSmart/interactables/icon_interactable.png")
-class_name Interactible extends Area2D
+extends Area2D
+class_name Interactible
 
-var player :Player
 @onready var parent = get_parent()
 @onready var interaction_enter :String = "Press F to interact with " + self.name
 @onready var interacted_with :String = "This is a note from " + self.name
 @onready var interaction_exit :String = 'Have left the interaction zone of ' + self.name
 
-func _ready()->void:
+func _ready():
 	_debug()
 	_signaler()
 	set_collision_layer_value(8,true)
 	set_collision_mask_value(8,true)
 	set_process(false)
 
-func _on_body_entered(body :Node2D)->void:
+func _on_body_entered(body :Node2D):
 	if body is Player:
 		parent.publisher_null.emit('player_entered_the_space')
 		set_process(true)
 		_dprint(interaction_enter)
 
-func _process(_delta :float)->void:
+func _process(_delta :float):
 	if Input.is_action_just_pressed('interact'):
 		_dprint('interaction occured at ' + parent.name)
 		parent.publisher_null.emit('interacted')
 
-func _on_body_exited(body :Node2D)->void:
+func _on_body_exited(body :Node2D):
 	if body is Player:
 		parent.publisher_null.emit('player_left_the_space')
 		set_process(false)
 		_dprint(interaction_exit)
 
-func _get_player_reference(ref :Player)->void:
-	player = ref
-	Libraryton.player_reference.disconnect(_get_player_reference)
 
-func _signaler()->void:
+
+func _signaler():
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	Libraryton.player_reference.connect(_get_player_reference)
 	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
 

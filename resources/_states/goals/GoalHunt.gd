@@ -1,4 +1,5 @@
-extends GoalState #GoalHunt.gd
+extends GoalState
+class_name GoalHunt
 
 var target :AnzhuBeing
 @onready var bgm_hunt :AudioStreamPlayer2D =  $BgmHunt
@@ -23,4 +24,4 @@ func player_out_of_sight()->void:
 
 func player_spotted():
 	if is_active:
-		sfx_spotted.play
+		sfx_spotted.play()

@@ -1,48 +1,26 @@
-class_name GoTo extends Node
+@icon("res://warehouse/icons/node/icon_follower.png")
+extends Node
+class_name GoTo
 
-var is_stunned :bool= false:
-	set(value): if value != is_stunned:
-		is_stunned = value
-		if was_stunned:
-			parent.publisher_null.emit("reached_target")
-			was_stunned = false
-
-var was_stunned = false
-
+var is_stunned :bool= false
 @onready var parent :AnzhuBeing = get_parent()
 @onready var location :Area2D = $Location
 
 func _ready():
-	_debug()
 	location.global_position = Vector2.ZERO
-	location.body_entered.connect(_location_reached)
+	location.body_entered.connect(func(body): if body.name == parent.name: parent.publisher_null.emit("reached_target"))
 
-func set_new_GoTo_location():
-	var direction :Vector2i = Directon.choose_random_direction()
-	var random_ra :int = Libraryton.rng.randi_range(15,30)
-	var new_location = parent.global_position + Vector2(direction*random_ra)
-	location.global_position = new_location
+func set_GoTo_node(target :Node2D=null):
+	if target: location.global_position = target.global_position
+	else:      location.global_position = parent.global_position + randomized_distance()
 	parent.publisher_one.emit('new_target_position', location.global_position)
-
-func _location_reached(body :Node2D):
-	if body.name == parent.name:
-		if not is_stunned:
-			parent.publisher_null.emit("reached_target")
-		else:
-			was_stunned = true
-
-
-func set_GoTo_node(target :Node2D):
-	location.global_position = target.global_position
-	parent.publisher_one.emit('new_target_position', location.global_position)
-
 
 func change_actions(new_action :String):
-	match new_action:
-		"Stunned":
-			is_stunned = true
-		_:
-			is_stunned = false
+	if new_action == "Stunned":
+		parent.publisher_null.emit("reached_target")
+
+func randomized_distance()->Vector2:
+	return Vector2(Directon.choose_random_direction() * Libraryton.rng.randi_range(15,30))
 
 #region    #============================================================# Debug
 @export_group("Debug")

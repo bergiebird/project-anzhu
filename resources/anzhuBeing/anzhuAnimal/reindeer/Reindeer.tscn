@@ -1,39 +1,36 @@
 [gd_scene load_steps=8 format=3 uid="uid://4usvcs4gfign"]
 
 [ext_resource type="Script" uid="uid://l06kmlmqgi5n" path="res://resources/anzhuBeing/anzhuAnimal/reindeer/scripts/Reindeer.gd" id="1_h2ltq"]
-[ext_resource type="PackedScene" path="res://resources/anzhuCharacter/mask/Mask.tscn" id="2_eajid"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_vbcdi"]
 [ext_resource type="SpriteFrames" uid="uid://dbou7vyci5jqt" path="res://resources/anzhuBeing/anzhuAnimal/reindeer/scripts/sf_reindeer.tres" id="3_acxsq"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="4_eajid"]
 [ext_resource type="PackedScene" uid="uid://chicyma06s6la" path="res://resources/anzhuBeing/corpse/Corpse.tscn" id="6_xmqht"]
-[ext_resource type="Script" uid="uid://b2ffdvy6n22ko" path="res://resources/anzhuBeing/anzhuAnimal/reindeer/scripts/the_state_machine.gd" id="7_hycff"]
 [ext_resource type="PackedScene" uid="uid://c31orajqrt5wx" path="res://resources/anzhuBeing/hurtBox/hurt_box.tscn" id="13_esfm0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0k4j"]
 
 [node name="Reindeer" type="CharacterBody2D"]
 script = ExtResource("1_h2ltq")
 this_animals_type = 7
-starting_health = 1
 debug_all = true
 metadata/_custom_type_script = "uid://cirdyev4u4o7t"
 
-[node name="Mask" parent="." instance=ExtResource("2_eajid")]
-unique_name_in_owner = true
-set_mask_dimensions = 1
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_v0k4j")
+script = ExtResource("2_vbcdi")
+metadata/_custom_type_script = "uid://60saxsgwo84g"
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-unique_name_in_owner = true
 sprite_frames = ExtResource("3_acxsq")
 animation = &"Wander"
 autoplay = "Idle"
 
 [node name="SnowTracker" type="Node" parent="."]
-unique_name_in_owner = true
 script = ExtResource("4_eajid")
 
 [node name="AudioManager" type="Node2D" parent="."]
-unique_name_in_owner = true
 
 [node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
-unique_name_in_owner = true
 position = Vector2(2.38419e-07, 2.38419e-07)
 scale = Vector2(0.4, 0.4)
 
@@ -43,4 +40,3 @@ scale = Vector2(0.4, 0.4)
 
 [node name="TheStateMachine" type="Node" parent="."]
 unique_name_in_owner = true
-script = ExtResource("7_hycff")

@@ -1,5 +1,6 @@
 @icon("res://resources/anzhuBeing/player/abilities/gun/icons8-sniper-rifle-100.png")
-class_name Gunshot extends Ability
+extends Ability
+class_name Gunshot
 
 @export_range(0, 0.5, 0.01) var bullet_travel_time:float = 0.26
 @export var flash_time:float = 0.1
@@ -24,7 +25,7 @@ var is_empty :bool = false
 func _grandparent_set():
 	grandparent.publisher_one.connect(func(func_name, one:Variant): Observerton.subscribe_one(self, func_name, one))
 
-func _physics_process(_delta: float):
+func _process(_delta: float):
 	match parent.current_state:
 		parent.AbilityStates.RELOADING:
 			pass

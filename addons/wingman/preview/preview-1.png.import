@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djrp4ncdkwlh1"
-path="res://.godot/imported/only_screenshot.png-f461fc0fb5e98eec86d32456992d324f.ctex"
+uid="uid://5b0bafed3c5c"
+path="res://.godot/imported/preview-1.png-975d05db677ca5f22746b9dfddca60ff.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://warehouse/_screenshots/only_screenshot.png"
-dest_files=["res://.godot/imported/only_screenshot.png-f461fc0fb5e98eec86d32456992d324f.ctex"]
+source_file="res://addons/wingman/preview/preview-1.png"
+dest_files=["res://.godot/imported/preview-1.png-975d05db677ca5f22746b9dfddca60ff.ctex"]
 
 [params]
 

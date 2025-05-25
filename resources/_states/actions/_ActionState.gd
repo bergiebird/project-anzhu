@@ -1,1 +1,2 @@
-class_name ActionState extends State
+extends State
+class_name ActionState

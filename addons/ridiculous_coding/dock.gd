@@ -33,7 +33,7 @@ var stats: ConfigFile = ConfigFile.new()
 
 func _ready():
 	reset_button.pressed.connect(on_reset_button_pressed)
-	
+
 	load_checkbox_state()
 	connect_checkboxes()
 	fireworks_timer.timeout.connect(stop_fireworks)
@@ -49,14 +49,14 @@ func load_experience_progress():
 	else:
 		level = 1
 		xp = 0
-	
+
 	xp_next = 2*BASE_XP
 	progress.max_value = xp_next
-	
+
 	for i in range(2,level+1):
 		xp_next += round(BASE_XP * i / 10.0) * 10
 		progress.max_value = round(BASE_XP * level / 10.0) * 10
-	
+
 	progress.value = xp - (xp_next - progress.max_value)
 
 
@@ -69,16 +69,16 @@ func save_experioence_progress():
 func _on_typing():
 	xp += 1
 	progress.value += 1
-	
+
 	if progress.value >= progress.max_value:
 		level += 1
 		xp_next = xp + round(BASE_XP * level / 10.0) * 10
 		progress.value = 0
 		progress.max_value = xp_next - xp
-		
-		if fireworks: 
+
+		if fireworks:
 			start_fireworks()
-	
+
 	save_experioence_progress()
 	update_progress()
 
@@ -86,7 +86,7 @@ func _on_typing():
 func start_fireworks():
 	sfx_fireworks.play()
 	fireworks_timer.start()
-	
+
 	fire_particles_one.emitting = true
 	fire_particles_two.emitting = true
 
@@ -102,32 +102,32 @@ func update_progress():
 
 
 func connect_checkboxes():
-	explosion_checkbox.toggled.connect(func(toggled): 
+	explosion_checkbox.toggled.connect(func(toggled):
 		explosions = toggled
 		save_checkbox_state()
 	)
-	
-	blip_checkbox.toggled.connect(func(toggled): 
+
+	blip_checkbox.toggled.connect(func(toggled):
 		blips = toggled
 		save_checkbox_state()
 	)
-	
-	chars_checkbox.toggled.connect(func(toggled): 
+
+	chars_checkbox.toggled.connect(func(toggled):
 		chars = toggled
 		save_checkbox_state()
 	)
-	
-	shake_checkbox.toggled.connect(func(toggled): 
+
+	shake_checkbox.toggled.connect(func(toggled):
 		shake = toggled
 		save_checkbox_state()
 	)
-	
-	sound_checkbox.toggled.connect(func(toggled): 
+
+	sound_checkbox.toggled.connect(func(toggled):
 		sound = toggled
 		save_checkbox_state()
 	)
-	
-	fireworks_checkbox.toggled.connect(func(toggled): 
+
+	fireworks_checkbox.toggled.connect(func(toggled):
 		fireworks = toggled
 		save_checkbox_state()
 	)

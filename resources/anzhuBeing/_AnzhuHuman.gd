@@ -1,1 +1,2 @@
-class_name Human extends AnzhuBeing
+extends AnzhuBeing
+class_name Human

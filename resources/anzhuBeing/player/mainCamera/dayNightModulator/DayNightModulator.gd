@@ -1,31 +1,26 @@
 @icon("res://resources/anzhuBeing/player/mainCamera/dayNightModulator/icon_area_meteo.png")
-class_name DayNightModulator extends CanvasModulate #DayNightModulator.gd
+extends CanvasModulate
+class_name DayNightModulator
+
 const TOO_DARK_THRESHOLD :float = 0.025
-@export_enum("DAWN", "MORNING", "NOON", "AFTERNOON", "DUSK", "NIGHT", "MIDNIGHT", "LATE_NIGHT") var starting_TimeOfDay :int = DayNighton.TimeOfDay.LATE_NIGHT
-@export var dawn_lerp_time :float = 1
-@export var morning_lerp_time :float = 1
-@export var noon_lerp_time :float = 1
-@export var afternoon_lerp_time :float = 1
-@export var dusk_lerp_time :float = 1
-@export var night_lerp_time :float = 1
-@export var midnight_lerp_time :float = 1
-@export var late_night_lerp_time :float = 1
+
+@export var starting_TimeOfDay :DayNighton.TimeOfDay = DayNighton.TimeOfDay.LATE_NIGHT
+
 var init_time_lerp :Array = []
 var modulate_dictionary :Dictionary
 var first_time :bool = true
 var is_nightlight_on :bool
-@onready var time_to_pass :int = int(DayNighton.WORLD_TIMER_WAIT_TIME)
-@onready var lerp_times :Array[float] = [
-	dawn_lerp_time, morning_lerp_time, noon_lerp_time, afternoon_lerp_time,
-	dusk_lerp_time, night_lerp_time, midnight_lerp_time, late_night_lerp_time]
 
-func _ready( )->void:
+@onready var time_to_pass :int = int(DayNighton.WORLD_TIMER_WAIT_TIME)
+@onready var lerp_times :Array[float] = [1, 1, 1, 1,1, 1, 1, 1]
+
+func _ready():
 	prepare_lerp_time()
 	modulate_dictionary = DayNighton.initialize(self)
 	DayNighton.time_progressed.connect(sun_change)
 	DayNighton.progress_time(starting_TimeOfDay)
 
-func sun_change(new_time :int)->void:
+func sun_change(new_time :int):
 	_debug_sun_change(new_time)
 	var rgb :float = modulate_dictionary[new_time]['modulate']/255.0
 	if first_time:
@@ -34,7 +29,7 @@ func sun_change(new_time :int)->void:
 	else:
 		Builderton.tweener_deferred(self,'color', Color(rgb,rgb,rgb), 0)
 
-func prepare_lerp_time( )->void:
+func prepare_lerp_time():
 	_debug_resize(init_time_lerp.resize(DayNighton.TimeOfDay.size()))
 	for index :int in range(lerp_times.size()):
 		if lerp_times[index] < 1:
@@ -42,7 +37,7 @@ func prepare_lerp_time( )->void:
 		else:
 			init_time_lerp[index] = int(time_to_pass/lerp_times[index])
 
-func _process(_delta :float)->void:
+func _process(_delta :float):
 	if color.r <= TOO_DARK_THRESHOLD:
 		if not is_nightlight_on:
 			DayNighton.time_progressed_nightlight.emit(true)
@@ -53,16 +48,15 @@ func _process(_delta :float)->void:
 			DayNighton.time_progressed_nightlight.emit(false)
 
 
-###
-## DEBUG
-###
+#region #===========================================================================# DEBUG
 @export_group('DEBUG')
 @export var debug :bool = true
 
-func _debug_sun_change(new_time :int)->void:
+func _debug_sun_change(new_time :int):
 	if debug:
 		print_rich("[color=#FFD700]⏰ Time has changed:[/color] [color=#87CEEB]" + modulate_dictionary[new_time]['name'] + "[/color]")
 
-func _debug_resize(resize_return :int)->void:
+func _debug_resize(resize_return :int):
 	if debug:
 		Debuggerton.dprint(str(resize_return))
+#endregion #========================================================================# DEBUG

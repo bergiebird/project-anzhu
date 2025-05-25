@@ -1,4 +1,5 @@
-class_name BearHurtBox extends HurtBox
+extends HurtBox
+class_name BearHurtBox
 
 @onready var sfx_strike :AudioStreamPlayer2D = $SfxStrike
 

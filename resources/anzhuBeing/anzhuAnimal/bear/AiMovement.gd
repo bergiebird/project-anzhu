@@ -1,5 +1,6 @@
 @icon('res://warehouse/icons/node/icon_brain.png')
-class_name AIMovement extends Node
+extends Node
+class_name AIMovement
 
 @onready var parent: AnzhuBeing = get_parent()
 

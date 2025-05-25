@@ -1,9 +1,13 @@
+/home/bergiebird/.local/share/fonts/comic-code
+/home/bergiebird/Downloads/JetBrainsMono-2.304/fonts/ttf
+res://resources/anzhuBeing/breath
+res://resources/ui
+res://resources/environment/objectsSmart/campFire
+/home/bergiebird/Current/Godot/projects/project-anzhu/warehouse/_screenshots
 res://resources/anzhuBeing/anzhuAnimal/walrus/scripts
 res://resources/anzhuBeing/go_to
 res://resources/anzhuBeing/anzhuAnimal/walrus/visual
-res://resources/environment/sign
 res://resources/environment/cliffs
-/home/bergiebird/.local/share/fonts/comic-code
 res://
 res://resources/anzhuBeing/anzhuAnimal/bear/scripts
 res://resources/anzhuBeing/corpse
@@ -17,7 +21,3 @@ res://resources/ui/buttons/togglebutton
 res://warehouse/UI/PNGs
 res://resources/ui/ninePatchRects
 res://resources
-res://resources/environment/objectsSmart/collectible
-res://resources/ui
-res://resources/tools/elevationsLayer
-/home/bergiebird/Current/Godot/projects/exports/anzhu/2025_04_25_928
