@@ -3,11 +3,13 @@ extends Marker2D
 class_name Respawner
 
 func _ready():
-	Libraryton.player_reference.connect(collect_player_reference)
+	Signalton.player_reference.connect(collect_player_reference)
 
 func collect_player_reference(ref:Player):
+	if not debug:
+		ref.global_position = self.global_position
 	self.global_position = ref.global_position
-	Libraryton.player_reference.disconnect(collect_player_reference)
+	Signalton.player_reference.disconnect(collect_player_reference)
 
 
 #region	DEBUG

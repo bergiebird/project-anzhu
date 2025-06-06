@@ -15,6 +15,10 @@ region = Rect2(8, 88, 8, 8)
 atlas = ExtResource("2_u00ov")
 region = Rect2(16, 88, 8, 8)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_v4b5t"]
+atlas = ExtResource("2_u00ov")
+region = Rect2(16, 96, 8, 8)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_r8wrc"]
 atlas = ExtResource("1_8grnm")
 region = Rect2(24, 88, 8, 8)
@@ -38,10 +42,6 @@ region = Rect2(0, 96, 8, 8)
 [sub_resource type="AtlasTexture" id="AtlasTexture_snf2a"]
 atlas = ExtResource("2_u00ov")
 region = Rect2(8, 96, 8, 8)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_v4b5t"]
-atlas = ExtResource("2_u00ov")
-region = Rect2(16, 96, 8, 8)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_e5eiw"]
 atlas = ExtResource("2_u00ov")
@@ -86,6 +86,14 @@ animations = [{
 "loop": true,
 "name": &"Charge",
 "speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v4b5t")
+}],
+"loop": true,
+"name": &"Corpse",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 10.0,

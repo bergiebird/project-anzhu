@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bqyubqk75ak53"]
+[gd_scene load_steps=26 format=3 uid="uid://bqyubqk75ak53"]
 
 [ext_resource type="Script" uid="uid://bixg0s0rgi1ys" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.gd" id="1_prs41"]
 [ext_resource type="Script" uid="uid://c7meipjbeacr2" path="res://resources/anzhuBeing/player/mainCamera/dayNightModulator/DayNightModulator.gd" id="2_o8pbx"]
@@ -8,11 +8,29 @@
 [ext_resource type="Shader" uid="uid://dtdby88hgbxtg" path="res://resources/ui/CRT.gdshader" id="6_p1x0l"]
 [ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="7_5ib5g"]
 [ext_resource type="Script" uid="uid://bgvdyvmgehdix" path="res://resources/anzhuBeing/player/mainCamera/Framing.gd" id="7_ch1di"]
-[ext_resource type="Script" uid="uid://ccpck3l3c6mix" path="res://resources/anzhuBeing/player/mainCamera/crt.gd" id="7_l833n"]
 [ext_resource type="Script" uid="uid://0xvc5hkssbts" path="res://resources/anzhuBeing/player/mainCamera/ui_controls.gd" id="9_p1x0l"]
 [ext_resource type="Script" uid="uid://ic0gfnpadgiw" path="res://resources/ui/TextEffects.gd" id="10_jg3oj"]
 [ext_resource type="FontFile" uid="uid://cydaeja4giwbn" path="res://warehouse/fonts/[16] Enter Input/Enter-Input-All/Enter_Input_Dark.ttf" id="10_xgl6y"]
 [ext_resource type="Script" uid="uid://1nq2ap21xj6y" path="res://resources/anzhuBeing/player/mainCamera/console.gd" id="12_p1x0l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_06wol"]
+shader = ExtResource("6_p1x0l")
+shader_parameter/scanlines_opacity = 0.03
+shader_parameter/scanlines_width = 0.04
+shader_parameter/grille_opacity = 0.04
+shader_parameter/resolution = Vector2(200, 200)
+shader_parameter/roll_speed = 0.1
+shader_parameter/roll_size = 5.0
+shader_parameter/roll_variation = 1.8
+shader_parameter/distort_intensity = 0.002
+shader_parameter/noise_opacity = 0.016
+shader_parameter/noise_speed = 1000.0
+shader_parameter/aberration = 0.00200005
+shader_parameter/brightness = 1.055
+shader_parameter/discolor = true
+shader_parameter/discolor_saturation = 0.1
+shader_parameter/discolor_contrast = 1.0
+shader_parameter/clip_warp = true
 
 [sub_resource type="Gradient" id="Gradient_4cc5g"]
 offsets = PackedFloat32Array(0.0325077, 0.149773, 0.9613)
@@ -76,25 +94,6 @@ hue_variation_max = 0.00999998
 hue_variation_curve = SubResource("CurveTexture_h6hdp")
 turbulence_influence_max = 0.3
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_06wol"]
-shader = ExtResource("6_p1x0l")
-shader_parameter/scanlines_opacity = 0.03
-shader_parameter/scanlines_width = 0.04
-shader_parameter/grille_opacity = 0.04
-shader_parameter/resolution = Vector2(200, 200)
-shader_parameter/roll_speed = 0.1
-shader_parameter/roll_size = 5.0
-shader_parameter/roll_variation = 1.8
-shader_parameter/distort_intensity = 0.002
-shader_parameter/noise_opacity = 0.016
-shader_parameter/noise_speed = 1000.0
-shader_parameter/aberration = 0.00200005
-shader_parameter/brightness = 1.055
-shader_parameter/discolor = true
-shader_parameter/discolor_saturation = 0.1
-shader_parameter/discolor_contrast = 1.0
-shader_parameter/clip_warp = true
-
 [sub_resource type="RichTextEffect" id="RichTextEffect_jg3oj"]
 script = ExtResource("10_jg3oj")
 metadata/_custom_type_script = "uid://ic0gfnpadgiw"
@@ -106,31 +105,17 @@ script = ExtResource("1_prs41")
 debug_view = 100
 
 [node name="DayNightModulator" type="CanvasModulate" parent="."]
-unique_name_in_owner = true
 editor_description = "Funnily enough, I designed this entire system forgetting the simple fact that the day/night cycle of an island this far north would absolutely be 23/1 in the summertime. Woops"
+color = Color(0, 0, 0, 1)
 script = ExtResource("2_o8pbx")
+START_TIME = "Noon"
 
-[node name="SnowFall" type="GPUParticles2D" parent="."]
-light_mask = 0
-z_index = 100
-amount = 4000
-texture = ExtResource("3_ch1di")
-lifetime = 5.0
-preprocess = 4.0
-randomness = 0.1
-fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_4cc5g")
-script = ExtResource("4_jg3oj")
-direction = 7
+[node name="WorldTimer" type="Timer" parent="DayNightModulator"]
+process_callback = 0
+wait_time = 180.0
+autostart = true
 
-[node name="WindSFX" type="AudioStreamPlayer2D" parent="SnowFall"]
-position = Vector2(0, 100)
-stream = ExtResource("5_xgl6y")
-pitch_scale = 1.4
-attenuation = 0.8
-bus = &"Wind"
-
-[node name="CRT" type="ColorRect" parent="SnowFall"]
+[node name="CRT" type="ColorRect" parent="."]
 z_index = 4000
 z_as_relative = false
 material = SubResource("ShaderMaterial_06wol")
@@ -145,7 +130,27 @@ offset_right = 200.0
 offset_bottom = 200.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("7_l833n")
+
+[node name="SnowFall" type="GPUParticles2D" parent="."]
+light_mask = 0
+z_index = 100
+amount = 1500
+texture = ExtResource("3_ch1di")
+lifetime = 5.0
+preprocess = 4.0
+randomness = 0.1
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_4cc5g")
+script = ExtResource("4_jg3oj")
+weather_pattern = 1
+weather_type = 5
+
+[node name="WindSFX" type="AudioStreamPlayer2D" parent="SnowFall"]
+position = Vector2(0, 100)
+stream = ExtResource("5_xgl6y")
+pitch_scale = 1.4
+attenuation = 0.8
+bus = &"Wind"
 
 [node name="Framing" type="CanvasLayer" parent="."]
 visible = false
@@ -157,26 +162,26 @@ anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_left = 3336.0
-offset_right = 2402.59
+offset_right = 24.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
-metadata/_edit_lock_ = true
+color = Color(0.227451, 0.105882, 0.25098, 1)
 
 [node name="Console" type="RichTextLabel" parent="Framing/EastPanel"]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_left = 8.0
-offset_top = 136.0
-offset_right = -2445.59
-offset_bottom = 1912.0
+offset_left = 51.0
+offset_top = 1.0
+offset_right = -26.0
+offset_bottom = 1774.0
 grow_horizontal = 2
 theme = ExtResource("7_5ib5g")
 bbcode_enabled = true
 text = "
 [i][fx]\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. \""
+fit_content = true
 custom_effects = [SubResource("RichTextEffect_jg3oj")]
 script = ExtResource("12_p1x0l")
 
@@ -188,8 +193,9 @@ one_shot = true
 layout_mode = 3
 anchors_preset = 0
 offset_left = -3336.0
+offset_top = -115.0
 offset_right = -3296.0
-offset_bottom = 40.0
+offset_bottom = -75.0
 script = ExtResource("9_p1x0l")
 metadata/_custom_type_script = "uid://0xvc5hkssbts"
 
@@ -304,6 +310,18 @@ theme = ExtResource("7_5ib5g")
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "l"
 
+[node name="VersionLabel" type="Label" parent="Framing/EastPanel"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 2228.0
+offset_right = 512.0
+offset_bottom = 2426.0
+scale = Vector2(0.8, 0.8)
+theme = ExtResource("7_5ib5g")
+text = "Project: Anzhu
+Version 0.01.43
+PRE-PRODUCTION"
+
 [node name="WestPanel" type="ColorRect" parent="Framing"]
 anchors_preset = 15
 anchor_right = 1.0
@@ -311,7 +329,7 @@ anchor_bottom = 1.0
 offset_right = -3333.59
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+color = Color(0.227451, 0.105882, 0.25098, 1)
 metadata/_edit_lock_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Framing/WestPanel"]
@@ -380,8 +398,9 @@ text = "Quit & Close Game"
 [node name="UiControls" type="Control" parent="Framing/WestPanel"]
 layout_mode = 3
 anchors_preset = 0
+offset_top = -115.0
 offset_right = 40.0
-offset_bottom = 40.0
+offset_bottom = -75.0
 script = ExtResource("9_p1x0l")
 
 [node name="W" type="Label" parent="Framing/WestPanel/UiControls"]
@@ -496,28 +515,28 @@ theme_override_colors/font_color = Color(0.717647, 0.254902, 0.196078, 1)
 theme_override_fonts/font = ExtResource("10_xgl6y")
 text = "e"
 
-[node name="F" type="Label" parent="Framing/WestPanel/UiControls"]
+[node name="Space" type="Label" parent="Framing/WestPanel/UiControls"]
 z_index = 1
 z_as_relative = false
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 500.0
-offset_top = 2064.0
-offset_right = 532.0
-offset_bottom = 2098.0
-grow_horizontal = 2
-grow_vertical = 0
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 1879.0
+offset_top = 2324.0
+offset_right = 1975.0
+offset_bottom = 2358.0
+grow_horizontal = 0
+grow_vertical = 2
 scale = Vector2(5, 5)
 tooltip_text = "Pickup Items"
 mouse_filter = 0
 theme = ExtResource("7_5ib5g")
 theme_override_colors/font_color = Color(0.25098, 0.180392, 0.168627, 1)
 theme_override_fonts/font = ExtResource("10_xgl6y")
-text = "f"
+text = "Z"
 
 [connection signal="pressed" from="Framing/WestPanel/VBoxContainer/Reset" to="Framing" method="_on_reset_pressed"]
 [connection signal="pressed" from="Framing/WestPanel/VBoxContainer/Elevation" to="Framing" method="_on_elevation_pressed"]

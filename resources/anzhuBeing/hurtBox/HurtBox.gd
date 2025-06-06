@@ -9,16 +9,16 @@ var current_attacking_direction :AttackingDirection = AttackingDirection.None
 @onready var hurt_shape :RectangleShape2D = hurt_node.shape
 @onready var hurt_timer :Timer = $Timer
 
-func _ready() -> void:
+func _ready():
 	_signaler()
 	__ready()
 
-func _signaler()->void:
+func _signaler():
 	body_entered.connect(_on_body_entered)
 	hurt_timer.timeout.connect(_end_attack_cooldown)
 	__signaler()
 
-func update_and_match_attacking_direction(incoming_direction :Vector2)->void:
+func update_and_match_attacking_direction(incoming_direction :Vector2):
 	if incoming_direction.y > 0 and current_attacking_direction != AttackingDirection.Vertical:
 		current_attacking_direction = AttackingDirection.Vertical
 		hurt_shape.size = Vector2(12.0,16.0)
@@ -31,19 +31,16 @@ func update_and_match_attacking_direction(incoming_direction :Vector2)->void:
 	else:
 		return
 
-func _end_attack_cooldown()->void:
+func _end_attack_cooldown():
 	on_cooldown = false
-
-func set_hurtbox_monitoring(_is_monitoring :bool):
-	monitoring = _is_monitoring
 
 func has_died():
 	monitoring = false
 
 #region # Virtuals
-func _on_body_entered(_body :AnzhuBeing)->void:pass
-func __ready()->void:pass
-func __signaler()->void:pass
+func _on_body_entered(_body :AnzhuBeing):pass
+func __ready():pass
+func __signaler():pass
 #endregion
 #region #DEBUG
 @export_category('DEBUG')

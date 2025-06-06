@@ -1,48 +1,53 @@
 extends CharacterBody2D
 class_name AnzhuBeing
+
 #region    #============================================================# Signals
-signal publisher_null(method_name :String)
-signal publisher_one(method_name :String, one :Variant)
-signal publisher_two(method_name :String, one :Variant, two :Variant)
-signal publisher_three(method_name :String, one :Variant, two :Variant, three :Variant)
+
+signal publish_event(String, Variant)
+
 #endregion #============================================================# Signals
 #region    #============================================================# Variables
+
 enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
 enum SpeedType {CREEP,WALK,JOG,RUN}
-@export var this_animals_type :AnimalType
+## Used for setting the group & stats
+@export_enum("Walrus", "Owl", "Human",  "Bear", "Fox", "Hare", "Wolf", "Deer", "Mammoth") var this_beings_type :String
+@export_multiline var visual_description :String = ""
+## Lower than 0.08 reduces jitteryness, higher than makes it better at detecting walls.
+@export var SAFE_MARGIN :float = 0.05
+
 var current_direction :int:
 	set(value):
 		if current_direction != value:
 			current_direction = value
-			var named_dir:String = Directon.get_current_direction(current_direction)
-			publisher_one.emit('update_direction', Directon.get_personal_should_flip(named_dir))
-			publisher_one.emit('direction_changed_with_value', current_direction)
-			publisher_one.emit('direction_changed_with_name', named_dir)
-var speed_types :Dictionary
-enum AnimalType {Walrus, Owl, Human,  Bear, Fox, Hare, Wolf, Reindeer, Mammoth}
+			var named_dir :String = Directon.get_current_direction(current_direction)
+			publish_event.emit('update_direction',
+			{
+				"Name": named_dir,
+				"Flip": Directon.get_personal_should_flip(named_dir),
+				})
+
 var personal_stats :Dictionary:
 	set(value):
 		personal_stats = value
-		add_to_group(personal_stats["Group"])
-		animal_icon = personal_stats["Icon"]
+		add_to_group("being")
+		add_to_group(this_beings_type)
+		entity_icon = personal_stats["Icon"]
 		max_health = personal_stats["StartingHealth"]
 		speed_types = personal_stats["SpeedType"]
 var max_health :int
-var animal_icon :String
-var animal_name :String
+var speed_types :Dictionary
+var entity_icon :String
 var velocity_force :Vector2
-var is_stunned :bool = false
-var player :Player
 
-## Lower than 0.08 reduces jitteryness, higher than makes it better at detecting walls.
-@export var SAFE_MARGIN :float = 0.05
 var is_sliding :bool = false:
 	set(value): if value!=is_sliding:
 		is_sliding = value
-		publisher_one.emit("sliding", is_sliding)
-@export_multiline var visual_description :String = ""
+		publish_event.emit("sliding", is_sliding)
+
 #endregion #============================================================# Variables
 #region    #============================================================# Ready
+
 func _ready():
 	initialize_debugging()
 	_setup_basics()
@@ -51,40 +56,35 @@ func _ready():
 	___ready()
 
 func _setup_basics():
-	add_to_group("being")
 	set_motion_mode(MOTION_MODE_FLOATING)
 	set_safe_margin(SAFE_MARGIN)
-	personal_stats = Staton.CHARACTER_SHEET[this_animals_type]
+	personal_stats =L.Beings.INFO[this_beings_type]
 	current_direction = PersonalDirection.EAST
+	z_index = 3
 	__setup_basics()
 	___setup_basics()
 
 func _signaler():
-	Libraryton.player_reference.connect(player_ref)
-	Signalton.loud_noise.connect(func(_who :AnzhuBeing, _where :Vector2, _db :float): publisher_null.emit("loud_noise"))
-	publisher_one.emit("override_visual_description", visual_description)
-	publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
-	publisher_one.connect(func(func_name, one): Observerton.subscribe_one(self, func_name, one))
-	publisher_two.connect(func(func_name, one, two): Observerton.subscribe_two(self, func_name, one, two))
-	publisher_three.connect(func(func_name, one, two, three): Observerton.subscribe_three(self, func_name, one, two, three))
+	Signalton.player_reference.connect(player_reference_subscriber)
+	publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
 	for child in get_children():
-		publisher_null.connect(func(func_name): Observerton.subscribe_null(child, func_name))
-		publisher_one.connect(func(func_name, one): Observerton.subscribe_one(child, func_name, one))
-		publisher_two.connect(func(func_name, one, two): Observerton.subscribe_two(child, func_name, one, two))
-		publisher_three.connect(func(func_name, one, two, three): Observerton.subscribe_three(child, func_name, one, two, three))
+		publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(child, func_name, data))
 	__signaler()
 	___signaler()
 
-func player_ref(ref :Player):
+var player :Player
+func player_reference_subscriber(ref :Player):
 	player = ref
-	Libraryton.player_reference.disconnect(player_ref)
+	Signalton.player_reference.disconnect(player_reference_subscriber)
+
 #endregion #============================================================# Ready
 #region    #============================================================# Movement
+
 func _process(delta:float):
 	__process(delta)
 	___process(delta)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(delta: float):
 	__physics_process(delta)
 	___physics_process(delta)
 	velocity = velocity_force * delta
@@ -95,15 +95,15 @@ func _physics_process(delta: float) -> void:
 
 #endregion #============================================================# Movement
 #region    #============================================================# Strikes
-func strike_target(damage :int, weapon :String, who:AnzhuBeing):
-	publisher_three.emit("_is_striking", damage, weapon, who)
-	who._was_just_struck(damage,weapon,self)
 
-func _was_just_struck(damage :int, weapon :String, who:AnzhuBeing):
-	if parse_incoming_damage(damage,weapon,who):
-		__was_just_struck(damage, weapon, who)
-		___was_just_struck(damage, weapon, who)
-		publisher_null.emit("was_struck")
+func strike_target(attack :Dictionary):
+	attack["VICTIM"]._was_just_struck(attack)
+
+func _was_just_struck(attack :Dictionary):
+	if parse_incoming_damage(attack):
+		__was_just_struck(attack)
+		___was_just_struck(attack)
+		publish_event.emit("was_struck")
 
 #endregion #============================================================# Strikes
 #region    #============================================================# MISC
@@ -114,7 +114,8 @@ func collide_with_(layer :int, is_enabled :bool):
 
 #endregion #============================================================# MISC
 #region    #============================================================# VIRTUALS
-func parse_incoming_damage(_damage :int, _weapon :String, _who:AnzhuBeing)->bool: return true
+
+func parse_incoming_damage(_attack :Dictionary)->bool: return true
 func __setup_basics(): pass
 func ___setup_basics(): pass
 func __signaler(): pass
@@ -126,10 +127,12 @@ func __process(_delta:float):pass
 func ___process(_delta:float):pass
 func __physics_process(_delta:float):pass
 func ___physics_process(_delta:float):pass
-func __was_just_struck(_damage :int, _weapon :String, _who:AnzhuBeing):pass
-func ___was_just_struck(_damage :int, _weapon :String, _who:AnzhuBeing):pass
+func __was_just_struck(_attack :Dictionary):pass
+func ___was_just_struck(_attack :Dictionary):pass
+
 #endregion #============================================================# VIRTUALS
 #region    #============================================================# Debug
+
 @export_group('DEBUG')
 @export var debug_all :bool = false
 @export var debug_self :bool = false

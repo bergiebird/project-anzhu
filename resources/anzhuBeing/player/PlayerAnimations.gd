@@ -2,11 +2,14 @@ extends AnimatedSprite2D
 class_name PlayerAnimations
 
 const FLASH_AMOUNT :int = 4
+
 @export var animations_reloads_reload_time :float = 0.5
 @export var modified_speed_up :float = 0.16
+
 var is_dead :bool = false
 var is_colored :bool = false
 var anim_direction :String = '_SIDE'
+
 @onready var parent :AnzhuBeing = get_parent()
 @onready var mask :Mask = parent.get_node("Mask")
 @onready var abilities :Abilities = parent.get_node('Abilities')
@@ -16,16 +19,9 @@ var anim_direction :String = '_SIDE'
 func has_died():
 	is_dead = true
 
-func should_flip(yes :bool):
-	flip_h = yes
-
 func reloading(is_reloading :bool):
 	if is_reloading:
 		reload_anim.start_routine()
-
-func modified_reload(is_reload_modified :bool):
-	if is_reload_modified:
-		speed_scale += modified_speed_up
 
 func jumping(is_jumping :bool):
 	if is_jumping:
@@ -49,17 +45,14 @@ func _process(_delta :float):
 		abilities.AbilityStates.RELOADING:
 			return
 		abilities.AbilityStates.MOVING:
-			if speed > 200:
-				just_play('run')
-			else:
-				just_play('walk')
+			if speed > 200: just_play('run')
+			else:           just_play('walk')
 		abilities.AbilityStates.IDLING:
 				just_play('idle')
 
-
-func update_direction(flipper :bool=flip_h):
-	if flip_h != flipper:
-		flip_h = flipper
+func update_direction(bol :Dictionary):
+	if flip_h != bol["Flip"]:
+		flip_h = bol["Flip"]
 
 func just_play(anim_name :String, should_stop :bool=false, force_speed_scale:int = -1):
 	anim_direction = Directon.ANIM_NAME[parent.current_direction]
@@ -79,14 +72,14 @@ func efficiency_check(force_speed_scale :int = -1):
 		speed_scale = force_speed_scale
 
 func was_struck():
-	modulate = Swatchton.RED_TOMATO
+	modulate =L.Palette.RED_TOMATO
 	for flashes :int in FLASH_AMOUNT:
 		is_colored = !is_colored
-		self_modulate = Swatchton.RED_TOMATO if is_colored else Swatchton.BASIC_WHITE
+		self_modulate =L.Palette.RED_TOMATO if is_colored else L.BasicPalette.BASIC_WHITE
 		if not is_dead:
 			await get_tree().create_timer(.4).timeout
-	modulate = Swatchton.BASIC_WHITE
-	self_modulate = Swatchton.BASIC_WHITE
+	modulate =L.BasicPalette.BASIC_WHITE
+	self_modulate =L.BasicPalette.BASIC_WHITE
 
 #region DEBUG
 @export_group('Debug')

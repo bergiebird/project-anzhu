@@ -7,10 +7,11 @@ var current_sign :StaticBody2D
 @onready var timer :Timer = $TextDisappearTimer
 
 func _ready():
-	Libraryton.reference_emitter_deferred("console_reference", self)
+	Signalton.reference_emitter_deferred("console_reference", self)
 	Signalton.update_console.connect(sign_text)
 	Inputon.cursor_movement_report.connect(func(bol :bool): current_visibility_of_text = bol)
 	timer.timeout.connect(_on_timeout)
+	text = ""
 
 func sign_text(incoming_text :String, incoming_sign :StaticBody2D = null):
 	timer.stop()

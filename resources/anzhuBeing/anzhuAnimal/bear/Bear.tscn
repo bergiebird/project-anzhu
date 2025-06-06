@@ -1,32 +1,33 @@
-[gd_scene load_steps=33 format=3 uid="uid://dr7gmcq3ydu2b"]
+[gd_scene load_steps=34 format=3 uid="uid://dr7gmcq3ydu2b"]
 
-[ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/Bear.gd" id="1_6aww6"]
+[ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear.gd" id="1_6aww6"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="3_xf7mx"]
-[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/bear/_AnimalActions.gd" id="4_hho7n"]
+[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/_AnimalActions.gd" id="4_hho7n"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="5_gcotj"]
 [ext_resource type="Script" uid="uid://sng16f2nhiub" path="res://resources/anzhuBeing/anzhuAnimal/bear/ActionStunned.gd" id="6_2d7ra"]
-[ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
-[ext_resource type="SpriteFrames" uid="uid://1t351xrrxt6d" path="res://resources/anzhuBeing/anzhuAnimal/bear/visual/sf_bear.tres" id="6_ybwxf"]
+[ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://resources/anzhuBeing/anzhuAnimal/bear/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
+[ext_resource type="SpriteFrames" uid="uid://1t351xrrxt6d" path="res://resources/anzhuBeing/anzhuAnimal/bear/sf_bear.tres" id="6_ybwxf"]
 [ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="8_i834n"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="11_4sorn"]
 [ext_resource type="Script" uid="uid://77r3fqyd6fhd" path="res://resources/_states/goals/ActionChase.gd" id="12_fnbe6"]
 [ext_resource type="Script" uid="uid://cv8vrn7ohwvvv" path="res://resources/_states/goals/GoalHunt.gd" id="13_kkkf8"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="13_qx7fo"]
 [ext_resource type="Script" uid="uid://n4g3epvshvea" path="res://resources/_states/goals/GoalNothing.gd" id="14_k7mq3"]
-[ext_resource type="AudioStream" uid="uid://dighd7kxlaht8" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (saw player).mp3" id="14_t1s4a"]
-[ext_resource type="AudioStream" uid="uid://b1e37kdue1g3v" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (hurt).mp3" id="15_n3oor"]
-[ext_resource type="AudioStream" uid="uid://cjfo3gmgsqhpb" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear (normal).mp3" id="16_47icu"]
+[ext_resource type="AudioStream" uid="uid://dighd7kxlaht8" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear (saw player).mp3" id="14_t1s4a"]
+[ext_resource type="AudioStream" uid="uid://b1e37kdue1g3v" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear (hurt).mp3" id="15_n3oor"]
+[ext_resource type="AudioStream" uid="uid://cjfo3gmgsqhpb" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear (normal).mp3" id="16_47icu"]
 [ext_resource type="AudioStream" uid="uid://bh3tjtuu7g7a2" path="res://warehouse/_audio/sfx/walk/default_bus_layout.tres" id="17_fjh5o"]
 [ext_resource type="AudioStream" uid="uid://cfc7k8xu6ve63" path="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3" id="18_5puse"]
 [ext_resource type="Script" uid="uid://chhugqt8kfyc1" path="res://resources/anzhuBeing/anzhuAnimal/bear/BearAnimations.gd" id="18_nr2iy"]
-[ext_resource type="AudioStream" uid="uid://cisjs4ks2qp54" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear Bite 1.mp3" id="24_lf0l5"]
-[ext_resource type="AudioStream" uid="uid://dy4gm4o2d242p" path="res://resources/anzhuBeing/anzhuAnimal/bear/audio/Bear Bite 2.mp3" id="25_6237r"]
+[ext_resource type="AudioStream" uid="uid://cisjs4ks2qp54" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear Bite 1.mp3" id="24_lf0l5"]
+[ext_resource type="AudioStream" uid="uid://dy4gm4o2d242p" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear Bite 2.mp3" id="25_6237r"]
 [ext_resource type="PackedScene" uid="uid://c1you2bnyaapu" path="res://resources/anzhuBeing/go_to/go_to.tscn" id="25_d723r"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="28_2d7ra"]
-[ext_resource type="Script" uid="uid://drtuaa2rbofev" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearHurtBox.gd" id="28_ar1ys"]
+[ext_resource type="Script" uid="uid://drtuaa2rbofev" path="res://resources/anzhuBeing/anzhuAnimal/bear/BearHurtBox.gd" id="28_ar1ys"]
+[ext_resource type="Script" uid="uid://biiie1kknacug" path="res://resources/anzhuBeing/anzhuAnimal/bear/Cardinals.gd" id="28_d723r"]
 [ext_resource type="Script" uid="uid://cox8u8bydopri" path="res://resources/anzhuBeing/anzhuAnimal/bear/AiMovement.gd" id="29_2d7ra"]
 [ext_resource type="Script" uid="uid://bf2g70a1gkkrq" path="res://resources/anzhuBeing/anzhuAnimal/bear/BearEyesight.gd" id="30_jxxsm"]
-[ext_resource type="Script" uid="uid://ccjwxftmp5da6" path="res://resources/anzhuBeing/anzhuAnimal/bear/scripts/BearCorpse.gd" id="31_xf7mx"]
+[ext_resource type="Script" uid="uid://ccjwxftmp5da6" path="res://resources/anzhuBeing/anzhuAnimal/bear/BearCorpse.gd" id="31_xf7mx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nr2iy"]
 
@@ -41,16 +42,17 @@ stream_0/stream = ExtResource("24_lf0l5")
 stream_1/stream = ExtResource("25_6237r")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hho7n"]
-radius = 92.0
+radius = 105.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr2iy"]
 radius = 0.1
 
 [node name="Bear" type="CharacterBody2D"]
+z_index = 3
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_6aww6")
-this_animals_type = 3
+this_beings_type = "Bear"
 visual_description = "POLAR BEAR!"
 
 [node name="Mask" type="CollisionShape2D" parent="."]
@@ -87,14 +89,20 @@ max_distance = 250.0
 
 [node name="Chase" type="Node2D" parent="Actions"]
 script = ExtResource("12_fnbe6")
+sprint_time = 4.5
 
 [node name="DirectionTimer" type="Timer" parent="Actions/Chase"]
-wait_time = 1.5
+wait_time = 1.2
+
+[node name="ChargeTimer" type="Timer" parent="Actions/Chase"]
+process_callback = 0
+wait_time = 4.0
+one_shot = true
 
 [node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Actions/Chase"]
 stream = ExtResource("18_5puse")
-max_distance = 225.0
-attenuation = 0.5
+max_distance = 250.0
+attenuation = 3.0
 
 [node name="Goals" type="Node2D" parent="."]
 script = ExtResource("11_4sorn")
@@ -105,8 +113,8 @@ script = ExtResource("13_kkkf8")
 [node name="BgmHunt" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
 editor_description = "Bear Hunt Music"
 stream = ExtResource("6_cuqt7")
-max_distance = 350.0
-attenuation = 1.6
+max_distance = 225.0
+attenuation = 0.75
 bus = &"PolarBear"
 
 [node name="SfxSpotted" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
@@ -134,7 +142,7 @@ one_shot = true
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 z_index = 10
 sprite_frames = ExtResource("6_ybwxf")
-animation = &"Chase"
+animation = &"Sit"
 autoplay = "Idle"
 script = ExtResource("18_nr2iy")
 
@@ -155,6 +163,7 @@ bus = &"SFX"
 wait_time = 2.0
 
 [node name="GoTo" parent="." instance=ExtResource("25_d723r")]
+debug_self = true
 
 [node name="AiMovement" type="Node" parent="."]
 script = ExtResource("29_2d7ra")
@@ -185,5 +194,29 @@ max_distance = 350.0
 [node name="Timer" type="Timer" parent="Corpse"]
 wait_time = 2.61
 one_shot = true
+
+[node name="Cardinals" type="Node2D" parent="."]
+process_mode = 4
+script = ExtResource("28_d723r")
+
+[node name="RayNorth" type="RayCast2D" parent="Cardinals"]
+position = Vector2(0, -4)
+target_position = Vector2(0, -3)
+collision_mask = 0
+
+[node name="RaySouth" type="RayCast2D" parent="Cardinals"]
+position = Vector2(0, 4)
+target_position = Vector2(0, 3)
+collision_mask = 0
+
+[node name="RayEast" type="RayCast2D" parent="Cardinals"]
+position = Vector2(4, 0)
+target_position = Vector2(3, 0)
+collision_mask = 0
+
+[node name="RayWest" type="RayCast2D" parent="Cardinals"]
+position = Vector2(-4, 0)
+target_position = Vector2(-3, 0)
+collision_mask = 0
 
 [connection signal="animation_changed" from="Animations" to="Animations" method="_on_animation_changed"]

@@ -4,7 +4,7 @@ var personal_debug :bool = false
 func enable_print(message:String, debugger_color:Color)->void:
 	print_rich('[color='+debugger_color.to_html()+']'+message+' debugging enabled . . .[/color]')
 
-func dprint(message:String, debugger_color:Color = Swatchton.BLUE_WATER_LIGHT)->void:
+func dprint(message:String, debugger_color:Color = L.Palette.BLUE_WATER_LIGHT)->void:
 	print_rich('[color='+debugger_color.to_html()+']'+message+'[/color]')
 
 ## When discovering that connections have a return type, I wanted to create a function to expose

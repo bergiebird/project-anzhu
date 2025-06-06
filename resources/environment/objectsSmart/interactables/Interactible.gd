@@ -2,13 +2,17 @@
 extends Area2D
 class_name Interactible
 
-@onready var parent = get_parent()
-@onready var interaction_enter :String = "Press F to interact with " + self.name
-@onready var interacted_with :String = "This is a note from " + self.name
-@onready var interaction_exit :String = 'Have left the interaction zone of ' + self.name
+enum Interact {
+	OnButtonPress,
+	OnCollision,
+	OnSight,
+	OnClick,
+}
+
+@export var primary_interactible_state :Interact
+@export var secondary_interactible_state : Interact
 
 func _ready():
-	_debug()
 	_signaler()
 	set_collision_layer_value(8,true)
 	set_collision_mask_value(8,true)
@@ -16,39 +20,47 @@ func _ready():
 
 func _on_body_entered(body :Node2D):
 	if body is Player:
-		parent.publisher_null.emit('player_entered_the_space')
 		set_process(true)
-		_dprint(interaction_enter)
+		parent.publish_event.emit('player_entered_the_space')
 
 func _process(_delta :float):
 	if Input.is_action_just_pressed('interact'):
-		_dprint('interaction occured at ' + parent.name)
-		parent.publisher_null.emit('interacted')
+		parent.publish_event.emit('interacted')
 
 func _on_body_exited(body :Node2D):
 	if body is Player:
-		parent.publisher_null.emit('player_left_the_space')
 		set_process(false)
-		_dprint(interaction_exit)
-
-
+		parent.publish_event.emit('player_left_the_space')
 
 func _signaler():
+	ready.connect(_debug)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
-	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
-
-#region DEBUG
 @export_group('debug')
+#region
 @export var debug :bool = false
-@export var debug_color :Color = Swatchton.GREEN_FOREST
+@export var debug_color :Color =L.Palette.GREEN_FOREST
+@onready var interaction_enter :String = "Press F to interact with " + self.name
+@onready var interacted_with :String = "This is a note from " + self.name
+@onready var interaction_exit :String = 'Have left the interaction zone of ' + self.name
+@onready var parent = get_parent()
 
 func _debug() ->void:
 	if debug:
-		Debuggerton.enable_print(self.name, debug_color)
+		pass
 
 func _dprint(message :String)->void:
+		if debug:
+			Debuggerton.dprint(message, debug_color)
+
+func interacted():
 	if debug:
-		Debuggerton.dprint(message, debug_color)
+		_dprint('interaction occured at ' + parent.name)
+
+
+
+
+
+
 #endregion

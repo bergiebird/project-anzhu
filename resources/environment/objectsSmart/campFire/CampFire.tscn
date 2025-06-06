@@ -85,14 +85,15 @@ animations = [{
 z_index = 200
 z_as_relative = false
 script = ExtResource("1_ggvyn")
+is_lit = true
 
 [node name="Mask" type="CollisionShape2D" parent="."]
-position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_jyux6")
+debug_color = Color(0.435294, 0.431373, 0.447059, 1)
 script = ExtResource("2_mi3f3")
 description = "A campfire"
 set_mask_dimensions = 1
-has_background = false
+has_healthbar = false
 
 [node name="Light" type="PointLight2D" parent="."]
 visible = false
@@ -112,7 +113,8 @@ bus = &"SFX"
 [node name="BgmCampFire" type="AudioStreamPlayer2D" parent="."]
 visible = false
 stream = ExtResource("8_obei1")
-max_distance = 75.0
+max_distance = 80.0
+attenuation = 0.5
 bus = &"PolarBear"
 
 [node name="Interactible" parent="." instance=ExtResource("8_jyux6")]
@@ -120,29 +122,25 @@ bus = &"PolarBear"
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible"]
 shape = ExtResource("9_lc4nv")
 
-[node name="Heal" type="Area2D" parent="."]
+[node name="HealingArea" type="Area2D" parent="."]
 script = ExtResource("10_yg5ku")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Heal"]
-visible = false
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealingArea"]
 position = Vector2(-1, 2)
 shape = SubResource("CircleShape2D_lc4nv")
 debug_color = Color(0.639105, 0.171813, 0.0875667, 0.42)
 metadata/_edit_lock_ = true
 
-[node name="HealInterval" type="Timer" parent="Heal"]
+[node name="HealInterval" type="Timer" parent="HealingArea"]
 
 [node name="Stand" type="Sprite2D" parent="."]
 texture = ExtResource("11_nls13")
 region_enabled = true
 region_rect = Rect2(24, 504, 8, 8)
 
-[node name="Fire" type="AnimatedSprite2D" parent="."]
+[node name="Fire" type="AnimatedSprite2D" parent="." groups=["visibility_changed"]]
 visible = false
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_lc4nv")
 autoplay = "default"
 frame_progress = 0.603681
-
-[connection signal="body_entered" from="Heal" to="Heal" method="_on_body_entered"]
-[connection signal="body_exited" from="Heal" to="Heal" method="_on_body_exited"]

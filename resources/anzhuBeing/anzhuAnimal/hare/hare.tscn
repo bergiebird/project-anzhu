@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://djohaqklk0yvq"]
+
+[ext_resource type="Script" uid="uid://dlm68di2fvt6s" path="res://resources/anzhuBeing/anzhuAnimal/hare/Hare.gd" id="1_i130l"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_ycej4"]
+[ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="3_ycej4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqtgj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqtgj"]
+atlas = ExtResource("3_ycej4")
+region = Rect2(8, 32, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i130l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqtgj")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Hare" type="CharacterBody2D"]
+script = ExtResource("1_i130l")
+this_beings_type = "Hare"
+visual_description = "Aw a rabbit"
+
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_oqtgj")
+script = ExtResource("2_ycej4")
+description = "Aw, a rabbit"
+set_mask_dimensions = 1
+metadata/_custom_type_script = "uid://60saxsgwo84g"
+
+[node name="Animations" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_i130l")
+animation = &"Idle"

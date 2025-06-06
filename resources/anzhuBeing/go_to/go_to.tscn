@@ -18,3 +18,5 @@ shape = SubResource("CircleShape2D_nr2iy")
 [node name="DebugSprite" type="Sprite2D" parent="Location"]
 visible = false
 texture = ExtResource("2_8k54n")
+
+[connection signal="ready" from="." to="." method="_on_ready"]

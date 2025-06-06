@@ -11,7 +11,6 @@
 
 [resource]
 default_font = ExtResource("1_gd557")
-default_font_size = 48
 Button/colors/font_color = Color(0.921569, 0.721569, 0.356863, 1)
 Button/colors/font_hover_color = Color(0.435294, 0.431373, 0.447059, 1)
 Button/font_sizes/font_size = 48

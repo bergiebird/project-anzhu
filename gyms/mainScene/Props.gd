@@ -109,7 +109,7 @@ var plant_encyclopedia :Dictionary = {
 }
 
 func _ready():
-	Libraryton.reference_emitter_deferred("props_reference", self, debug)
+	Signalton.reference_emitter_deferred("props_reference", self, debug)
 
 #region # DEBUG
 @export var debug:bool = false

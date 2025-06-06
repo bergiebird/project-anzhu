@@ -3,7 +3,16 @@ extends Node2D
 class_name Abilities
 
 @export var shoot_cooldown :float = 0.4
-enum AbilityStates {NONE, IDLING, MOVING, INIT_JUMP, JUMPING, RELOADING, GUNFIRED,}
+enum AbilityStates {
+	NONE,
+	IDLING,
+	MOVING,
+	INIT_JUMP,
+	JUMPING,
+	RELOADING,
+	GUNFIRED, ##
+	CROUCHING, ## Spacebar, this is the modifier
+	}
 
 @onready var old_state :AbilityStates = AbilityStates.NONE:
 	set(value):
@@ -14,14 +23,14 @@ enum AbilityStates {NONE, IDLING, MOVING, INIT_JUMP, JUMPING, RELOADING, GUNFIRE
 			AbilityStates.IDLING:
 				pass
 			AbilityStates.MOVING:
-				parent.publisher_one.emit("reset_velocities", true)
+				pass
 			AbilityStates.JUMPING:
-				parent.publisher_one.emit('jumping', false)
+				parent.publish_event.emit('jumping', false)
 			AbilityStates.RELOADING:
-				parent.publisher_one.emit('reloading', false)
-				parent.publisher_one.emit('full_ammo', true)
+				parent.publish_event.emit('reloading', false)
+				parent.publish_event.emit('full_ammo',true)
 			AbilityStates.INIT_JUMP:
-				parent.publisher_one.emit('initializing_jump', false)
+				parent.publish_event.emit('initializing_jump', false)
 			AbilityStates.GUNFIRED:
 				pass
 
@@ -37,28 +46,27 @@ enum AbilityStates {NONE, IDLING, MOVING, INIT_JUMP, JUMPING, RELOADING, GUNFIRE
 			AbilityStates.MOVING:
 				pass
 			AbilityStates.JUMPING:
-				parent.publisher_one.emit('jumping', true)
+				parent.publish_event.emit('jumping', true)
 			AbilityStates.RELOADING:
-				parent.publisher_one.emit('reloading', true)
+				parent.publish_event.emit('reloading', true)
 			AbilityStates.INIT_JUMP:
-				parent.publisher_one.emit('initializing_jump', true)
+				parent.publish_event.emit('initializing_jump', true)
 			AbilityStates.GUNFIRED:
 				current_state = AbilityStates.IDLING
 
+var is_efficient :bool=false
 
-var is_efficient :bool=false:
-	set(value):
-			is_efficient = value
-			if_debug('is_efficient: '+ str(is_efficient))
-			parent.publisher_one.emit('efficiency', is_efficient)
+#:
+	#set(value):
+			#is_efficient = value
+			#if_debug('is_efficient: '+ str(is_efficient))
+			#parent.publish_event.emit('efficiency', is_efficient)
 
 var parent :Player
 
-func _ready()->void:
+func _ready():
 	parent = get_parent()
 	for child :Ability in get_children():
-		child.parent = self
-		child.grandparent = parent
 		child.set_physics_process(true)
 		child.set_process(true)
 	current_state =AbilityStates.IDLING
@@ -69,11 +77,11 @@ func _ready()->void:
 @export var debugger_color :Color = Color("eaf1f0")
 @onready var dcolor :String = debugger_color.to_html()
 
-func debug()->void:
+func debug():
 	Debuggerton.enable_print(self.name, dcolor)
 	debug_abilities = true
 
-func if_debug(message :String)->void:
+func if_debug(message :String):
 	if debug_abilities:
 		Debuggerton.dprint(message, dcolor)
 #endregion #=======================================================# DEBUG

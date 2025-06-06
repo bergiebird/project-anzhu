@@ -1,14 +1,16 @@
-#Libraryton.gd
-#region    #============================================================# Ready
 extends Node
+## Libraryton.gd
+#region    #============================================================# Ready
 
 func _ready()->void:
 	debug_remove_digits_from_string = _remove_digits_from_string()
 	_rng()
 	gloabl_get_emit_dicts()
 	_debug()
+
 #endregion #============================================================# Ready
 #region    #============================================================# Track Delivery
+
 ## Track Delivery Service: Designed to give all SnowTracker Nodes found in Character Scenes
 signal deliver_tracks_dictionary(outgoing_tracks :Dictionary[String,Node])
 var tracks_dictionary :Dictionary[String,Node]
@@ -18,8 +20,10 @@ func set_tracks(incoming_dictionary :Dictionary[String,Node])->void:
 func set_tracks_dictionary(incoming_dictionary:Dictionary[String,Node])->void:
 	tracks_dictionary = incoming_dictionary
 	deliver_tracks_dictionary.emit(tracks_dictionary)
+
 #endregion #============================================================# Track Delivery
 #region    #============================================================# Global Delivery
+
 ## Global Node Delivery Service: Designed to provide anyone with all nodes in the given scene.
 
 signal global_node_delivery(outgoing_global_scene_nodes :Dictionary[String,Node])
@@ -37,8 +41,10 @@ func get_emit_dicts(what_container:String, delivery_network:Signal)->Dictionary:
 	var container :Node = GAME.find_child(what_container, true, false)
 	delivery_network.emit(container)
 	return getChildren_filterDictionary( {}, container)
+
 #endregion #============================================================# GLOBAL DELIVERY
 #region    #============================================================# Track & Print
+
 ## Track & Print:
 ## A function designed to only print when the particular property has been updated.
 var _tracked_values :Dictionary = {}
@@ -57,8 +63,10 @@ func track_and_print(object :Object, property_name :String, label :String = "")-
 		_tracked_values[key] = current_value
 		return true
 	return false
+
 #endregion #============================================================# TRACK & PRINT
 #region    #============================================================# RegEx
+
 ## Removes the digits from a string
 ## Need
 @onready var pattern_that_removes_digits :RegEx = RegEx.new() #Create a new pattern
@@ -70,8 +78,10 @@ func _remove_digits_from_string()->Error:
 
 func remove_digits_from_string(input_string :String)->String:
 	return pattern_that_removes_digits.sub(input_string,'',true)
+
 #endregion #============================================================# RegEx
 #region    #============================================================# Filters
+
 ## Filter -> Return with "Type":
 ## Takes a node and acts upon it to create a return
 var lambda2 :Callable = func(_child1 :Object, _child2 :Object)->void: pass
@@ -102,38 +112,25 @@ func getChildren_filterDictionary(dictionary :Dictionary, node :Node, callable1 
 		dictionary[child.name] = child
 		callable1.call(child)
 	return dictionary
+
 #endregion #============================================================# Filters
 #region    #============================================================# References
-## Simple signals to give out the reference to anyone who wants it in the scene.
-## reference_emitter handles emitting from all signals here.
-signal player_reference(player_ref :Player)
-signal entities_reference(entities_ref :CanvasGroup)
-signal elevation_reference(elevation_ref :ElevationsLayer)
-signal tracks_reference(tracks_ref :CanvasGroup)
-signal props_reference(props_ref :TileMapLayer)
-signal console_reference(console :RichTextLabel)
-signal snowfall_reference(snowfall_ref :GPUParticles2D)
-var player :Player
 
-func reference_emitter_deferred(ref_signal :String, ref :Node, should_debug :bool=false)->void:
-	Callable(self, "reference_emitter").bind(ref_signal, ref, should_debug).call_deferred()
 
-func reference_emitter(ref_signal :String, ref :Node, should_debug:bool=false)->void:
-	if ref is Player:
-		player = ref
-	var error :Error = emit_signal(ref_signal, ref)
-	if should_debug:
-		printt(ref_signal, "was emitted with reference: ", ref, "Error value: ", error )
+
+
 #endregion #============================================================# References
 #region    #============================================================# RNG
-var rng :RandomNumberGenerator
 
+var rng :RandomNumberGenerator
 func _rng()->void:
 	rng = RandomNumberGenerator.new()
 	rng.randomize()
 
+
 #endregion #============================================================# RNG
 #region    #============================================================# DEBUG
+
 @onready var debug :bool = false
 var debug_remove_digits_from_string :Error
 
@@ -141,12 +138,8 @@ func _debug()->void:
 	print(debug_remove_digits_from_string)
 	assert(global_node_delivery)
 	assert(global_node2d_delivery)
-	assert(entities_reference)
-	assert(elevation_reference)
-	assert(tracks_reference)
-	assert(props_reference)
-	assert(snowfall_reference)
 	assert(global_delivery)
 	assert(deliver_tracks_dictionary)
-	assert(player_reference)
+
+
 #endregion #============================================================# DEBUG

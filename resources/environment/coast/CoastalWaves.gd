@@ -6,15 +6,15 @@ var player :Player
 @onready var line_points_size :int = line_points.size()
 
 func _ready()->void:
-	coastline.default_color = Swatchton.BASIC_WHITE_TRANSPARENT
+	coastline.default_color = L.BasicPalette.BASIC_WHITE_TRANSPARENT
 	set_process(false)
-	Libraryton.player_reference.connect(collect_player_reference)
+	Signalton.player_reference.connect(collect_player_reference)
 	_debug()
 
 func collect_player_reference(ref:Player):
 	player = ref
 	set_process(true)
-	Libraryton.player_reference.disconnect(collect_player_reference)
+	Signalton.player_reference.disconnect(collect_player_reference)
 
 
 func _process(_delta :float)->void:

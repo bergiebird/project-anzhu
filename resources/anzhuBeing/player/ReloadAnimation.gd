@@ -1,11 +1,6 @@
-class_name ReloadAnimation extends Node #ReloadAnimation.gd
+extends Node
+class_name ReloadAnimation
 
-const START :String = "Start"
-const STUFF :String = "Stuff"
-const THONK :String = "Thonk"
-const RETURN_TO_IDLE :String = "Return_to_idle"
-const STUFF_8_TIMES :int = 10
-const THONK_2_TIMES :int = 2
 var animation :String
 var current_direction :String
 @onready var parent :AnimatedSprite2D = get_parent()
@@ -15,29 +10,33 @@ var current_direction :String
 @onready var sfx_thonk :AudioStreamPlayer = $SfxThonk
 
 func _ready():
-	grandparent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
+	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
 
 func start_routine():
-	parent.speed_scale = 1
+	parent.speed_scale = 1 if not instant_reload else 100
 	animation = "reload" + current_direction + "_"
 	parent.stop()
-	parent.play(animation + START)
+	parent.play(animation + "Start")
 	await parent.animation_finished
 	sfx_stuff.play()
-	for stuff in STUFF_8_TIMES:
+	for stuff in 10:
 		parent.stop()
-		parent.play(animation + STUFF)
+		parent.play(animation + "Stuff")
 		await parent.animation_finished
 	sfx_stuff.stop()
-	for thonk in THONK_2_TIMES:
+	for thonk in 2:
 		parent.stop()
-		parent.play(animation + THONK)
+		parent.play(animation + "Thonk")
 		await parent.animation_finished
 		sfx_thonk.play()
 	parent.stop()
-	parent.play(animation + RETURN_TO_IDLE)
+	parent.play(animation + "Return_to_idle")
 	await parent.animation_finished
 	parent.reload_animation_finished()
 
-func direction_changed_with_name(incoming_name :String):
-	current_direction = Directon.get_personal_anim_direction(incoming_name)
+func update_direction(incoming_direction :Dictionary):
+	current_direction = Directon.get_personal_anim_direction(incoming_direction["Name"])
+
+
+@export_group("Debug")
+@export var instant_reload :bool

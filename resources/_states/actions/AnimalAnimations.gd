@@ -1,14 +1,15 @@
-class_name AnimalAnimations extends AnimatedSprite2D
+extends AnimatedSprite2D
+class_name AnimalAnimations
+
 @onready var parent = get_parent()
-
-
 
 func update_animations(anim_name :String):
 	if animation != anim_name:
 		animation = anim_name
+		play()
 
-func update_direction(bol :bool):
-	flip_h = bol
+func update_direction(bol :Dictionary):
+	flip_h = bol["Flip"]
 
 func has_died():
 	update_animations("Dead")

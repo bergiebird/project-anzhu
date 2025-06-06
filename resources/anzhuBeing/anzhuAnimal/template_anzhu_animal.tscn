@@ -1,0 +1,49 @@
+[gd_scene load_steps=11 format=3 uid="uid://xijom4dly8es"]
+
+[ext_resource type="Script" uid="uid://dwjx81223k2na" path="res://resources/anzhuBeing/anzhuAnimal/_AnzhuAnimal.gd" id="1_ntk1m"]
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_4klxn"]
+[ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="3_4klxn"]
+[ext_resource type="Script" uid="uid://cnof30b7u102a" path="res://resources/_states/actions/AnimalAnimations.gd" id="3_h7icm"]
+[ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="3_ntk1m"]
+[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/_AnimalActions.gd" id="4_4klxn"]
+[ext_resource type="PackedScene" uid="uid://c1you2bnyaapu" path="res://resources/anzhuBeing/go_to/go_to.tscn" id="4_h7icm"]
+[ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuBeing/corpse/Corpse.gd" id="6_kladl"]
+[ext_resource type="Script" uid="uid://cox8u8bydopri" path="res://resources/anzhuBeing/anzhuAnimal/bear/AiMovement.gd" id="9_t2a4m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8lew1"]
+
+[node name="TEMPLATE_AnzhuAnimal" type="CharacterBody2D"]
+script = ExtResource("1_ntk1m")
+metadata/_custom_type_script = "uid://dwjx81223k2na"
+
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8lew1")
+script = ExtResource("2_4klxn")
+set_mask_dimensions = 1
+metadata/_custom_type_script = "uid://60saxsgwo84g"
+
+[node name="AnimalGoalsMachine" type="Node2D" parent="."]
+script = ExtResource("3_ntk1m")
+metadata/_custom_type_script = "uid://bn1ww4f4t115g"
+
+[node name="AnimalActionsMachine" type="Node2D" parent="."]
+script = ExtResource("4_4klxn")
+metadata/_custom_type_script = "uid://72ydk5v1g7hl"
+
+[node name="SnowTracker" type="Marker2D" parent="."]
+script = ExtResource("3_4klxn")
+metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
+
+[node name="Corpse" type="Area2D" parent="."]
+script = ExtResource("6_kladl")
+metadata/_custom_type_script = "uid://bm6h3sq2ypia"
+
+[node name="AnimalAnimations" type="AnimatedSprite2D" parent="."]
+script = ExtResource("3_h7icm")
+metadata/_custom_type_script = "uid://cnof30b7u102a"
+
+[node name="GoTo" parent="." instance=ExtResource("4_h7icm")]
+
+[node name="AIMovement" type="Node" parent="."]
+script = ExtResource("9_t2a4m")
+metadata/_custom_type_script = "uid://cox8u8bydopri"

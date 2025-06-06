@@ -2,18 +2,18 @@
 extends Ability
 class_name PlayerMovement
 
-enum SpeedType{CREEP, WALK, JOG, RUN}
 @export_group('Movement')
 @export var efficient_bonus :int = 15
 @export var run_bonus :int = 20
-@onready var sheet = Staton.CHARACTER_SHEET[Staton.AnimalType.Human]["SpeedType"]
-@onready var speed_jog = sheet[Staton.Speed.JOG]
-@onready var speed_run :int = sheet[Staton.Speed.RUN]
-@onready var speed_normal :int = sheet[Staton.Speed.WALK]
+
+@onready var stats =L.Beings.INFO["Human"]["SpeedType"]
+@onready var speed_jog = stats["Jog"]
+@onready var speed_run :int = stats["Run"]
+@onready var speed_normal :int = stats["Walk"]
 var velocity :Vector2
 
-func _grandparent_set():
-	grandparent.publisher_one.connect(func(func_name, one:Variant): Observerton.subscribe_one(self, func_name, one))
+#func _grandparent_set():
+	#grandparent.publisher_one.connect(func(func_name, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
 
 func _physics_process(_delta: float) -> void:                   ## Every physics frame
 	if parent.current_state == parent.AbilityStates.IDLING \
@@ -26,7 +26,7 @@ func _physics_process(_delta: float) -> void:                   ## Every physics
 					grandparent.current_direction = enput
 			velocity = mover(direction)                            ## WASD check
 			if velocity != Vector2.ZERO:
-				grandparent.velocity_force = velocity               ## Do something if unique
+				grandparent.velocity_force = velocity
 				parent.current_state = parent.AbilityStates.MOVING
 				return
 		parent.current_state = parent.AbilityStates.IDLING

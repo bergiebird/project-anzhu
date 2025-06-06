@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://ddmph0kataceh"
+path="res://.godot/imported/Music Historic 4 (russian pop bear music).mp3-623e350cc7f735c3412bfac4ea92efa3.mp3str"
+
+[deps]
+
+source_file="res://resources/anzhuBeing/anzhuAnimal/bear/Music Historic 4 (russian pop bear music).mp3"
+dest_files=["res://.godot/imported/Music Historic 4 (russian pop bear music).mp3-623e350cc7f735c3412bfac4ea92efa3.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

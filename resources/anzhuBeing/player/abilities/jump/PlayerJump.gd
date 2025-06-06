@@ -10,10 +10,10 @@ var landing_location :Vector2
 var only_one_may_enter :bool = true
 @onready var sfx_land :AudioStreamPlayer = $SfxLand
 
-func _ready() -> void:
-	Libraryton.elevation_reference.connect(func(ref :TileMapLayer)->void:elevation_map = ref)
+func __ready():
+	Signalton.elevation_reference.connect(func(ref :TileMapLayer)->void:elevation_map = ref)
 
-func _physics_process(_delta :float)->void:
+func _physics_process(_delta :float):
 	match parent.current_state:
 		parent.AbilityStates.IDLING:    check_for_init_jump()
 		parent.AbilityStates.MOVING:    check_for_init_jump()
@@ -35,13 +35,10 @@ func check_if_can_jump():
 func execute_jump():
 	if only_one_may_enter:
 				only_one_may_enter = false
-				Debuggerton.tweener_property_disposal([Builderton.tweener(grandparent, 'global_position', landing_location, jump_time)], debug)
+				Debuggerton.tweener_property_disposal(
+					[Builderton.tweener(grandparent, 'global_position', landing_location, jump_time)], debug_self)
 				await get_tree().create_timer(jump_time - 0.13).timeout
 				sfx_land.play()
 				await get_tree().create_timer(0.13).timeout
 				only_one_may_enter = true
 				parent.current_state = parent.AbilityStates.IDLING
-###
-##	DEBUG
-###
-@export var debug :bool

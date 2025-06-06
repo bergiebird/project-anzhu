@@ -15,11 +15,11 @@ func _ready():
 	preprocess = 0.1
 	explosiveness = 0.9
 	randomness = 0.2
-	grandparent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
+	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
 
 
-func direction_changed_with_name(new_direction :String):
-	match new_direction:
+func update_direction(new_direction :Dictionary):
+	match new_direction["Name"]:
 		'NORTH':
 			mat.direction = Vector3.UP
 			z_index = -1

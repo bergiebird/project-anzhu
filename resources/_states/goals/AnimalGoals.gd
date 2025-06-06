@@ -6,13 +6,13 @@ enum AnimalGoals {Nothing,Hunt}
 @onready var current_goal :AnimalGoals = -1
 var goals :Dictionary[AnimalGoals,GoalState]
 
-func __ready()->void:
+func __ready():
 	change_goals(starting_goal)
 
-func change_goals(incoming_goal)->void:
+func change_goals(incoming_goal):
 	if incoming_goal is String:
 		incoming_goal = get_node(incoming_goal).which_state
-	if incoming_goal is AnimalGoals:                          # Ensures Typesafety
+	if incoming_goal is AnimalGoals:
 		if current_goal != incoming_goal:
 			current_goal = incoming_goal
 			on_transition(states[current_goal])

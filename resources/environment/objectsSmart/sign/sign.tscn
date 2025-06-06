@@ -11,6 +11,7 @@
 size = Vector2(8, 8)
 
 [node name="Sign" type="StaticBody2D"]
+z_index = 2
 script = ExtResource("1_v0fcl")
 visual_description = "Test Test"
 

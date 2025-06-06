@@ -23,7 +23,7 @@ var is_empty :bool = false
 @onready var sfx_gunshot :AudioStreamPlayer = $SfxGunshot
 
 func _grandparent_set():
-	grandparent.publisher_one.connect(func(func_name, one:Variant): Observerton.subscribe_one(self, func_name, one))
+	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
 
 func _process(_delta: float):
 	match parent.current_state:
@@ -50,7 +50,13 @@ func process_gunshot():
 	gunray.force_raycast_update()
 	if gunray.is_colliding():
 		var target_acquired:AnzhuBeing = gunray.get_collider()
-		grandparent.strike_target(1,"gun",target_acquired)
+		grandparent.strike_target(
+			{
+				"DAMAGE": 1,
+				"WEAPON": "gun",
+				"ATTACKER": grandparent,
+				"VICTIM": target_acquired,
+			})
 		gunray.collide_with_bodies = false
 
 func full_ammo(has_ammo :bool):

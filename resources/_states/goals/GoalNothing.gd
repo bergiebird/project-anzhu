@@ -28,13 +28,14 @@ func _on_timeout():
 				timer.start()
 			"Wander":
 				timer.stop()
-				grandparent.publisher_null.emit("set_GoTo_node")
+				grandparent.publish_event.emit("set_GoTo_node")
 			"Roll":
 				timer.wait_time = time_options.pick_random()
 				timer.start()
 		if chosen_state != old_chosen_state:
-			grandparent.publisher_one.emit("change_actions", chosen_state)
-			old_chosen_state = chosen_state
+			if grandparent:
+				grandparent.publish_event.emit("change_actions", chosen_state)
+				old_chosen_state = chosen_state
 
 func ___get_state_value(_parent :StateMachine):
 	which_state = _parent.AnimalGoals.Nothing

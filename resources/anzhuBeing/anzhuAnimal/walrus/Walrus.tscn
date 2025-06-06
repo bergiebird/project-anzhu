@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_o0tca"]
 [ext_resource type="SpriteFrames" uid="uid://dxm2bxjoy2ikb" path="res://resources/anzhuBeing/anzhuAnimal/walrus/visual/sf_walrus.tres" id="4_xras0"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="4_y54qn"]
-[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/bear/_AnimalActions.gd" id="5_drws8"]
+[ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/_AnimalActions.gd" id="5_drws8"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="5_emk87"]
 [ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuBeing/corpse/Corpse.gd" id="6_k3hd0"]
 [ext_resource type="Script" uid="uid://bcp0mgrl6h2bk" path="res://resources/anzhuBeing/anzhuAnimal/walrus/scripts/actionroll.gd" id="6_uk2hj"]
@@ -72,7 +72,7 @@ metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("4_xras0")
-animation = &"Idle"
+animation = &"Corpse"
 script = ExtResource("13_jmnr7")
 
 [node name="GoTo" parent="." instance=ExtResource("13_33w8m")]

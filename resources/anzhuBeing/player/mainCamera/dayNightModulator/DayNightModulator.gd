@@ -2,59 +2,52 @@
 extends CanvasModulate
 class_name DayNightModulator
 
-const TOO_DARK_THRESHOLD :float = 0.025
-
-@export var starting_TimeOfDay :DayNighton.TimeOfDay = DayNighton.TimeOfDay.LATE_NIGHT
-
+@export_enum("Dawn", "Morning", "Noon", "Afternoon", "Dusk",
+"Night", "Midnight", "Late Night") var START_TIME :String = "Dawn"
+var current_time :String
+var night_lights_on :bool
 var init_time_lerp :Array = []
-var modulate_dictionary :Dictionary
 var first_time :bool = true
 var is_nightlight_on :bool
-
-@onready var time_to_pass :int = int(DayNighton.WORLD_TIMER_WAIT_TIME)
-@onready var lerp_times :Array[float] = [1, 1, 1, 1,1, 1, 1, 1]
+var time_dictionary :Dictionary
+@onready var world_timer :Timer = $WorldTimer
 
 func _ready():
-	prepare_lerp_time()
-	modulate_dictionary = DayNighton.initialize(self)
-	DayNighton.time_progressed.connect(sun_change)
-	DayNighton.progress_time(starting_TimeOfDay)
-
-func sun_change(new_time :int):
-	_debug_sun_change(new_time)
-	var rgb :float = modulate_dictionary[new_time]['modulate']/255.0
-	if first_time:
-		first_time = false
-		Builderton.tweener_deferred(self,'color',Color(rgb,rgb,rgb),0)
-	else:
-		Builderton.tweener_deferred(self,'color', Color(rgb,rgb,rgb), 0)
-
-func prepare_lerp_time():
-	_debug_resize(init_time_lerp.resize(DayNighton.TimeOfDay.size()))
-	for index :int in range(lerp_times.size()):
-		if lerp_times[index] < 1:
-			init_time_lerp[index] = 1
-		else:
-			init_time_lerp[index] = int(time_to_pass/lerp_times[index])
+	time_dictionary =L.World.TIME
+	world_timer.timeout.connect(progress_time)
+	current_time = START_TIME
+	Signalton.time_dictionary_delivery.emit(time_dictionary)
+	progress_time(current_time)
 
 func _process(_delta :float):
-	if color.r <= TOO_DARK_THRESHOLD:
+	if color.r <=L.World.TOO_DARK_THRESHOLD:
 		if not is_nightlight_on:
-			DayNighton.time_progressed_nightlight.emit(true)
+			Signalton.new_hour_nightlight.emit(true)
 			is_nightlight_on = true
-	elif color.r > TOO_DARK_THRESHOLD:
+	elif color.r >L.World.TOO_DARK_THRESHOLD:
 		if is_nightlight_on:
 			is_nightlight_on = false
-			DayNighton.time_progressed_nightlight.emit(false)
+			Signalton.new_hour_nightlight.emit(false)
+
+func progress_time(_incoming_time :String=current_time):
+	current_time = time_dictionary[current_time]["next_time"]
+	var new_hour :Dictionary = time_dictionary[current_time]
+	var modulation :float = new_hour['modulate']
+	Builderton.tweener_deferred(self,'color', Color(modulation,modulation,modulation), 5)
+	Signalton.new_hour.emit()
+	Signalton.new_hour_name.emit(current_time)
+	Signalton.new_hour_nightlight.emit(new_hour['night_lights_on'])
+	Signalton.new_hour_campfire.emit(new_hour['camp_fire_energy'])
+	_debug_sun_change()
 
 
-#region #===========================================================================# DEBUG
+#region    #=============================================# DEBUG
 @export_group('DEBUG')
 @export var debug :bool = true
 
-func _debug_sun_change(new_time :int):
+func _debug_sun_change():
 	if debug:
-		print_rich("[color=#FFD700]⏰ Time has changed:[/color] [color=#87CEEB]" + modulate_dictionary[new_time]['name'] + "[/color]")
+		print_rich("[color=#FFD700]⏰:[/color] [color=#87CEEB]" + current_time + "[/color]")
 
 func _debug_resize(resize_return :int):
 	if debug:

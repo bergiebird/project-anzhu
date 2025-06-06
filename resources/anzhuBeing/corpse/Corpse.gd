@@ -6,29 +6,28 @@ var is_dead :bool
 @onready var parent :AnzhuBeing = get_parent()
 @onready var mask :CollisionShape2D = parent.get_node('Mask')
 
-func _ready()->void:
+func _ready():
 	body_entered.connect(_on_body_entered)
-	parent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
 
-func _on_body_entered(body :Node2D)->void:
+func _on_body_entered(body :Node2D):
 	if body is Player and is_dead:
 		queue_free()
 
-func has_died()->void:
+func has_died():
 	is_dead = true
 	await _has_died()
 	reparent_at_same_location()
 	construct_new_animation()
 	be_free()
 
-func reparent_at_same_location()->void:
+func reparent_at_same_location():
 	stored_position = parent.global_position
 	var new_parent = parent.get_parent()
 	parent.remove_child(self)
 	new_parent.add_child(self)
 	global_position = stored_position
 
-func construct_new_animation()->void:
+func construct_new_animation():
 	var new_anim :AnimatedSprite2D = AnimatedSprite2D.new()
 	var old_anims :AnimatedSprite2D = parent.get_node('Animations')
 	new_anim.sprite_frames = old_anims.sprite_frames
@@ -36,7 +35,7 @@ func construct_new_animation()->void:
 	new_anim.z_index = 1
 	add_child(new_anim)
 
-func be_free()->void:
+func be_free():
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.queue_free()
 	if mask.get_parent() == parent:
@@ -45,15 +44,16 @@ func be_free()->void:
 		add_child(mask)
 	monitorable = true
 	monitoring = true
+	z_index = 3
 	parent.queue_free()
 
 #region Virtuals
-func _has_died()->void:pass
+func _has_died():pass
 #endregion
 #region DEBUG
 @export_group('DEBUG')
 @export var debug_corpse :bool = false
 
-func debug()->void:
+func debug():
 	debug_corpse = true
 #endregion

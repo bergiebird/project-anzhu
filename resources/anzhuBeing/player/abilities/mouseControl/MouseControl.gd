@@ -6,7 +6,8 @@ class_name MouseControl
 @onready var mouse_idle_timer :Timer = $MouseIdleTimer
 @onready var menu_click_audio :AudioStreamPlayer = $MenuClick
 @onready var click_reset_timer :Timer = $ClickResetTimer
-func _ready():
+
+func __ready():
 	Inputon.set_player_cursors() # Initializer
 	Inputon.hide_cursor()
 	click_reset_timer.timeout.connect(click_restted)

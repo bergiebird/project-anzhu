@@ -33,8 +33,7 @@ func _ready():
 	if should_start_with_begin:
 		bgm_begin.playing = true
 
-func initialize_DayNightMusic():
-	DayNighton.time_progressed.connect(play_time_music)
+func initialize_DayNightMusic(): # TODO: Doesnt
 	for child :AudioStreamPlayer in day_night_audio.get_children():
 		audio_dictionary[child.name] = child
 
@@ -49,9 +48,9 @@ func initialize_CylcleBGMusic():
 		await bgm_begin.finished
 	play_new_bgm(false)
 
-func play_new_bgm(scene_just_started :bool = true):
+func play_new_bgm(_scene_just_started :bool = true):
 	while store_new == store_old:
-		store_new = Libraryton.rng.randi_range(0, dictionary_size - 1)
+		store_new =Libraryton.rng.randi_range(0, dictionary_size - 1)
 	store_old = store_new
 	audio_dictionary[store_old].playing = true
 

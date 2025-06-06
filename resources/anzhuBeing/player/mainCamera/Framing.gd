@@ -1,13 +1,20 @@
 extends CanvasLayer
 class_name Framing
+
 @export var keep_controls :bool = false
+
 var is_text_displaying :bool
+
 @onready var console = %Console
 @onready var controls_button :Node = %KeepControls
 @onready var both_panels_children :Array[Node] = []
+
 func _ready():
 	both_panels_children.append_array($EastPanel.get_children())
 	both_panels_children.append_array($WestPanel.get_children())
+	for child in get_children():
+		if child is ColorRect:
+			child.color = Color.BLACK
 	console.text_on_screen.connect(func(bol:bool): is_text_displaying = bol)
 	visible = true
 	Inputon.cursor_movement_report.connect(ui_visibility)
@@ -15,8 +22,6 @@ func _ready():
 
 func ui_visibility(has_visible :bool):
 	for child in both_panels_children:
-		#if is_text_displaying:
-			#continue
 		child.visible = has_visible
 		if child is UiControls and keep_controls:
 			child.visible = true
@@ -25,12 +30,16 @@ func ui_visibility(has_visible :bool):
 
 func _on_reset_pressed():
 	Signalton.reload_current_scene()
+
 func _on_elevation_pressed():
 	Signalton.toggle_debug_elevation.emit()
+
 func _on_quit_pressed():
 	get_tree().quit()
+
 func _on_invisible_walls_toggled(_toggled_on: bool):
 	Signalton.toggle_debug_invisible.emit()
+
 func _on_keep_controls_toggled(toggled_on: bool):
 	keep_controls = toggled_on
 

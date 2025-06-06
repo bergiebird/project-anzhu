@@ -1,7 +1,8 @@
-class_name AnzhuAnimal extends AnzhuBeing
+extends AnzhuBeing
+class_name AnzhuAnimal
 
-func __ready()->void:
-	add_to_group('animal')
-
-func __was_just_struck(_damage :int, _weapon :String, _who :AnzhuBeing)->void:
+func __was_just_struck(_attack :Dictionary)->void:
 	is_sliding = true
+
+func __setup_basics():
+	add_to_group('animal')

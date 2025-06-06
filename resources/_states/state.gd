@@ -1,33 +1,37 @@
 extends Node2D
 class_name State
+
 var parent :Node:
 	set(value):
 		parent = value
 		__parent_acquired()
 		___parent_acquired()
-var grandparent :AnzhuAnimal:
+		grandparent = parent.get_parent()
+
+var grandparent :AnzhuBeing:
 	set(value):
 		grandparent = value
+		grandparent.publish_event.connect(func(func_name:String, data:Variant=null): L.Observe.subscribe_to_event(self, func_name, data))
 		__grandparent_acquired()
 		___grandparent_acquired()
+
 var is_active :bool
 var which_state
+
 @onready var _can_process :bool = true
 @onready var _can_physics_process :bool = true
-func _ready() -> void:
+
+#region Basics
+func _ready():
 	parent = get_parent()
-	grandparent = parent.get_parent()
-	grandparent.publisher_null.connect(func(func_name): Observerton.subscribe_null(self, func_name))
-	grandparent.publisher_one.connect(func(func_name, one :Variant): Observerton.subscribe_one(self, func_name, one))
-	grandparent.publisher_two.connect(func(func_name, one :Variant, two :Variant): Observerton.subscribe_two(self, func_name, one, two))
 	_action_state_debug()
 	__ready()
 	___ready()
 
-func _enter()->void:
+func _enter():
 	is_active = true
 	if self_debug:
-		print_rich( animal_icon + "[color=firebrick] Entering [/color]" + what_state_type )
+		print_rich( entity_icon + "[color=firebrick] Entering [/color]" + what_state_type )
 	__enter()
 	___enter()
 	set_physics_process(_can_physics_process)
@@ -44,9 +48,14 @@ func _exit()->void:
 	set_process(false)
 	is_active = false
 	if self_debug:
-		print_rich( animal_icon + "[color=dimgray] Leaving [/color] " + what_state_type)
+		print_rich( entity_icon + "[color=dimgray] Leaving [/color] " + what_state_type)
 	__exit()
 	___exit()
+#endregion
+
+
+
+
 
 #region #VIRTUALS
 func __enter()->void:pass
@@ -64,7 +73,7 @@ func ___get_state_value(_parent :StateMachine):pass
 
 #region # DEBUG
 @export var self_debug :bool = false
-var animal_icon :String = ""
+var entity_icon :String = ""
 @onready var what_state_type :String = "[color=yellow][b]Goal: [/b] " + self.name + '[/color]'
 
 func _action_state_debug():

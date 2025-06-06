@@ -2,16 +2,17 @@
 extends Node2D
 class_name StateMachine
 
-var states :Dictionary[int,State]
+var states :Dictionary[int, State]
 var current_state :State
 @onready var parent :AnzhuBeing = get_parent()
 
 func _ready():
-	for child :State in get_children():                      # May be redundant as statemachine gets same children
-		child.___get_state_value(self)                 # Each state initializes its own AnimalActions key
+	for child :State in get_children():         # May be redundant as statemachine gets same children
+		child.___get_state_value(self)           # Each state initializes its own AnimalActions key
 		child.set_physics_process(false)
+
 		child.set_process(false)
-		states[child.which_state] = child                # Put together dictionary
+		states[child.which_state] = child        # Put together dictionary
 	__ready()
 
 func on_transition(state :State):
@@ -19,6 +20,8 @@ func on_transition(state :State):
 		current_state._exit()
 	current_state = state
 	current_state._enter()
+
+
 
 
 #region VIRTUALS
