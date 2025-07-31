@@ -1,11 +1,13 @@
 @icon("res://resources/anzhuBeing/player/abilities/mouseControl/icon_search.png")
+
 extends Ability
 class_name MouseControl
-@onready var can_click :bool = true
-@onready var previous_mouse_position :Vector2 = get_viewport().get_mouse_position()
-@onready var mouse_idle_timer :Timer = $MouseIdleTimer
-@onready var menu_click_audio :AudioStreamPlayer = $MenuClick
-@onready var click_reset_timer :Timer = $ClickResetTimer
+
+@onready var can_click: bool = true
+@onready var previous_mouse_position: Vector2 = get_viewport().get_mouse_position()
+@onready var mouse_idle_timer: Timer = $MouseIdleTimer
+@onready var menu_click_audio: AudioStreamPlayer = $MenuClick
+@onready var click_reset_timer: Timer = $ClickResetTimer
 
 func __ready():
 	Inputon.set_player_cursors() # Initializer
@@ -13,13 +15,13 @@ func __ready():
 	click_reset_timer.timeout.connect(click_restted)
 	mouse_idle_timer.timeout.connect(func():Inputon.hide_cursor())
 
-func _process(_delta :float):
+func _process(_delta: float):
 	var current_mouse_position :Vector2 = get_viewport().get_mouse_position()
 	if current_mouse_position != previous_mouse_position:
 		previous_mouse_position = current_mouse_position
 		mouse_moved()
 
-func _input(event :InputEvent):
+func _input(event: InputEvent):
 	if event is InputEventMouse or Inputon.escape():
 		mouse_moved()
 		if can_click:

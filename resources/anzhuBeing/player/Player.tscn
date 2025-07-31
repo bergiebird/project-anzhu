@@ -39,7 +39,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 262787
+collision_layer = 262803
 collision_mask = 262275
 script = ExtResource("1_e4mdq")
 this_beings_type = "Human"
@@ -76,7 +76,7 @@ jump_distance = 3.0
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
-z_index = 2
+texture_filter = 1
 position = Vector2(0, -1)
 sprite_frames = ExtResource("8_lkdrv")
 animation = &"executeJump_SIDE"
@@ -106,7 +106,7 @@ pitch_scale = 2.0
 current = true
 
 [node name="SnowTracker" type="Marker2D" parent="."]
-position = Vector2(0, 2)
+position = Vector2(0, 2.4)
 script = ExtResource("16_buxeu")
 metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
@@ -128,4 +128,3 @@ visible = false
 [editable path="Abilities/Gun"]
 [editable path="Abilities/Jump"]
 [editable path="Abilities/MouseControl"]
-[editable path="MainCamera"]

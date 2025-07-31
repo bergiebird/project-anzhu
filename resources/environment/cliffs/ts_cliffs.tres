@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c2juxxibyuqgu"]
 
-[ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://warehouse/Overworld/Resources/anzhu_cliffs.png" id="1_srphd"]
+[ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://resources/environment/cliffs/anzhu_cliffs.png" id="1_srphd"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_lhh1u"]
 texture = ExtResource("1_srphd")
@@ -23,7 +23,7 @@ texture_region_size = Vector2i(8, 8)
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -2, 0, -2, 0, -4, -2, -4, -2, 1, 4, 1)
 1:2/0 = 0
-1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, -2, -4, -2, -4, 1, 4, 1)
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -2, 4, -2, 4, 2, -4, 2)
 2:2/0 = 0
 2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(2, -4, 0, -4, 0, -2, -4, -2, -4, 1, 2, 1)
 0:3/0 = 0
@@ -1396,14 +1396,14 @@ texture_region_size = Vector2i(8, 8)
 23:52/0 = 0
 23:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 4, 4, -4, -4, -4, -4, 4)
 24:52/0 = 0
-24:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 4, 4, -4, -4, -4, -4, 4)
+24:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 0, -4, 0)
 25:52/0 = 0
-25:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 4, 4, -4, -4, -4, -4, 4)
+25:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 0, -4, 0)
 26:52/0 = 0
 27:52/0 = 0
 28:52/0 = 0
 29:52/0 = 0
-29:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 4, 4, -4, -4, -4, -4, 4)
+29:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 2, -4, 2)
 30:52/0 = 0
 30:52/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 4, 4, -4, -4, -4, -4, 4)
 31:52/0 = 0
@@ -1478,9 +1478,9 @@ texture_region_size = Vector2i(8, 8)
 27:46/0/physics_layer_0/polygon_0/points = PackedVector2Array(-1, -2, 4, -2, 4, 4, -1, 4)
 4:1/0 = 0
 60:18/0 = 0
-60:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(4, 4, 4, -4, -4, -4, -4, 4)
+60:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 2, -4, 2)
 62:18/0 = 0
-62:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+62:18/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -4, 4, -4, 4, 2, -4, 2)
 
 [resource]
 tile_size = Vector2i(8, 8)

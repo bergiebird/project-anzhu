@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://0ijhuxl7wotp"]
+
+[ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="1_on5ne"]
+[ext_resource type="Script" uid="uid://cljmfw22ssxx2" path="res://resources/environment/objectsSmart/collectible/Collectible.gd" id="1_rvcnw"]
+[ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/environment/objectsSmart/interactables/Interactible.gd" id="2_rvcnw"]
+[ext_resource type="Texture2D" uid="uid://bs33736ddbwrt" path="res://resources/environment/objectsSmart/collectible/logs/log-1.png" id="3_f356s"]
+[ext_resource type="Script" uid="uid://su1yn7mjwpgm" path="res://resources/environment/objectsSmart/collectible/CollectibleSprite.gd" id="4_2pyo0"]
+[ext_resource type="Shape2D" uid="uid://ksw2huxa5fht" path="res://resources/environment/objectsSmart/collectible/interaction_shape.tres" id="5_387ek"]
+[ext_resource type="AudioStream" uid="uid://hy82ij0iyeaq" path="res://resources/environment/objectsSmart/collectible/Collect.mp3" id="6_f356s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f356s"]
+size = Vector2(8, 8)
+
+[node name="Collectible" type="StaticBody2D"]
+script = ExtResource("1_rvcnw")
+
+[node name="Mask" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_f356s")
+script = ExtResource("1_on5ne")
+description = "Driftwood!"
+set_mask_dimensions = 1
+has_healthbar = false
+metadata/_custom_type_script = "uid://60saxsgwo84g"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_f356s")
+script = ExtResource("4_2pyo0")
+
+[node name="Interactible" type="Area2D" parent="."]
+script = ExtResource("2_rvcnw")
+metadata/_custom_type_script = "uid://b0b683moir7cy"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Interactible"]
+shape = ExtResource("5_387ek")
+
+[node name="SfxCollect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_f356s")
+volume_db = -10.0
+bus = &"SFX"

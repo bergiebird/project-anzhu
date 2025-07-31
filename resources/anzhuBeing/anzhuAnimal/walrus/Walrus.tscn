@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cy8x2rpiisi4c"]
+[gd_scene load_steps=19 format=3 uid="uid://cy8x2rpiisi4c"]
 
 [ext_resource type="Script" uid="uid://cuyuuhi5p5vat" path="res://resources/anzhuBeing/anzhuAnimal/walrus/scripts/Warlus.gd" id="1_qyjs8"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_o0tca"]
@@ -6,8 +6,10 @@
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="4_y54qn"]
 [ext_resource type="Script" uid="uid://72ydk5v1g7hl" path="res://resources/anzhuBeing/anzhuAnimal/_AnimalActions.gd" id="5_drws8"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="5_emk87"]
+[ext_resource type="AudioStream" uid="uid://c1drcrjabfejk" path="res://resources/anzhuBeing/anzhuAnimal/walrus/audio/Walrus_1.wav" id="6_j825g"]
 [ext_resource type="Script" uid="uid://bm6h3sq2ypia" path="res://resources/anzhuBeing/corpse/Corpse.gd" id="6_k3hd0"]
 [ext_resource type="Script" uid="uid://bcp0mgrl6h2bk" path="res://resources/anzhuBeing/anzhuAnimal/walrus/scripts/actionroll.gd" id="6_uk2hj"]
+[ext_resource type="AudioStream" uid="uid://c8eq1mcng85n" path="res://resources/anzhuBeing/anzhuAnimal/walrus/audio/Walrus_2.wav" id="7_cwyc0"]
 [ext_resource type="Script" uid="uid://crgdesgb0g5fd" path="res://resources/_states/actions/ActionIdle.gd" id="9_xras0"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="10_sm0p4"]
 [ext_resource type="Script" uid="uid://n4g3epvshvea" path="res://resources/_states/goals/GoalNothing.gd" id="12_wf8cq"]
@@ -16,12 +18,20 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3x73f"]
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_57gyt"]
+random_pitch = 1.1
+random_volume_offset_db = 0.2
+streams_count = 2
+stream_0/stream = ExtResource("6_j825g")
+stream_1/stream = ExtResource("7_cwyc0")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_o0tca"]
 
 [node name="Walrus" type="CharacterBody2D"]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_qyjs8")
+this_beings_type = "Walrus"
 
 [node name="Mask" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_3x73f")
@@ -34,25 +44,27 @@ metadata/_custom_type_script = "uid://60saxsgwo84g"
 [node name="Actions" type="Node2D" parent="."]
 script = ExtResource("5_drws8")
 starting_action = 3
+debug_self = true
 metadata/_custom_type_script = "uid://72ydk5v1g7hl"
 
 [node name="Idle" type="Node2D" parent="Actions"]
 script = ExtResource("9_xras0")
+self_debug = true
 metadata/_custom_type_script = "uid://crgdesgb0g5fd"
 
 [node name="Wander" type="Node2D" parent="Actions"]
 script = ExtResource("10_sm0p4")
+self_debug = true
 metadata/_custom_type_script = "uid://dpcgwylrmycpp"
+
+[node name="WalrusRoar" type="AudioStreamPlayer2D" parent="Actions/Wander"]
+stream = SubResource("AudioStreamRandomizer_57gyt")
+max_distance = 1500.0
+attenuation = 5.0
 
 [node name="Roll" type="Node2D" parent="Actions"]
 script = ExtResource("6_uk2hj")
-
-[node name="Corpse" type="Area2D" parent="."]
-script = ExtResource("6_k3hd0")
-metadata/_custom_type_script = "uid://bm6h3sq2ypia"
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse"]
-shape = SubResource("CircleShape2D_o0tca")
+self_debug = true
 
 [node name="Goals" type="Node2D" parent="."]
 script = ExtResource("5_emk87")
@@ -72,7 +84,15 @@ metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
 sprite_frames = ExtResource("4_xras0")
-animation = &"Corpse"
+animation = &"Roll"
+frame_progress = 0.638907
 script = ExtResource("13_jmnr7")
 
 [node name="GoTo" parent="." instance=ExtResource("13_33w8m")]
+
+[node name="Corpse" type="Area2D" parent="."]
+script = ExtResource("6_k3hd0")
+metadata/_custom_type_script = "uid://bm6h3sq2ypia"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse"]
+shape = SubResource("CircleShape2D_o0tca")

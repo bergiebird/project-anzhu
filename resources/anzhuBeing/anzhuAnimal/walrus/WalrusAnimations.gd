@@ -2,8 +2,8 @@ extends AnimalAnimations
 class_name WalrusAnimations
 
 
-func change_actions(new_action :Dictionary):
-	match new_action["STRING"]:
+func change_actions(new_action :String):
+	match new_action:
 		"Idle":
 			update_animations("Idle")
 		"Stunned":

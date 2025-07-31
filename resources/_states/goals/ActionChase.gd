@@ -12,13 +12,13 @@ func ___get_state_value(_parent :StateMachine):
 	which_state = _parent.AnimalActions.Chase
 
 func ___ready():
-	Signalton.player_reference.connect(acquire_player)
+	Sgnl.player_reference.connect(acquire_player)
 	direction_timer.timeout.connect(reached_target)
 	charge_timer.timeout.connect(___end_charge)
 
 func acquire_player(ref :Player):
 	player=ref
-	Signalton.player_reference.disconnect(acquire_player)
+	Sgnl.player_reference.disconnect(acquire_player)
 
 func ___enter():
 	if not is_active:
@@ -53,7 +53,7 @@ func ___start_charge(): if is_active:
 func ___end_charge():
 	current_speed = "Jog"
 
-func strike_target(blah):
+func strike_target(_blah):
 	await get_tree().create_timer(0.32).timeout
 	charge_timer.stop()
 	current_speed = "Jog"

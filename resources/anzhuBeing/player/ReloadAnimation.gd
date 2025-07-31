@@ -1,16 +1,18 @@
-extends Node
-class_name ReloadAnimation
 
-var animation :String
-var current_direction :String
-@onready var parent :AnimatedSprite2D = get_parent()
-@onready var grandparent :Player = parent.get_parent()
-@onready var tres_frames :SpriteFrames = parent.sprite_frames
-@onready var sfx_stuff :AudioStreamPlayer = $SfxStuff
-@onready var sfx_thonk :AudioStreamPlayer = $SfxThonk
+class_name ReloadAnimation
+extends Node
+
+var animation: String
+var current_direction: String
+
+@onready var parent: AnimatedSprite2D = get_parent()
+@onready var grandparent: Player = parent.get_parent()
+@onready var tres_frames: SpriteFrames = parent.sprite_frames
+@onready var sfx_stuff: AudioStreamPlayer = $SfxStuff
+@onready var sfx_thonk: AudioStreamPlayer = $SfxThonk
 
 func _ready():
-	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
+	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):Lib.Observe.subscribe_to_event(self, func_name, data))
 
 func start_routine():
 	parent.speed_scale = 1 if not instant_reload else 100

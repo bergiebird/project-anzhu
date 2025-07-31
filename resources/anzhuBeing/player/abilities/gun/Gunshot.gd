@@ -1,29 +1,32 @@
 @icon("res://resources/anzhuBeing/player/abilities/gun/icons8-sniper-rifle-100.png")
-extends Ability
+
 class_name Gunshot
+extends Ability
 
-@export_range(0, 0.5, 0.01) var bullet_travel_time:float = 0.26
-@export var flash_time:float = 0.1
-@export var modified_speed_up:float = 0.16
-@export var noise_db:float = 300.0
+@export_range(0, 0.5, 0.01) var bullet_travel_time: float = 0.26
+@export var flash_time: float = 0.1
+@export var modified_speed_up: float = 0.16
+@export var noise_db: float = 300.0
+@export var attack_gunshot: Attack
 
-var is_empty :bool = false
+var is_empty: bool = false
 
-@onready var can_shoot :bool = true
-@onready var vfx_flash :PointLight2D = $VfxFlash
-@onready var flash :bool = vfx_flash.visible:
-	set(value):
-		flash = value
+@onready var can_shoot: bool = true
+@onready var smoke_barrel: CPUParticles2D = $VfxSmoke
+@onready var smoke_back: CPUParticles2D = $VfxSmoke2
+@onready var gunray: RayCast2D = $GunRay
+@onready var sfx_gunshot: AudioStreamPlayer = $SfxGunshot
+@onready var vfx_flash: PointLight2D = $VfxFlash
+@onready var timer_flash: Timer = $FlashTime
+@onready var flash: bool = vfx_flash.visible:
+	set(v):
+		flash = v
 		if flash:
-			await get_tree().create_timer(flash_time).timeout
-			flash = false
-@onready var smoke_barrel :CPUParticles2D = $VfxSmoke
-@onready var smoke_back :CPUParticles2D = $VfxSmoke2
-@onready var gunray :RayCast2D = $GunRay
-@onready var sfx_gunshot :AudioStreamPlayer = $SfxGunshot
+			timer_flash.start()
 
 func _grandparent_set():
-	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
+	grandparent.publish_event.connect(func(func_name:String, data:Variant=null):Lib.Observe.subscribe_to_event(self, func_name, data))
+
 
 func _process(_delta: float):
 	match parent.current_state:
@@ -36,8 +39,9 @@ func _process(_delta: float):
 			elif is_empty and Inputon.gun_reload():
 				parent.current_state = parent.AbilityStates.RELOADING
 
+
 func process_gunshot():
-	Signalton.loud_noise.emit(grandparent,grandparent.global_position, noise_db)
+	Sgnl.loud_noise.emit(grandparent,grandparent.global_position, noise_db)
 	is_empty = true
 	sfx_gunshot.play()
 	position = Vector2.ZERO
@@ -49,26 +53,14 @@ func process_gunshot():
 	gunray.collide_with_bodies = true
 	gunray.force_raycast_update()
 	if gunray.is_colliding():
-		var target_acquired:AnzhuBeing = gunray.get_collider()
-		grandparent.strike_target(
-			{
-				"DAMAGE": 1,
-				"WEAPON": "gun",
-				"ATTACKER": grandparent,
-				"VICTIM": target_acquired,
-			})
+		attack_gunshot.victim = gunray.get_collider()
+		#grandparent.strike_target(attack_gunshot)
 		gunray.collide_with_bodies = false
 
-func full_ammo(has_ammo :bool):
+
+func full_ammo(has_ammo: bool):
 	is_empty = !has_ammo
 
 
-#region #DEBUGGER
-@export_group('Debug')
-@export var debug_gunshot :bool = false
-@export var debugger_color :Color = Color("fff1a9")
-
-func debug()->void:
-	Debuggerton.enable_print(self.name, debugger_color)
-	debug_gunshot = true
-#endregion
+func _on_flash_time_timeout() -> void:
+	flash = false

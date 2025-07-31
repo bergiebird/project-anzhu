@@ -1,5 +1,5 @@
 ## Static Hell
-class_name L
+class_name Lib
 extends Node
 
 class Math:
@@ -76,9 +76,9 @@ class Beings: # Send this to a resource
 			"DamagePerHit":1,
 			"SpeedType": {
 				"Creep": 10,
-				"Walk": 500, # Make very slow so player can get far away, half speed of jog
-				"Jog": 1225,
-				"Run": 2700,
+				"Walk": 520, # Make very slow so player can get far away, half speed of jog
+				"Jog": 1400,
+				"Run": 2650,
 				},
 			},
 		"Fox":{
@@ -225,3 +225,21 @@ class Observe:
 				Callable(target, func_name).call(data)
 		elif target.has_method(func_name):
 			Callable(target, func_name).call()
+class Filter:
+	## Filter -> Return with "Type":
+	## Takes a node and acts upon it to create a return
+
+# Cycle through the children of a node and run each supplied function on all children
+	static func children(node :Node, callables :Array[Callable], include_node :bool = false)->void:
+		for child :Node in node.get_children():
+			for lamda in callables:
+				lamda.call(child, node if include_node else null )
+
+
+	static func getChildren_filterDictionary(dictionary :Dictionary, node :Node, callables :Array[Callable] = [])->Dictionary:
+		for child :Node in node.get_children():
+			dictionary[child.name] = child
+			if callables:
+				for lamda :Callable in callables:
+					lamda.call(child)
+		return dictionary

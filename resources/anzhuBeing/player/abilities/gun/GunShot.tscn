@@ -1,7 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://b3100fbxnsgc0"]
+[gd_scene load_steps=11 format=3 uid="uid://b3100fbxnsgc0"]
 
 [ext_resource type="Script" uid="uid://88twws4eaxq0" path="res://resources/anzhuBeing/player/abilities/gun/Gunshot.gd" id="1_1tum2"]
+[ext_resource type="Script" uid="uid://b320hn56a6jjm" path="res://Attack.gd" id="2_46cyy"]
 [ext_resource type="AudioStream" uid="uid://dt8tbpw6y5t1o" path="res://warehouse/_audio/sfx/gunshot/rando_gunshot.tres" id="2_mnp2n"]
+
+[sub_resource type="Resource" id="Resource_20jso"]
+script = ExtResource("2_46cyy")
+weapon = "gun"
+damage = 0
+metadata/_custom_type_script = "uid://b320hn56a6jjm"
 
 [sub_resource type="Gradient" id="Gradient_d1bta"]
 offsets = PackedFloat32Array(0, 0.0805195, 0.628571)
@@ -37,6 +44,7 @@ colors = PackedColorArray(0.917647, 0.945098, 0.941176, 1, 0.523343, 0.525148, 0
 [node name="GunShot" type="Node2D"]
 script = ExtResource("1_1tum2")
 bullet_travel_time = 0.1
+attack_gunshot = SubResource("Resource_20jso")
 
 [node name="VfxFlash" type="PointLight2D" parent="."]
 visible = false
@@ -103,3 +111,9 @@ collide_with_bodies = false
 stream = ExtResource("2_mnp2n")
 volume_db = 3.0
 bus = &"SFX"
+
+[node name="FlashTime" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[connection signal="timeout" from="FlashTime" to="." method="_on_flash_time_timeout"]

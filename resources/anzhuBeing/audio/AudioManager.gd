@@ -26,8 +26,6 @@ func get_is_playing(name_of_sfx :String)->bool:
 
 func __ready()->void:pass
 func __signaler()->void:pass
-func __was_just_struck()->void: 	pass
-func __match_observer(_method_name:String)->void:pass
 #endregion
 
 #region # DEBUG

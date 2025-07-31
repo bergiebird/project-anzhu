@@ -16,7 +16,7 @@ var is_exit :bool = false:
 
 func _ready():
 	_debug()
-	Signalton.player_reference.connect(_player_reference_collection)
+	Sgnl.player_reference.connect(_player_reference_collection)
 	body_entered.connect(_teleport_player)
 	body_exited.connect(_player_exited)
 
@@ -33,20 +33,20 @@ func _player_exited(body: Node2D):
 
 func _player_reference_collection(ref :Player):
 	player = ref
-	Signalton.player_reference.disconnect(_player_reference_collection)
+	Sgnl.player_reference.disconnect(_player_reference_collection)
 
 #region	 DEBUG
 
 @export_group('debug')
-@export var debug :bool = false
-@export var debug_color :Color =L.Palette.BROWN_DARKEST
-@onready var debug_sprite :Sprite2D = $DebugSprite
+@export var debug: bool = false
+@export var debug_color: Color =Lib.Palette.BROWN_DARKEST
+@onready var debug_sprite: Sprite2D = $DebugSprite
 
 func _debug():
 	assert(pair, self.name + " does not have a pair")
 	if debug:
 		debug_sprite.visible = true
-		Debuggerton.enable_print(self.name, debug_color)
+		Dbgr.enable_print(self.name, debug_color)
 	else:
 		debug_sprite.visible = false
 #endregion

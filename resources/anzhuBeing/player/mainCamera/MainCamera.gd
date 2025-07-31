@@ -1,16 +1,22 @@
-extends Camera2D
+
 class_name MainCamera
+extends Camera2D
 
-enum DebugView{ NoCRT=100, None=12, Far=8, Farthest=3 }
+enum DebugView{
+	NO_CRT = 100,
+	NONE = 12,
+	FAR = 8,
+	FARTHEST = 3,
+ }
 
-@export var debug_view :DebugView = DebugView.None:
-	set(value):
-		debug_view = value
+@export var debug_view: DebugView = DebugView.NONE:
+	set(v):
+		debug_view = v
 		if not is_node_ready():
 			await self.ready
 		visible = true
 		match debug_view:
-			DebugView.NoCRT:
+			DebugView.NO_CRT:
 				zoom = Vector2(11,11)
 				$CRT.visible = false
 			_:

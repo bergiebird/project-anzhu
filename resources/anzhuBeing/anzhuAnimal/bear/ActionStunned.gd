@@ -13,6 +13,9 @@ func ___ready():
 	timer.wait_time = stun_time
 	timer.timeout.connect(func(): grandparent.publish_event.emit("change_actions","Chase"))
 
+func ___enter():
+	grandparent.publish_event.emit("set_stun_state", true)
+
 func was_struck():
 	stun_time_modifier -= REMOVE_FROM_STUN_TIME_MODIFIER
 	timer.wait_time += stun_time_modifier
@@ -25,7 +28,8 @@ func _physics_process(delta: float):
 func ___get_state_value(_parent :StateMachine):
 	which_state = _parent.AnimalActions.Stunned
 
-
+func ___exit():
+	grandparent.publish_event.emit("set_stun_state", false)
 
 
 # ISSUES:

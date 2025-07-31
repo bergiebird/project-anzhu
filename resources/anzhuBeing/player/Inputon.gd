@@ -8,7 +8,7 @@ var player :Player:
 var shot_db :float
 
 func _ready():
-	Signalton.player_reference.connect(func(ref :Player)->void: player = ref)
+	Sgnl.player_reference.connect(func(ref :Player)->void: player = ref)
 	set_player_cursors()
 #region #=======================================================================================# KEYBOARD
 func look_direction(direction :String)->bool:

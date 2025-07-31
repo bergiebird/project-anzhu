@@ -1,10 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://dtdhu37x0dhxo"]
 
-[ext_resource type="Script" uid="uid://cljmfw22ssxx2" path="res://resources/environment/objectsSmart/collectible/collectible.gd" id="1_atk80"]
+[ext_resource type="Script" uid="uid://cljmfw22ssxx2" path="res://resources/environment/objectsSmart/collectible/Collectible.gd" id="1_atk80"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_rd0mu"]
 [ext_resource type="Texture2D" uid="uid://bs33736ddbwrt" path="res://resources/environment/objectsSmart/collectible/logs/log-1.png" id="3_n242o"]
 [ext_resource type="Script" uid="uid://b0b683moir7cy" path="res://resources/environment/objectsSmart/interactables/Interactible.gd" id="4_fkjls"]
-[ext_resource type="Script" uid="uid://su1yn7mjwpgm" path="res://resources/environment/objectsSmart/collectible/collectible_sprite.gd" id="4_rd0mu"]
+[ext_resource type="Script" uid="uid://su1yn7mjwpgm" path="res://resources/environment/objectsSmart/collectible/CollectibleSprite.gd" id="4_rd0mu"]
 [ext_resource type="Shape2D" uid="uid://ksw2huxa5fht" path="res://resources/environment/objectsSmart/collectible/interaction_shape.tres" id="5_dv0np"]
 [ext_resource type="AudioStream" uid="uid://hy82ij0iyeaq" path="res://resources/environment/objectsSmart/collectible/Collect.mp3" id="6_erhb4"]
 

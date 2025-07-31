@@ -1,14 +1,9 @@
 Timer
+Node
+Area2D
+Walrus
 AIMovement
 AnimalAnimations
 AnimalActionsMachine
 Corpse
 SnowTracker
-AnimalGoalsMachine
-AnimatedSprite2D
-Mask
-CollisionShape2D
-AnzhuAnimal
-CharacterBody2D
-RayCast2D
-Sprite2D

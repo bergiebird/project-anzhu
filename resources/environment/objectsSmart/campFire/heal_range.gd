@@ -15,7 +15,7 @@ func _ready():
 
 func distribute_heal():
 	if player_in_area:
-		Signalton.heal_player.emit()
+		Sgnl.heal_player.emit()
 
 func _on_player_entering_area(body: Node2D):
 	if body is Player:

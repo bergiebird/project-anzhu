@@ -1,16 +1,11 @@
 @icon("res://resources/environment/objectsSmart/interactables/icon_interactable.png")
-extends Area2D
+
 class_name Interactible
+extends Area2D
 
-enum Interact {
-	OnButtonPress,
-	OnCollision,
-	OnSight,
-	OnClick,
-}
+signal interacted
+signal player_entered_the_space(bool)
 
-@export var primary_interactible_state :Interact
-@export var secondary_interactible_state : Interact
 
 func _ready():
 	_signaler()
@@ -18,32 +13,40 @@ func _ready():
 	set_collision_mask_value(8,true)
 	set_process(false)
 
+
 func _on_body_entered(body :Node2D):
 	if body is Player:
 		set_process(true)
-		parent.publish_event.emit('player_entered_the_space')
+		player_entered_the_space.emit(true)
+
 
 func _process(_delta :float):
 	if Input.is_action_just_pressed('interact'):
-		parent.publish_event.emit('interacted')
+		interacted.emit()
+
 
 func _on_body_exited(body :Node2D):
 	if body is Player:
 		set_process(false)
-		parent.publish_event.emit('player_left_the_space')
+		player_entered_the_space.emit(false)
+
 
 func _signaler():
 	ready.connect(_debug)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	if debug: interacted.connect(debug_interacted)
 
+
+
+
+#region #===========================================================================================# Debug
 @export_group('debug')
-#region
-@export var debug :bool = false
-@export var debug_color :Color =L.Palette.GREEN_FOREST
-@onready var interaction_enter :String = "Press F to interact with " + self.name
-@onready var interacted_with :String = "This is a note from " + self.name
-@onready var interaction_exit :String = 'Have left the interaction zone of ' + self.name
+@export var debug: bool = false
+@export var debug_color: Color = Lib.Palette.GREEN_FOREST
+@onready var interaction_enter: String = "Press F to interact with " + self.name
+@onready var interacted_with: String = "This is a note from " + self.name
+@onready var interaction_exit: String = 'Have left the interaction zone of ' + self.name
 @onready var parent = get_parent()
 
 func _debug() ->void:
@@ -52,15 +55,9 @@ func _debug() ->void:
 
 func _dprint(message :String)->void:
 		if debug:
-			Debuggerton.dprint(message, debug_color)
+			Dbgr.dprint(message, debug_color)
 
-func interacted():
+func debug_interacted():
 	if debug:
 		_dprint('interaction occured at ' + parent.name)
-
-
-
-
-
-
 #endregion

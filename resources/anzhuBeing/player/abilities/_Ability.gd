@@ -1,13 +1,13 @@
 extends Node2D
 class_name Ability
 
-var parent :Abilities:
+var parent: Abilities:
 	set(value):
 		parent = value
 		_parent_set()
 		grandparent = parent.get_parent()
 
-var grandparent :Player:
+var grandparent: Player:
 	set(value):
 		grandparent = value
 		_grandparent_set()

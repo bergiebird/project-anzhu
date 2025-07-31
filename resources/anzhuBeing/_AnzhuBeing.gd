@@ -39,6 +39,7 @@ var max_health :int
 var speed_types :Dictionary
 var entity_icon :String
 var velocity_force :Vector2
+var is_on_ice :bool = false
 
 var is_sliding :bool = false:
 	set(value): if value!=is_sliding:
@@ -58,24 +59,23 @@ func _ready():
 func _setup_basics():
 	set_motion_mode(MOTION_MODE_FLOATING)
 	set_safe_margin(SAFE_MARGIN)
-	personal_stats =L.Beings.INFO[this_beings_type]
+	personal_stats =Lib.Beings.INFO[this_beings_type]
 	current_direction = PersonalDirection.EAST
-	z_index = 3
 	__setup_basics()
 	___setup_basics()
 
 func _signaler():
-	Signalton.player_reference.connect(player_reference_subscriber)
-	publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
+	Sgnl.player_reference.connect(player_reference_subscriber)
+	publish_event.connect(func(func_name:String, data:Variant=null):Lib.Observe.subscribe_to_event(self, func_name, data))
 	for child in get_children():
-		publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(child, func_name, data))
+		publish_event.connect(func(func_name:String, data:Variant=null):Lib.Observe.subscribe_to_event(child, func_name, data))
 	__signaler()
 	___signaler()
 
 var player :Player
 func player_reference_subscriber(ref :Player):
 	player = ref
-	Signalton.player_reference.disconnect(player_reference_subscriber)
+	Sgnl.player_reference.disconnect(player_reference_subscriber)
 
 #endregion #============================================================# Ready
 #region    #============================================================# Movement
@@ -91,7 +91,7 @@ func _physics_process(delta: float):
 	move_and_slide()
 	if not is_sliding:
 		velocity_force = Vector2.ZERO
-		velocity /= 0.1
+		velocity /= 0.05
 
 #endregion #============================================================# Movement
 #region    #============================================================# Strikes
@@ -143,5 +143,6 @@ func initialize_debugging():
 	early_ready_for_debug()
 
 func if_debug(message :String):
-	if debug_self: Debuggerton.dprint(message)
+	if debug_self:
+		Dbgr.dprint(message)
 #endregion #============================================================# Debug

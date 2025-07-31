@@ -3,6 +3,8 @@ class_name AnimalActionsMachine
 
 enum AnimalActions {Idle,Stunned,Sit,Wander,Chase,Roll}
 
+
+@export var starting_action :AnimalActions = AnimalActions.Idle
 var animal_actions :Dictionary[AnimalActions, String] = {
 	AnimalActions.Idle:"Idle",
 	AnimalActions.Stunned: "Stunned",
@@ -11,8 +13,6 @@ var animal_actions :Dictionary[AnimalActions, String] = {
 	AnimalActions.Chase: "Chase",
 	AnimalActions.Roll: "Roll",
 }
-
-@export var starting_action :AnimalActions = AnimalActions.Idle
 var actions :Dictionary[AnimalActions, ActionState]
 @onready var current_action :AnimalActions = -1
 
@@ -29,11 +29,15 @@ func late_ready():
 func change_actions(incoming_action):
 	if incoming_action is String:
 		incoming_action = get_node(incoming_action).which_state
-		if incoming_action is not AnimalActions: printerr('FAILURE')
+		if incoming_action is not AnimalActions:
+			printerr('FAILURE')
 	if incoming_action is AnimalActions:
 		if current_action != incoming_action:
 			current_action = incoming_action
 			on_transition(actions[current_action])
+			if debug_self:
+				print_rich(
+					'[color=green]Transitioning to: [color=white]%s[/color][/color]' % animal_actions[incoming_action])
 	else:
 		_debug()
 
@@ -45,7 +49,7 @@ func change_actions(incoming_action):
 @export var debug_self :bool = false
 
 func debug()->void:
-	print_rich('[color=yellow]Animations debugging enabled . . .[/color]')
+	print_rich('[color=yellow]Animal Actions Machine debugging enabled . . .[/color]')
 	debug_self = true
 
 func _debug():

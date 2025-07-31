@@ -1,11 +1,11 @@
 extends Node
-#Builderton.gd
+#Buildton.gd
 ## Builder Pattern: "Separate the construction of a complex object from its representation
 ## so that the same construction process can create different representations." - Design Patterns Pg[97]
 #=====================================================#=====================================================#
-#=====================================================#=====================================================#
+#region TRACKS
 ## Creates a TileMapLayer, places it as a child of %Tracks, and returns the reference
-## %Tracks tells Builderton its reference.
+## %Tracks tells Buildton its reference.
 
 const tracks_PATH_START :String = "res://resources/anzhuBeing/snowTracker/"
 const tracks_PATH_END :String = ".tres"
@@ -14,8 +14,8 @@ const SLIDE_PATH_END :String = "_slide.tres"
 var tracks :CanvasGroup
 
 func _ready():
-	Debuggerton.signal_checker([
-		Signalton.tracks_reference.connect(func(ref :CanvasGroup)->void: tracks = ref)])
+	Dbgr.signal_checker([
+		Sgnl.tracks_reference.connect(func(ref :CanvasGroup)->void: tracks = ref)])
 
 ## Keep here for the constants
 func create_trackMap_array(who :String)->Array[TileMapLayer]:
@@ -29,7 +29,8 @@ func track_map(who :String, PATH_END :String)->TileMapLayer:
 	tile_map.name = who + PATH_END
 	tracks.add_child(tile_map)
 	return tile_map
-#=====================================================#=====================================================#
+#endregion
+#region TWEENS
 var active_tweens :Dictionary[String,Tween] = {}
 
 func tweener_deferred(object :Object, property :String, end_result :Variant, time :float, trans_enum :Tween.TransitionType=Tween.TRANS_LINEAR, ease_enum :Tween.EaseType=Tween.EASE_IN_OUT)->PropertyTweener:
@@ -50,4 +51,4 @@ func kill_tweener(object :Object, property :String)->String:
 
 func get_key(object :Object, property:String)->String:
 	return str(object.get_instance_id()) + property
-#=====================================================#=====================================================#
+#endregion

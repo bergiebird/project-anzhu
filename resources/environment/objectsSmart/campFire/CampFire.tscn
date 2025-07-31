@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_mi3f3"]
 [ext_resource type="Texture2D" uid="uid://dmvcfy5crckwj" path="res://resources/environment/objectsSmart/campFire/big-fire.png" id="2_yg5ku"]
 [ext_resource type="Texture2D" uid="uid://c43gja4g441vn" path="res://resources/environment/objectsSmart/campFire/camp_fire_light.tres" id="4_8np16"]
-[ext_resource type="AudioStream" uid="uid://dgnxwh4t4p2vs" path="res://warehouse/_audio/sfx/Campfire.mp3" id="7_6e312"]
+[ext_resource type="AudioStream" uid="uid://dgnxwh4t4p2vs" path="res://resources/environment/objectsSmart/campFire/Campfire.mp3" id="7_6e312"]
 [ext_resource type="PackedScene" uid="uid://jlicup5il7x7" path="res://resources/environment/objectsSmart/interactables/Interactable.tscn" id="8_jyux6"]
 [ext_resource type="AudioStream" uid="uid://buls2uubesprq" path="res://warehouse/_audio/music/bgm/Menu (start - I think).mp3" id="8_obei1"]
 [ext_resource type="Shape2D" uid="uid://ksw2huxa5fht" path="res://resources/environment/objectsSmart/collectible/interaction_shape.tres" id="9_lc4nv"]
@@ -82,8 +82,6 @@ animations = [{
 }]
 
 [node name="CampFire" type="StaticBody2D"]
-z_index = 200
-z_as_relative = false
 script = ExtResource("1_ggvyn")
 is_lit = true
 
@@ -138,7 +136,7 @@ texture = ExtResource("11_nls13")
 region_enabled = true
 region_rect = Rect2(24, 504, 8, 8)
 
-[node name="Fire" type="AnimatedSprite2D" parent="." groups=["visibility_changed"]]
+[node name="Fire" type="AnimatedSprite2D" parent="."]
 visible = false
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_lc4nv")

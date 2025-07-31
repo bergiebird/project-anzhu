@@ -11,7 +11,7 @@ var parent :Node:
 var grandparent :AnzhuBeing:
 	set(value):
 		grandparent = value
-		grandparent.publish_event.connect(func(func_name:String, data:Variant=null): L.Observe.subscribe_to_event(self, func_name, data))
+		grandparent.publish_event.connect(func(func_name:String, data:Variant=null): Lib.Observe.subscribe_to_event(self, func_name, data))
 		__grandparent_acquired()
 		___grandparent_acquired()
 
@@ -31,24 +31,24 @@ func _ready():
 func _enter():
 	is_active = true
 	if self_debug:
-		print_rich( entity_icon + "[color=firebrick] Entering [/color]" + what_state_type )
+		print_rich( entity_icon + "[color=firebrick] Entering: [/color]" + what_state_type )
 	__enter()
 	___enter()
 	set_physics_process(_can_physics_process)
 	set_process(_can_process)
 
-func _process(_delta: float) -> void:
-	_debug_update()
-
-func _physics_process(_delta: float) -> void:
-	_debug_physics_update()
+#func _process(_delta: float) -> void:
+	#_debug_update()
+#
+#func _physics_process(_delta: float) -> void:
+	#_debug_physics_update()
 
 func _exit()->void:
 	set_physics_process(false)
 	set_process(false)
 	is_active = false
 	if self_debug:
-		print_rich( entity_icon + "[color=dimgray] Leaving [/color] " + what_state_type)
+		print_rich( entity_icon + "[color=dimgray] Leaving: [/color] " + what_state_type)
 	__exit()
 	___exit()
 #endregion
@@ -68,7 +68,8 @@ func __parent_acquired()->void:pass
 func ___parent_acquired()->void:pass
 func __grandparent_acquired()->void:pass
 func ___grandparent_acquired()->void:pass
-func ___get_state_value(_parent :StateMachine):pass
+func ___get_state_value(_parent :StateMachine):
+	print(self.name + " has not set their personal state value")
 #endregion
 
 #region # DEBUG
@@ -82,12 +83,14 @@ func _action_state_debug():
 	if self is ActionState and self_debug :
 		printt(self, parent, grandparent)
 
-func _debug_update():
-	if self_debug:
-		print_rich("[bgcolor=purple][color=white]UPDATE ERROR [/color][/bgcolor] [color=yellow]" \
-		+ self.name + " has not been assigned a process function[/color]")
-func _debug_physics_update():
-	if self_debug:
-		print_rich("[bgcolor=blue][color=white]PHYSICS ERROR [/color][/bgcolor] [color=yellow]"  \
-		+ self.name + " has not been assigned a physics_process function[/color]")
+
+
+#func _debug_update():
+	#if self_debug:
+		#print_rich("[bgcolor=purple][color=white]UPDATE ERROR [/color][/bgcolor] [color=yellow]" \
+		#+ self.name + " has not been assigned a process function[/color]")
+#func _debug_physics_update():
+	#if self_debug:
+		#print_rich("[bgcolor=blue][color=white]PHYSICS ERROR [/color][/bgcolor] [color=yellow]"  \
+		#+ self.name + " has not been assigned a physics_process function[/color]")
 #endregion

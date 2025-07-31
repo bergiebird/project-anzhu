@@ -3,17 +3,16 @@ extends Ability
 class_name PlayerMovement
 
 @export_group('Movement')
-@export var efficient_bonus :int = 15
-@export var run_bonus :int = 20
+@export var efficient_bonus: int = 15
+@export var run_bonus: int = 20
 
-@onready var stats =L.Beings.INFO["Human"]["SpeedType"]
-@onready var speed_jog = stats["Jog"]
-@onready var speed_run :int = stats["Run"]
-@onready var speed_normal :int = stats["Walk"]
-var velocity :Vector2
+var velocity: Vector2
 
-#func _grandparent_set():
-	#grandparent.publisher_one.connect(func(func_name, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
+@onready var stats =Lib.Beings.INFO["Human"]["SpeedType"]
+@onready var speed_jog: int = stats["Jog"]
+@onready var speed_run: int = stats["Run"]
+@onready var speed_normal: int = stats["Walk"]
+
 
 func _physics_process(_delta: float) -> void:                   ## Every physics frame
 	if parent.current_state == parent.AbilityStates.IDLING \

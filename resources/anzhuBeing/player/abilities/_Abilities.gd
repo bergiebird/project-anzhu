@@ -1,8 +1,11 @@
 @icon("res://warehouse/icons/node/icon_human_controller.png")
-extends Node2D
-class_name Abilities
 
-@export var shoot_cooldown :float = 0.4
+class_name Abilities
+extends Node2D
+
+@export var shoot_cooldown: float = 0.4
+
+# TODO: Make the spacebar the modifier so you can reduce the inputs of the blayer.
 enum AbilityStates {
 	NONE,
 	IDLING,
@@ -14,9 +17,12 @@ enum AbilityStates {
 	CROUCHING, ## Spacebar, this is the modifier
 	}
 
-@onready var old_state :AbilityStates = AbilityStates.NONE:
-	set(value):
-		old_state = value
+var parent: Player
+var is_efficient: bool=false
+
+@onready var old_state: AbilityStates = AbilityStates.NONE:
+	set(v):
+		old_state = v
 		match old_state:
 			AbilityStates.NONE:
 				pass
@@ -33,11 +39,10 @@ enum AbilityStates {
 				parent.publish_event.emit('initializing_jump', false)
 			AbilityStates.GUNFIRED:
 				pass
-
-@onready var current_state :int = AbilityStates.NONE:
-	set(value): if value != current_state:
+@onready var current_state: int = AbilityStates.NONE:
+	set(v): if v != current_state:
 		old_state = current_state
-		current_state = value
+		current_state = v
 		match current_state:
 			AbilityStates.NONE:
 				pass
@@ -54,15 +59,6 @@ enum AbilityStates {
 			AbilityStates.GUNFIRED:
 				current_state = AbilityStates.IDLING
 
-var is_efficient :bool=false
-
-#:
-	#set(value):
-			#is_efficient = value
-			#if_debug('is_efficient: '+ str(is_efficient))
-			#parent.publish_event.emit('efficiency', is_efficient)
-
-var parent :Player
 
 func _ready():
 	parent = get_parent()
@@ -71,17 +67,18 @@ func _ready():
 		child.set_process(true)
 	current_state =AbilityStates.IDLING
 
+
 #region   #=======================================================# DEBUG
 @export_group('Debug')
-@export var debug_abilities :bool = false
-@export var debugger_color :Color = Color("eaf1f0")
-@onready var dcolor :String = debugger_color.to_html()
+@export var debug_abilities: bool = false
+@export var debugger_color: Color = Color("eaf1f0")
+@onready var dcolor: String = debugger_color.to_html()
 
 func debug():
-	Debuggerton.enable_print(self.name, dcolor)
+	Dbgr.enable_print(self.name, dcolor)
 	debug_abilities = true
 
 func if_debug(message :String):
 	if debug_abilities:
-		Debuggerton.dprint(message, dcolor)
-#endregion #=======================================================# DEBUG
+		Dbgr.dprint(message, dcolor)
+#endregion

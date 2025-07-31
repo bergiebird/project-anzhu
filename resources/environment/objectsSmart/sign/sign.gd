@@ -2,19 +2,14 @@
 extends StaticBody2D
 class_name Sign
 
-signal publish_event(String, Variant)
-
 @export_multiline var sign_contents :String = ''' '''
 @export_multiline var visual_description :String = """"""
-var console :RichTextLabel
+
+@onready var interactible :Interactible= $Interactible
 
 func _ready():
-	Signalton.console_reference.connect(func(ref:RichTextLabel): console = ref)
-	publish_event.connect(func(func_name:String, data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
-	publish_event.emit("override_visual_description", visual_description)
+	interactible.player_entered_the_space.connect(_player_entered_the_space)
+	$Mask.initial_output(visual_description)
 
-func player_left_the_space():
-	console.start_disappear_timer(self)
-
-func player_entered_the_space():
-	console.sign_text(sign_contents,self)
+func _player_entered_the_space(is_in_range: bool):
+	Sgnl.console_read_sign.emit(is_in_range, self, sign_contents)

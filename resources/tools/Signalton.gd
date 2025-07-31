@@ -1,5 +1,5 @@
 extends Node
-#Signalton.gd
+#Sgnl.gd
 signal update_console(String)
 signal heal_player
 signal loud_noise(who :AnzhuBeing, where :Vector2, noise_db :float)
@@ -15,16 +15,15 @@ signal new_hour_melatonin(int)
 signal time_dictionary_delivery(Dictionary)
 signal new_hour_nightlight(bool)
 signal new_hour_campfire(float)
+signal console_read_sign(bool, Sign, String)
 
 #region    #=================================================================# References
 ## Simple signals to give out the reference to anyone who wants it in the scene.
 ## reference_emitter handles emitting from all signals here.
 signal player_reference(player_ref :Player)
-signal entities_reference(entities_ref :CanvasGroup)
 signal elevation_reference(elevation_ref :ElevationsLayer)
 signal tracks_reference(tracks_ref :CanvasGroup)
 signal props_reference(props_ref :TileMapLayer)
-signal console_reference(console :RichTextLabel)
 signal snowfall_reference(snowfall_ref :GPUParticles2D)
 
 var player :Player

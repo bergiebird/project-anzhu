@@ -4,7 +4,7 @@ class_name AnimalGoalsMachine
 enum AnimalGoals {Nothing,Hunt}
 @export var starting_goal :AnimalGoals = AnimalGoals.Nothing
 @onready var current_goal :AnimalGoals = -1
-var goals :Dictionary[AnimalGoals,GoalState]
+
 
 func __ready():
 	change_goals(starting_goal)

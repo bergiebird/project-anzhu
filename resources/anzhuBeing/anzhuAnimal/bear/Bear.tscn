@@ -42,13 +42,12 @@ stream_0/stream = ExtResource("24_lf0l5")
 stream_1/stream = ExtResource("25_6237r")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hho7n"]
-radius = 105.0
+radius = 110.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr2iy"]
 radius = 0.1
 
 [node name="Bear" type="CharacterBody2D"]
-z_index = 3
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_6aww6")
@@ -101,8 +100,8 @@ one_shot = true
 
 [node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Actions/Chase"]
 stream = ExtResource("18_5puse")
-max_distance = 250.0
-attenuation = 3.0
+max_distance = 100.0
+attenuation = 2.0
 
 [node name="Goals" type="Node2D" parent="."]
 script = ExtResource("11_4sorn")
@@ -113,22 +112,21 @@ script = ExtResource("13_kkkf8")
 [node name="BgmHunt" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
 editor_description = "Bear Hunt Music"
 stream = ExtResource("6_cuqt7")
-max_distance = 225.0
-attenuation = 0.75
+max_distance = 285.0
+attenuation = 1.81
 bus = &"PolarBear"
 
 [node name="SfxSpotted" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
 stream = ExtResource("14_t1s4a")
-volume_db = 3.0
-max_distance = 400.0
-attenuation = 0.5
+volume_db = 1.0
+max_distance = 300.0
+attenuation = 2.5
 bus = &"SFX"
 
 [node name="SfxOutOfSight" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
 stream = ExtResource("16_47icu")
-volume_db = 3.0
-max_distance = 400.0
-attenuation = 0.5
+max_distance = 300.0
+attenuation = 2.5
 bus = &"SFX"
 
 [node name="Nothing" type="Node2D" parent="Goals"]
@@ -140,7 +138,6 @@ wait_time = 6.0
 one_shot = true
 
 [node name="Animations" type="AnimatedSprite2D" parent="."]
-z_index = 10
 sprite_frames = ExtResource("6_ybwxf")
 animation = &"Sit"
 autoplay = "Idle"
@@ -163,7 +160,6 @@ bus = &"SFX"
 wait_time = 2.0
 
 [node name="GoTo" parent="." instance=ExtResource("25_d723r")]
-debug_self = true
 
 [node name="AiMovement" type="Node" parent="."]
 script = ExtResource("29_2d7ra")

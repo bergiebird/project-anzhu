@@ -1,4 +1,5 @@
-extends AudioStreamPlayer2D #CoastalWaves.gd
+extends AudioStreamPlayer2D
+class_name _CoastalWaves
 
 var player :Player
 @onready var coastline :Line2D = get_parent()
@@ -8,13 +9,13 @@ var player :Player
 func _ready()->void:
 	coastline.default_color = L.BasicPalette.BASIC_WHITE_TRANSPARENT
 	set_process(false)
-	Signalton.player_reference.connect(collect_player_reference)
+	Sgnl.player_reference.connect(collect_player_reference)
 	_debug()
 
 func collect_player_reference(ref:Player):
 	player = ref
 	set_process(true)
-	Signalton.player_reference.disconnect(collect_player_reference)
+	Sgnl.player_reference.disconnect(collect_player_reference)
 
 
 func _process(_delta :float)->void:

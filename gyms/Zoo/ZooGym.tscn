@@ -1,9 +1,9 @@
 [gd_scene load_steps=20 format=4 uid="uid://c17cw7tkkjo8a"]
 
 [ext_resource type="Script" uid="uid://b6a83rf68g2eq" path="res://gyms/Zoo/zoo_gym.gd" id="1_081gq"]
-[ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://warehouse/Overworld/Resources/ground_and_water_ANZHU.png" id="1_qx4d4"]
+[ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://resources/environment/snow/ground_and_water_ANZHU.png" id="1_qx4d4"]
 [ext_resource type="Script" uid="uid://djvbu6mh08co4" path="res://resources/anzhuBeing/snowTracker/TracksManager.gd" id="2_fxva6"]
-[ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://warehouse/Overworld/Resources/anzhu_cliffs.png" id="5_nmdn8"]
+[ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://resources/environment/cliffs/anzhu_cliffs.png" id="5_nmdn8"]
 [ext_resource type="Texture2D" uid="uid://nxai7gqj4ivy" path="res://resources/tools/invisibleWalls/invisible_walls.png" id="6_k4luy"]
 [ext_resource type="TileSet" uid="uid://io7ysittrqe2" path="res://warehouse/Overworld/ts_arctic_all.tres" id="7_16scg"]
 [ext_resource type="Script" uid="uid://c5q5gpnueiedb" path="res://gyms/Zoo/ZooEntities.gd" id="8_yihgq"]
@@ -1995,10 +1995,11 @@ position = Vector2(598, 355)
 position = Vector2(698, 289)
 
 [node name="MainCamera" parent="NODE2D/Entities" instance=ExtResource("10_1s0vo")]
+visible = false
 position = Vector2(663, 346)
-zoom = Vector2(5, 5)
+zoom = Vector2(1, 1)
 
-[node name="SnowFall" parent="NODE2D/Entities/MainCamera" index="1"]
+[node name="SnowFall" parent="NODE2D/Entities/MainCamera" index="2"]
 visible = false
 amount = 50000
 
