@@ -10,7 +10,8 @@ enum AudioMode{
 }
 
 ## This system is here to sample the differences between Cycling Music & time specific music.
-## I don't know which is better. I love vibing to the Cycling music while other times I prefer complete silence with some indication that the time of day has changed.
+## I don't know which is better. I love vibing to the Cycling music while other times
+## I prefer complete silence with some indication that the time of day has changed.
 @export var audio_mode: AudioMode = AudioMode.CylcleBGMusic
 
 ## Toggle the opening jingle

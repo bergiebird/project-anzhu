@@ -93,7 +93,7 @@ func _input(event: InputEvent):
 				Sgnl.update_console.emit(description)
 
 func jumping(needs_inverse: bool):
-	visible=!needs_inverse
+	visible = !needs_inverse
 
 func _heal_player():
 	if parent is Player:

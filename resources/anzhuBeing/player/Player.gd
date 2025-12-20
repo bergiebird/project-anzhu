@@ -22,9 +22,7 @@ func has_died():
 	Sgnl.reload_current_scene()
 
 
-#region Debug
 func early_ready_for_debug():
 	if debug_self:
 		debug_icon = "[img]res://resources/player/player.png[/img]"
 		print_rich(debug_icon)
- #endregion

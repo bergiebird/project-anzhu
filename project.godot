@@ -13,7 +13,7 @@ config_version=5
 config/name="Project: Anzhu"
 config/tags=PackedStringArray("_current")
 run/main_scene="uid://bu2w1ukm7uknj"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.5", "Forward Plus")
 run/max_fps=60
 config/icon="res://warehouse/~examples/arctic-3.png"
 
@@ -58,11 +58,14 @@ movie_writer/movie_file="/home/bergiebird/Current/Godot/projects/project-anzhu/w
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/cider_wiki/plugin.cfg", "res://addons/fancy_editor_sounds/plugin.cfg", "res://addons/script-ide/plugin.cfg")
+enabled=PackedStringArray("res://addons/_Godot-IDE_/plugin.cfg", "res://addons/fancy_editor_sounds/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
+"res://addons/": "gray",
+"res://addons/_Godot-IDE_/plugins/": "blue",
+"res://addons/_Godot-IDE_/shared_resources/": "teal",
 "res://gyms/": "yellow",
 "res://resources/": "purple",
 "res://warehouse/": "gray"

@@ -3,8 +3,6 @@
 class_name Abilities
 extends Node2D
 
-@export var shoot_cooldown: float = 0.4
-
 # TODO: Make the spacebar the modifier so you can reduce the inputs of the blayer.
 enum AbilityStates {
 	NONE,
@@ -16,6 +14,8 @@ enum AbilityStates {
 	GUNFIRED, ##
 	CROUCHING, ## Spacebar, this is the modifier
 	}
+
+@export var shoot_cooldown: float = 0.4
 
 var parent: Player
 var is_efficient: bool=false
@@ -31,7 +31,8 @@ var is_efficient: bool=false
 			AbilityStates.MOVING:
 				pass
 			AbilityStates.JUMPING:
-				parent.publish_event.emit('jumping', false)
+				pass
+#				parent.publish_event.emit('jumping', false)
 			AbilityStates.RELOADING:
 				parent.publish_event.emit('reloading', false)
 				parent.publish_event.emit('full_ammo',true)
@@ -51,7 +52,8 @@ var is_efficient: bool=false
 			AbilityStates.MOVING:
 				pass
 			AbilityStates.JUMPING:
-				parent.publish_event.emit('jumping', true)
+				pass
+#				parent.publish_event.emit('jumping', true)
 			AbilityStates.RELOADING:
 				parent.publish_event.emit('reloading', true)
 			AbilityStates.INIT_JUMP:
@@ -62,7 +64,7 @@ var is_efficient: bool=false
 
 func _ready():
 	parent = get_parent()
-	for child :Ability in get_children():
+	for child in get_children():
 		child.set_physics_process(true)
 		child.set_process(true)
 	current_state =AbilityStates.IDLING

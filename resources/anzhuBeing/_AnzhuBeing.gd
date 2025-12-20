@@ -1,12 +1,7 @@
 extends CharacterBody2D
 class_name AnzhuBeing
 
-#region    #============================================================# Signals
-
 signal publish_event(String, Variant)
-
-#endregion #============================================================# Signals
-#region    #============================================================# Variables
 
 enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
 enum SpeedType {CREEP,WALK,JOG,RUN}
@@ -46,7 +41,7 @@ var is_sliding :bool = false:
 		is_sliding = value
 		publish_event.emit("sliding", is_sliding)
 
-#endregion #============================================================# Variables
+
 #region    #============================================================# Ready
 
 func _ready():
@@ -80,11 +75,12 @@ func player_reference_subscriber(ref :Player):
 #endregion #============================================================# Ready
 #region    #============================================================# Movement
 
-func _process(delta:float):
+func _process(delta:float) -> void:
 	__process(delta)
 	___process(delta)
 
-func _physics_process(delta: float):
+
+func _physics_process(delta: float) -> void:
 	__physics_process(delta)
 	___physics_process(delta)
 	velocity = velocity_force * delta

@@ -7,7 +7,7 @@ class_name Respawner
 @export var debug: bool
 
 
-func _ready():
+func _ready() -> void:
 	var player: Player = get_tree().get_first_node_in_group("player")
 	if not debug:
 		player.global_position = self.global_position

@@ -6,12 +6,12 @@ func update_animation_stunned():
 	update_animations("Stunned")
 	while (animation == "Stunned"):
 		match parent.modulate:
-			L.BasicPalette.BASIC_WHITE:
-				parent.modulate = L.Palette.RED_TOMATO
+			Lib.BasicPalette.BASIC_WHITE:
+				parent.modulate = Lib.Palette.RED_TOMATO
 			_:
-				parent.modulate =L.BasicPalette.BASIC_WHITE
+				parent.modulate =Lib.BasicPalette.BASIC_WHITE
 		await get_tree().create_timer(.30).timeout
-	parent.modulate =L.BasicPalette.BASIC_WHITE
+	parent.modulate =Lib.BasicPalette.BASIC_WHITE
 
 func change_actions(new_action :String):
 	if new_action is String:
