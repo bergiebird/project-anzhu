@@ -5,25 +5,25 @@ var player :Player:
 	set(value):
 		if player != value:
 			player = value
-var shot_db :float
+var shot_db: float
 
 func _ready():
 	Sgnl.player_reference.connect(func(ref :Player)->void: player = ref)
 	set_player_cursors()
 #region #=======================================================================================# KEYBOARD
-func look_direction(direction :String)->bool:
+func look_direction(direction: String)->bool:
 	return true if Input.is_action_pressed(Directon.get_aim(direction)) else false
 
-func aim(direction :String)->bool:
+func aim(direction: String)->bool:
 	return Input.is_action_pressed("aim_" + direction)
 
-func inverse_move(direction :String)->bool:
+func inverse_move(direction: String)->bool:
 	return move(Directon.OPPOSITE[direction])
 
-func move(direction :String)->bool:
+func move(direction: String)->bool:
 	return Input.is_action_pressed("move_" + direction)
 
-func inverse_aim(direction :String)->bool:
+func inverse_aim(direction: String)->bool:
 	return aim(Directon.OPPOSITE[direction])
 
 func jump_pressed()->bool:
@@ -42,8 +42,8 @@ func escape()->bool:
 	return Input.is_action_just_released("esc")
 #endregion #====================================================================================# KEYBOARD
 #region #=======================================================================================# MOUSE
-signal cursor_movement_report(bol :bool)
-const CURSOR_HOTSPOT :Vector2 = Vector2(14,4)
+signal cursor_movement_report(bol: bool)
+const CURSOR_HOTSPOT: Vector2 = Vector2(14,4)
 
 var current_resting_cursor :DisplayServer.CursorShape
 

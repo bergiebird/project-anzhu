@@ -1,11 +1,11 @@
 @icon("res://resources/anzhuAnimal/reindeer/reindeer.png")
 class_name Reindeer extends AnzhuAnimal #Reindeer.gd
-var herd_members :Array = []
-var preferred_distance :int = 50
-var min_distance :int = 20
-var max_distance :int = 100
+var herd_members: Array = []
+var preferred_distance: int = 50
+var min_distance: int = 20
+var max_distance: int = 100
 
-#func _process(_delta :float)->void:
+#func _process(_delta: float)->void:
 	#update_herd_awareness()
 #
 #func update_herd_awareness()->void:

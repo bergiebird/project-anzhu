@@ -5,7 +5,7 @@ enum AnimalActions {Idle,Stunned,Sit,Wander,Chase,Roll}
 
 
 @export var starting_action :AnimalActions = AnimalActions.Idle
-var animal_actions :Dictionary[AnimalActions, String] = {
+var animal_actions: Dictionary[AnimalActions, String] = {
 	AnimalActions.Idle:"Idle",
 	AnimalActions.Stunned: "Stunned",
 	AnimalActions.Sit: "Sit",
@@ -13,7 +13,7 @@ var animal_actions :Dictionary[AnimalActions, String] = {
 	AnimalActions.Chase: "Chase",
 	AnimalActions.Roll: "Roll",
 }
-var actions :Dictionary[AnimalActions, ActionState]
+var actions: Dictionary[AnimalActions, ActionState]
 @onready var current_action :AnimalActions = -1
 
 
@@ -46,7 +46,7 @@ func change_actions(incoming_action):
 
 #region #==========================================================# DEBUG
 @export_group('DEBUG')
-@export var debug_self :bool = false
+@export var debug_self: bool = false
 
 func debug()->void:
 	print_rich('[color=yellow]Animal Actions Machine debugging enabled . . .[/color]')

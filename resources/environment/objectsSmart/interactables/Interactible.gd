@@ -7,31 +7,31 @@ signal interacted
 signal player_entered_the_space(bool)
 
 
-func _ready():
+func _ready() -> void:
 	_signaler()
-	set_collision_layer_value(8,true)
-	set_collision_mask_value(8,true)
+	set_collision_layer_value(8, true)
+	set_collision_mask_value(8, true)
 	set_process(false)
 
 
-func _on_body_entered(body :Node2D):
+func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		set_process(true)
 		player_entered_the_space.emit(true)
 
 
-func _process(_delta :float):
+func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed('interact'):
 		interacted.emit()
 
 
-func _on_body_exited(body :Node2D):
+func _on_body_exited(body: Node2D) -> void:
 	if body is Player:
 		set_process(false)
 		player_entered_the_space.emit(false)
 
 
-func _signaler():
+func _signaler() -> void:
 	ready.connect(_debug)
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
@@ -53,7 +53,7 @@ func _debug() ->void:
 	if debug:
 		pass
 
-func _dprint(message :String)->void:
+func _dprint(message: String)->void:
 		if debug:
 			Dbgr.dprint(message, debug_color)
 

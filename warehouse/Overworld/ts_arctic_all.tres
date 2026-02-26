@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=11 format=3 uid="uid://io7ysittrqe2"]
+[gd_resource type="TileSet" format=3 uid="uid://io7ysittrqe2"]
 
 [ext_resource type="Texture2D" uid="uid://dmf5w3rvo712t" path="res://warehouse/Overworld/PNGs/arctic.png" id="1_oh8xw"]
 [ext_resource type="Texture2D" uid="uid://dsjaoi0jd7e7o" path="res://warehouse/Overworld/PNGs/original.png" id="2_iomjw"]

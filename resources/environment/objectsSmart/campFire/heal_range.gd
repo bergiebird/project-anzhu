@@ -2,9 +2,9 @@
 extends Area2D
 class_name HealingArea
 
-var player_in_area :bool = false
+var player_in_area: bool = false
 
-@onready var heal_interval :Timer = $HealInterval
+@onready var heal_interval: Timer = $HealInterval
 @onready var parent = get_parent()
 
 func _ready():

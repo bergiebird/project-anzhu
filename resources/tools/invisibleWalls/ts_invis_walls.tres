@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://oodp7ds07mh1"]
+[gd_resource type="TileSet" format=3 uid="uid://oodp7ds07mh1"]
 
 [ext_resource type="Texture2D" uid="uid://nxai7gqj4ivy" path="res://resources/tools/invisibleWalls/invisible_walls.png" id="1_irnos"]
 

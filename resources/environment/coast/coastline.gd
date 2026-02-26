@@ -3,9 +3,9 @@ class_name CoastalWaves
 
 var player :Player
 
-@onready var sfx :AudioStreamPlayer2D = $Waves
+@onready var sfx: AudioStreamPlayer2D = $Waves
 @onready var line_points :PackedVector2Array = points
-@onready var line_points_size :int = line_points.size()
+@onready var line_points_size: int = line_points.size()
 
 func _ready()->void:
 	default_color = Lib.BasicPalette.BASIC_WHITE_TRANSPARENT
@@ -35,12 +35,12 @@ func get_closest_point_on_segment(point: Vector2, segment_start: Vector2, segmen
 	var segment_length_squared: float = segment.length_squared()
 	if segment_length_squared < 0.00001:
 		return segment_start
-	var projection :float = clamp(segment.dot(point - segment_start) / segment_length_squared, 0.0, 1.0)
+	var projection: float = clamp(segment.dot(point - segment_start) / segment_length_squared, 0.0, 1.0)
 	return segment_start + segment * projection
 
 #region	DEBUG
 @export_group('DEBUG')
-@export var debug :bool = false
+@export var debug: bool = false
 @onready var debug_image :Sprite2D = get_child(0).get_child(0)
 
 func _debug()->void:

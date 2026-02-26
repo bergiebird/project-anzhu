@@ -22,7 +22,7 @@ enum WeatherPattern {
 	}
 ## Set the overall pattern of the snowfall
 @export var weather_pattern: WeatherPattern
-@onready var size_weather_pattern :int = WeatherPattern.size()
+@onready var size_weather_pattern: int = WeatherPattern.size()
 
 func set_pattern():
 		match weather_pattern:
@@ -116,8 +116,8 @@ var frequencies: Dictionary[int,float] = {
 	FrequencyType.MOSTEST:200.0, FrequencyType.ALOT:300.0, FrequencyType.NORMAL:700.0,
 	FrequencyType.MINIMAL:1900.0, FrequencyType.NONE:12000.0}
 
-func update_frequency(val :int, old_val:int):
-	var ftween_time :int = abs(val-old_val)
+func update_frequency(val: int, old_val:int):
+	var ftween_time: int = abs(val-old_val)
 	if frequency == 5: emitting = false
 	else:              emitting = true
 	Dbgr.tweener_property_disposal([
@@ -145,10 +145,10 @@ var directions: Dictionary[int,Vector3] = {
 	WindDirection.SOUTH_WEST: Vector3.UP + Vector3.LEFT,
 	WindDirection.WEST: Vector3.LEFT,
 	WindDirection.NORTH_WEST: Vector3.DOWN + Vector3.LEFT}
-var wind_direction :Vector2
+var wind_direction: Vector2
 
 
-func position_wind_sfx(tween_time :int):
+func position_wind_sfx(tween_time: int):
 	if player:
 		var position_new: Vector2 = parent.position - wind_direction * ((speed*speed*speed+10))*10
 		var pitch_new: float = 1.4 - (float(frequency)*0.1)
@@ -161,8 +161,8 @@ enum WindSpeed {STRONG_GALE,MODERATE_GALE,LIGHT_GALE,STRONG_BREEZE,MODERATE_BREE
 
 @export var speed: WindSpeed:
 	set(v):
-			var speed_int :int = wind_dict[speed]
-			var value_int :int = wind_dict[v]
+			var speed_int: int = wind_dict[speed]
+			var value_int: int = wind_dict[v]
 			Dbgr.tweener_property_disposal([
 				Buildton.tweener(process_material, "linear_accel_min", value_int, abs(value_int - speed_int)),
 				Buildton.tweener(process_material, "linear_accel_max", value_int, abs(value_int - speed_int))], debug)
@@ -183,8 +183,8 @@ var wind_dict: Dictionary[WindSpeed,int] = {
 #region    #=============================================# DEBUG
 
 @export_group('debug')
-@export var debug :bool = false
-@export var debug_color :Color =Lib.Palette.WHITE_WHITE
+@export var debug: bool = false
+@export var debug_color: Color =Lib.Palette.WHITE_WHITE
 
 var player: Player
 

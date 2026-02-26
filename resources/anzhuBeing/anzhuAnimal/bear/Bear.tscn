@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://dr7gmcq3ydu2b"]
+[gd_scene format=3 uid="uid://dr7gmcq3ydu2b"]
 
 [ext_resource type="Script" uid="uid://legnebu0kphu" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear.gd" id="1_6aww6"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="3_xf7mx"]
@@ -47,170 +47,173 @@ radius = 110.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr2iy"]
 radius = 0.1
 
-[node name="Bear" type="CharacterBody2D"]
+[node name="Bear" type="CharacterBody2D" unique_id=688505199]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_6aww6")
 this_beings_type = "Bear"
-visual_description = "POLAR BEAR!"
+visual_description = "IT IS A POLAR BEAR!
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+careful"
+
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=1377813823]
 shape = SubResource("RectangleShape2D_nr2iy")
 script = ExtResource("3_xf7mx")
 set_mask_dimensions = 5
+damage_recieved = 12
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
-[node name="Actions" type="Node2D" parent="."]
+[node name="Actions" type="Node2D" parent="." unique_id=286462773]
 script = ExtResource("4_hho7n")
 
-[node name="Idle" type="Node2D" parent="Actions"]
+[node name="Idle" type="Node2D" parent="Actions" unique_id=1202266470]
 script = ExtResource("5_gcotj")
 
-[node name="Stunned" type="Node2D" parent="Actions"]
+[node name="Stunned" type="Node2D" parent="Actions" unique_id=2097380462]
 script = ExtResource("6_2d7ra")
 
-[node name="StunnedTimer" type="Timer" parent="Actions/Stunned"]
+[node name="StunnedTimer" type="Timer" parent="Actions/Stunned" unique_id=1453540122]
 wait_time = 0.5
 
-[node name="Sit" type="Node2D" parent="Actions"]
+[node name="Sit" type="Node2D" parent="Actions" unique_id=230969982]
 script = ExtResource("8_i834n")
 
-[node name="Wander" type="Node2D" parent="Actions"]
+[node name="Wander" type="Node2D" parent="Actions" unique_id=1249089180]
 script = ExtResource("13_qx7fo")
 
-[node name="WanderTimer" type="Timer" parent="Actions/Wander"]
+[node name="WanderTimer" type="Timer" parent="Actions/Wander" unique_id=440016600]
 editor_description = "Will change the animal's trajectory every timeout."
 wait_time = 3.0
 
-[node name="SfxWander" type="AudioStreamPlayer2D" parent="Actions/Wander"]
+[node name="SfxWander" type="AudioStreamPlayer2D" parent="Actions/Wander" unique_id=225990583]
 stream = ExtResource("17_fjh5o")
 max_distance = 250.0
 
-[node name="Chase" type="Node2D" parent="Actions"]
+[node name="Chase" type="Node2D" parent="Actions" unique_id=1115874356]
 script = ExtResource("12_fnbe6")
 sprint_time = 4.5
 
-[node name="DirectionTimer" type="Timer" parent="Actions/Chase"]
+[node name="DirectionTimer" type="Timer" parent="Actions/Chase" unique_id=811169855]
 wait_time = 1.2
 
-[node name="ChargeTimer" type="Timer" parent="Actions/Chase"]
+[node name="ChargeTimer" type="Timer" parent="Actions/Chase" unique_id=90672604]
 process_callback = 0
 wait_time = 4.0
 one_shot = true
 
-[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Actions/Chase"]
+[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Actions/Chase" unique_id=792518832]
 stream = ExtResource("18_5puse")
 max_distance = 100.0
 attenuation = 2.0
 
-[node name="Goals" type="Node2D" parent="."]
+[node name="Goals" type="Node2D" parent="." unique_id=1421879398]
 script = ExtResource("11_4sorn")
 
-[node name="Hunt" type="Node2D" parent="Goals"]
+[node name="Hunt" type="Node2D" parent="Goals" unique_id=1291109121]
 script = ExtResource("13_kkkf8")
 
-[node name="BgmHunt" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
+[node name="BgmHunt" type="AudioStreamPlayer2D" parent="Goals/Hunt" unique_id=795091304]
 editor_description = "Bear Hunt Music"
 stream = ExtResource("6_cuqt7")
 max_distance = 285.0
 attenuation = 1.81
 bus = &"PolarBear"
 
-[node name="SfxSpotted" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
+[node name="SfxSpotted" type="AudioStreamPlayer2D" parent="Goals/Hunt" unique_id=499481409]
 stream = ExtResource("14_t1s4a")
 volume_db = 1.0
 max_distance = 300.0
 attenuation = 2.5
 bus = &"SFX"
 
-[node name="SfxOutOfSight" type="AudioStreamPlayer2D" parent="Goals/Hunt"]
+[node name="SfxOutOfSight" type="AudioStreamPlayer2D" parent="Goals/Hunt" unique_id=1015447998]
 stream = ExtResource("16_47icu")
 max_distance = 300.0
 attenuation = 2.5
 bus = &"SFX"
 
-[node name="Nothing" type="Node2D" parent="Goals"]
+[node name="Nothing" type="Node2D" parent="Goals" unique_id=1066931968]
 script = ExtResource("14_k7mq3")
 time_options = Array[int]([6, 9, 5, 4, 3, 5, 4])
 
-[node name="Timer" type="Timer" parent="Goals/Nothing"]
+[node name="Timer" type="Timer" parent="Goals/Nothing" unique_id=783527660]
 wait_time = 6.0
 one_shot = true
 
-[node name="Animations" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="." unique_id=995067507]
 sprite_frames = ExtResource("6_ybwxf")
-animation = &"Sit"
+animation = &"Chase"
 autoplay = "Idle"
 script = ExtResource("18_nr2iy")
 
-[node name="HurtBox" type="Area2D" parent="."]
+[node name="HurtBox" type="Area2D" parent="." unique_id=1233945636]
 collision_layer = 0
 collision_mask = 512
 script = ExtResource("28_ar1ys")
 
-[node name="HurtShape" type="CollisionShape2D" parent="HurtBox"]
+[node name="HurtShape" type="CollisionShape2D" parent="HurtBox" unique_id=123834438]
 shape = SubResource("RectangleShape2D_jrj27")
 debug_color = Color(0.615686, 0, 0.0431373, 0.588235)
 
-[node name="SfxStrike" type="AudioStreamPlayer2D" parent="HurtBox"]
+[node name="SfxStrike" type="AudioStreamPlayer2D" parent="HurtBox" unique_id=2025482061]
 stream = SubResource("AudioStreamRandomizer_jrj27")
 bus = &"SFX"
 
-[node name="Timer" type="Timer" parent="HurtBox"]
+[node name="Timer" type="Timer" parent="HurtBox" unique_id=1131234288]
 wait_time = 2.0
 
-[node name="GoTo" parent="." instance=ExtResource("25_d723r")]
+[node name="GoTo" parent="." unique_id=729300808 instance=ExtResource("25_d723r")]
 
-[node name="AiMovement" type="Node" parent="."]
+[node name="AiMovement" type="Node" parent="." unique_id=486569939]
 script = ExtResource("29_2d7ra")
 
-[node name="Eyesight" type="Area2D" parent="."]
+[node name="Eyesight" type="Area2D" parent="." unique_id=461187945]
 script = ExtResource("30_jxxsm")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Eyesight"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eyesight" unique_id=194024757]
 shape = SubResource("CircleShape2D_hho7n")
 
-[node name="SnowTracker" type="Marker2D" parent="."]
+[node name="SnowTracker" type="Marker2D" parent="." unique_id=2091431002]
 position = Vector2(0, 3)
 script = ExtResource("28_2d7ra")
 metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
-[node name="Corpse" type="Area2D" parent="."]
+[node name="Corpse" type="Area2D" parent="." unique_id=1907455525]
 script = ExtResource("31_xf7mx")
 metadata/_custom_type_script = "uid://ccjwxftmp5da6"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse" unique_id=1620152716]
 shape = SubResource("CircleShape2D_nr2iy")
 
-[node name="SfxDeathHowl" type="AudioStreamPlayer2D" parent="Corpse"]
+[node name="SfxDeathHowl" type="AudioStreamPlayer2D" parent="Corpse" unique_id=1769827474]
 stream = ExtResource("15_n3oor")
 volume_db = 2.0
 max_distance = 350.0
 
-[node name="Timer" type="Timer" parent="Corpse"]
+[node name="Timer" type="Timer" parent="Corpse" unique_id=1453361725]
 wait_time = 2.61
 one_shot = true
 
-[node name="Cardinals" type="Node2D" parent="."]
+[node name="Cardinals" type="Node2D" parent="." unique_id=971528431]
 process_mode = 4
 script = ExtResource("28_d723r")
 
-[node name="RayNorth" type="RayCast2D" parent="Cardinals"]
+[node name="RayNorth" type="RayCast2D" parent="Cardinals" unique_id=37159337]
 position = Vector2(0, -4)
 target_position = Vector2(0, -3)
 collision_mask = 0
 
-[node name="RaySouth" type="RayCast2D" parent="Cardinals"]
+[node name="RaySouth" type="RayCast2D" parent="Cardinals" unique_id=49411681]
 position = Vector2(0, 4)
 target_position = Vector2(0, 3)
 collision_mask = 0
 
-[node name="RayEast" type="RayCast2D" parent="Cardinals"]
+[node name="RayEast" type="RayCast2D" parent="Cardinals" unique_id=1534469303]
 position = Vector2(4, 0)
 target_position = Vector2(3, 0)
 collision_mask = 0
 
-[node name="RayWest" type="RayCast2D" parent="Cardinals"]
+[node name="RayWest" type="RayCast2D" parent="Cardinals" unique_id=807302086]
 position = Vector2(-4, 0)
 target_position = Vector2(-3, 0)
 collision_mask = 0

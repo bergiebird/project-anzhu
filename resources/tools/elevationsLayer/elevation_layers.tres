@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://ctmrpnqyoa1mm"]
+[gd_resource type="TileSet" format=3 uid="uid://ctmrpnqyoa1mm"]
 
 [ext_resource type="Texture2D" uid="uid://pio4q5jvles3" path="res://resources/tools/elevationsLayer/proto_tiles.png" id="1_twuca"]
 

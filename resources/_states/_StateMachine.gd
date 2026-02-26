@@ -2,10 +2,10 @@
 extends Node2D
 class_name StateMachine
 
-var states :Dictionary[int, State]
+var states: Dictionary[int, State]
 var current_state :State
 
-@onready var parent :AnzhuBeing = get_parent()
+@onready var parent: AnzhuBeing = get_parent()
 
 func _ready():
 	for child :State in get_children():         # May be redundant as statemachine gets same children

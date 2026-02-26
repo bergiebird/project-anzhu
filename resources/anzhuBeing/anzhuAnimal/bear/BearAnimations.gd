@@ -13,7 +13,7 @@ func update_animation_stunned():
 		await get_tree().create_timer(.30).timeout
 	parent.modulate =Lib.BasicPalette.BASIC_WHITE
 
-func change_actions(new_action :String):
+func change_actions(new_action: String):
 	if new_action is String:
 		match new_action:
 			"Stunned": update_animation_stunned()

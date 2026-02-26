@@ -7,6 +7,6 @@ class_name Breakable
 func _ready():
 	body_entered.connect(_body_entered)
 
-func _body_entered(body :Node2D):
+func _body_entered(body: Node2D):
 	if parent.has_method("on_break"):
 						parent.on_break(body)

@@ -1,8 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://djohaqklk0yvq"]
+[gd_scene format=3 uid="uid://djohaqklk0yvq"]
 
 [ext_resource type="Script" uid="uid://dlm68di2fvt6s" path="res://resources/anzhuBeing/anzhuAnimal/hare/Hare.gd" id="1_i130l"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_ycej4"]
 [ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="3_ycej4"]
+[ext_resource type="Script" uid="uid://dytb5h3lhcg3p" path="res://resources/anzhuBeing/anzhuAnimal/hare/hare_sight.gd" id="4_oqtgj"]
+[ext_resource type="PackedScene" uid="uid://c1you2bnyaapu" path="res://resources/anzhuBeing/go_to/go_to.tscn" id="5_e04ro"]
+[ext_resource type="Script" uid="uid://fhk68avnqx2w" path="res://resources/anzhuBeing/anzhuAnimal/hare/ears.gd" id="6_eif1b"]
+[ext_resource type="Script" uid="uid://dcd06sdooesoe" path="res://resources/anzhuBeing/anzhuAnimal/hare/nose.gd" id="7_26ar8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqtgj"]
 
@@ -21,19 +25,57 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Hare" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_eif1b"]
+radius = 109.01835
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oqtgj"]
+radius = 240.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_26ar8"]
+
+[node name="Hare" type="CharacterBody2D" unique_id=390730212]
 script = ExtResource("1_i130l")
 this_beings_type = "Hare"
 visual_description = "Aw a rabbit"
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=1134976095]
 shape = SubResource("RectangleShape2D_oqtgj")
 script = ExtResource("2_ycej4")
 description = "Aw, a rabbit"
 set_mask_dimensions = 1
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
-[node name="Animations" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="." unique_id=1256341184]
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_i130l")
 animation = &"Idle"
+
+[node name="GoTo" parent="." unique_id=639935228 instance=ExtResource("5_e04ro")]
+
+[node name="Ears" type="Area2D" parent="." unique_id=874213355]
+position = Vector2(0, 1)
+script = ExtResource("6_eif1b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ears" unique_id=1364705774]
+shape = SubResource("CircleShape2D_eif1b")
+debug_color = Color(0.14117648, 0.3137255, 0.37254903, 0.5882353)
+
+[node name="Eyes" type="Area2D" parent="." unique_id=923654512]
+position = Vector2(0, 1)
+script = ExtResource("4_oqtgj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Eyes" unique_id=260662699]
+shape = SubResource("CircleShape2D_oqtgj")
+debug_color = Color(0.92156863, 0.72156864, 0.35686275, 0.39215687)
+
+[node name="Nose" type="Area2D" parent="." unique_id=930519642]
+position = Vector2(0, 1)
+script = ExtResource("7_26ar8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Nose" unique_id=1991379853]
+shape = SubResource("CircleShape2D_26ar8")
+debug_color = Color(0.20392157, 0.6117647, 0.34509805, 0.78431374)
+
+[connection signal="heard_a_noise" from="Ears" to="." method="_on_ears_heard_a_noise"]
+[connection signal="player_is_spotted" from="Eyes" to="." method="_on_hare_sight_player_is_spotted"]
+[connection signal="player_un_spotted" from="Eyes" to="." method="_on_hare_sight_player_un_spotted"]

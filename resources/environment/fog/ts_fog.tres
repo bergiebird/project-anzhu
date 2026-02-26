@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c0qnjdpuiadds"]
+[gd_resource type="TileSet" format=3 uid="uid://c0qnjdpuiadds"]
 
 [ext_resource type="Texture2D" uid="uid://jf1v3e45ynb2" path="res://resources/environment/fog/Fog.png" id="1_67n6p"]
 

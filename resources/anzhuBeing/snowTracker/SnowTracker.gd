@@ -2,14 +2,14 @@
 extends Marker2D
 class_name SnowTracker
 
-var current_cells :Array[Vector2i] = []
-var current_tile_coords :Vector2i
-var personal_maps :Array[TileMapLayer]
+var current_cells: Array[Vector2i] = []
+var current_tile_coords: Vector2i
+var personal_maps: Array[TileMapLayer]
 var current_map :TileMapLayer
 var elevation_map :ElevationsLayer
-var current_elevation :int
-var new_elevation :int
-var can_make_tracks :bool = false
+var current_elevation: int
+var new_elevation: int
+var can_make_tracks: bool = false
 
 
 func _ready():
@@ -30,7 +30,7 @@ func _process(_delta: float):
 
 func check_current_tile():
 	if can_make_tracks:
-		var new_tile_coords :Vector2i = current_map.local_to_map(current_map.to_local(global_position))
+		var new_tile_coords: Vector2i = current_map.local_to_map(current_map.to_local(global_position))
 		if new_tile_coords!=current_tile_coords or current_tile_coords==null:
 			current_tile_coords = new_tile_coords
 			on_new_tile(new_tile_coords)
@@ -40,11 +40,11 @@ func on_new_tile(incoming_cell: Vector2i):
 	if parent is Player:
 		_check_elevation()
 	_reorder_cells(incoming_cell)
-	var cell_new :Vector2i = current_cells[0]
-	var cell_current :Vector2i = current_cells[1]
-	var cell_previous :Vector2i = current_cells[2]
-	var from_to :Vector2i = (cell_new - cell_current) + (cell_previous - cell_current)
-	var alternative :int = determine_alternative(from_to, cell_new.x - cell_current.x)
+	var cell_new: Vector2i = current_cells[0]
+	var cell_current: Vector2i = current_cells[1]
+	var cell_previous: Vector2i = current_cells[2]
+	var from_to: Vector2i = (cell_new - cell_current) + (cell_previous - cell_current)
+	var alternative: int = determine_alternative(from_to, cell_new.x - cell_current.x)
 	from_to += Lib.Tracking.ATLAS_OFFSET
 	current_map.set_cell(cell_current, 0, from_to, alternative)
 
@@ -61,7 +61,7 @@ func _reorder_cells(_incoming_cell: Vector2i):
 		current_cells.pop_back()
 
 func determine_alternative(from_to: Vector2i, cell_new_x: int) -> int:
-	var alternative :int = Lib.Tracking.Rotation.HORIZONTAL
+	var alternative: int = Lib.Tracking.Rotation.HORIZONTAL
 	if from_to == Vector2i.ZERO:
 		if cell_new_x == 0:
 			alternative = Lib.Tracking.Rotation.VERTICAL

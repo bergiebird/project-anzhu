@@ -2,14 +2,14 @@
 class_name GoalNothing
 extends GoalState
 
-@export var state_options :Array[String] = ["Idle","Sit","Wander"]
-@export var time_options :Array[int] = [6,9,30,12,15,5,4]
+@export var state_options: Array[String] = ["Idle","Sit","Wander"]
+@export var time_options: Array[int] = [6,9,30,12,15,5,4]
 
-var chosen_time :int
-var chosen_state :String
-var old_chosen_state :String
+var chosen_time: int
+var chosen_state: String
+var old_chosen_state: String
 
-@onready var timer :Timer = $Timer
+@onready var timer: Timer = $Timer
 
 func ___ready():
 	timer.timeout.connect(_on_timeout)

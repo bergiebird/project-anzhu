@@ -1,20 +1,22 @@
-@icon('res://resources/anzhuBeing/eyesight/icon_visibility.png')
+@icon('res://resources/anzhuBeing/Eyes/icon_visibility.png')
 extends Eyesight
-class_name BearEyesight
+class_name BearEyes
 
-func __signaler():
+func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	Sgnl.loud_noise.connect(loud_noise)
 
 
-func loud_noise(_who_made_noise, _where_noise_came_from, _how_loud_was_noise):
+func _loud_noise(_who_made_noise, _where_noise_came_from, _how_loud_was_noise):
 	if is_spotted:
 		has_grievance = true
+
 
 func _on_body_entered(body: Node2D):
 	if body is Player:
 		is_spotted = true
+
 
 func _on_body_exited(body: Node2D):
 	if body is Player:
@@ -25,7 +27,7 @@ func _on_body_exited(body: Node2D):
 
 #region #========================================================# DEBUG
 @export_category('DEBUG')
-@export var debug_eyesight :bool = false
+@export var debug_Eyes: bool = false
 func debug():
-	debug_eyesight = true
+	debug_Eyes = true
 #endregion

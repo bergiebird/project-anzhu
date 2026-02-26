@@ -2,7 +2,7 @@
 class_name ActionWander
 extends ActionState
 
-var target_acquired :bool = false
+var target_acquired: bool = false
 
 func ___ready():
 	if grandparent is Walrus:
@@ -20,14 +20,14 @@ func on_location_reached():
 	if is_active:
 		grandparent.publish_event.emit("set_GoTo_node")
 
-func new_target_position(_incoming_position :Vector2):
+func new_target_position(_incoming_position: Vector2):
 	if is_active:
 		target_acquired = true
 
 func ___exit():
 	target_acquired = false
 
-func _physics_process(_delta :float):
+func _physics_process(_delta: float):
 	if target_acquired:
 		grandparent.publish_event.emit("move_towards_target", "Walk")
 

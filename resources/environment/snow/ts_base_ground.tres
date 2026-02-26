@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://70l137u30xy4"]
+[gd_resource type="TileSet" format=3 uid="uid://70l137u30xy4"]
 
 [ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://resources/environment/snow/ground_and_water_ANZHU.png" id="1_y0ioq"]
 

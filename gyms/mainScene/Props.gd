@@ -3,7 +3,7 @@ class_name Props
 
 enum EdiblePlantType{SHRUB, BERRY, HERB, FUNGI} # Should be a resource in a later stage maybe
 
-var plant_encyclopedia :Dictionary = {
+var plant_encyclopedia: Dictionary = {
 	"Arc Willow":{
 		"EdiblePlantType": EdiblePlantType.SHRUB,
 		"Eaten By": [],

@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cy8x2rpiisi4c"]
+[gd_scene format=3 uid="uid://cy8x2rpiisi4c"]
 
 [ext_resource type="Script" uid="uid://cuyuuhi5p5vat" path="res://resources/anzhuBeing/anzhuAnimal/walrus/scripts/Warlus.gd" id="1_qyjs8"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_o0tca"]
@@ -27,13 +27,13 @@ stream_1/stream = ExtResource("7_cwyc0")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_o0tca"]
 
-[node name="Walrus" type="CharacterBody2D"]
+[node name="Walrus" type="CharacterBody2D" unique_id=1439231921]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_qyjs8")
 this_beings_type = "Walrus"
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=814302975]
 shape = SubResource("RectangleShape2D_3x73f")
 script = ExtResource("2_o0tca")
 description = "[DEFAULT WALRUS DESCRIPTION]"
@@ -41,58 +41,58 @@ set_mask_dimensions = 1
 damage_recieved = 4
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
-[node name="Actions" type="Node2D" parent="."]
+[node name="Actions" type="Node2D" parent="." unique_id=993415185]
 script = ExtResource("5_drws8")
 starting_action = 3
 debug_self = true
 metadata/_custom_type_script = "uid://72ydk5v1g7hl"
 
-[node name="Idle" type="Node2D" parent="Actions"]
+[node name="Idle" type="Node2D" parent="Actions" unique_id=1537757039]
 script = ExtResource("9_xras0")
 self_debug = true
 metadata/_custom_type_script = "uid://crgdesgb0g5fd"
 
-[node name="Wander" type="Node2D" parent="Actions"]
+[node name="Wander" type="Node2D" parent="Actions" unique_id=579227799]
 script = ExtResource("10_sm0p4")
 self_debug = true
 metadata/_custom_type_script = "uid://dpcgwylrmycpp"
 
-[node name="WalrusRoar" type="AudioStreamPlayer2D" parent="Actions/Wander"]
+[node name="WalrusRoar" type="AudioStreamPlayer2D" parent="Actions/Wander" unique_id=1210465420]
 stream = SubResource("AudioStreamRandomizer_57gyt")
 max_distance = 1500.0
 attenuation = 5.0
 
-[node name="Roll" type="Node2D" parent="Actions"]
+[node name="Roll" type="Node2D" parent="Actions" unique_id=1722651223]
 script = ExtResource("6_uk2hj")
 self_debug = true
 
-[node name="Goals" type="Node2D" parent="."]
+[node name="Goals" type="Node2D" parent="." unique_id=730445636]
 script = ExtResource("5_emk87")
 metadata/_custom_type_script = "uid://bn1ww4f4t115g"
 
-[node name="GoalNothing" type="Node2D" parent="Goals"]
+[node name="GoalNothing" type="Node2D" parent="Goals" unique_id=1322969]
 script = ExtResource("12_wf8cq")
 state_options = Array[String](["Idle", "Wander", "Roll"])
 metadata/_custom_type_script = "uid://n4g3epvshvea"
 
-[node name="Timer" type="Timer" parent="Goals/GoalNothing"]
+[node name="Timer" type="Timer" parent="Goals/GoalNothing" unique_id=1896468872]
 
-[node name="SnowTracker" type="Marker2D" parent="."]
+[node name="SnowTracker" type="Marker2D" parent="." unique_id=670716710]
 position = Vector2(0, 1)
 script = ExtResource("4_y54qn")
 metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
-[node name="Animations" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="." unique_id=2041405940]
 sprite_frames = ExtResource("4_xras0")
 animation = &"Roll"
 frame_progress = 0.638907
 script = ExtResource("13_jmnr7")
 
-[node name="GoTo" parent="." instance=ExtResource("13_33w8m")]
+[node name="GoTo" parent="." unique_id=1010001583 instance=ExtResource("13_33w8m")]
 
-[node name="Corpse" type="Area2D" parent="."]
+[node name="Corpse" type="Area2D" parent="." unique_id=145375522]
 script = ExtResource("6_k3hd0")
 metadata/_custom_type_script = "uid://bm6h3sq2ypia"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Corpse" unique_id=1556066086]
 shape = SubResource("CircleShape2D_o0tca")

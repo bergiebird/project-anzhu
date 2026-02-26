@@ -1,25 +1,25 @@
 extends Node2D
 class_name State
 
-var parent :Node:
+var parent: Node:
 	set(value):
 		parent = value
 		__parent_acquired()
 		___parent_acquired()
 		grandparent = parent.get_parent()
 
-var grandparent :AnzhuBeing:
+var grandparent: AnzhuBeing:
 	set(value):
 		grandparent = value
 		grandparent.publish_event.connect(func(func_name:String, data:Variant=null): Lib.Observe.subscribe_to_event(self, func_name, data))
 		__grandparent_acquired()
 		___grandparent_acquired()
 
-var is_active :bool
+var is_active: bool
 var which_state
 
-@onready var _can_process :bool = true
-@onready var _can_physics_process :bool = true
+@onready var _can_process: bool = true
+@onready var _can_physics_process: bool = true
 
 #region Basics
 func _ready():
@@ -73,9 +73,9 @@ func ___get_state_value(_parent :StateMachine):
 #endregion
 
 #region # DEBUG
-@export var self_debug :bool = false
-var entity_icon :String = ""
-@onready var what_state_type :String = "[color=yellow][b]Goal: [/b] " + self.name + '[/color]'
+@export var self_debug: bool = false
+var entity_icon: String = ""
+@onready var what_state_type: String = "[color=yellow][b]Goal: [/b] " + self.name + '[/color]'
 
 func _action_state_debug():
 	if self is ActionState and self_debug:

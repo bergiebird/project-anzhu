@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3100fbxnsgc0"]
+[gd_scene format=3 uid="uid://b3100fbxnsgc0"]
 
 [ext_resource type="Script" uid="uid://88twws4eaxq0" path="res://resources/anzhuBeing/player/abilities/gun/Gunshot.gd" id="1_1tum2"]
 [ext_resource type="Script" uid="uid://b320hn56a6jjm" path="res://Attack.gd" id="2_46cyy"]
@@ -7,7 +7,6 @@
 [sub_resource type="Resource" id="Resource_20jso"]
 script = ExtResource("2_46cyy")
 weapon = "gun"
-damage = 0
 metadata/_custom_type_script = "uid://b320hn56a6jjm"
 
 [sub_resource type="Gradient" id="Gradient_d1bta"]
@@ -41,18 +40,18 @@ point_count = 3
 offsets = PackedFloat32Array(0, 0.314815, 1)
 colors = PackedColorArray(0.917647, 0.945098, 0.941176, 1, 0.523343, 0.525148, 0.537255, 0.18254, 0.435294, 0.431373, 0.447059, 0)
 
-[node name="GunShot" type="Node2D"]
+[node name="GunShot" type="Node2D" unique_id=1884398401]
 script = ExtResource("1_1tum2")
 bullet_travel_time = 0.1
 attack_gunshot = SubResource("Resource_20jso")
 
-[node name="VfxFlash" type="PointLight2D" parent="."]
+[node name="VfxFlash" type="PointLight2D" parent="." unique_id=1045081755]
 visible = false
 color = Color(1, 0.945098, 0.662745, 1)
 energy = 3.0
 texture = SubResource("GradientTexture2D_1tum2")
 
-[node name="VfxSmoke" type="CPUParticles2D" parent="."]
+[node name="VfxSmoke" type="CPUParticles2D" parent="." unique_id=1432885688]
 emitting = false
 amount = 40
 texture = SubResource("GradientTexture2D_d2ek5")
@@ -76,7 +75,7 @@ scale_amount_curve = SubResource("Curve_d2ek5")
 color = Color(0.682353, 0.643137, 0.494118, 1)
 color_ramp = SubResource("Gradient_naea4")
 
-[node name="VfxSmoke2" type="CPUParticles2D" parent="."]
+[node name="VfxSmoke2" type="CPUParticles2D" parent="." unique_id=1643928600]
 z_index = 1
 emitting = false
 amount = 35
@@ -101,18 +100,18 @@ scale_amount_curve = SubResource("Curve_d2ek5")
 color = Color(0.682353, 0.643137, 0.494118, 1)
 color_ramp = SubResource("Gradient_naea4")
 
-[node name="GunRay" type="RayCast2D" parent="."]
+[node name="GunRay" type="RayCast2D" parent="." unique_id=320503774]
 rotation = 1.5708
 target_position = Vector2(84, 0)
 collision_mask = 16
 collide_with_bodies = false
 
-[node name="SfxGunshot" type="AudioStreamPlayer" parent="."]
+[node name="SfxGunshot" type="AudioStreamPlayer" parent="." unique_id=834047885]
 stream = ExtResource("2_mnp2n")
 volume_db = 3.0
 bus = &"SFX"
 
-[node name="FlashTime" type="Timer" parent="."]
+[node name="FlashTime" type="Timer" parent="." unique_id=774630060]
 wait_time = 0.1
 one_shot = true
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://b5id41tdwyrd4"]
+[gd_scene format=3 uid="uid://b5id41tdwyrd4"]
 
 [ext_resource type="Script" uid="uid://d3odvoyfq8ttm" path="res://resources/anzhuBeing/player/Player.gd" id="1_e4mdq"]
 [ext_resource type="Script" uid="uid://82hfueor42tn" path="res://resources/anzhuBeing/player/abilities/_Abilities.gd" id="2_3v2ag"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://4h8x1njhms85" path="res://resources/anzhuBeing/player/abilities/jump/jump.tscn" id="7_el3np"]
 [ext_resource type="PackedScene" uid="uid://7acqmb7qc7pg" path="res://resources/anzhuBeing/player/abilities/mouseControl/MouseControl.tscn" id="7_ou8og"]
 [ext_resource type="SpriteFrames" uid="uid://cwrpcmfndlfq1" path="res://resources/anzhuBeing/player/sf_player.tres" id="8_lkdrv"]
+[ext_resource type="Shader" uid="uid://dww4t5xdxra50" path="res://resources/anzhuBeing/player/outline.gdshader" id="9_edqir"]
 [ext_resource type="Material" uid="uid://dvuuxouj12vys" path="res://resources/anzhuBeing/breath/pp_breath.tres" id="10_0tu2h"]
 [ext_resource type="Script" uid="uid://dwl8j1ftfgflh" path="res://resources/anzhuBeing/player/abilities/move/PlayerMovement.gd" id="10_m88x0"]
 [ext_resource type="Script" uid="uid://c0areapnvjvhb" path="res://resources/anzhuBeing/player/ReloadAnimation.gd" id="11_0tu2h"]
@@ -19,7 +20,14 @@
 [ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.tscn" id="15_y6uby"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="16_buxeu"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_edqir"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0b3xi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_buxeu"]
+shader = ExtResource("9_edqir")
+shader_parameter/outline_color = Color(0.0705882, 0.054902, 0.137255, 1)
+shader_parameter/width = 1
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_edqir"]
 random_pitch = 1.3
@@ -38,79 +46,83 @@ height = 300
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" unique_id=356289271]
 collision_layer = 262803
 collision_mask = 262275
 script = ExtResource("1_e4mdq")
 this_beings_type = "Human"
 visual_description = "It's you?"
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=1327557531]
+visible = false
+material = SubResource("ShaderMaterial_edqir")
 shape = SubResource("RectangleShape2D_0b3xi")
 script = ExtResource("2_el3np")
+description = "It is you"
 set_mask_dimensions = 1
 background_color = Color(0.0627451, 0.0313726, 0.0862745, 1)
 
-[node name="FullHP" type="AudioStreamPlayer2D" parent="Mask"]
+[node name="FullHP" type="AudioStreamPlayer2D" parent="Mask" unique_id=1542643182]
 stream = ExtResource("3_buxeu")
 volume_db = -15.0
 bus = &"SFX"
 
-[node name="Abilities" type="Node2D" parent="."]
+[node name="Abilities" type="Node2D" parent="." unique_id=1316407245]
 editor_description = "This will be our list of abilities we can play with."
 script = ExtResource("2_3v2ag")
-debugger_color = Color(0.917647, 0.945098, 0.372549, 1)
 
-[node name="Gun" parent="Abilities" instance=ExtResource("11_f1ej7")]
+[node name="Gun" parent="Abilities" unique_id=1478075443 instance=ExtResource("11_f1ej7")]
 editor_description = "In depth scene handling all FX & collider elements of the gun. "
 z_index = 2
 
-[node name="Movement" type="Node2D" parent="Abilities"]
+[node name="Movement" type="Node2D" parent="Abilities" unique_id=664003640]
 script = ExtResource("10_m88x0")
 run_bonus = 16
 
-[node name="Jump" parent="Abilities" instance=ExtResource("7_el3np")]
+[node name="Jump" parent="Abilities" unique_id=1989385196 instance=ExtResource("7_el3np")]
 jump_distance = 3.0
 
-[node name="MouseControl" parent="Abilities" instance=ExtResource("7_ou8og")]
+[node name="MouseControl" parent="Abilities" unique_id=851205747 instance=ExtResource("7_ou8og")]
+process_mode = 3
 
-[node name="Animations" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="." unique_id=1906002294]
 modulate = Color(0.917647, 0.945098, 0.941176, 1)
 texture_filter = 1
+material = SubResource("ShaderMaterial_buxeu")
+use_parent_material = true
 position = Vector2(0, -1)
 sprite_frames = ExtResource("8_lkdrv")
-animation = &"executeJump_SIDE"
+animation = &"executeJump_NORTH"
 autoplay = "idle_SIDE"
 script = ExtResource("3_ro5pv")
-debugger_color = Color(0.901961, 0.478431, 0.517647, 1)
 
-[node name="Breath" type="GPUParticles2D" parent="Animations"]
+[node name="Breath" type="GPUParticles2D" parent="Animations" unique_id=1000849458]
 position = Vector2(0, 1)
 process_material = ExtResource("10_0tu2h")
 script = ExtResource("11_buxeu")
 metadata/_custom_type_script = "uid://c8abj0k6k5t7f"
 
-[node name="ReloadAnimation" type="Node" parent="Animations"]
+[node name="ReloadAnimation" type="Node" parent="Animations" unique_id=1050477706]
 script = ExtResource("11_0tu2h")
 
-[node name="SfxStuff" type="AudioStreamPlayer" parent="Animations/ReloadAnimation"]
+[node name="SfxStuff" type="AudioStreamPlayer" parent="Animations/ReloadAnimation" unique_id=372021651]
 stream = ExtResource("14_iu2d7")
 volume_db = -10.0
 pitch_scale = 0.7
 
-[node name="SfxThonk" type="AudioStreamPlayer" parent="Animations/ReloadAnimation"]
+[node name="SfxThonk" type="AudioStreamPlayer" parent="Animations/ReloadAnimation" unique_id=2117957335]
 stream = SubResource("AudioStreamRandomizer_edqir")
 pitch_scale = 2.0
 
-[node name="AudioListener2D" type="AudioListener2D" parent="."]
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=895241856]
 current = true
 
-[node name="SnowTracker" type="Marker2D" parent="."]
+[node name="SnowTracker" type="Marker2D" parent="." unique_id=1287827425]
 position = Vector2(0, 2.4)
 script = ExtResource("16_buxeu")
 metadata/_custom_type_script = "uid://bd7ibd17tc3yv"
 
-[node name="Nightlight" type="PointLight2D" parent="."]
+[node name="Nightlight" type="PointLight2D" parent="." unique_id=1830805500]
 visible = false
 energy = 0.15
 blend_mode = 2
@@ -118,12 +130,20 @@ shadow_filter = 2
 texture = SubResource("GradientTexture2D_jej6c")
 script = ExtResource("13_f1ej7")
 
-[node name="Timer" type="Timer" parent="Nightlight"]
+[node name="Timer" type="Timer" parent="Nightlight" unique_id=1812424950]
 wait_time = 3.5
 one_shot = true
 
-[node name="MainCamera" parent="." instance=ExtResource("15_y6uby")]
+[node name="MainCamera" parent="." unique_id=1754051063 instance=ExtResource("15_y6uby")]
 visible = false
+
+[connection signal="reload_started" from="Abilities/Gun" to="Animations/ReloadAnimation" method="_on_gun_reload_started"]
+[connection signal="ended_jump" from="Abilities/Jump" to="Mask" method="_on_jump_ended_jump"]
+[connection signal="ended_jump" from="Abilities/Jump" to="Animations" method="_on_jump_ended_jump"]
+[connection signal="prepared_jump" from="Abilities/Jump" to="Animations" method="_on_jump_prepared_jump"]
+[connection signal="started_jump" from="Abilities/Jump" to="Mask" method="_on_jump_started_jump"]
+[connection signal="started_jump" from="Abilities/Jump" to="Animations" method="_on_jump_started_jump"]
+[connection signal="reloading_ended" from="Animations/ReloadAnimation" to="Abilities" method="_on_reload_animation_reloading_ended"]
 
 [editable path="Abilities/Gun"]
 [editable path="Abilities/Jump"]

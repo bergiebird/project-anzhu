@@ -28,5 +28,5 @@ func _grandparent_set():
 	pass
 
 #region    #=================================================# DEBUG
-@export var debug_self :bool
+@export var debug_self: bool
 #endregion #=================================================# DEBUG

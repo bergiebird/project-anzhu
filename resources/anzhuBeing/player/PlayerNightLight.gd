@@ -29,11 +29,11 @@ func update_nightlight(should_nightlight_be_on: bool)->void:
 
 ## Not in use
 ## This makes everything super dark temporarily
-#func gunfired(did_gun_fire :bool)->void:
+#func gunfired(did_gun_fire: bool)->void:
 	#if did_gun_fire:
 		#change_nightlight(minimum_light, fast_time)
 
-func change_nightlight(m_energy :float, wait_time :float)->void:
+func change_nightlight(m_energy: float, wait_time: float)->void:
 	Dbgr.tweener_property_disposal([
 		Buildton.tweener_deferred(self, 'energy', m_energy, wait_time, Tween.TRANS_EXPO)], debug)
 	#if visible:
@@ -43,7 +43,7 @@ func change_nightlight(m_energy :float, wait_time :float)->void:
 
 #region # DEBUG
 @export_group("DEBUG")
-@export var debug :bool = false
+@export var debug: bool = false
 func _debug()->void:
 	if debug:
 		print_rich('[color=2a2942]NightLight debugging enabled . . .[/color]')

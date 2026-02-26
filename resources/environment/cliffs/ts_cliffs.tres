@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c2juxxibyuqgu"]
+[gd_resource type="TileSet" format=3 uid="uid://c2juxxibyuqgu"]
 
 [ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://resources/environment/cliffs/anzhu_cliffs.png" id="1_srphd"]
 

@@ -1,12 +1,12 @@
 @icon("res://resources/AnzhuBeing/audio/icon_audio.png")
 class_name AudioManager extends Node2D #AudioManager.gd
 
-var audio_dictionary :Dictionary[String, AudioStreamPlayer2D] = {}
-var audio_string :String = "Sfx_"
-@onready var parent :AnzhuBeing = get_parent()
+var audio_dictionary: Dictionary[String, AudioStreamPlayer2D] = {}
+var audio_string: String = "Sfx_"
+@onready var parent: AnzhuBeing = get_parent()
 
 func _ready()->void:
-	for child :AudioStreamPlayer2D in get_children():
+	for child: AudioStreamPlayer2D in get_children():
 		audio_dictionary[child.name] = child
 	__ready()
 	__signaler()
@@ -15,11 +15,11 @@ func _signaler()->void:
 	parent.publish_event.connect(func(func_name:String,data:Variant=null):L.Observe.subscribe_to_event(self, func_name, data))
 	__signaler()
 
-func start_sfx(name_of_sfx :String)->void:
+func start_sfx(name_of_sfx: String)->void:
 	audio_dictionary.get(audio_string + name_of_sfx).playing = true
-func stop_sfx(name_of_sfx :String)->void:
+func stop_sfx(name_of_sfx: String)->void:
 	audio_dictionary.get(audio_string + name_of_sfx).playing = false
-func get_is_playing(name_of_sfx :String)->bool:
+func get_is_playing(name_of_sfx: String)->bool:
 	return audio_dictionary.get(audio_string + name_of_sfx).playing
 
 #region # VIRTUALS
@@ -30,7 +30,7 @@ func __signaler()->void:pass
 
 #region # DEBUG
 @export_group('DEBUG')
-@export var debug :bool = false
+@export var debug: bool = false
 
 func _debug()->void:
 	print_rich('[color=ebb85b]Audio debugging enabled . . .[/color]')

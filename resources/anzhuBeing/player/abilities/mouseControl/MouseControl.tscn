@@ -1,20 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://7acqmb7qc7pg"]
+[gd_scene format=3 uid="uid://7acqmb7qc7pg"]
 
 [ext_resource type="Script" uid="uid://diojajniip25g" path="res://resources/anzhuBeing/player/abilities/mouseControl/MouseControl.gd" id="1_s3l53"]
 [ext_resource type="AudioStream" uid="uid://du0g21w3j2wem" path="res://resources/anzhuBeing/player/abilities/mouseControl/MenuClick.mp3" id="4_s76yc"]
 
-[node name="MouseControl" type="Node2D"]
+[node name="MouseControl" type="Node2D" unique_id=849940769]
 script = ExtResource("1_s3l53")
 
-[node name="ClickResetTimer" type="Timer" parent="."]
+[node name="ClickResetTimer" type="Timer" parent="." unique_id=470950078]
 wait_time = 0.16
 one_shot = true
 
-[node name="MouseIdleTimer" type="Timer" parent="."]
+[node name="MouseIdleTimer" type="Timer" parent="." unique_id=2130772837]
 wait_time = 3.2
 one_shot = true
 
-[node name="MenuClick" type="AudioStreamPlayer" parent="."]
+[node name="MenuClick" type="AudioStreamPlayer" parent="." unique_id=188810147]
 stream = ExtResource("4_s76yc")
 volume_db = -13.0
 mix_target = 2
+
+[connection signal="timeout" from="ClickResetTimer" to="." method="_on_click_reset_timer_timeout"]
+[connection signal="timeout" from="MouseIdleTimer" to="." method="_on_mouse_idle_timer_timeout"]

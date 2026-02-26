@@ -1,10 +1,10 @@
 extends GoalState
 class_name GoalHunt
 
-var target :AnzhuBeing
-@onready var bgm_hunt :AudioStreamPlayer2D =  $BgmHunt
-@onready var sfx_spotted :AudioStreamPlayer2D = $SfxSpotted
-@onready var sfx_out_of_sight :AudioStreamPlayer2D = $SfxOutOfSight
+var target: AnzhuBeing
+@onready var bgm_hunt: AudioStreamPlayer2D =  $BgmHunt
+@onready var sfx_spotted: AudioStreamPlayer2D = $SfxSpotted
+@onready var sfx_out_of_sight: AudioStreamPlayer2D = $SfxOutOfSight
 
 func ___get_state_value(_parent :StateMachine):
 	which_state = _parent.AnimalGoals.Hunt

@@ -5,10 +5,10 @@ class_name Door extends Area2D
 @export var pair :Door
 
 @export_group("Uniques")
-@export var is_permanently_closed :bool
+@export var is_permanently_closed: bool
 
 var player :Player
-var is_exit :bool = false:
+var is_exit: bool = false:
 	set(value): if is_exit != value:
 		is_exit = value
 		if is_exit:

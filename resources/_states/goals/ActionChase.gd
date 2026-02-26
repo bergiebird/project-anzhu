@@ -1,12 +1,12 @@
 extends ActionState
 class_name ActionChase
 
-@export var sprint_time :float = 5.0
+@export var sprint_time: float = 5.0
 var player :Player
-var current_speed :String
-@onready var sfx_chase :AudioStreamPlayer2D = $Sfx_Chase
-@onready var direction_timer :Timer = $DirectionTimer
-@onready var charge_timer :Timer = $ChargeTimer
+var current_speed: String
+@onready var sfx_chase: AudioStreamPlayer2D = $Sfx_Chase
+@onready var direction_timer: Timer = $DirectionTimer
+@onready var charge_timer: Timer = $ChargeTimer
 
 func ___get_state_value(_parent :StateMachine):
 	which_state = _parent.AnimalActions.Chase
@@ -53,7 +53,7 @@ func ___start_charge(): if is_active:
 func ___end_charge():
 	current_speed = "Jog"
 
-func strike_target(_blah):
+func strike_target(_blah: Attack):
 	await get_tree().create_timer(0.32).timeout
 	charge_timer.stop()
 	current_speed = "Jog"

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=17 format=3 uid="uid://dxm2bxjoy2ikb"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dxm2bxjoy2ikb"]
 
 [ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="1_8grnm"]
 [ext_resource type="Texture2D" uid="uid://brkldmiw0om3t" path="res://resources/anzhuBeing/anzhuAnimal/walrus/visual/Walrus-Sheet.png" id="2_u00ov"]

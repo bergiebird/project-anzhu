@@ -22,7 +22,7 @@ func change_goals(incoming_goal):
 
 #region # DEBUG
 @export_group('DEBUG')
-@export var debug_goals :bool = false
+@export var debug_goals: bool = false
 func debug()->void:
 	pass
 #endregion

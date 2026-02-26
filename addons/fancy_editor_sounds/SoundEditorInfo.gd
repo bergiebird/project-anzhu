@@ -2,19 +2,19 @@ extends RefCounted
 class_name SoundEditorInfo
 
 var code_edit :CodeEdit
-var char_count :int
-var caret_column :int
-var caret_line :int
-var previous_text :String = ""
-var selection_length :int
-var has_unselected :bool
-var last_selection_time :float
-var previous_line :String
-var previous_selection :String
-var previous_caret_pos :Vector2
-var previous_line_count :int
-var tab_pressed :bool
-var tab_affected_lines :Array = []
+var char_count: int
+var caret_column: int
+var caret_line: int
+var previous_text: String = ""
+var selection_length: int
+var has_unselected: bool
+var last_selection_time: float
+var previous_line: String
+var previous_selection: String
+var previous_caret_pos: Vector2
+var previous_line_count: int
+var tab_pressed: bool
+var tab_affected_lines: Array = []
 
 func _init(_code_edit :CodeEdit):
 	code_edit = _code_edit
@@ -33,7 +33,7 @@ func _init(_code_edit :CodeEdit):
 	tab_affected_lines = []
 
 func _to_string()->String:
-	var info_text :String = "[SoundEditorInfo] " + str(code_edit)
+	var info_text: String = "[SoundEditorInfo] " + str(code_edit)
 	info_text += "\nChar Count: " + str(char_count)
 	info_text += "\nCaret: Line " + str(caret_line) + ", Column " + str(caret_column)
 	info_text += "\nSelection Length: " + str(selection_length)

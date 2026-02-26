@@ -1,13 +1,13 @@
 extends ActionState
 class_name ActionStunned
 
-@export var DECELERATION :float = 0.97
-@export var stun_time_modifier :float = 0.50
-@export var REMOVE_FROM_STUN_TIME_MODIFIER :float = 0.02
+@export var DECELERATION: float = 0.97
+@export var stun_time_modifier: float = 0.50
+@export var REMOVE_FROM_STUN_TIME_MODIFIER: float = 0.02
 
-var stun_time :float = 0.1
+var stun_time: float = 0.1
 
-@onready var timer :Timer = $StunnedTimer
+@onready var timer: Timer = $StunnedTimer
 
 func ___ready():
 	timer.wait_time = stun_time

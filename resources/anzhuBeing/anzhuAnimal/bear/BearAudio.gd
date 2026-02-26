@@ -1,10 +1,10 @@
 extends AudioManager
 class_name BearAudio
 
-@onready var sfx_hunt :AudioStreamPlayer2D = $Sfx_Hunt
-var sfx_hunt_count :int = 1
-var count :float = 1.0
-var first_time :bool = true
+@onready var sfx_hunt: AudioStreamPlayer2D = $Sfx_Hunt
+var sfx_hunt_count: int = 1
+var count: float = 1.0
+var first_time: bool = true
 
 func _reset_bgm()->void:
 	sfx_hunt.volume_db = 0

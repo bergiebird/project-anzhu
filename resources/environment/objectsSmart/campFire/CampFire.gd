@@ -42,5 +42,5 @@ func _interacted(): ## Light/Unlight Fire
 
 
 #region    #==============================================================================# DEBUG
-@onready var debug_icon :String = "[img]res://resources/campFire/campfire.png[/img]"
+@onready var debug_icon: String = "[img]res://resources/campFire/campfire.png[/img]"
 #endregion

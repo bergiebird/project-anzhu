@@ -4,6 +4,9 @@ class_name PlayerJump
 extends Ability
 
 signal jumped(has_started_the_jump: bool)
+signal prepared_jump
+signal started_jump
+signal ended_jump
 
 @export var jump_time: float = 1.0
 @export var jump_distance: float = 2.0
@@ -33,6 +36,7 @@ func check_for_init_jump() -> void:
 	if Inputon.jump_pressed():
 		parent.current_state = parent.AbilityStates.INIT_JUMP
 		landing_location = elevation_map.evaluate_jump_request(jump_distance, grandparent.current_direction)
+		prepared_jump.emit()
 
 
 func check_if_can_jump() -> void:
@@ -45,10 +49,12 @@ func check_if_can_jump() -> void:
 
 
 func execute_jump() -> void:
-	jumped.emit(true)
+	started_jump.emit()
+#	jumped.emit(true)
 	Dbgr.tweener_property_disposal([Buildton.tweener(grandparent, 'global_position', landing_location, jump_time)], debug_self)
 	await get_tree().create_timer(jump_time - land_recovery_time).timeout
 	sfx_land.play()
 	await get_tree().create_timer(land_recovery_time).timeout
-	jumped.emit(false)
+	ended_jump.emit()
+#	jumped.emit(false)
 	parent.current_state = parent.AbilityStates.IDLING

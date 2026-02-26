@@ -8,18 +8,22 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="Project: Anzhu"
-config/tags=PackedStringArray("_current")
+config/tags=PackedStringArray("main")
 run/main_scene="uid://bu2w1ukm7uknj"
-config/features=PackedStringArray("4.5", "Forward Plus")
+config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
 config/icon="res://warehouse/~examples/arctic-3.png"
 
 [audio]
 
-buses/default_bus_layout="res://resources/anzhuBeing/anzhuAnimal/bear/default_bus_layout.tres"
+buses/default_bus_layout="uid://dknbrymka6k3b"
 general/default_playback_type.web=0
 
 [autoload]
@@ -58,14 +62,12 @@ movie_writer/movie_file="/home/bergiebird/Current/Godot/projects/project-anzhu/w
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/_Godot-IDE_/plugin.cfg", "res://addons/fancy_editor_sounds/plugin.cfg")
+enabled=PackedStringArray("res://addons/fancy_editor_sounds/plugin.cfg")
 
 [file_customization]
 
 folder_colors={
 "res://addons/": "gray",
-"res://addons/_Godot-IDE_/plugins/": "blue",
-"res://addons/_Godot-IDE_/shared_resources/": "teal",
 "res://gyms/": "yellow",
 "res://resources/": "purple",
 "res://warehouse/": "gray"

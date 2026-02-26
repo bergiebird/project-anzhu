@@ -2,12 +2,12 @@ extends Node
 #Sgnl.gd
 signal update_console(String)
 signal heal_player
-signal loud_noise(who :AnzhuBeing, where :Vector2, noise_db :float)
+signal loud_noise(who: AnzhuBeing, where: Vector2, noise_db: float)
 signal gunshot
 signal reload_scene
 signal toggle_debug_collision
 signal toggle_debug_elevation
-signal toggle_debug_invisible
+signal toggle_debug_invisible(bol: bool)
 signal on_new_tile(Vector2i)
 signal new_hour
 signal new_hour_name(String)
@@ -16,6 +16,8 @@ signal time_dictionary_delivery(Dictionary)
 signal new_hour_nightlight(bool)
 signal new_hour_campfire(float)
 signal console_read_sign(bool, Sign, String)
+signal music_muted(bool)
+signal sfx_requested
 
 #region    #=================================================================# References
 ## Simple signals to give out the reference to anyone who wants it in the scene.
@@ -24,14 +26,14 @@ signal player_reference(player_ref :Player)
 signal elevation_reference(elevation_ref :ElevationsLayer)
 signal tracks_reference(tracks_ref :CanvasGroup)
 signal props_reference(props_ref :TileMapLayer)
-signal snowfall_reference(snowfall_ref :GPUParticles2D)
+signal snowfall_reference(snowfall_ref: GPUParticles2D)
 
 var player :Player
 
-func reference_emitter_deferred(ref_signal :String, ref :Node, should_debug :bool=false)->void:
+func reference_emitter_deferred(ref_signal: String, ref: Node, should_debug: bool=false)->void:
 	Callable(self, "reference_emitter").bind(ref_signal, ref, should_debug).call_deferred()
 
-func reference_emitter(ref_signal :String, ref :Node, should_debug:bool=false)->void:
+func reference_emitter(ref_signal: String, ref: Node, should_debug:bool=false)->void:
 	if ref is Player:
 		player = ref
 	var error :Error = emit_signal(ref_signal, ref)
@@ -41,7 +43,7 @@ func reference_emitter(ref_signal :String, ref :Node, should_debug:bool=false)->
 #endregion #================================================================# References
 
 
-var saved_state :bool = false
+var saved_state: bool = false
 
 func _ready():
 	reload_scene.connect(reload_current_scene)

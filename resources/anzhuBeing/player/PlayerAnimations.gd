@@ -1,30 +1,21 @@
 extends AnimatedSprite2D
 class_name PlayerAnimations
 
-@export var FLASH_AMOUNT :int = 4
-@export var animations_reloads_reload_time :float = 0.5
-@export var modified_speed_up :float = 0.16
+@export var FLASH_AMOUNT: int = 4
+@export var animations_reloads_reload_time: float = 0.5
+@export var modified_speed_up: float = 0.16
 
-var is_dead :bool = false
-var is_colored :bool = false
-var anim_direction :String = '_SIDE'
+var is_dead: bool = false
+var is_colored: bool = false
+var anim_direction: String = '_SIDE'
 
-@onready var parent :AnzhuBeing = get_parent()
-@onready var mask :Mask = parent.get_node("Mask")
-@onready var abilities :Abilities = parent.get_node('Abilities')
-@onready var breath :GPUParticles2D = $Breath
-@onready var reload_anim :ReloadAnimation = $ReloadAnimation
+@onready var parent: AnzhuBeing = get_parent()
+@onready var abilities: Abilities = parent.get_node('Abilities')
 
 
-func _process(_delta :float):
-	var speed :int = int(parent.velocity.length())
+func _process(_delta: float) -> void:
+	var speed: int = int(parent.velocity.length())
 	match abilities.current_state:
-		abilities.AbilityStates.RELOADING:
-			return
-		abilities.AbilityStates.JUMPING:
-			return
-		abilities.AbilityStates.RELOADING:
-			return
 		abilities.AbilityStates.MOVING:
 			if speed > 400:
 				just_play('run')
@@ -34,45 +25,24 @@ func _process(_delta :float):
 				just_play('idle')
 
 
-func has_died():
+func has_died() -> void:
 	is_dead = true
 
 
-func reloading(is_reloading: bool):
-	if is_reloading:
-		reload_anim.start_routine()
-
-
-func jumping(is_jumping: bool):
-	if is_jumping:
-		just_play('executeJump', true, 1)
-
-
-func initializing_jump(is_jump_initialized: bool):
-	if is_jump_initialized:
-		just_play('readyJump', true, 1)
-
-
-func reload_animation_finished():
-	if_debug('reload finished ' + animation)
-	abilities.current_state = abilities.AbilityStates.IDLING
-
-
-func update_direction(bol: Dictionary):
+func update_direction(bol: Dictionary) -> void:
 	if flip_h != bol["Flip"]:
 		flip_h = bol["Flip"]
 
 
-func just_play(anim_name: String, should_stop: bool=false, force_speed_scale: int = -1):
+func just_play(anim_name: String, should_stop: bool = false, force_speed_scale: int = -1) -> void:
 	anim_direction = Directon.ANIM_NAME[parent.current_direction]
 	if should_stop:
 		stop()
 	efficiency_check(force_speed_scale)
 	play(anim_name + anim_direction)
-	if_debug("anim: " + anim_name + "  anim_direction:  " + anim_direction)
 
 
-func efficiency_check(force_speed_scale: int = -1):
+func efficiency_check(force_speed_scale: int = -1) -> void:
 	if force_speed_scale == -1:
 		if abilities.is_efficient:
 			speed_scale = 1
@@ -82,9 +52,9 @@ func efficiency_check(force_speed_scale: int = -1):
 		speed_scale = force_speed_scale
 
 
-func was_struck():
+func was_struck() -> void:
 	modulate = Lib.Palette.RED_TOMATO
-	for flashes:int in FLASH_AMOUNT:
+	for flashes: int in FLASH_AMOUNT:
 		is_colored = !is_colored
 		self_modulate = Lib.Palette.RED_TOMATO if is_colored else Lib.BasicPalette.BASIC_WHITE
 		if not is_dead:
@@ -93,17 +63,9 @@ func was_struck():
 	self_modulate = Lib.BasicPalette.BASIC_WHITE
 
 
-#region DEBUG
-@export_group('Debug')
-@export var debug_animations: bool = false
-@export var debugger_color: Color = Color("e67a84")
+func _on_jump_prepared_jump() -> void:
+	just_play('readyJump', true, 1)
 
-func debug():
-	Dbgr.enable_print(self.name, debugger_color)
-	debug_animations = true
 
-func if_debug(message: String):
-	if debug_animations:
-		Dbgr.dprint(message, debugger_color)
-
-#endregion
+func _on_jump_started_jump() -> void:
+	just_play('executeJump', true, 1)

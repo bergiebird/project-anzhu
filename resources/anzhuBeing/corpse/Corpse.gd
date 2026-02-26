@@ -1,15 +1,16 @@
 @icon("res://resources/anzhuBeing/corpse/icon_bag.png")
 class_name Corpse extends Area2D
 
-var stored_position :Vector2
-var is_dead :bool
-@onready var parent :AnzhuBeing = get_parent()
-@onready var mask :CollisionShape2D = parent.get_node('Mask')
+var stored_position: Vector2
+var is_dead: bool
+@onready var parent: AnzhuBeing = get_parent()
+@onready var mask: CollisionShape2D = parent.get_node('Mask')
 
 func _ready():
 	body_entered.connect(_on_body_entered)
 
-func _on_body_entered(body :Node2D):
+func _on_body_entered(body: Node2D):
+	Sgnl.sfx_requested.emit()
 	if body is Player and is_dead:
 		queue_free()
 
@@ -36,6 +37,7 @@ func construct_new_animation():
 	add_child(new_anim)
 
 func be_free():
+
 	if has_node("CollisionShape2D"):
 		$CollisionShape2D.queue_free()
 	if mask.get_parent() == parent:
@@ -52,7 +54,7 @@ func _has_died():pass
 #endregion
 #region DEBUG
 @export_group('DEBUG')
-@export var debug_corpse :bool = false
+@export var debug_corpse: bool = false
 
 func debug():
 	debug_corpse = true

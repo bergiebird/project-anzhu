@@ -15,12 +15,11 @@ var velocity: Vector2
 
 
 func _physics_process(_delta: float) -> void:                   ## Every physics frame
-	if parent.current_state == parent.AbilityStates.IDLING \
-	or parent.current_state == parent.AbilityStates.MOVING:
+	if parent.current_state == parent.AbilityStates.IDLING or parent.current_state == parent.AbilityStates.MOVING:
 		velocity = Vector2.ZERO                                   ## If current state is Idling or Moving, initialize
 		for direction:String in Directon.DIRECTIONS:              ## Cycle through all 4 direction
 			if Inputon.look_direction(direction):                  ## JIKL check
-				var enput :int = Directon.ENUM_POS[direction]       ## "Enum + Input"
+				var enput: int = Directon.ENUM_POS[direction]       ## "Enum + Input"
 				if enput != grandparent.current_direction:          ## Mostly for animation reasons
 					grandparent.current_direction = enput
 			velocity = mover(direction)                            ## WASD check
@@ -31,7 +30,7 @@ func _physics_process(_delta: float) -> void:                   ## Every physics
 		parent.current_state = parent.AbilityStates.IDLING
 		grandparent.velocity_force = Vector2.ZERO
 
-func mover(direction :String)->Vector2:
+func mover(direction: String) -> Vector2:
 	if Inputon.move(direction):
 		velocity = Directon.get_vectors_with_string(direction)
 		if Inputon.aim(direction):
@@ -46,6 +45,6 @@ func mover(direction :String)->Vector2:
 		return velocity
 	return Vector2.ZERO
 
-func set_efficiency(speed :int, efficiency :bool)->Vector2:
+func set_efficiency(speed: int, efficiency: bool) -> Vector2:
 	parent.is_efficient = efficiency
 	return velocity * speed

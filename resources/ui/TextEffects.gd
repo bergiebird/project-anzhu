@@ -1,6 +1,6 @@
 class_name RichTextTextEffects extends RichTextEffect
 
-var bbcode :String = "fx"
+var bbcode: String = "fx"
 
 
 func _process_custom_fx(char_fx :CharFXTransform):

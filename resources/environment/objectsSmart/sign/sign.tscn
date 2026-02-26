@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c7v51glm6p1uh"]
+[gd_scene format=3 uid="uid://c7v51glm6p1uh"]
 
 [ext_resource type="Script" uid="uid://d4m486q5717mh" path="res://resources/environment/objectsSmart/sign/sign.gd" id="1_v0fcl"]
 [ext_resource type="Texture2D" uid="uid://bhfsv1mjeh0yr" path="res://warehouse/~documented/original/Misc.png" id="2_1gegj"]
@@ -10,11 +10,11 @@ size = Vector2(8, 8)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6se5w"]
 
-[node name="Sign" type="StaticBody2D"]
+[node name="Sign" type="StaticBody2D" unique_id=10886156]
 script = ExtResource("1_v0fcl")
 visual_description = "Test Test"
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=880344678]
 shape = SubResource("RectangleShape2D_0s36i")
 script = ExtResource("4_k120j")
 description = "This is a sign"
@@ -22,15 +22,17 @@ set_mask_dimensions = 1
 has_healthbar = false
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2040937380]
 texture = ExtResource("2_1gegj")
 region_enabled = true
 region_rect = Rect2(9, 265, 6, 6)
 
-[node name="Interactible" type="Area2D" parent="."]
+[node name="Interactible" type="Area2D" parent="." unique_id=1390283136]
 script = ExtResource("3_n703m")
 metadata/_custom_type_script = "uid://b0b683moir7cy"
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible" unique_id=1999337031]
 visible = false
 shape = SubResource("CircleShape2D_6se5w")
+
+[connection signal="player_entered_the_space" from="Interactible" to="." method="_on_interactible_player_entered_the_space"]
