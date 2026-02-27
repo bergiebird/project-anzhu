@@ -7,7 +7,7 @@ class_name Door extends Area2D
 @export_group("Uniques")
 @export var is_permanently_closed: bool
 
-var player :Player
+var player: Player
 var is_exit: bool = false:
 	set(value): if is_exit != value:
 		is_exit = value
@@ -31,7 +31,7 @@ func _player_exited(body: Node2D):
 	if is_exit and body is Player:
 		is_exit = false
 
-func _player_reference_collection(ref :Player):
+func _player_reference_collection(ref: Player):
 	player = ref
 	Sgnl.player_reference.disconnect(_player_reference_collection)
 

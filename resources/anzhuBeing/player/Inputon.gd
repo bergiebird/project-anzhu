@@ -1,14 +1,14 @@
 extends Node
 #Inputon.gd
 
-var player :Player:
+var player: Player:
 	set(value):
 		if player != value:
 			player = value
 var shot_db: float
 
 func _ready():
-	Sgnl.player_reference.connect(func(ref :Player)->void: player = ref)
+	Sgnl.player_reference.connect(func(ref: Player)->void: player = ref)
 	set_player_cursors()
 #region #=======================================================================================# KEYBOARD
 func look_direction(direction: String)->bool:

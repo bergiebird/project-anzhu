@@ -8,5 +8,6 @@ func _ready() -> void:
 	visible = false
 	Sgnl.toggle_debug_invisible.connect(_toggle_invisible_walls)
 
-func _toggle_invisible_walls(toggled_on: bool):
+
+func _toggle_invisible_walls(toggled_on: bool) -> void:
 	visible = toggled_on

@@ -3,32 +3,34 @@ extends Marker2D
 class_name SnowTracker
 
 var current_cells: Array[Vector2i] = []
+var personal_maps: Array[TileMapLayer] = []
 var current_tile_coords: Vector2i
-var personal_maps: Array[TileMapLayer]
-var current_map :TileMapLayer
-var elevation_map :ElevationsLayer
+var current_map: TileMapLayer
+var elevation_map: ElevationsLayer
 var current_elevation: int
 var new_elevation: int
 var can_make_tracks: bool = false
 
+@onready var parent: AnzhuBeing = get_parent()
 
-func _ready():
+
+func _ready() -> void:
 	Sgnl.tracks_reference.connect(setup_maps)
 	elevation_map = get_tree().get_first_node_in_group('elevations_manager')
 
 
-func setup_maps(_ref :CanvasGroup):
-	personal_maps = Buildton.create_trackMap_array(parent.name)
+func setup_maps(_ref: CanvasGroup) -> void:
+	personal_maps = Buildton.create_trackMap_array(get_parent().name)
 	current_map = personal_maps[0]
 	can_make_tracks = true
 	Sgnl.tracks_reference.disconnect(setup_maps)
 
 
-func _process(_delta: float):
+func _process(_delta: float) -> void:
 	check_current_tile()
 
 
-func check_current_tile():
+func check_current_tile() -> void:
 	if can_make_tracks:
 		var new_tile_coords: Vector2i = current_map.local_to_map(current_map.to_local(global_position))
 		if new_tile_coords!=current_tile_coords or current_tile_coords==null:
@@ -36,7 +38,7 @@ func check_current_tile():
 			on_new_tile(new_tile_coords)
 
 
-func on_new_tile(incoming_cell: Vector2i):
+func on_new_tile(incoming_cell: Vector2i) -> void:
 	if parent is Player:
 		_check_elevation()
 	_reorder_cells(incoming_cell)
@@ -48,17 +50,20 @@ func on_new_tile(incoming_cell: Vector2i):
 	from_to += Lib.Tracking.ATLAS_OFFSET
 	current_map.set_cell(cell_current, 0, from_to, alternative)
 
-func _check_elevation():
+
+func _check_elevation() -> void:
 	new_elevation = elevation_map.get_players_current_elevation()
 	if new_elevation!=current_elevation or current_elevation==null:
 		parent.publish_event.emit("on_new_elevation", new_elevation)
 		current_elevation = new_elevation
 
-func _reorder_cells(_incoming_cell: Vector2i):
+
+func _reorder_cells(_incoming_cell: Vector2i) -> void:
 	while current_cells.size() <= Lib.Tracking.MAX_CELL_ARRAY_SIZE:
 		current_cells.push_front(_incoming_cell)
 	while current_cells.size() > Lib.Tracking.MAX_CELL_ARRAY_SIZE:
 		current_cells.pop_back()
+
 
 func determine_alternative(from_to: Vector2i, cell_new_x: int) -> int:
 	var alternative: int = Lib.Tracking.Rotation.HORIZONTAL
@@ -67,20 +72,22 @@ func determine_alternative(from_to: Vector2i, cell_new_x: int) -> int:
 			alternative = Lib.Tracking.Rotation.VERTICAL
 	return alternative
 
-func sliding(is_sliding): # keep this dynamic
+
+func sliding(is_sliding) -> void: # keep this dynamic
 	if is_sliding is bool:
 		is_sliding = int(is_sliding)
 	current_map = personal_maps[is_sliding]
 
-func jumping(is_jumping: bool):
+
+func jumping(is_jumping: bool) -> void:
 	can_make_tracks = !is_jumping
 
-func change_actions(new_action: String):
+
+func change_actions(new_action: String) -> void:
 	if new_action is String:
 		sliding(new_action == "Stunned")
 
-#region    #===============================================================# DEBUG
-@export_group("DEBUG")
-@export var debug: bool
-@onready var parent: AnzhuBeing = get_parent()
-#endregion
+##region    #===============================================================# DEBUG
+#@export_group("DEBUG")
+#@export var debug: bool
+##endregion

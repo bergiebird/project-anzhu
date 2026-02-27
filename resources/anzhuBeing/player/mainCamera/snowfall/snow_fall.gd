@@ -39,13 +39,16 @@ func set_pattern():
 					speed = speed
 				else:
 					weather_type = weather_type
+				Sgnl.new_weather.emit(frequency, speed)
 
 func weather_random():
 	weather_type = Libraryton.rng.randi_range(0, WeatherType.size() - 1)
+	Sgnl.new_weather.emit(frequency, speed)
 
 func full_random_weather(_current_time = 0):
 	direction = Libraryton.rng.randi_range(0,7)
 	frequency = Libraryton.rng.randi_range(0,4)
+	Sgnl.new_weather.emit(frequency, speed)
 	_debug_weather_changed()
 
 #endregion
@@ -105,7 +108,13 @@ func wrap_values(mod: int, affected: int)->int:
 
 #endregion
 #region    #=============================================# WEATHER FREQUENCY
-enum FrequencyType {MOSTEST, ALOT, NORMAL, MINIMAL, NONE}
+enum FrequencyType {
+	MOSTEST = 1,
+	ALOT = 2,
+	NORMAL = 3,
+	MINIMAL = 4,
+	NONE = 0
+}
 
 @export var frequency: FrequencyType:
 	set(v):
@@ -118,16 +127,26 @@ var frequencies: Dictionary[int,float] = {
 
 func update_frequency(val: int, old_val:int):
 	var ftween_time: int = abs(val-old_val)
-	if frequency == 5: emitting = false
-	else:              emitting = true
+	if frequency == 5:
+		emitting = false
+	else:
+		emitting = true
 	Dbgr.tweener_property_disposal([
 		Buildton.tweener(process_material, "emission_sphere_radius", frequencies[val], ftween_time)],debug)
 	call_deferred("position_wind_sfx", ftween_time)
 
 #endregion
 #region    #=============================================# WEATHER DIRECTION
-enum WindDirection {NORTH,NORTH_EAST,EAST,SOUTH_EAST,SOUTH,SOUTH_WEST,WEST,NORTH_WEST}
-
+enum WindDirection {
+	NORTH,
+	NORTH_EAST,
+	EAST,
+	SOUTH_EAST,
+	SOUTH,
+	SOUTH_WEST,
+	WEST,
+	NORTH_WEST
+}
 
 @export var direction :WindDirection:
 	set(v):
@@ -151,13 +170,23 @@ var wind_direction: Vector2
 func position_wind_sfx(tween_time: int):
 	if player:
 		var position_new: Vector2 = parent.position - wind_direction * ((speed*speed*speed+10))*10
-		var pitch_new: float = 1.4 - (float(frequency)*0.1)
+		var pitch_new: float = 1.4 - (float(frequency)* 0.1)
 		Dbgr.tweener_property_disposal([
 			Buildton.tweener(sfx_wind, "pitch_scale", pitch_new, tween_time),
 			Buildton.tweener(sfx_wind, "position", position_new, tween_time)], debug)
+
 #endregion
 #region    #=============================================# WEATHER SPEED
-enum WindSpeed {STRONG_GALE,MODERATE_GALE,LIGHT_GALE,STRONG_BREEZE,MODERATE_BREEZE,LIGHT_BREEZE,CALM}
+
+enum WindSpeed {
+	STRONG_GALE = 0,
+	MODERATE_GALE = 1,
+	LIGHT_GALE = 2,
+	STRONG_BREEZE = 3,
+	MODERATE_BREEZE = 4,
+	LIGHT_BREEZE = 5,
+	CALM = 6,
+}
 
 @export var speed: WindSpeed:
 	set(v):

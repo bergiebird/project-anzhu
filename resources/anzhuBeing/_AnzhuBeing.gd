@@ -71,8 +71,8 @@ func _signaler():
 	__signaler()
 	___signaler()
 
-var player :Player
-func player_reference_subscriber(ref :Player):
+var player: Player
+func player_reference_subscriber(ref: Player):
 	player = ref
 	Sgnl.player_reference.disconnect(player_reference_subscriber)
 

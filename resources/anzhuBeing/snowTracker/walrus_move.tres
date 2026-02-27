@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dpmwy7hud5rf6"]
+[gd_resource type="TileSet" format=3 uid="uid://dpmwy7hud5rf6"]
 
 [ext_resource type="Texture2D" uid="uid://cnjmiiq1uwhfy" path="res://resources/anzhuBeing/snowTracker/tracks_walrus_move.png" id="1_kjrmg"]
 

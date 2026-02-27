@@ -2,7 +2,7 @@ extends ActionState
 class_name ActionChase
 
 @export var sprint_time: float = 5.0
-var player :Player
+var player: Player
 var current_speed: String
 @onready var sfx_chase: AudioStreamPlayer2D = $Sfx_Chase
 @onready var direction_timer: Timer = $DirectionTimer
@@ -16,7 +16,7 @@ func ___ready():
 	direction_timer.timeout.connect(reached_target)
 	charge_timer.timeout.connect(___end_charge)
 
-func acquire_player(ref :Player):
+func acquire_player(ref: Player):
 	player=ref
 	Sgnl.player_reference.disconnect(acquire_player)
 

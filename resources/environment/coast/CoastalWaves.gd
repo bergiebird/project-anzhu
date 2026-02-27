@@ -1,7 +1,7 @@
 extends AudioStreamPlayer2D
 class_name _CoastalWaves
 
-var player :Player
+var player: Player
 @onready var coastline :Line2D = get_parent()
 @onready var line_points :PackedVector2Array = coastline.points
 @onready var line_points_size: int = line_points.size()

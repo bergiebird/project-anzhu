@@ -11,11 +11,11 @@ const tracks_PATH_START: String = "res://resources/anzhuBeing/snowTracker/"
 const tracks_PATH_END: String = ".tres"
 const MOVE_PATH_END: String = "_move.tres"
 const SLIDE_PATH_END: String = "_slide.tres"
-var tracks :CanvasGroup
+var tracks: CanvasGroup
 
 func _ready():
 	Dbgr.signal_checker([
-		Sgnl.tracks_reference.connect(func(ref :CanvasGroup)->void: tracks = ref)])
+		Sgnl.tracks_reference.connect(func(ref: CanvasGroup)->void: tracks = ref)])
 
 ## Keep here for the constants
 func create_trackMap_array(who: String)->Array[TileMapLayer]:
@@ -23,7 +23,7 @@ func create_trackMap_array(who: String)->Array[TileMapLayer]:
 
 func track_map(who: String, PATH_END: String)->TileMapLayer:
 	var just_who: String = Libraryton.remove_digits_from_string(who.to_lower())
-	var tile_map :TileMapLayer = TileMapLayer.new()
+	var tile_map: TileMapLayer = TileMapLayer.new()
 	var tile_set :TileSet = load(tracks_PATH_START + just_who + PATH_END)
 	tile_map.tile_set  = tile_set
 	tile_map.name = who + PATH_END

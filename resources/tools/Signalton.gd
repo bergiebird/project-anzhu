@@ -18,17 +18,19 @@ signal new_hour_campfire(float)
 signal console_read_sign(bool, Sign, String)
 signal music_muted(bool)
 signal sfx_requested
+signal set_storm_intensity(float)
+signal new_weather(_frequency, _speed)
 
 #region    #=================================================================# References
 ## Simple signals to give out the reference to anyone who wants it in the scene.
 ## reference_emitter handles emitting from all signals here.
-signal player_reference(player_ref :Player)
-signal elevation_reference(elevation_ref :ElevationsLayer)
-signal tracks_reference(tracks_ref :CanvasGroup)
-signal props_reference(props_ref :TileMapLayer)
+signal player_reference(player_ref: Player)
+signal elevation_reference(elevation_ref: ElevationsLayer)
+signal tracks_reference(tracks_ref: CanvasGroup)
+signal props_reference(props_ref: TileMapLayer)
 signal snowfall_reference(snowfall_ref: GPUParticles2D)
 
-var player :Player
+var player: Player
 
 func reference_emitter_deferred(ref_signal: String, ref: Node, should_debug: bool=false)->void:
 	Callable(self, "reference_emitter").bind(ref_signal, ref, should_debug).call_deferred()

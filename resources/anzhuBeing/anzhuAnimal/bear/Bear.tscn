@@ -60,7 +60,6 @@ careful"
 shape = SubResource("RectangleShape2D_nr2iy")
 script = ExtResource("3_xf7mx")
 set_mask_dimensions = 5
-damage_recieved = 12
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
 [node name="Actions" type="Node2D" parent="." unique_id=286462773]
