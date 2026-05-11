@@ -1,0 +1,169 @@
+[gd_scene format=3 uid="uid://bufdmb6a387hl"]
+
+[ext_resource type="Script" uid="uid://cm4ajvumjhutm" path="res://resources/tools/respawnNode/Respawner.gd" id="1_hdgs4"]
+[ext_resource type="Theme" uid="uid://bmnjnrxcaql6w" path="res://resources/ui/ui_theme_1.tres" id="2_acm2v"]
+[ext_resource type="LabelSettings" uid="uid://chmnfdp4nkrf5" path="res://resources/tools/annotations/labset_annotations.tres" id="3_wqnq8"]
+[ext_resource type="Script" uid="uid://dktia2rrqqot1" path="res://gyms/levels/level_debug_0/Annotations.gd" id="4_3a8ek"]
+
+[node name="Tools" type="Node2D" unique_id=924768309]
+editor_description = "This is anything that requires a position but is not something in universe. This may mostly be spawn points but curious how it could change in the future."
+metadata/_edit_lock_ = true
+
+[node name="RespawnNode" type="Marker2D" parent="." unique_id=1050971291]
+editor_description = "A bandaid respawner, given that the mythological elements of Baba Yaga(Life) and Koschei(Death) are about Life/Death, we can do something here."
+position = Vector2(1281, 685)
+rotation = 0.523598
+gizmo_extents = 45.0
+script = ExtResource("1_hdgs4")
+respawn_type = 0
+
+[node name="Annotations" type="Control" parent="." unique_id=312026193]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(1, 1.00046)
+metadata/_edit_use_anchors_ = true
+
+[node name="Bear Pin" type="Label" parent="Annotations" unique_id=850399077]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 855.0
+offset_top = -312.0
+offset_right = 1275.0
+offset_bottom = -72.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Bear can pin the player."
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Collectible Bug" type="Label" parent="Annotations" unique_id=2139780163]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 1109.0
+offset_top = 831.61743
+offset_right = 1529.0
+offset_bottom = 1071.6174
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Cant pickup the Collectibles"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Ice" type="Label" parent="Annotations" unique_id=429658606]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 951.0
+offset_top = -19.0
+offset_right = 1704.0
+offset_bottom = 21.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Make sliding on ice not lose momentum"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Campfire" type="Label" parent="Annotations" unique_id=1021049018]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 1443.0
+offset_top = 880.0
+offset_right = 1903.0
+offset_bottom = 1125.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Have driftwood be a requirement to start a campfire. Have campfire run for a set period of time before turning off."
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Deer" type="Label" parent="Annotations" unique_id=698237315]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 841.0
+offset_top = 589.0
+offset_right = 1308.0
+offset_bottom = 649.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Add Deer here"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Hare" type="Label" parent="Annotations" unique_id=1702409407]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 484.0
+offset_top = 315.0
+offset_right = 951.0
+offset_bottom = 375.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Add Hares here"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Wolfs" type="Label" parent="Annotations" unique_id=1194862461]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 1064.0
+offset_top = 184.0
+offset_right = 1531.0
+offset_bottom = 244.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Add wolfs here"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Foxes" type="Label" parent="Annotations" unique_id=1831632362]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 1372.0
+offset_top = -172.0
+offset_right = 1679.0
+offset_bottom = -132.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Add Foxes here"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Owls" type="Label" parent="Annotations" unique_id=1217657402]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 233.0
+offset_top = -143.0
+offset_right = 700.0
+offset_bottom = -83.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Add Owls here"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="Walrus" type="Label" parent="Annotations" unique_id=2075921750]
+z_index = 4096
+z_as_relative = false
+layout_mode = 0
+offset_left = 915.0
+offset_top = 753.0
+offset_right = 1208.0
+offset_bottom = 793.0
+scale = Vector2(0.15, 0.15)
+theme = ExtResource("2_acm2v")
+text = "Work on Walrus"
+label_settings = ExtResource("3_wqnq8")
+autowrap_mode = 3
+
+[node name="RemoveParentOnStart" type="Node" parent="Annotations" unique_id=74971910]
+script = ExtResource("4_3a8ek")

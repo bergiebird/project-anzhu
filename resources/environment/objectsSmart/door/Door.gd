@@ -17,7 +17,8 @@ var is_exit: bool = false:
 func _ready():
 	_debug()
 	Sgnl.player_reference.connect(_player_reference_collection)
-	body_entered.connect(_teleport_player)
+	if not is_permanently_closed:
+		body_entered.connect(_teleport_player)
 	body_exited.connect(_player_exited)
 
 func _teleport_player(body: Node2D):
@@ -29,6 +30,7 @@ func _teleport_player(body: Node2D):
 
 func _player_exited(body: Node2D):
 	if is_exit and body is Player:
+		print("EXITED")
 		is_exit = false
 
 func _player_reference_collection(ref: Player):

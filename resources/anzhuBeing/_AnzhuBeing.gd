@@ -2,6 +2,8 @@ extends CharacterBody2D
 class_name AnzhuBeing
 
 signal publish_event(String, Variant)
+signal sliding(_is_sliding: bool)
+signal has_died
 
 enum PersonalDirection {NORTH,SOUTH,EAST,WEST}
 enum SpeedType {CREEP,WALK,JOG,RUN}
@@ -10,6 +12,7 @@ enum SpeedType {CREEP,WALK,JOG,RUN}
 @export_multiline var visual_description: String = ""
 ## Lower than 0.08 reduces jitteryness, higher than makes it better at detecting walls.
 @export var SAFE_MARGIN: float = 0.05
+@export var ice_detector: Area2D
 
 var current_direction: int:
 	set(value):
@@ -23,8 +26,8 @@ var current_direction: int:
 				})
 
 var personal_stats: Dictionary:
-	set(value):
-		personal_stats = value
+	set(v):
+		personal_stats = v
 		add_to_group("being")
 		add_to_group(this_beings_type)
 		entity_icon = personal_stats["Icon"]
@@ -37,9 +40,9 @@ var velocity_force: Vector2
 var is_on_ice: bool = false
 
 var is_sliding: bool = false:
-	set(value): if value!=is_sliding:
-		is_sliding = value
-		publish_event.emit("sliding", is_sliding)
+	set(v): if v != is_sliding:
+		is_sliding = v
+		sliding.emit(is_sliding)
 
 
 #region    #============================================================# Ready
@@ -68,6 +71,9 @@ func _signaler():
 		publish_event.connect(
 			func(func_name:String, data: Variant = null) -> void:
 				Lib.Observe.subscribe_to_event(child, func_name, data))
+	if ice_detector:
+		ice_detector.body_entered.connect(func(_body): is_on_ice = true)
+		ice_detector.body_exited.connect(func(_body): is_on_ice = false)
 	__signaler()
 	___signaler()
 

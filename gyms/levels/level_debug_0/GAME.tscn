@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bu2w1ukm7uknj"]
+
+[ext_resource type="Script" uid="uid://dla6qde00tedb" path="res://gyms/levels/level_debug_0/GameRoot.gd" id="1_suws4"]
+[ext_resource type="Script" uid="uid://by62a7j36d7d6" path="res://gyms/levels/level_debug_0/level_manager.gd" id="2_5fy80"]
+[ext_resource type="Script" uid="uid://bo8l4qy6fqy1l" path="res://gyms/levels/level_debug_0/root_node2d.gd" id="2_b8ymc"]
+[ext_resource type="PackedScene" uid="uid://dh4kdmnpha7mj" path="res://gyms/levels/level_debug_0/debug_0_snow.scn" id="4_wcjtr"]
+[ext_resource type="PackedScene" uid="uid://bh4a2cbmcslnj" path="res://gyms/levels/level_debug_0/debug_0_tracks.tscn" id="5_wcjtr"]
+[ext_resource type="PackedScene" uid="uid://cdr2p55j4ce4c" path="res://gyms/levels/level_debug_0/debug_0_snowOverlap.tscn" id="6_e6h7p"]
+[ext_resource type="PackedScene" uid="uid://3ba5y3dn4ijm" path="res://gyms/levels/level_debug_0/debug_0_ocean.tscn" id="7_wfss3"]
+[ext_resource type="PackedScene" uid="uid://clp85esfsqywt" path="res://gyms/levels/level_debug_0/debug_0_ice.tscn" id="8_2bd5s"]
+[ext_resource type="PackedScene" uid="uid://bhoi0ljy8vnh7" path="res://gyms/levels/level_debug_0/debug_0_walls.tscn" id="9_q1hcr"]
+[ext_resource type="PackedScene" uid="uid://d1y1vo71qfu8o" path="res://gyms/levels/level_debug_0/debug_0_entities.tscn" id="10_7t6nb"]
+[ext_resource type="PackedScene" uid="uid://uewbtapwhme0" path="res://gyms/levels/level_debug_0/debug_0_fogs.tscn" id="11_sj3jf"]
+[ext_resource type="PackedScene" uid="uid://bufdmb6a387hl" path="res://gyms/levels/level_debug_0/debug_0_tools.tscn" id="12_h6q23"]
+[ext_resource type="PackedScene" uid="uid://ddv3nvhdwptc4" path="res://gyms/levels/level_debug_0/nodeAudio/node_audio.tscn" id="18_b8ymc"]
+
+[node name="GAME" type="Node2D" unique_id=825530745]
+editor_description = "root"
+script = ExtResource("1_suws4")
+
+[node name="LevelManager" type="Node2D" parent="." unique_id=1560026899]
+script = ExtResource("2_5fy80")
+
+[node name="NODE2D" type="Node2D" parent="LevelManager" unique_id=1147511218]
+editor_description = "This is containing all of the Node2Ds"
+script = ExtResource("2_b8ymc")
+level_name = &"level_debug_0"
+checklist = Array[PackedScene]([ExtResource("4_wcjtr"), ExtResource("5_wcjtr"), ExtResource("6_e6h7p"), ExtResource("7_wfss3"), ExtResource("8_2bd5s"), ExtResource("9_q1hcr"), ExtResource("10_7t6nb"), ExtResource("11_sj3jf"), ExtResource("12_h6q23")])
+
+[node name="NODE" type="Node" parent="LevelManager" unique_id=1504399826]
+editor_description = "Everything and anything that doesn't require a location in the world."
+
+[node name="Audio" parent="LevelManager/NODE" unique_id=1974866645 instance=ExtResource("18_b8ymc")]
+editor_description = ""
+audio_mode = 0
+should_start_with_begin = true

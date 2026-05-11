@@ -1,42 +1,45 @@
-[gd_scene load_steps=8 format=3 uid="uid://4usvcs4gfign"]
+[gd_scene format=3 uid="uid://4usvcs4gfign"]
 
 [ext_resource type="Script" uid="uid://l06kmlmqgi5n" path="res://resources/anzhuBeing/anzhuAnimal/reindeer/scripts/Reindeer.gd" id="1_h2ltq"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_vbcdi"]
 [ext_resource type="SpriteFrames" uid="uid://dbou7vyci5jqt" path="res://resources/anzhuBeing/anzhuAnimal/reindeer/scripts/sf_reindeer.tres" id="3_acxsq"]
 [ext_resource type="Script" uid="uid://bd7ibd17tc3yv" path="res://resources/anzhuBeing/snowTracker/SnowTracker.gd" id="4_eajid"]
 [ext_resource type="PackedScene" uid="uid://chicyma06s6la" path="res://resources/anzhuBeing/corpse/Corpse.tscn" id="6_xmqht"]
-[ext_resource type="PackedScene" uid="uid://c31orajqrt5wx" path="res://resources/anzhuBeing/hurtBox/hurt_box.tscn" id="13_esfm0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0k4j"]
 
-[node name="Reindeer" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_x4584"]
+radius = 1.0
+
+[node name="Reindeer" type="CharacterBody2D" unique_id=1000830547 node_paths=PackedStringArray("ice_detector")]
 script = ExtResource("1_h2ltq")
-this_animals_type = 7
+this_beings_type = "Deer"
+visual_description = "A Wild Deer"
+ice_detector = NodePath("IceDetector")
 debug_all = true
 metadata/_custom_type_script = "uid://cirdyev4u4o7t"
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=2034949587]
 shape = SubResource("RectangleShape2D_v0k4j")
 script = ExtResource("2_vbcdi")
+description = "A Reindeer"
+set_mask_dimensions = 2
 metadata/_custom_type_script = "uid://60saxsgwo84g"
 
-[node name="Animations" type="AnimatedSprite2D" parent="."]
+[node name="Animations" type="AnimatedSprite2D" parent="." unique_id=1836109039]
 sprite_frames = ExtResource("3_acxsq")
 animation = &"Wander"
 autoplay = "Idle"
 
-[node name="SnowTracker" type="Node" parent="."]
+[node name="SnowTracker" type="Marker2D" parent="." unique_id=6931547]
 script = ExtResource("4_eajid")
 
-[node name="AudioManager" type="Node2D" parent="."]
+[node name="Corpse" parent="." unique_id=1167069420 instance=ExtResource("6_xmqht")]
 
-[node name="Eyesight" type="VisibleOnScreenNotifier2D" parent="."]
-position = Vector2(2.38419e-07, 2.38419e-07)
-scale = Vector2(0.4, 0.4)
+[node name="IceDetector" type="Area2D" parent="." unique_id=783817781]
+collision_layer = 0
+collision_mask = 4
 
-[node name="Corpse" parent="." instance=ExtResource("6_xmqht")]
-
-[node name="HurtBox" parent="." instance=ExtResource("13_esfm0")]
-
-[node name="TheStateMachine" type="Node" parent="."]
-unique_name_in_owner = true
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IceDetector" unique_id=358537294]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_x4584")

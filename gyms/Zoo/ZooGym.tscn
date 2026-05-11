@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://c17cw7tkkjo8a"]
+[gd_scene format=4 uid="uid://c17cw7tkkjo8a"]
 
 [ext_resource type="Script" uid="uid://b6a83rf68g2eq" path="res://gyms/Zoo/zoo_gym.gd" id="1_081gq"]
 [ext_resource type="Texture2D" uid="uid://dqirc7d7g28jg" path="res://resources/environment/snow/ground_and_water_ANZHU.png" id="1_qx4d4"]
@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dr7gmcq3ydu2b" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear.tscn" id="9_8jy0f"]
 [ext_resource type="PackedScene" uid="uid://bqyubqk75ak53" path="res://resources/anzhuBeing/player/mainCamera/MainCamera.tscn" id="10_1s0vo"]
 [ext_resource type="Texture2D" uid="uid://pio4q5jvles3" path="res://resources/tools/elevationsLayer/proto_tiles.png" id="11_hmi4i"]
-[ext_resource type="PackedScene" uid="uid://ddv3nvhdwptc4" path="res://gyms/mainScene/nodeAudio/node_audio.tscn" id="13_a1mdy"]
+[ext_resource type="PackedScene" uid="uid://ddv3nvhdwptc4" path="res://gyms/levels/level_debug_0/nodeAudio/node_audio.tscn" id="13_a1mdy"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ij44i"]
 texture = ExtResource("1_qx4d4")

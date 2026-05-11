@@ -6,7 +6,7 @@ extends GPUParticles2D
 @onready var sfx_wind: AudioStreamPlayer2D = $WindSFX
 @onready var parent: Camera2D = get_parent()
 
-func _ready():
+func _ready() -> void:
 	_debug()
 	set_pattern()
 	weather_pattern = weather_pattern
@@ -16,15 +16,15 @@ func _ready():
 
 #region    #==============================================# WEATHER PATTERN
 enum WeatherPattern {
-	FULL_RANDOM=0,  ## Randomly choose all values every time_change
-	WEATHER_RANDOM=1, ## Randomly choose Weather Type every time change
-	ONE_WEATHER=2, ## Ensures the weather never changes from how it is set
+	FULL_RANDOM = 0,  ## Randomly choose all values every time_change
+	WEATHER_RANDOM = 1, ## Randomly choose Weather Type every time change
+	ONE_WEATHER = 2, ## Ensures the weather never changes from how it is set
 	}
 ## Set the overall pattern of the snowfall
 @export var weather_pattern: WeatherPattern
 @onready var size_weather_pattern: int = WeatherPattern.size()
 
-func set_pattern():
+func set_pattern() -> void:
 		match weather_pattern:
 			WeatherPattern.FULL_RANDOM:
 				Sgnl.new_hour.connect(full_random_weather)
@@ -41,11 +41,11 @@ func set_pattern():
 					weather_type = weather_type
 				Sgnl.new_weather.emit(frequency, speed)
 
-func weather_random():
+func weather_random() -> void:
 	weather_type = Libraryton.rng.randi_range(0, WeatherType.size() - 1)
 	Sgnl.new_weather.emit(frequency, speed)
 
-func full_random_weather(_current_time = 0):
+func full_random_weather(_current_time = 0) -> void:
 	direction = Libraryton.rng.randi_range(0,7)
 	frequency = Libraryton.rng.randi_range(0,4)
 	Sgnl.new_weather.emit(frequency, speed)
@@ -97,7 +97,8 @@ enum WeatherType{
 				speed = WindSpeed.STRONG_GALE
 				direction = wrap_values(Libraryton.rng.randi_range(-1,1), direction)
 
-func wrap_values(mod: int, affected: int)->int:
+
+func wrap_values(mod: int, affected: int) -> int:
 	affected += mod
 	if affected >= 8:
 		affected -= 8
@@ -121,11 +122,11 @@ enum FrequencyType {
 			update_frequency(v, frequency)
 			frequency = v
 
-var frequencies: Dictionary[int,float] = {
+var frequencies: Dictionary[int, float] = {
 	FrequencyType.MOSTEST:200.0, FrequencyType.ALOT:300.0, FrequencyType.NORMAL:700.0,
 	FrequencyType.MINIMAL:1900.0, FrequencyType.NONE:12000.0}
 
-func update_frequency(val: int, old_val:int):
+func update_frequency(val: int, old_val: int) -> void:
 	var ftween_time: int = abs(val-old_val)
 	if frequency == 5:
 		emitting = false

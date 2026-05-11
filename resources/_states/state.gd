@@ -68,7 +68,7 @@ func __parent_acquired()->void:pass
 func ___parent_acquired()->void:pass
 func __grandparent_acquired()->void:pass
 func ___grandparent_acquired()->void:pass
-func ___get_state_value(_parent :StateMachine):
+func ___get_state_value(_parent: StateMachine):
 	print(self.name + " has not set their personal state value")
 #endregion
 

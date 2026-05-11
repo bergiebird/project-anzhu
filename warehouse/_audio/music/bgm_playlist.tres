@@ -1,8 +1,8 @@
-[gd_resource type="AudioStreamPlaylist" load_steps=4 format=3 uid="uid://vmqaefg54xvc"]
+[gd_resource type="AudioStreamPlaylist" format=3 uid="uid://vmqaefg54xvc"]
 
-[ext_resource type="AudioStream" uid="uid://hvyddlreidmd" path="res://gyms/mainScene/nodeAudio/CyclingBGM/Music Historic 1.mp3" id="1_txv7p"]
-[ext_resource type="AudioStream" uid="uid://bsck3qaty34rh" path="res://gyms/mainScene/nodeAudio/CyclingBGM/Music Historic 2 (baroque).mp3" id="2_kktud"]
-[ext_resource type="AudioStream" uid="uid://towmm2aavkd0" path="res://gyms/mainScene/nodeAudio/CyclingBGM/Music historic 3.mp3" id="3_g0ywp"]
+[ext_resource type="AudioStream" uid="uid://hvyddlreidmd" path="res://gyms/levels/level_debug_0/nodeAudio/CyclingBGM/Music Historic 1.mp3" id="1_txv7p"]
+[ext_resource type="AudioStream" uid="uid://bsck3qaty34rh" path="res://gyms/levels/level_debug_0/nodeAudio/CyclingBGM/Music Historic 2 (baroque).mp3" id="2_kktud"]
+[ext_resource type="AudioStream" uid="uid://towmm2aavkd0" path="res://gyms/levels/level_debug_0/nodeAudio/CyclingBGM/Music historic 3.mp3" id="3_g0ywp"]
 
 [resource]
 shuffle = true

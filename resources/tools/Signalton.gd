@@ -20,6 +20,7 @@ signal music_muted(bool)
 signal sfx_requested
 signal set_storm_intensity(float)
 signal new_weather(_frequency, _speed)
+signal bear_chasing(bool, AudioStreamPlayer2D)
 
 #region    #=================================================================# References
 ## Simple signals to give out the reference to anyone who wants it in the scene.

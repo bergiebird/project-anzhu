@@ -21,13 +21,3 @@ func _on_body_entered(body: Node2D):
 func _on_body_exited(body: Node2D):
 	if body is Player:
 		is_spotted = false
-
-
-
-
-#region #========================================================# DEBUG
-@export_category('DEBUG')
-@export var debug_Eyes: bool = false
-func debug():
-	debug_Eyes = true
-#endregion

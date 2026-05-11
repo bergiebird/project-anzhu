@@ -30,7 +30,7 @@ general/default_playback_type.web=0
 
 Sgnl="*res://resources/tools/Signalton.gd"
 Directon="*res://resources/anzhuBeing/Directon.gd"
-Audioton="*res://gyms/mainScene/nodeAudio/Audioton.gd"
+Audioton="*res://gyms/levels/level_debug_0/nodeAudio/Audioton.gd"
 Libraryton="*res://resources/tools/Libraryton.gd"
 Dbgr="*res://resources/tools/Debuggerton.gd"
 Screenshoton="*res://resources/tools/Screenshoton.gd"
@@ -85,6 +85,7 @@ Reindeer=""
 Walrus=""
 Wolf=""
 Fox=""
+debug_shapes=""
 
 [gui]
 
@@ -178,6 +179,7 @@ left_click={
 
 2d_physics/layer_1="WALL"
 2d_physics/layer_2="PROP"
+2d_physics/layer_3="ICE"
 2d_physics/layer_5="GUNSHOT"
 2d_physics/layer_8="INTERACTABLE"
 2d_physics/layer_10="MELEE"

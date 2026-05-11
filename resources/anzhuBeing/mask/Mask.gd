@@ -3,9 +3,18 @@ class_name Mask
 
 #region    #============================================================# VARIABLES
 
-@export_multiline var description: String = """NARP"""
-enum MaskDims {NULL, _08x08, _10x10, _10x12, _12x10, _12x12, _07x07}
+enum MaskDims {
+	NULL,
+	_08x08,
+	_10x10,
+	_10x12,
+	_12x10,
+	_12x12,
+	_07x07,
+}
+
 ## Powerful variable change. Affects collision and HP.
+@export_multiline var description: String = """NARP"""
 @export var set_mask_dimensions: MaskDims = 0:
 	set(value):
 		match value:
@@ -39,7 +48,7 @@ var enable_click: bool = false:
 var rotation_amount: float = 0.01
 var rotation_crement: float = 0.003
 
-@onready var parent :CollisionObject2D = get_parent()
+@onready var parent: CollisionObject2D = get_parent()
 
 #region    #============================================================# FUNCTIONS
 
@@ -50,9 +59,9 @@ func _ready():
 	if has_healthbar:
 		_establish_healthbar()
 	if parent is AnzhuBeing:
-		(func(): parent.publish_event.emit("mask_dimensions_of_self",mask_dimensions)).call_deferred()
 		if parent is Player:
 			Sgnl.heal_player.connect(_heal_player)
+
 
 
 func initial_output(new_description: String):
@@ -99,7 +108,9 @@ func _establish_healthbar():
 func _input(event: InputEvent) -> void:
 	if enable_click:
 		if event is InputEventMouseButton:
-				Sgnl.update_console.emit(description)
+			if parent is AnzhuBeing:
+				description = parent.visual_description
+			Sgnl.update_console.emit(description)
 
 
 func _heal_player() -> void:
@@ -114,11 +125,15 @@ func _heal_player() -> void:
 
 
 func was_struck(incoming_value: int = damage_recieved) -> void:
+	if !has_background:
+		return
+
 	healthbar.size.y += incoming_value                    # The incoming value will raise the healthbar by that many pixels
 	healthbar.position.y -= incoming_value                # The position needs to compensate
 	_animate()
 	if healthbar.size.y >= max_hp and healthbar.position.y <= 0:
-		parent.publish_event.emit('has_died')
+		parent.has_died.emit()
+		#parent.publish_event.emit('has_died')
 
 
 func _animate():
@@ -135,6 +150,13 @@ func _animate():
 	__htween.tween_property(healthbar, ^"rotation", 0.0, 0.1).set_trans(Tween.TRANS_BOUNCE)
 	__tween.tween_property(background, ^"rotation", 0.0, 0.1).set_trans(Tween.TRANS_BOUNCE)
 	rotation_amount += rotation_crement
+	await get_tree().create_timer(0.5).timeout
+	tween.kill()
+	htween.kill()
+	_tween.kill()
+	_htween.kill()
+	__tween.kill()
+	__htween.kill()
 
 
 

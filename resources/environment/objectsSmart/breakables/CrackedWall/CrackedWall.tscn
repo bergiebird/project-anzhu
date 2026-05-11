@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://ch6uelmftvwe4"]
+[gd_scene format=3 uid="uid://ch6uelmftvwe4"]
 
 [ext_resource type="Texture2D" uid="uid://i8j2p2axsftu" path="res://resources/environment/cliffs/anzhu_cliffs.png" id="1_eql6u"]
 [ext_resource type="Script" uid="uid://drbmh8tbn6fop" path="res://resources/environment/objectsSmart/breakables/CrackedWall/cracked_wall.gd" id="1_f082s"]
@@ -10,21 +10,21 @@ size = Vector2(8, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5fy80"]
 size = Vector2(10, 10)
 
-[node name="CrackedWall" type="StaticBody2D"]
+[node name="CrackedWall" type="StaticBody2D" unique_id=1216759126]
 script = ExtResource("1_f082s")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=708430984]
 shape = SubResource("RectangleShape2D_amh5d")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=927355451]
 texture = ExtResource("1_eql6u")
 region_enabled = true
 region_rect = Rect2(200, 368, 8, 8)
 
-[node name="Breakable" type="Area2D" parent="."]
+[node name="Breakable" type="Area2D" parent="." unique_id=1831131455]
 collision_layer = 16
-collision_mask = 16
+collision_mask = 0
 script = ExtResource("2_tcm31")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakable"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Breakable" unique_id=2130236054]
 shape = SubResource("RectangleShape2D_5fy80")

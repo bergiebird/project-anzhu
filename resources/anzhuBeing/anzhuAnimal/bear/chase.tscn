@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cjacg3egyqpsn"]
+
+[ext_resource type="Script" uid="uid://77r3fqyd6fhd" path="res://resources/_states/goals/ActionChase.gd" id="1_l3xxy"]
+[ext_resource type="AudioStream" uid="uid://cfc7k8xu6ve63" path="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3" id="2_kie6g"]
+
+[node name="Chase" type="Node2D" unique_id=730376689]
+script = ExtResource("1_l3xxy")
+sprint_time = 4.5
+
+[node name="DirectionTimer" type="Timer" parent="." unique_id=1789041688]
+wait_time = 1.2
+
+[node name="ChargeTimer" type="Timer" parent="." unique_id=701616593]
+process_callback = 0
+wait_time = 4.0
+one_shot = true
+
+[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="." unique_id=378728894]
+stream = ExtResource("2_kie6g")
+max_distance = 100.0
+attenuation = 2.0
+
+[connection signal="timeout" from="DirectionTimer" to="." method="___end_charge"]
+[connection signal="timeout" from="ChargeTimer" to="." method="reached_target"]

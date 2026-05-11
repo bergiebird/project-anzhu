@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cqnxcpeuswidr"]
+
+[ext_resource type="Script" uid="uid://bo8l4qy6fqy1l" path="res://gyms/levels/level_debug_0/root_node2d.gd" id="1_022dd"]
+
+[node name="NODE2D" type="Node2D" unique_id=994337135]
+script = ExtResource("1_022dd")
+level_name = &"level_debug_1"

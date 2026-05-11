@@ -41,7 +41,7 @@ func evaluate_jump_request_by_tile(jump_dist: float, direction: int) -> Array:
 	var starting_coords: Vector2i = _get_players_local_coords()
 	var jump_vector: Vector2i = Directon.jump_distance_calculation(int(jump_dist), direction)
 	var step_count: int = maxi(abs(jump_vector.x), abs(jump_vector.y))  # How many tiles to walk through
-	var tiles: Array = []                                      # Ordered from player outward to landing
+	var tiles: Array = []                                               # Ordered from player outward to landing
 	for i: int in range(1, step_count + 1):
 		var tile_coords: Vector2i = starting_coords + Vector2i(sign(jump_vector.x) * i, sign(jump_vector.y) * i)
 		var tile_data: TileData = get_cell_tile_data(tile_coords)

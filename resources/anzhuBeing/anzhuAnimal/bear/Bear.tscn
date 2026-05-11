@@ -8,8 +8,8 @@
 [ext_resource type="AudioStream" uid="uid://ddmph0kataceh" path="res://resources/anzhuBeing/anzhuAnimal/bear/Music Historic 4 (russian pop bear music).mp3" id="6_cuqt7"]
 [ext_resource type="SpriteFrames" uid="uid://1t351xrrxt6d" path="res://resources/anzhuBeing/anzhuAnimal/bear/sf_bear.tres" id="6_ybwxf"]
 [ext_resource type="Script" uid="uid://cq50plpkkjn5e" path="res://resources/_states/actions/ActionSit.gd" id="8_i834n"]
+[ext_resource type="PackedScene" uid="uid://cjacg3egyqpsn" path="res://resources/anzhuBeing/anzhuAnimal/bear/chase.tscn" id="9_nr2iy"]
 [ext_resource type="Script" uid="uid://bn1ww4f4t115g" path="res://resources/_states/goals/AnimalGoals.gd" id="11_4sorn"]
-[ext_resource type="Script" uid="uid://77r3fqyd6fhd" path="res://resources/_states/goals/ActionChase.gd" id="12_fnbe6"]
 [ext_resource type="Script" uid="uid://cv8vrn7ohwvvv" path="res://resources/_states/goals/GoalHunt.gd" id="13_kkkf8"]
 [ext_resource type="Script" uid="uid://dpcgwylrmycpp" path="res://resources/_states/actions/ActionWander.gd" id="13_qx7fo"]
 [ext_resource type="Script" uid="uid://n4g3epvshvea" path="res://resources/_states/goals/GoalNothing.gd" id="14_k7mq3"]
@@ -17,7 +17,6 @@
 [ext_resource type="AudioStream" uid="uid://b1e37kdue1g3v" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear (hurt).mp3" id="15_n3oor"]
 [ext_resource type="AudioStream" uid="uid://cjfo3gmgsqhpb" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear (normal).mp3" id="16_47icu"]
 [ext_resource type="AudioStream" uid="uid://bh3tjtuu7g7a2" path="res://warehouse/_audio/sfx/walk/default_bus_layout.tres" id="17_fjh5o"]
-[ext_resource type="AudioStream" uid="uid://cfc7k8xu6ve63" path="res://warehouse/_audio/sfx/Animal Run (heavy animal).mp3" id="18_5puse"]
 [ext_resource type="Script" uid="uid://chhugqt8kfyc1" path="res://resources/anzhuBeing/anzhuAnimal/bear/BearAnimations.gd" id="18_nr2iy"]
 [ext_resource type="AudioStream" uid="uid://cisjs4ks2qp54" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear Bite 1.mp3" id="24_lf0l5"]
 [ext_resource type="AudioStream" uid="uid://dy4gm4o2d242p" path="res://resources/anzhuBeing/anzhuAnimal/bear/Bear Bite 2.mp3" id="25_6237r"]
@@ -47,7 +46,10 @@ radius = 110.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_nr2iy"]
 radius = 0.1
 
-[node name="Bear" type="CharacterBody2D" unique_id=688505199]
+[sub_resource type="CircleShape2D" id="CircleShape2D_d723r"]
+radius = 1.0
+
+[node name="Bear" type="CharacterBody2D" unique_id=688505199 node_paths=PackedStringArray("ice_detector")]
 collision_layer = 17
 collision_mask = 17
 script = ExtResource("1_6aww6")
@@ -55,6 +57,7 @@ this_beings_type = "Bear"
 visual_description = "IT IS A POLAR BEAR!
 
 careful"
+ice_detector = NodePath("IceDetector")
 
 [node name="Mask" type="CollisionShape2D" parent="." unique_id=1377813823]
 shape = SubResource("RectangleShape2D_nr2iy")
@@ -70,6 +73,7 @@ script = ExtResource("5_gcotj")
 
 [node name="Stunned" type="Node2D" parent="Actions" unique_id=2097380462]
 script = ExtResource("6_2d7ra")
+DELERATION_ON_ICE = 1.045
 
 [node name="StunnedTimer" type="Timer" parent="Actions/Stunned" unique_id=1453540122]
 wait_time = 0.5
@@ -88,22 +92,7 @@ wait_time = 3.0
 stream = ExtResource("17_fjh5o")
 max_distance = 250.0
 
-[node name="Chase" type="Node2D" parent="Actions" unique_id=1115874356]
-script = ExtResource("12_fnbe6")
-sprint_time = 4.5
-
-[node name="DirectionTimer" type="Timer" parent="Actions/Chase" unique_id=811169855]
-wait_time = 1.2
-
-[node name="ChargeTimer" type="Timer" parent="Actions/Chase" unique_id=90672604]
-process_callback = 0
-wait_time = 4.0
-one_shot = true
-
-[node name="Sfx_Chase" type="AudioStreamPlayer2D" parent="Actions/Chase" unique_id=792518832]
-stream = ExtResource("18_5puse")
-max_distance = 100.0
-attenuation = 2.0
+[node name="Chase" parent="Actions" unique_id=730376689 instance=ExtResource("9_nr2iy")]
 
 [node name="Goals" type="Node2D" parent="." unique_id=1421879398]
 script = ExtResource("11_4sorn")
@@ -112,6 +101,7 @@ script = ExtResource("11_4sorn")
 script = ExtResource("13_kkkf8")
 
 [node name="BgmHunt" type="AudioStreamPlayer2D" parent="Goals/Hunt" unique_id=795091304]
+unique_name_in_owner = true
 editor_description = "Bear Hunt Music"
 stream = ExtResource("6_cuqt7")
 max_distance = 285.0
@@ -141,7 +131,7 @@ one_shot = true
 
 [node name="Animations" type="AnimatedSprite2D" parent="." unique_id=995067507]
 sprite_frames = ExtResource("6_ybwxf")
-animation = &"Chase"
+animation = &"Corpse"
 autoplay = "Idle"
 script = ExtResource("18_nr2iy")
 
@@ -194,27 +184,41 @@ wait_time = 2.61
 one_shot = true
 
 [node name="Cardinals" type="Node2D" parent="." unique_id=971528431]
-process_mode = 4
 script = ExtResource("28_d723r")
 
 [node name="RayNorth" type="RayCast2D" parent="Cardinals" unique_id=37159337]
-position = Vector2(0, -4)
-target_position = Vector2(0, -3)
-collision_mask = 0
+position = Vector2(0, -6)
+target_position = Vector2(0, -1)
+collision_mask = 16
 
 [node name="RaySouth" type="RayCast2D" parent="Cardinals" unique_id=49411681]
-position = Vector2(0, 4)
-target_position = Vector2(0, 3)
-collision_mask = 0
+position = Vector2(0, 6)
+target_position = Vector2(0, 1)
+collision_mask = 16
 
 [node name="RayEast" type="RayCast2D" parent="Cardinals" unique_id=1534469303]
-position = Vector2(4, 0)
-target_position = Vector2(3, 0)
-collision_mask = 0
+position = Vector2(6, 0)
+target_position = Vector2(1, 0)
+collision_mask = 16
 
 [node name="RayWest" type="RayCast2D" parent="Cardinals" unique_id=807302086]
-position = Vector2(-4, 0)
-target_position = Vector2(-3, 0)
-collision_mask = 0
+position = Vector2(-6, 0)
+target_position = Vector2(-1, 0)
+collision_mask = 16
 
-[connection signal="animation_changed" from="Animations" to="Animations" method="_on_animation_changed"]
+[node name="IceDetector" type="Area2D" parent="." unique_id=1499050879]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IceDetector" unique_id=2120876772]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_d723r")
+
+[connection signal="has_died" from="." to="Animations" method="has_died"]
+[connection signal="has_died" from="." to="Corpse" method="has_died"]
+[connection signal="move_towards_target" from="Actions/Wander" to="AiMovement" method="move_towards_target"]
+[connection signal="move_towards_target" from="Actions/Chase" to="AiMovement" method="move_towards_target"]
+[connection signal="new_target_position" from="GoTo" to="Actions/Wander" method="new_target_position"]
+[connection signal="new_target_position" from="GoTo" to="AiMovement" method="new_target_position"]
+[connection signal="reached_target" from="GoTo" to="Actions/Chase" method="reached_target"]
+[connection signal="reached_target" from="GoTo" to="Goals/Nothing" method="reached_target"]

@@ -13,7 +13,8 @@ enum CollectibleType {WOOD} # Heh, will we have others?
 @onready var interactible: Interactible = $Interactible
 @onready var sprite: Sprite2D = $Sprite2D
 
-
+func _ready() -> void:
+	interactible.interacted.connect(_interacted)
 
 func _interacted():
 	match collectible_type:

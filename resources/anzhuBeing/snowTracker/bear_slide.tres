@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=3 format=3 uid="uid://dn32loqf3lxun"]
+[gd_resource type="TileSet" format=3 uid="uid://dn32loqf3lxun"]
 
 [ext_resource type="Texture2D" uid="uid://lbvkp7imscxf" path="res://resources/anzhuBeing/snowTracker/tracks_bear_slide.png" id="1_kd1c1"]
 

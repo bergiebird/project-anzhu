@@ -2,8 +2,12 @@
 class_name Attack
 extends Resource
 
+enum AttackType{
+	NONE
+}
+
 @export var damage: int = 0
-@export_enum("gun", "hatchet", "claw") var weapon: String
+@export var weapon: AttackType
 
 var attacker: AnzhuBeing
 var victim: AnzhuBeing:

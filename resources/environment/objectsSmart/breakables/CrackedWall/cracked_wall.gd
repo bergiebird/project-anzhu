@@ -3,4 +3,4 @@ extends StaticBody2D
 class_name CrackedWall
 
 func on_break(_body: Node2D):
-	pass
+	print("====BROKEN")

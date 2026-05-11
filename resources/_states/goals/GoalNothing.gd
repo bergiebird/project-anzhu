@@ -39,7 +39,7 @@ func _on_timeout():
 				grandparent.publish_event.emit("change_actions", chosen_state)
 				old_chosen_state = chosen_state
 
-func ___get_state_value(_parent :StateMachine):
+func ___get_state_value(_parent: StateMachine):
 	which_state = _parent.AnimalGoals.Nothing
 
 func reached_target():

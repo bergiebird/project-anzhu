@@ -1,12 +1,18 @@
 extends HurtBox
 class_name BearHurtBox
 
-@onready var attack: Attack = Attack.new()
+
+signal strike_target(atk: Attack)
+
+var attack: Attack
+
 @onready var sfx_strike: AudioStreamPlayer2D = $SfxStrike
 
-func __ready():
-	attack.attacker = get_parent()
-	attack.weapon = "claw"
+
+func __ready() -> void:
+	attack = Attack.new()
+	attack.attacker = parent
+	attack.weapon = Attack.AttackType.NONE
 	attack.damage = 1
 
 
@@ -17,14 +23,15 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	on_cooldown = true
 	attack.victim = body
-	parent.publish_event.emit("strike_target", attack)
+	strike_target.emit(attack)
+
 	hurt_timer.start()
+	sfx_strike.play()
+
 
 func _physics_process(_delta: float):
 	update_and_match_attacking_direction(parent.get_real_velocity().abs())
 
+
 func was_just_hit():
 	monitoring = false
-
-func strike_target(_attack: Attack):
-	sfx_strike.play()

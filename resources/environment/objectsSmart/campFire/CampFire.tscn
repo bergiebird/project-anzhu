@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://c0pl44e11q0uf"]
+[gd_scene format=3 uid="uid://c0pl44e11q0uf"]
 
 [ext_resource type="Script" uid="uid://ce1y6f37kb76j" path="res://resources/environment/objectsSmart/campFire/CampFire.gd" id="1_ggvyn"]
 [ext_resource type="Script" uid="uid://60saxsgwo84g" path="res://resources/anzhuBeing/mask/Mask.gd" id="2_mi3f3"]
@@ -81,11 +81,11 @@ animations = [{
 "speed": 6.0
 }]
 
-[node name="CampFire" type="StaticBody2D"]
+[node name="CampFire" type="StaticBody2D" unique_id=9611250]
 script = ExtResource("1_ggvyn")
 is_lit = true
 
-[node name="Mask" type="CollisionShape2D" parent="."]
+[node name="Mask" type="CollisionShape2D" parent="." unique_id=23849144 groups=["debug_shapes"]]
 shape = SubResource("RectangleShape2D_jyux6")
 debug_color = Color(0.435294, 0.431373, 0.447059, 1)
 script = ExtResource("2_mi3f3")
@@ -93,7 +93,7 @@ description = "A campfire"
 set_mask_dimensions = 1
 has_healthbar = false
 
-[node name="Light" type="PointLight2D" parent="."]
+[node name="Light" type="PointLight2D" parent="." unique_id=547791641]
 visible = false
 energy = 0.1
 range_z_min = -4096
@@ -102,41 +102,41 @@ shadow_enabled = true
 shadow_filter = 2
 texture = ExtResource("4_8np16")
 
-[node name="SfxCrackle" type="AudioStreamPlayer2D" parent="."]
+[node name="SfxCrackle" type="AudioStreamPlayer2D" parent="." unique_id=1427027310]
 visible = false
 stream = ExtResource("7_6e312")
 max_distance = 75.0
 bus = &"SFX"
 
-[node name="BgmCampFire" type="AudioStreamPlayer2D" parent="."]
+[node name="BgmCampFire" type="AudioStreamPlayer2D" parent="." unique_id=1291191633]
 visible = false
 stream = ExtResource("8_obei1")
 max_distance = 80.0
 attenuation = 0.5
 bus = &"PolarBear"
 
-[node name="Interactible" parent="." instance=ExtResource("8_jyux6")]
+[node name="Interactible" parent="." unique_id=1968136609 instance=ExtResource("8_jyux6")]
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible"]
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Interactible" unique_id=1437520156 groups=["debug_shapes"]]
 shape = ExtResource("9_lc4nv")
 
-[node name="HealingArea" type="Area2D" parent="."]
+[node name="HealingArea" type="Area2D" parent="." unique_id=308698519]
 script = ExtResource("10_yg5ku")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HealingArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HealingArea" unique_id=450870275]
 position = Vector2(-1, 2)
 shape = SubResource("CircleShape2D_lc4nv")
 debug_color = Color(0.639105, 0.171813, 0.0875667, 0.42)
 metadata/_edit_lock_ = true
 
-[node name="HealInterval" type="Timer" parent="HealingArea"]
+[node name="HealInterval" type="Timer" parent="HealingArea" unique_id=24298431]
 
-[node name="Stand" type="Sprite2D" parent="."]
+[node name="Stand" type="Sprite2D" parent="." unique_id=658671329]
 texture = ExtResource("11_nls13")
 region_enabled = true
 region_rect = Rect2(24, 504, 8, 8)
 
-[node name="Fire" type="AnimatedSprite2D" parent="."]
+[node name="Fire" type="AnimatedSprite2D" parent="." unique_id=1464720186]
 visible = false
 position = Vector2(0, -7)
 sprite_frames = SubResource("SpriteFrames_lc4nv")

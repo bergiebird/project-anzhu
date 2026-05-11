@@ -2,6 +2,13 @@
 class_name Lib
 extends Node
 
+enum CharacterSpeed{
+	CREEP,
+	WALK,
+	JOG,
+	RUN,
+}
+
 class Math:
 	static func flip_a_coin()->bool:
 		return Libraryton.rng.randi() % 2 == 1
@@ -30,10 +37,12 @@ class Palette:
 	const PINK_DARK: Color = Color("c23753")
 	const WHITE_YELLOW: Color = Color("fff1a9")
 	const WHITE_WHITE: Color = Color("eaf1f0")
+
 class BasicPalette:
 	const BASIC_WHITE_TRANSPARENT: Color = Color("ffffff00")
 	const BASIC_WHITE: Color = Color("ffffff")
 	const BASIC_BLACK: Color = Color('000000')
+
 class Beings: # Send this to a resource
 	enum Speed{CREEP, WALK, JOG, RUN}
 	const INFO: Dictionary[String,Dictionary] = {
@@ -42,10 +51,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 100,   # Creeep for all characters needs to be given a purpose
-				"Walk": 500,
-				"Jog": 600,
-				"Run": 700,
+				Speed.CREEP: 100,   # Creeep for all characters needs to be given a purpose
+				Speed.WALK: 500,
+				Speed.JOG: 600,
+				Speed.RUN: 700,
 				},
 			},
 		"Owl": {
@@ -53,10 +62,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 0,
-				"Walk": 0,
-				"Jog": 0,
-				"Run": 0,
+				Speed.CREEP: 0,
+				Speed.WALK: 0,
+				Speed.JOG: 0,
+				Speed.RUN: 0,
 				},
 			},
 		"Human": {
@@ -64,10 +73,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 10,
-				"Walk": 700,
-				"Jog": 1000,
-				"Run": 2000,
+				Speed.CREEP: 10,
+				Speed.WALK: 700,
+				Speed.JOG: 1000,
+				Speed.RUN: 2000,
 				},
 			},
 		"Bear": {
@@ -75,10 +84,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 12,  # These guys are TANKS
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 10,
-				"Walk": 520, # Make very slow so player can get far away, half speed of jog
-				"Jog": 1400,
-				"Run": 2650,
+				Speed.CREEP: 10,
+				Speed.WALK: 520, # Make very slow so player can get far away, half speed of jog
+				Speed.JOG: 1400,
+				Speed.RUN: 2650,
 				},
 			},
 		"Fox":{
@@ -86,10 +95,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 0,
-				"Walk": 0,
-				"Jog": 0,
-				"Run": 0,
+				Speed.CREEP: 0,
+				Speed.WALK: 0,
+				Speed.JOG: 0,
+				Speed.RUN: 0,
 				},
 			},
 		"Hare":{
@@ -97,10 +106,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 0,
-				"Walk": 0,
-				"Jog": 0,
-				"Run": 0,
+				Speed.CREEP: 0,
+				Speed.WALK: 0,
+				Speed.JOG: 0,
+				Speed.RUN: 0,
 				},
 			},
 		"Wolf":{
@@ -108,10 +117,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 0,
-				"Walk": 0,
-				"Jog": 0,
-				"Run": 0,
+				Speed.CREEP: 0,
+				Speed.WALK: 0,
+				Speed.JOG: 0,
+				Speed.RUN: 0,
 				},
 			},
 		"Deer":{
@@ -119,10 +128,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 0,
-				"Walk": 0,
-				"Jog": 0,
-				"Run": 0,
+				Speed.CREEP: 0,
+				Speed.WALK: 0,
+				Speed.JOG: 0,
+				Speed.RUN: 0,
 				},
 			},
 		"Mammoth":{
@@ -130,10 +139,10 @@ class Beings: # Send this to a resource
 			"StartingHealth": 8,
 			"DamagePerHit":1,
 			"SpeedType": {
-				"Creep": 0,
-				"Walk": 0,
-				"Jog": 0,
-				"Run": 0,
+				Speed.CREEP: 0,
+				Speed.WALK: 0,
+				Speed.JOG: 0,
+				Speed.RUN: 0,
 				},
 			},
 	}
@@ -206,6 +215,7 @@ class World:
 #			"melatonin_value": Melatonin.WhatIsThisSunYouSpeakOf,
 		}
 	}
+
 class Tracking:
 	enum Rotation {HORIZONTAL, VERTICAL}
 	const ATLAS_OFFSET: Vector2i = Vector2i(1,1)
@@ -225,6 +235,7 @@ class Observe:
 				Callable(target, func_name).call(data)
 		elif target.has_method(func_name):
 			Callable(target, func_name).call()
+
 class Filter:
 	## Filter -> Return with "Type":
 	## Takes a node and acts upon it to create a return
@@ -234,7 +245,6 @@ class Filter:
 		for child: Node in node.get_children():
 			for lamda in callables:
 				lamda.call(child, node if include_node else null )
-
 
 	static func getChildren_filterDictionary(dictionary: Dictionary, node: Node, callables: Array[Callable] = [])->Dictionary:
 		for child: Node in node.get_children():

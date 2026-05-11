@@ -2,6 +2,9 @@
 class_name ActionWander
 extends ActionState
 
+signal move_towards_target(speed_type: Lib.Beings.Speed)
+
+
 var target_acquired: bool = false
 
 func ___ready():
@@ -29,7 +32,7 @@ func ___exit():
 
 func _physics_process(_delta: float):
 	if target_acquired:
-		grandparent.publish_event.emit("move_towards_target", "Walk")
+		move_towards_target.emit(Lib.Beings.Speed.WALK)
 
 #region WALRUS
 func walrus_enter():
@@ -39,6 +42,6 @@ func walrus_enter():
 #endregion
 
 #region BASIC
-func ___get_state_value(_parent :StateMachine):
+func ___get_state_value(_parent: StateMachine):
 	which_state = _parent.AnimalActions.Wander
 #endregion

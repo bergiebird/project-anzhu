@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=11 format=3 uid="uid://dbou7vyci5jqt"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://dbou7vyci5jqt"]
 
 [ext_resource type="Texture2D" uid="uid://2xdr0k4ypwfv" path="res://warehouse/Animals/PNGs/reindeer.png" id="1_emlh5"]
 [ext_resource type="Texture2D" uid="uid://bbnixm6lqqhfw" path="res://warehouse/Animals/PNGs/arctic.png" id="2_id3p4"]

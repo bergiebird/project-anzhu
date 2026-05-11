@@ -1,10 +1,12 @@
 @icon("res://resources/anzhuBeing/player/player.png")
 
-class_name Player
 extends Human
+class_name Player
 
+static var ref: Player
 
 func ___ready() -> void:
+	ref = self
 	Sgnl.reference_emitter_deferred("player_reference", self, debug_self)
 	if not is_in_group('player'):
 		add_to_group('player')
@@ -18,7 +20,7 @@ func jumping(needs_inverse: bool) -> void:
 	collide_with_(1, !needs_inverse)
 
 
-func has_died() -> void:
+func _has_died() -> void:
 	Sgnl.reload_current_scene()
 
 

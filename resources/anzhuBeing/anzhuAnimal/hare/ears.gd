@@ -23,6 +23,6 @@ func _on_body_entered(body: Node2D) -> void:
 		is_player_in_earshot = true
 
 
-func _on_loud_noise(who: AnzhuBeing, where: Vector2):
+func _on_loud_noise(who: AnzhuBeing, where: Vector2, _db: float):
 	if is_player_in_earshot:
 		heard_a_noise.emit(who, where)

@@ -2,6 +2,8 @@
 extends Marker2D
 class_name SnowTracker
 
+signal reached_new_elevation(_new_elevation: int)
+
 var current_cells: Array[Vector2i] = []
 var personal_maps: Array[TileMapLayer] = []
 var current_tile_coords: Vector2i
@@ -16,7 +18,8 @@ var can_make_tracks: bool = false
 
 func _ready() -> void:
 	Sgnl.tracks_reference.connect(setup_maps)
-	elevation_map = get_tree().get_first_node_in_group('elevations_manager')
+	elevation_map = get_tree().get_first_node_in_group(&'elevations_manager')
+	parent.sliding.connect(sliding)
 
 
 func setup_maps(_ref: CanvasGroup) -> void:
@@ -33,7 +36,7 @@ func _process(_delta: float) -> void:
 func check_current_tile() -> void:
 	if can_make_tracks:
 		var new_tile_coords: Vector2i = current_map.local_to_map(current_map.to_local(global_position))
-		if new_tile_coords!=current_tile_coords or current_tile_coords==null:
+		if new_tile_coords != current_tile_coords or current_tile_coords == null:
 			current_tile_coords = new_tile_coords
 			on_new_tile(new_tile_coords)
 
@@ -53,8 +56,9 @@ func on_new_tile(incoming_cell: Vector2i) -> void:
 
 func _check_elevation() -> void:
 	new_elevation = elevation_map.get_players_current_elevation()
-	if new_elevation!=current_elevation or current_elevation==null:
-		parent.publish_event.emit("on_new_elevation", new_elevation)
+	if new_elevation != current_elevation\
+	 or current_elevation==null:
+		reached_new_elevation.emit(new_elevation)
 		current_elevation = new_elevation
 
 
@@ -86,8 +90,3 @@ func jumping(is_jumping: bool) -> void:
 func change_actions(new_action: String) -> void:
 	if new_action is String:
 		sliding(new_action == "Stunned")
-
-##region    #===============================================================# DEBUG
-#@export_group("DEBUG")
-#@export var debug: bool
-##endregion

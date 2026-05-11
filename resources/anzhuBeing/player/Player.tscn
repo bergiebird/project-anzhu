@@ -46,12 +46,16 @@ height = 300
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 
-[node name="Player" type="CharacterBody2D" unique_id=356289271]
+[sub_resource type="CircleShape2D" id="CircleShape2D_edqir"]
+radius = 1.0
+
+[node name="Player" type="CharacterBody2D" unique_id=356289271 node_paths=PackedStringArray("ice_detector")]
 collision_layer = 262803
 collision_mask = 262275
 script = ExtResource("1_e4mdq")
 this_beings_type = "Human"
 visual_description = "It's you?"
+ice_detector = NodePath("IceDetector")
 
 [node name="Mask" type="CollisionShape2D" parent="." unique_id=1327557531]
 visible = false
@@ -60,6 +64,8 @@ shape = SubResource("RectangleShape2D_0b3xi")
 script = ExtResource("2_el3np")
 description = "It is you"
 set_mask_dimensions = 1
+has_healthbar = false
+has_background = false
 background_color = Color(0.0627451, 0.0313726, 0.0862745, 1)
 
 [node name="FullHP" type="AudioStreamPlayer2D" parent="Mask" unique_id=1542643182]
@@ -137,6 +143,16 @@ one_shot = true
 [node name="MainCamera" parent="." unique_id=1754051063 instance=ExtResource("15_y6uby")]
 visible = false
 
+[node name="IceDetector" type="Area2D" parent="." unique_id=230646153]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="IceDetector" unique_id=2105428100]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_edqir")
+
+[connection signal="has_died" from="." to="." method="_has_died"]
+[connection signal="has_died" from="." to="Animations" method="has_died"]
 [connection signal="reload_started" from="Abilities/Gun" to="Animations/ReloadAnimation" method="_on_gun_reload_started"]
 [connection signal="ended_jump" from="Abilities/Jump" to="Mask" method="_on_jump_ended_jump"]
 [connection signal="ended_jump" from="Abilities/Jump" to="Animations" method="_on_jump_ended_jump"]

@@ -1,9 +1,11 @@
-Timer
 Node2D
-AudioStreamPlayer
-Node
+Sprite3D
+Marker2D
 CollisionShape2D
 Area2D
+Timer
+Node
+AudioStreamPlayer
 Walrus
 AIMovement
 AnimalAnimations

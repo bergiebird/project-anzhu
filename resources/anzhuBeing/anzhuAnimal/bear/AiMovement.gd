@@ -36,7 +36,6 @@ func new_target_position(incoming_target: Vector2) -> void:
 	target_position = incoming_target
 
 
-func move_towards_target(speed_type: String) -> void:
+func move_towards_target(speed_type: Lib.Beings.Speed) -> void:
 	if target_position != Vector2.ZERO:
-		parent.velocity_force = _get_cardinal_direction(
-			target_position - parent.global_position) * float(parent.speed_types[speed_type])
+		parent.velocity_force = _get_cardinal_direction(target_position - parent.global_position) * float(parent.speed_types[speed_type])

@@ -4,7 +4,7 @@ class_name HurtBox extends Area2D #HurtBox.gd
 @export_group("timer info")
 enum AttackingDirection {Vertical, Horizontal, None}
 var on_cooldown: bool = false
-var current_attacking_direction :AttackingDirection = AttackingDirection.None
+var current_attacking_direction: AttackingDirection = AttackingDirection.None
 
 @onready var parent: AnzhuBeing = get_parent()
 @onready var hurt_node: CollisionShape2D = $HurtShape
@@ -20,6 +20,7 @@ func _ready():
 func _signaler():
 	body_entered.connect(_on_body_entered)
 	hurt_timer.timeout.connect(_end_attack_cooldown)
+	parent.has_died.connect(has_died)
 	__signaler()
 
 
@@ -53,5 +54,5 @@ func __signaler():
 	pass
 
 # DEBUG
-@export_category('DEBUG')
-@export var debug_hurt_box: bool = false
+#@export_category('DEBUG')
+#@export var debug_hurt_box: bool = false

@@ -8,27 +8,28 @@ class_name PlayerMovement
 
 var velocity: Vector2
 
-@onready var stats =Lib.Beings.INFO["Human"]["SpeedType"]
-@onready var speed_jog: int = stats["Jog"]
-@onready var speed_run: int = stats["Run"]
-@onready var speed_normal: int = stats["Walk"]
+@onready var stats = Lib.Beings.INFO["Human"]["SpeedType"]
+@onready var speed_jog: int = stats[Lib.CharacterSpeed.JOG]
+@onready var speed_run: int = stats[Lib.CharacterSpeed.RUN]
+@onready var speed_normal: int = stats[Lib.CharacterSpeed.WALK]
 
 
-func _physics_process(_delta: float) -> void:                   ## Every physics frame
+func _physics_process(_delta: float) -> void:
 	if parent.current_state == parent.AbilityStates.IDLING or parent.current_state == parent.AbilityStates.MOVING:
-		velocity = Vector2.ZERO                                   ## If current state is Idling or Moving, initialize
-		for direction:String in Directon.DIRECTIONS:              ## Cycle through all 4 direction
-			if Inputon.look_direction(direction):                  ## JIKL check
+		velocity = Vector2.ZERO                                     ## If current state is Idling or Moving, initialize
+		for direction: String in Directon.DIRECTIONS:               ## Cycle through all 4 direction
+			if Inputon.look_direction(direction):                   ## JIKL check
 				var enput: int = Directon.ENUM_POS[direction]       ## "Enum + Input"
 				if enput != grandparent.current_direction:          ## Mostly for animation reasons
 					grandparent.current_direction = enput
-			velocity = mover(direction)                            ## WASD check
+			velocity = mover(direction)                             ## WASD check
 			if velocity != Vector2.ZERO:
 				grandparent.velocity_force = velocity
 				parent.current_state = parent.AbilityStates.MOVING
 				return
 		parent.current_state = parent.AbilityStates.IDLING
 		grandparent.velocity_force = Vector2.ZERO
+
 
 func mover(direction: String) -> Vector2:
 	if Inputon.move(direction):

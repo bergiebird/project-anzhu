@@ -2,6 +2,8 @@
 extends Node
 class_name GoTo
 
+signal new_target_position(new_position: Vector2)
+signal reached_target
 
 @onready var location: Area2D = $Location
 @onready var parent: AnzhuBeing = get_parent()
@@ -11,7 +13,7 @@ func _ready() -> void:
 	location.global_position = Vector2.ZERO
 	location.body_entered.connect(func(body):
 		if body.name == parent.name:
-			parent.publish_event.emit("reached_target"))
+			reached_target.emit())
 
 
 func set_GoTo_node(target: Node2D = null) -> void:
@@ -25,7 +27,7 @@ func set_GoTo_node(target: Node2D = null) -> void:
 		location.global_position = target_global_position
 	else:
 		location.global_position = parent.global_position + randomized_distance()
-	parent.publish_event.emit('new_target_position', location.global_position)
+	new_target_position.emit(location.global_position)
 
 
 func _self_is_not_too_close_to_target(_target_global_position) -> bool:
@@ -34,24 +36,13 @@ func _self_is_not_too_close_to_target(_target_global_position) -> bool:
 			return true
 	return false
 
-## This function is dynamic so that any action can be passed in
+## This argument is dynamic
 func change_actions(new_action) -> void:
 	if new_action is String:
 		match new_action:
 			"Stunned":
-				parent.publish_event.emit("reached_target")
+				reached_target.emit()
 
 
 func randomized_distance() -> Vector2:
 	return Vector2(Directon.choose_random_direction() * Libraryton.rng.randi_range(15,30))
-
-
-#region    #============================================================# Debug
-@export_group("Debug")
-@export var debug_self: bool = false
-@onready var debug_sprite :Sprite2D = location.get_node('DebugSprite')
-
-func _on_ready() -> void:
-	debug_sprite.visible = debug_self
-
-#endregion #============================================================# Debug

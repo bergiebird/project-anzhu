@@ -22,6 +22,7 @@ var tracks_dictionary: Dictionary[String,Node]
 
 func set_tracks(incoming_dictionary: Dictionary[String,Node])->void:
 	call_deferred("set_tracks_dictionary", incoming_dictionary)
+
 func set_tracks_dictionary(incoming_dictionary:Dictionary[String,Node])->void:
 	tracks_dictionary = incoming_dictionary
 	deliver_tracks_dictionary.emit(tracks_dictionary)

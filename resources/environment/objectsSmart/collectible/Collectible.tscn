@@ -37,5 +37,3 @@ shape = ExtResource("5_387ek")
 stream = ExtResource("6_f356s")
 volume_db = -10.0
 bus = &"SFX"
-
-[connection signal="interacted" from="Interactible" to="." method="_interacted"]

@@ -108,7 +108,7 @@ debug_view = 100
 editor_description = "Funnily enough, I designed this entire system forgetting the simple fact that the day/night cycle of an island this far north would absolutely be 23/1 in the summertime. Woops"
 color = Color(0, 0, 0, 1)
 script = ExtResource("2_o8pbx")
-START_TIME = "Noon"
+START_TIME = "Midnight"
 
 [node name="WorldTimer" type="Timer" parent="DayNightModulator" unique_id=567312166]
 process_callback = 0
@@ -134,6 +134,7 @@ grow_vertical = 2
 [node name="SnowFall" type="GPUParticles2D" parent="." unique_id=1221172991]
 light_mask = 0
 z_index = 100
+emitting = false
 amount = 1500
 texture = ExtResource("3_ch1di")
 lifetime = 5.0
